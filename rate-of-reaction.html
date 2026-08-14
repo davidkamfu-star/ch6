@@ -26,6 +26,7 @@
   </main>
   <nav class="footer-nav"><button id="mobilePrevious">← Previous</button><button id="mobileNext">Next →</button></nav>
   <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Enlarged chemistry figure"><div class="viewer-head"><span id="viewerLabel"></span><button class="viewer-close" id="viewerClose" aria-label="Close">×</button></div><div class="viewer-shell"><div class="viewer-crop" id="viewerCrop"></div></div></div>
+  <script src="topic9-diagrams.js"></script>
   <script src="topic9-retyped-data.js"></script>
   <script>
     const qs=window.TOPIC9_QUESTIONS,key='rate-of-reaction-progress-v1';let current=0,selected=null,state={};try{state=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){state={}}const el=id=>document.getElementById(id),saved=i=>state[i]||null;
