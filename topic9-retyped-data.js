@@ -211,6 +211,20 @@ window.TOPIC9_QUESTIONS = [
   }
 ];
 
+const embeddedDiagrams=[
+  ['q01',1180,645],['q02',1185,585],['q03',760,535],['q05',540,235],
+  ['q06',790,325],['q11',660,320],['q12',800,325],['q15-main',555,315],
+  ['q15-options',1120,680],['q16',1170,480],['q21',640,330],['q22',720,400]
+];
+let embeddedDiagramIndex=0;
+window.TOPIC9_QUESTIONS.forEach((q)=>{
+  (q.diagrams||[]).forEach((diagram)=>{
+    const [key,width,height]=embeddedDiagrams[embeddedDiagramIndex++];
+    diagram.src=window.TOPIC9_DIAGRAMS[key];
+    diagram.crop=[width,height,0,0,width,height];
+  });
+});
+
 const markingPages=[4,5,6,6,7,7,8,8,9,9,10,11,12,13,14,15,15,16,16,17,17,18,18,19,19,19,20,20,21,21,22,22,23,25];
 const markingY=[0,1649,3298,3298,4947,4947,6596,6596,8245,8245,9894,11543,0,1649,3298,4947,4947,6596,6596,8245,8245,9894,9894,11543,11543,11543,0,0,1649,1649,3298,3298,4947,6596];
 window.TOPIC9_QUESTIONS.forEach((q,i)=>{
