@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="500" viewBox="0 0 1040 500" role="img" aria-labelledby="title desc">
+  <title id="title">Electrolysis of concentrated sodium chloride solution</title>
+  <desc id="desc">Two graphite electrodes A and B connected to a battery and immersed in concentrated sodium chloride solution containing universal indicator.</desc>
+  <rect width="1040" height="500" fill="#fff"/>
+  <g fill="none" stroke="#111" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M350 110V55H455"/>
+    <path d="M585 110V55H535"/>
+    <path d="M455 31V79M478 42V68M512 31V79M535 42V68"/>
+    <path d="M292 132V408Q292 455 340 455H595Q643 455 643 408V132"/>
+    <path d="M292 262H643" stroke-width="4"/>
+  </g>
+  <g fill="#111">
+    <rect x="330" y="110" width="40" height="315" rx="2"/>
+    <rect x="565" y="110" width="40" height="315" rx="2"/>
+  </g>
+  <g fill="none" stroke="#333" stroke-width="4" stroke-linecap="round">
+    <path d="M315 294h38M392 294h38M469 294h38M546 294h38M615 294h18"/>
+    <path d="M315 330h38M392 330h38M469 330h38M546 330h38M615 330h18"/>
+    <path d="M315 366h38M392 366h38M469 366h38M546 366h38M615 366h18"/>
+    <path d="M315 402h38M392 402h38M469 402h38M546 402h38M615 402h18"/>
+  </g>
+  <g fill="none" stroke="#111" stroke-width="4" stroke-linecap="round">
+    <path d="M330 235H275"/>
+    <path d="M605 235H690"/>
+    <path d="M605 410H690"/>
+  </g>
+  <g fill="#111" font-family="Arial, Helvetica, sans-serif" font-size="27">
+    <text x="18" y="244">graphite electrode <tspan font-weight="700">A</tspan></text>
+    <text x="705" y="244">graphite electrode <tspan font-weight="700">B</tspan></text>
+    <text x="705" y="403">concentrated NaCl(aq) with a few</text>
+    <text x="705" y="438">drops of universal indicator</text>
+  </g>
+</svg>
