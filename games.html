@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Chemistry Games | Chemistry Hub</title>
-  <meta name="description" content="Ten quick chemistry games with a 150-question bank for HKDSE revision.">
+  <meta name="description" content="HKDSE Chemistry curriculum games covering all 12 topics with a 210-question bank.">
   <link rel="stylesheet" href="student-fun.css?v=20260822a">
   <link rel="stylesheet" href="student-tools.css?v=20260822a">
 </head>
@@ -23,7 +23,7 @@
       <div>
         <p class="kicker">QUICK RECALL · INSTANT FEEDBACK</p>
         <h1>Chemistry Arcade</h1>
-        <p>Choose from ten games and a 150-question bank. Each round draws ten questions at random, so students can replay without seeing the same set every time.</p>
+        <p>Revise every part of the HKDSE Chemistry curriculum through topic-labelled games. The 210-question bank covers all 12 topics, and each replay draws a fresh ten-question round.</p>
       </div>
     </section>
 
@@ -34,23 +34,35 @@
       <div class="game-stat"><b id="streakStat">0</b><span>BEST STREAK</span></div>
     </section>
 
-    <section>
+    <section class="curriculum-games">
+      <div class="game-section-heading"><div><p class="kicker">FULL CURRICULUM COVERAGE</p><h2>Games by HKDSE topic</h2></div><span>Topics 01–12</span></div>
       <div class="game-grid" id="gameGrid">
-        <button class="game-card" type="button" data-game="elements"><small>BEST <span data-best="elements">0</span>/10</small><i>⚛</i><b>Element Match</b><span>Connect element names, symbols and common chemical facts.</span><em>18-question bank</em></button>
-        <button class="game-card" type="button" data-game="ph"><small>BEST <span data-best="ph">0</span>/10</small><i>🧪</i><b>pH Challenge</b><span>Race through acids, alkalis, indicators and pH values.</span><em>18-question bank</em></button>
-        <button class="game-card" type="button" data-game="reactions"><small>BEST <span data-best="reactions">0</span>/10</small><i>⚡</i><b>Reaction Rush</b><span>Recall observations, products and reaction conditions.</span><em>18-question bank</em></button>
-        <button class="game-card" type="button" data-game="redox"><small>BEST <span data-best="redox">0</span>/10</small><i>🔋</i><b>Redox Battle</b><span>Track electron transfer, electrodes and electrolysis.</span><em>18-question bank</em></button>
-        <button class="game-card" type="button" data-game="organic"><small>BEST <span data-best="organic">0</span>/10</small><i>⬡</i><b>Organic Formula Match</b><span>Identify homologous series, groups and conversions.</span><em>18-question bank</em></button>
-        <button class="game-card" type="button" data-game="periodic"><small>BEST <span data-best="periodic">0</span>/10</small><i>↗</i><b>Periodic Trend Sprint</b><span>Predict group trends, period trends and displacement reactions.</span><em>12-question bank</em></button>
-        <button class="game-card" type="button" data-game="equations"><small>BEST <span data-best="equations">0</span>/10</small><i>⚖</i><b>Equation Balancer</b><span>Choose balanced equations and complete reaction coefficients.</span><em>12-question bank</em></button>
-        <button class="game-card" type="button" data-game="lab"><small>BEST <span data-best="lab">0</span>/10</small><i>🥽</i><b>Lab Safety Escape</b><span>Make safe decisions about heating, spills, gases and apparatus.</span><em>12-question bank</em></button>
-        <button class="game-card" type="button" data-game="bonding"><small>BEST <span data-best="bonding">0</span>/10</small><i>🔗</i><b>Bonding Detective</b><span>Use properties to identify ionic, covalent and metallic structures.</span><em>12-question bank</em></button>
-        <button class="game-card" type="button" data-game="calculations"><small>BEST <span data-best="calculations">0</span>/10</small><i>∑</i><b>Calculation Dash</b><span>Practise moles, formula masses, concentrations and gas volumes.</span><em>12-question bank</em></button>
+        <button class="game-card" type="button" data-game="planet"><u>TOPIC 01</u><small>BEST <span data-best="planet">0</span>/10</small><i>🌍</i><b>Planet Earth Quest</b><span>Atmosphere, water, rocks, minerals and separation methods.</span><em>12-question bank</em></button>
+        <button class="game-card" type="button" data-game="elements"><u>TOPIC 02</u><small>BEST <span data-best="elements">0</span>/10</small><i>⚛</i><b>Particle Explorer</b><span>Atomic structure, isotopes, electron arrangements and the periodic table.</span><em>18-question bank</em></button>
+        <button class="game-card" type="button" data-game="bonding"><u>TOPIC 02</u><small>BEST <span data-best="bonding">0</span>/10</small><i>🔗</i><b>Bonding Detective</b><span>Identify ionic, covalent and metallic structures from their properties.</span><em>12-question bank</em></button>
+        <button class="game-card" type="button" data-game="metals"><u>TOPIC 03</u><small>BEST <span data-best="metals">0</span>/10</small><i>🔨</i><b>Metal Master</b><span>Reactivity, extraction, displacement, corrosion and alloys.</span><em>12-question bank</em></button>
+        <button class="game-card" type="button" data-game="ph"><u>TOPIC 04</u><small>BEST <span data-best="ph">0</span>/10</small><i>🧪</i><b>Acid–Base Rescue</b><span>pH, indicators, neutralisation and salt preparation.</span><em>18-question bank</em></button>
+        <button class="game-card" type="button" data-game="fossil"><u>TOPIC 05</u><small>BEST <span data-best="fossil">0</span>/10</small><i>🛢</i><b>Fossil Fuel Hunt</b><span>Petroleum fractions, cracking, combustion and environmental effects.</span><em>12-question bank</em></button>
+        <button class="game-card" type="button" data-game="calculations"><u>TOPIC 06</u><small>BEST <span data-best="calculations">0</span>/10</small><i>∑</i><b>Microscopic World II Dash</b><span>Moles, formula masses, concentrations and molar gas volumes.</span><em>12-question bank</em></button>
+        <button class="game-card" type="button" data-game="redox"><u>TOPIC 07</u><small>BEST <span data-best="redox">0</span>/10</small><i>🔋</i><b>Redox Battle</b><span>Electron transfer, chemical cells, electrodes and electrolysis.</span><em>18-question bank</em></button>
+        <button class="game-card" type="button" data-game="reactions"><u>TOPICS 08–10</u><small>BEST <span data-best="reactions">0</span>/10</small><i>⚡</i><b>Reaction Systems Rush</b><span>Energy changes, reaction rates and dynamic equilibrium.</span><em>18-question bank</em></button>
+        <button class="game-card" type="button" data-game="rate"><u>TOPIC 09</u><small>BEST <span data-best="rate">0</span>/10</small><i>⏱</i><b>Rate Racer</b><span>Collision theory, rate graphs and experimental variables.</span><em>12-question bank</em></button>
+        <button class="game-card" type="button" data-game="equilibrium"><u>TOPIC 10</u><small>BEST <span data-best="equilibrium">0</span>/10</small><i>⇌</i><b>Equilibrium Shift</b><span>Dynamic equilibrium and Le Chatelier’s principle.</span><em>12-question bank</em></button>
+        <button class="game-card" type="button" data-game="organic"><u>TOPIC 11</u><small>BEST <span data-best="organic">0</span>/10</small><i>⬡</i><b>Organic Formula Match</b><span>Homologous series, functional groups, reactions and polymers.</span><em>18-question bank</em></button>
+        <button class="game-card" type="button" data-game="periodic"><u>TOPIC 12</u><small>BEST <span data-best="periodic">0</span>/10</small><i>↗</i><b>Periodic Trend Sprint</b><span>Group trends, Period 3 oxides and transition-metal properties.</span><em>12-question bank</em></button>
+      </div>
+    </section>
+
+    <section class="curriculum-games skill-games">
+      <div class="game-section-heading"><div><p class="kicker">EXAM &amp; PRACTICAL SKILLS</p><h2>Core chemistry skills</h2></div><span>Across the syllabus</span></div>
+      <div class="game-grid compact-grid">
+        <button class="game-card" type="button" data-game="equations"><u>CORE SKILL</u><small>BEST <span data-best="equations">0</span>/10</small><i>⚖</i><b>Equation Balancer</b><span>Choose balanced equations and complete reaction coefficients.</span><em>12-question bank</em></button>
+        <button class="game-card" type="button" data-game="lab"><u>CORE SKILL</u><small>BEST <span data-best="lab">0</span>/10</small><i>🥽</i><b>Lab Safety Escape</b><span>Make safe decisions about heating, spills, gases and apparatus.</span><em>12-question bank</em></button>
       </div>
     </section>
 
     <section class="game-arena" id="gameArena" aria-live="polite">
-      <div class="arena-top"><div><p class="kicker" id="roundLabel">QUESTION 1 OF 10</p><h2 id="gameTitle" style="margin:0;font:400 27px Georgia,serif">Element Match</h2></div><button id="closeGame" type="button">Close game ×</button></div>
+      <div class="arena-top"><div><p class="kicker" id="roundLabel">QUESTION 1 OF 10</p><h2 id="gameTitle" style="margin:0;font:400 27px Georgia,serif">Planet Earth Quest</h2></div><button id="closeGame" type="button">Close game ×</button></div>
       <div class="arena-progress"><i id="progressBar" style="width:10%"></i></div>
       <div class="game-prompt"><small id="scoreLabel">SCORE 0 · STREAK 0</small><h2 id="gamePrompt"></h2></div>
       <div class="game-options" id="gameOptions"></div>
@@ -64,27 +76,41 @@
   (function(){
     'use strict';
     const games={
-      elements:{title:'Element Match',questions:[
+      planet:{title:'Planet Earth Quest',questions:[
+        ['Which gas makes up about 78% of clean, dry air?',['Oxygen','Nitrogen','Carbon dioxide','Argon'],1,'Nitrogen is the most abundant gas in air, at about 78% by volume.'],
+        ['Approximately what percentage of clean, dry air is oxygen?',['1%','21%','50%','78%'],1,'Oxygen accounts for about 21% of clean, dry air.'],
+        ['How are nitrogen and oxygen obtained industrially from liquid air?',['Filtration','Fractional distillation','Crystallisation','Paper chromatography'],1,'The gases are separated by fractional distillation because they have different boiling points.'],
+        ['Which process removes insoluble suspended solids from water?',['Filtration','Neutralisation','Electrolysis','Cracking'],0,'Filtration traps insoluble particles while water passes through.'],
+        ['Why is chlorine added during drinking-water treatment?',['To increase hardness','To kill harmful microorganisms','To add oxygen gas','To remove all dissolved salts'],1,'Chlorination disinfects water by killing harmful microorganisms.'],
+        ['The major dissolved salt in seawater is…',['sodium chloride','calcium carbonate','potassium nitrate','copper(II) sulfate'],0,'Sodium chloride is the principal dissolved salt in seawater.'],
+        ['What is the main chemical substance in limestone?',['CaCO₃','SiO₂','NaCl','Fe₂O₃'],0,'Limestone consists mainly of calcium carbonate, CaCO₃.'],
+        ['What is the formula of silicon dioxide, a major component of sand?',['SiO','SiO₂','SO₂','CO₂'],1,'Sand commonly contains silicon dioxide, SiO₂.'],
+        ['A mineral from which a metal can be extracted economically is called…',['an alloy','an ore','a polymer','an electrolyte only'],1,'An ore contains enough of a metal or its compound for economical extraction.'],
+        ['Which atmospheric gas contributes to the enhanced greenhouse effect?',['Helium','Carbon dioxide','Neon','Hydrogen'],1,'Carbon dioxide absorbs outgoing infrared radiation and contributes to warming.'],
+        ['Which pollutant is a major cause of acid rain?',['Sulfur dioxide','Nitrogen','Argon','Water vapour'],0,'Sulfur dioxide is oxidised and dissolves in atmospheric water to form acidic substances.'],
+        ['Pure water boils at approximately what temperature at standard atmospheric pressure?',['0 °C','25 °C','100 °C','273 °C'],2,'At standard atmospheric pressure, pure water boils at about 100 °C.']
+      ]},
+      elements:{title:'Particle Explorer',questions:[
         ['Which symbol represents sodium?',['S','Na','N','K'],1,'Sodium has the symbol Na, from the Latin name natrium.'],
         ['Which element has the symbol Fe?',['Fluorine','Iron','Francium','Fermium'],1,'Fe represents iron, from the Latin name ferrum.'],
         ['Which element is a halogen?',['Neon','Chlorine','Sodium','Calcium'],1,'Chlorine is a Group 17 halogen.'],
         ['Which element is a noble gas?',['Oxygen','Nitrogen','Argon','Bromine'],2,'Argon is a Group 18 noble gas with a stable outer shell.'],
         ['What is the symbol for potassium?',['P','Po','Pt','K'],3,'Potassium uses K, from the Latin name kalium.'],
         ['Which element is liquid at room conditions?',['Bromine','Sulfur','Iodine','Carbon'],0,'Bromine is a reddish-brown liquid at room conditions.'],
-        ['Which element is found in every hydrocarbon?',['Hydrogen only','Carbon only','Carbon and hydrogen','Oxygen'],2,'Hydrocarbons contain carbon and hydrogen only.'],
-        ['Which metal is commonly protected by galvanising iron?',['Copper','Zinc','Silver','Lead'],1,'Galvanising coats iron with zinc.'],
+        ['In an electrically neutral atom, the number of protons equals the number of…',['neutrons','electrons','shells','isotopes'],1,'A neutral atom has equal numbers of positive protons and negative electrons.'],
+        ['The mass number of an atom equals the total number of…',['protons and neutrons','electrons and neutrons','protons and electrons','occupied shells'],0,'Protons and neutrons are the nucleons that contribute to mass number.'],
         ['Which symbol represents calcium?',['C','Cl','Ca','Cr'],2,'Calcium has the symbol Ca.'],
-        ['Which element is most abundant in air?',['Oxygen','Nitrogen','Argon','Carbon'],1,'Air is about 78% nitrogen by volume.'],
+        ['For a main-group element, the group number is related to the number of…',['outer-shell electrons','neutrons','occupied shells','isotopes'],0,'Elements in the same main group have the same number of outer-shell electrons.'],
         ['Which three elements belong to Group 1?',['Li, Na and K','F, Cl and Br','He, Ne and Ar','Be, Mg and Ca'],0,'Lithium, sodium and potassium are Group 1 alkali metals.'],
         ['What determines the identity of an element?',['Number of neutrons','Number of protons','Number of electron shells','Physical state'],1,'Every atom of one element has the same proton number.'],
         ['Isotopes of an element have the same number of…',['neutrons only','protons but different numbers of neutrons','electron shells only','nucleons'],1,'Isotopes share a proton number but have different neutron numbers.'],
         ['What is the electron arrangement of magnesium?',['2,8','2,8,1','2,8,2','2,8,8'],2,'Magnesium has proton number 12, giving the arrangement 2,8,2.'],
         ['How many electrons are present in Na⁺?',['9','10','11','12'],1,'A sodium atom has 11 electrons and loses one to form Na⁺.'],
         ['Which element forms graphite and diamond?',['Silicon','Carbon','Sulfur','Phosphorus'],1,'Graphite and diamond are allotropes of carbon.'],
-        ['Which metal commonly forms blue aqueous ions?',['Copper','Magnesium','Aluminium','Zinc'],0,'Hydrated copper(II) ions give aqueous solutions a blue colour.'],
+        ['Why is a sodium ion smaller than a sodium atom?',['It gains a proton','It loses its outer electron shell','It gains a neutron','Its nucleus disappears'],1,'Formation of Na⁺ removes the third-shell electron, leaving two occupied shells.'],
         ['Which particle has negligible mass compared with a proton?',['Neutron','Nucleus','Electron','Nucleon'],2,'The mass of an electron is very small compared with a proton or neutron.']
       ]},
-      ph:{title:'pH Challenge',questions:[
+      ph:{title:'Acid–Base Rescue',questions:[
         ['A solution with pH 2 is…',['strongly acidic','weakly alkaline','neutral','strongly alkaline'],0,'A pH well below 7 indicates an acidic solution.'],
         ['At 25 °C, a neutral aqueous solution has pH…',['0','5','7','14'],2,'At 25 °C, neutrality corresponds to pH 7.'],
         ['What colour is phenolphthalein in an alkaline solution?',['Red','Pink','Yellow','Blue'],1,'Phenolphthalein is colourless in acid and pink in alkali.'],
@@ -104,7 +130,35 @@
         ['Which gas is an important cause of acid rain?',['Hydrogen','Sulfur dioxide','Helium','Methane only'],1,'Sulfur dioxide can form acidic substances in atmospheric water.'],
         ['Aqueous ammonia is alkaline because it produces…',['H⁺ ions','OH⁻ ions','Cl⁻ ions','O²⁻ ions'],1,'Ammonia reacts with water to produce hydroxide ions.']
       ]},
-      reactions:{title:'Reaction Rush',questions:[
+      metals:{title:'Metal Master',questions:[
+        ['Which metal is the most reactive?',['Copper','Iron','Magnesium','Potassium'],3,'Potassium is above magnesium, iron and copper in the reactivity series.'],
+        ['Which metal is extracted from its molten compound by electrolysis?',['Iron','Copper','Aluminium','Silver'],2,'Aluminium is more reactive than carbon and is extracted by electrolysis.'],
+        ['Iron is extracted from iron oxide in a blast furnace mainly by…',['chlorination','reduction with carbon monoxide','filtration','neutralisation'],1,'Carbon monoxide reduces iron oxides to iron.'],
+        ['Which metal displaces copper from copper(II) sulfate solution?',['Silver','Gold','Zinc','Platinum'],2,'Zinc is more reactive than copper and displaces Cu²⁺ ions.'],
+        ['Rusting of iron requires…',['oxygen only','water only','oxygen and water','carbon dioxide only'],2,'Both oxygen and water are necessary for rusting.'],
+        ['Galvanising protects iron by coating it with…',['copper','zinc','silver','tin only'],1,'Zinc provides a barrier and sacrificial protection.'],
+        ['Brass is an alloy mainly containing…',['copper and zinc','iron and carbon','aluminium and magnesium','lead and tin'],0,'Brass is mainly an alloy of copper and zinc.'],
+        ['Why is stainless steel more corrosion-resistant than ordinary steel?',['It contains chromium','It contains no iron','It is a pure metal','It dissolves in water'],0,'Chromium helps form a protective oxide layer.'],
+        ['Which metal can be found native because it is very unreactive?',['Sodium','Calcium','Gold','Magnesium'],2,'Gold is very unreactive and may occur naturally as the element.'],
+        ['In Mg + Cu²⁺ → Mg²⁺ + Cu, magnesium is…',['reduced','oxidised','neutralised','precipitated'],1,'Magnesium loses electrons to form Mg²⁺ and is oxidised.'],
+        ['Why are alloys often harder than pure metals?',['Their atoms are all identical','Different-sized atoms disrupt layer movement','They contain no metallic bonds','They are always ionic'],1,'Different-sized atoms make it harder for layers to slide over one another.'],
+        ['Which method best prevents rusting on a moving iron bicycle chain?',['Painting only','Applying oil or grease','Adding water','Coating with salt'],1,'Oil or grease forms a flexible barrier against oxygen and water.']
+      ]},
+      fossil:{title:'Fossil Fuel Hunt',questions:[
+        ['Which set contains only fossil fuels?',['Coal, petroleum and natural gas','Hydrogen, oxygen and nitrogen','Wood, solar and wind','Water, uranium and coal'],0,'Coal, petroleum and natural gas are fossil fuels.'],
+        ['Petroleum is best described as…',['a pure alkane','a mixture of hydrocarbons','an element','an aqueous salt solution'],1,'Petroleum contains many different hydrocarbons.'],
+        ['Petroleum fractions are separated mainly according to differences in…',['colour','boiling point','pH','electrical charge'],1,'Fractional distillation separates hydrocarbons by boiling range.'],
+        ['Compared with shorter-chain fractions, longer-chain petroleum fractions are generally…',['more volatile','more viscous','more flammable','lower boiling'],1,'Longer chains have stronger intermolecular attractions and higher viscosity.'],
+        ['Cracking converts large hydrocarbon molecules into…',['only carbon dioxide','smaller alkanes and alkenes','metals and hydrogen','alcohols only'],1,'Cracking produces smaller, more useful hydrocarbons, including alkenes.'],
+        ['Complete combustion of a hydrocarbon produces…',['CO₂ and H₂O','CO and H₂ only','C and O₂','CH₄ and O₂'],0,'With sufficient oxygen, carbon forms CO₂ and hydrogen forms H₂O.'],
+        ['Incomplete combustion may produce the poisonous gas…',['oxygen','carbon monoxide','nitrogen','helium'],1,'Carbon monoxide is toxic because it reduces the blood’s oxygen-carrying capacity.'],
+        ['Sulfur impurities in fuels can lead to emissions of…',['SO₂','H₂','NH₃','Cl₂'],0,'Burning sulfur-containing fuels produces sulfur dioxide.'],
+        ['The main component of natural gas is…',['methane','ethene','ethanol','carbon monoxide'],0,'Natural gas consists mainly of methane.'],
+        ['Which petroleum fraction is commonly used as aircraft fuel?',['Refinery gas','Petrol only','Kerosene','Bitumen'],2,'Kerosene is used as aviation fuel.'],
+        ['Why is carbon dioxide from fossil-fuel combustion an environmental concern?',['It causes ozone directly','It contributes to the enhanced greenhouse effect','It is highly explosive','It removes all oxygen immediately'],1,'Additional atmospheric carbon dioxide strengthens the greenhouse effect.'],
+        ['Which change can reduce carbon monoxide formation during combustion?',['Reduce the oxygen supply','Provide an adequate oxygen supply','Lower all ventilation','Add sulfur'],1,'A sufficient oxygen supply promotes complete combustion to carbon dioxide.']
+      ]},
+      reactions:{title:'Reaction Systems Rush',questions:[
         ['Magnesium reacting with dilute hydrochloric acid releases…',['oxygen','hydrogen','chlorine','carbon dioxide'],1,'Metal + dilute acid gives a salt and hydrogen.'],
         ['A glowing splint relights in…',['hydrogen','oxygen','carbon dioxide','nitrogen'],1,'Oxygen relights a glowing splint.'],
         ['The test for carbon dioxide uses…',['limewater','blue litmus','anhydrous copper(II) sulfate','a burning splint'],0,'Carbon dioxide turns limewater milky.'],
@@ -123,6 +177,34 @@
         ['An endothermic reaction usually makes the immediate surroundings…',['warmer','cooler','unchanged in all cases','emit chlorine'],1,'An endothermic process absorbs energy from its surroundings.'],
         ['Increasing pressure speeds many gas reactions because it…',['reduces particle number','increases collision frequency','removes activation energy','makes gases solid'],1,'Compressing gases brings particles closer and increases collision frequency.'],
         ['Which symbol shows that a reaction is reversible?',['→','⇌','+','=','Δ only'],1,'The double arrow ⇌ shows that forward and reverse reactions can occur.']
+      ]},
+      rate:{title:'Rate Racer',questions:[
+        ['Reaction rate can be expressed as change in quantity divided by…',['mass','time','temperature','pressure only'],1,'Rate measures how quickly a reactant is used or a product is formed.'],
+        ['Why does increasing temperature usually increase reaction rate?',['Particles become larger','A greater fraction of collisions exceeds activation energy','Activation energy becomes zero','Reactants become catalysts'],1,'At higher temperature, more particles have enough energy for effective collisions.'],
+        ['Why does powdered calcium carbonate react faster than large chips of the same mass?',['It has a larger surface area','It has a smaller mass','It changes the products','It lowers acid concentration'],0,'Powdering exposes more particles for collision.'],
+        ['Increasing reactant concentration usually increases rate because…',['particles collide more frequently','particles lose energy','activation energy rises','the reaction becomes reversible'],0,'More particles per unit volume produce more frequent collisions.'],
+        ['A catalyst increases rate by…',['raising ΔH','providing a lower-activation-energy pathway','increasing product energy','changing the equilibrium constant'],1,'A catalyst offers an alternative reaction pathway with lower activation energy.'],
+        ['Which apparatus can follow a reaction that produces a gas?',['Gas syringe','Burette containing only water','Evaporating basin only','Voltmeter only'],0,'A gas syringe measures gas volume against time.'],
+        ['On a product-volume against time graph, the initial rate is found from…',['the final volume','the initial gradient','the x-intercept only','the graph colour'],1,'The tangent gradient near time zero gives the initial rate.'],
+        ['Why does a rate graph become horizontal?',['The reaction has stopped producing product','The catalyst has doubled','Temperature is infinite','Reactants are being created'],0,'A horizontal section shows no further change, usually because the limiting reactant is used up.'],
+        ['Which change speeds a gas-phase reaction?',['Decreasing pressure','Increasing pressure','Removing reactant','Cooling strongly'],1,'Higher pressure places gas particles closer together and increases collision frequency.'],
+        ['Which factor does not change when a catalyst is added?',['Reaction pathway','Activation energy','Overall enthalpy change','Reaction speed'],2,'A catalyst changes the pathway and activation energy, but not the overall energy change.'],
+        ['For a fair rate experiment comparing concentration, which variable should be controlled?',['Acid volume and temperature','Acid concentration','The independent variable only','All measured times'],0,'Other important conditions such as volume and temperature should remain constant.'],
+        ['An effective collision requires correct orientation and…',['sufficient energy','zero speed','identical particles','a noble gas'],0,'Particles must collide with suitable orientation and energy at least equal to the activation energy.']
+      ]},
+      equilibrium:{title:'Equilibrium Shift',questions:[
+        ['Dynamic equilibrium is established in a…',['closed system','completely open beaker only','system with no particles','reaction that has stopped'],0,'A closed system prevents reactants or products from escaping.'],
+        ['At dynamic equilibrium, the forward and reverse reaction rates are…',['both zero','equal','always increasing','unrelated'],1,'The reactions continue in both directions at equal rates.'],
+        ['At equilibrium, reactant and product concentrations are…',['always equal','constant but not necessarily equal','both zero','changing rapidly'],1,'Equal rates keep concentrations constant, but the concentrations need not be equal.'],
+        ['Increasing pressure shifts a gaseous equilibrium towards the side with…',['more gas molecules','fewer gas molecules','more solids','the catalyst'],1,'The system opposes the pressure increase by favouring fewer gaseous particles.'],
+        ['For an exothermic forward reaction, increasing temperature favours the…',['forward reaction','reverse reaction','catalyst only','solid phase only'],1,'Heat behaves like a product, so heating favours the endothermic reverse direction.'],
+        ['Removing a product from an equilibrium mixture generally shifts equilibrium…',['towards more product','towards reactants','nowhere in every case','towards the catalyst'],0,'The system opposes removal by producing more product.'],
+        ['Adding a catalyst to an equilibrium system changes…',['the equilibrium position','the equilibrium constant','the time taken to reach equilibrium','the equilibrium composition'],2,'A catalyst speeds both directions equally and only shortens the time to equilibrium.'],
+        ['For N₂ + 3H₂ ⇌ 2NH₃, increasing pressure favours…',['N₂ and H₂','NH₃','no side','only nitrogen'],1,'The product side has two gas molecules compared with four on the reactant side.'],
+        ['In the Haber process, lowering temperature increases equilibrium yield because ammonia formation is…',['endothermic','exothermic','photochemical only','not reversible'],1,'Lower temperature favours the exothermic direction, although the reaction becomes slower.'],
+        ['The equilibrium constant Kc changes when…',['a catalyst is added','temperature changes','pressure changes at fixed temperature','more solid is added'],1,'For a given reaction, Kc depends on temperature.'],
+        ['If extra reactant is added, the system usually shifts to…',['consume some added reactant','make still more reactant only','stop permanently','remove the catalyst'],0,'The equilibrium shifts in the direction that uses up some added reactant.'],
+        ['Industrial equilibrium conditions are often a compromise between yield and…',['reaction rate and cost','colour only','atomic number','indicator choice'],0,'Industry balances equilibrium yield with an acceptable rate, energy use and equipment cost.']
       ]},
       redox:{title:'Redox Battle',questions:[
         ['Oxidation is…',['gain of electrons','loss of electrons','gain of neutrons','loss of protons'],1,'Oxidation is loss of electrons; reduction is gain of electrons.'],
@@ -220,7 +302,7 @@
         ['Which molecule contains a double covalent bond?',['H₂','Cl₂','O₂','CH₄'],2,'The two oxygen atoms in O₂ share two pairs of electrons.'],
         ['Which substance can form hydrogen bonds between its molecules?',['Methane','Water','Carbon dioxide','Chlorine'],1,'Water molecules form hydrogen bonds through their O–H bonds and lone pairs.']
       ]},
-      calculations:{title:'Calculation Dash',questions:[
+      calculations:{title:'Microscopic World II Dash',questions:[
         ['Using H = 1 and O = 16, what is Mᵣ of H₂O?',['16','17','18','20'],2,'Mᵣ(H₂O) = 2(1) + 16 = 18.'],
         ['How many moles are in 18 g of water, Mᵣ = 18?',['0.5 mol','1 mol','2 mol','18 mol'],1,'Amount = mass ÷ molar mass = 18 ÷ 18 = 1 mol.'],
         ['What mass is 0.50 mol of NaOH, Mᵣ = 40?',['10 g','20 g','40 g','80 g'],1,'Mass = amount × molar mass = 0.50 × 40 = 20 g.'],
