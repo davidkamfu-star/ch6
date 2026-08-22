@@ -251,6 +251,13 @@ body:not(:has(.hero)) .topbar .brand::before {
   background-size: 88px 88px, 115px 115px, auto;
 }
 
+.shell .sidebar h1 { color: #fff !important; }
+.shell .sidebar .eyebrow { color: #86e8d1 !important; }
+.shell .sidebar .subtle { color: #c8dedb !important; }
+.shell .sidebar .reset { color: #b8d3cf !important; }
+.shell .sidebar .molecule-caption,
+.shell .sidebar .map-caption { color: #c8dedb !important; }
+
 .shell .score-card {
   border-radius: 20px !important;
   background: rgba(255, 255, 255, .10) !important;
