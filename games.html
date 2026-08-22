@@ -6,7 +6,7 @@
   <title>Chemistry Games | Chemistry Hub</title>
   <meta name="description" content="HKDSE Chemistry curriculum games covering all 12 topics with a 210-question bank.">
   <link rel="stylesheet" href="student-fun.css?v=20260822a">
-  <link rel="stylesheet" href="student-tools.css?v=20260822c">
+  <link rel="stylesheet" href="student-tools.css?v=20260822d">
 </head>
 <body class="student-page">
   <header class="topbar">
@@ -42,7 +42,7 @@
         <button class="mini-game-card atoms" type="button" data-mini="atoms"><span class="mini-icon">🎯</span><div><small>SPEED GAME · TOPIC 02</small><b>Atom Catch</b><p>Catch the correct element symbol as quickly as possible in 30 seconds.</p></div><em>BEST <strong data-mini-best="atoms">0</strong></em></button>
         <button class="mini-game-card ions" type="button" data-mini="ions"><span class="mini-icon">🧲</span><div><small>MOVE &amp; SORT · TOPICS 02 &amp; 07</small><b>Ion Sorter</b><p>Drag each ion into the cation or anion chamber. Tap-to-move also works.</p></div><em>BEST <strong data-mini-best="ions">0</strong></em></button>
         <button class="mini-game-card lab-move" type="button" data-mini="labmove"><span class="mini-icon">🔬</span><div><small>MOVE &amp; MATCH · PRACTICAL SKILLS</small><b>Lab Bench Builder</b><p>Move apparatus onto the correct laboratory workstation.</p></div><em>BEST <strong data-mini-best="labmove">0</strong></em></button>
-        <button class="mini-game-card organic-name" type="button" data-mini="organicname"><span class="mini-icon">🧩</span><div><small>DSE EXAM CHALLENGE · TOPIC 11</small><b>Name That Molecule</b><p>Solve complex structures using parent chains, priority rules and close exam-style distractors.</p></div><em>BEST <strong data-mini-best="organicname">0</strong>/12</em></button>
+        <button class="mini-game-card organic-name" type="button" data-mini="organicname"><span class="mini-icon">🧩</span><div><small>3-ROUND DSE CHALLENGE · TOPIC 11</small><b>Name That Molecule</b><p>Complete 36 structures across parent chains, functional groups and acid derivatives.</p></div><em>BEST <strong data-mini-best="organicname">0</strong>/36</em></button>
       </div>
     </section>
 
@@ -443,18 +443,34 @@
       ['CH₃CH(CH₃)CONH₂','2-methylpropanamide','amide','The parent chain including the amide carbon has three carbons, with methyl on carbon 2.',['3-methylpropanamide','2-methylbutanamide','2-ethyl ethanamide'],'BRANCHED AMIDE']
     ];
     function startOrganicNames(){
-      const session=prepareMini('organicname','Name That Molecule','DSE EXAM CHALLENGE · TOPIC 11','NAMED 0/12 · FIRST TRY 0');
-      const rounds=shuffle(organicNameItems).slice(0,12);let at=0,score=0,errors=0,ended=false,roundWrong=false;
-      function complete(){if(ended||session!==miniSession)return;ended=true;const xp=Math.max(15,score*7);finishMini('organicname',score,xp,'DSE naming challenge complete!','You named '+score+' of 12 complex structures correctly on the first try.',startOrganicNames)}
+      const session=prepareMini('organicname','Name That Molecule','3-ROUND DSE CHALLENGE · TOPIC 11','ROUND 1/3 · Q 0/12 · FIRST TRY 0');
+      const chainItems=shuffle(organicNameItems.filter(function(x){return ['alkane','alkene','haloalkane'].includes(x[2])}));
+      const groupItems=shuffle(organicNameItems.filter(function(x){return ['alcohol','aldehyde','ketone'].includes(x[2])}));
+      const derivativeItems=shuffle(organicNameItems.filter(function(x){return ['acid','ester','amide'].includes(x[2])}));
+      const rounds=[
+        {title:'Parent chains & locants',items:chainItems.slice(0,12)},
+        {title:'Functional-group priority',items:groupItems.slice(0,12)},
+        {title:'Acids, esters & amides',items:shuffle(derivativeItems.concat(chainItems.slice(12),groupItems.slice(12)))}
+      ];
+      let roundIndex=0,at=0,roundScore=0,totalScore=0,totalErrors=0,ended=false,roundWrong=false;
+      function status(){miniStatus.textContent='ROUND '+(roundIndex+1)+'/3 · Q '+at+'/12 · FIRST TRY '+roundScore+' · ERRORS '+totalErrors}
+      function completeRound(){
+        if(ended||session!==miniSession)return;totalScore+=roundScore;
+        if(roundIndex===rounds.length-1){ended=true;const xp=Math.max(30,totalScore*3);finishMini('organicname',totalScore,xp,'Three-round DSE naming series complete!','You named '+totalScore+' of 36 structures correctly on the first try.',startOrganicNames);return}
+        const completedRound=roundIndex+1,nextTitle=rounds[roundIndex+1].title;
+        miniStatus.textContent='ROUND '+completedRound+' COMPLETE · '+roundScore+'/12 FIRST TRY';
+        miniFeedback.innerHTML='<b>Round '+completedRound+' complete.</b> Cumulative score: '+totalScore+'/36.';
+        miniBody.innerHTML='<div class="mini-result naming-round-result"><strong>'+roundScore+'/12</strong><span>'+rounds[roundIndex].title.toUpperCase()+'</span><p>Next: '+nextTitle+'</p><button type="button">Continue to Round '+(completedRound+1)+' →</button></div>';
+        miniBody.querySelector('button').addEventListener('click',function(){roundIndex++;at=0;roundScore=0;miniFeedback.textContent='Round '+(roundIndex+1)+': '+rounds[roundIndex].title+'.';render()});
+      }
       function render(){
-        if(at>=rounds.length){complete();return}
-        roundWrong=false;const item=rounds[at],choices=shuffle([item[1]].concat(item[4]));
-        miniStatus.textContent='NAMED '+at+'/12 · FIRST TRY '+score+' · ERRORS '+errors;
-        miniBody.innerHTML='<div class="naming-checklist"><span>① principal group</span><span>② longest valid chain</span><span>③ lowest locants</span><span>④ prefixes + suffix</span></div><div class="naming-prompt"><div class="naming-meta"><span>DSE STYLE</span><span>'+item[5]+'</span></div><small>CHOOSE THE SYSTEMATIC NAME</small><strong class="naming-formula">'+item[0]+'</strong><span class="naming-rule">The distractors reproduce common examination naming errors.</span></div><div class="drag-bank name-bank">'+choices.map(function(choice,i){return '<button class="drag-tile name-tile" type="button" data-move-id="name-'+at+'-'+i+'" data-correct="'+String(choice===item[1])+'" data-label="'+choice+'">'+choice+'</button>'}).join('')+'</div><div class="drop-zone-grid name-drop-grid"><div class="drop-zone name-drop-zone" role="button" tabindex="0" data-zone="name"><b>FINAL SYSTEMATIC NAME</b><span>drag or tap the best answer here</span><div class="drop-results"></div></div></div>';
+        const currentRound=rounds[roundIndex];if(at>=currentRound.items.length){completeRound();return}
+        roundWrong=false;const item=currentRound.items[at],choices=shuffle([item[1]].concat(item[4]));status();
+        miniBody.innerHTML='<div class="naming-checklist"><span>① principal group</span><span>② longest valid chain</span><span>③ lowest locants</span><span>④ prefixes + suffix</span></div><div class="naming-prompt"><div class="naming-meta"><span>ROUND '+(roundIndex+1)+'/3</span><span>'+currentRound.title.toUpperCase()+'</span><span>'+item[5]+'</span></div><small>CHOOSE THE SYSTEMATIC NAME</small><strong class="naming-formula">'+item[0]+'</strong><span class="naming-rule">The distractors reproduce common examination naming errors.</span></div><div class="drag-bank name-bank">'+choices.map(function(choice,i){return '<button class="drag-tile name-tile" type="button" data-move-id="name-'+roundIndex+'-'+at+'-'+i+'" data-correct="'+String(choice===item[1])+'" data-label="'+choice+'">'+choice+'</button>'}).join('')+'</div><div class="drop-zone-grid name-drop-grid"><div class="drop-zone name-drop-zone" role="button" tabindex="0" data-zone="name"><b>FINAL SYSTEMATIC NAME</b><span>drag or tap the best answer here</span><div class="drop-results"></div></div></div>';
         wireMovable(session,function(tile){
           if(ended||session!==miniSession)return false;
-          if(tile.dataset.correct!=='true'){errors++;roundWrong=true;tile.classList.add('wrong');tile.disabled=true;miniFeedback.innerHTML='<b>Exam trap.</b> Recheck the principal functional group, parent chain and ordered locant set.';miniStatus.textContent='NAMED '+at+'/12 · FIRST TRY '+score+' · ERRORS '+errors;return true}
-          if(!roundWrong)score++;const target=miniBody.querySelector('.drop-results'),chip=document.createElement('span');chip.textContent=tile.dataset.label;target.appendChild(chip);tile.remove();miniFeedback.innerHTML='<b>Correct — '+item[1]+'.</b> '+item[3];at++;miniStatus.textContent='NAMED '+at+'/12 · FIRST TRY '+score+' · ERRORS '+errors;setTimeout(function(){if(session===miniSession&&!ended)render()},900);return true
+          if(tile.dataset.correct!=='true'){totalErrors++;roundWrong=true;tile.classList.add('wrong');tile.disabled=true;miniFeedback.innerHTML='<b>Exam trap.</b> Recheck the principal functional group, parent chain and ordered locant set.';status();return true}
+          if(!roundWrong)roundScore++;const target=miniBody.querySelector('.drop-results'),chip=document.createElement('span');chip.textContent=tile.dataset.label;target.appendChild(chip);tile.remove();miniFeedback.innerHTML='<b>Correct — '+item[1]+'.</b> '+item[3];at++;status();setTimeout(function(){if(session===miniSession&&!ended)render()},900);return true
         });
       }
       render();
