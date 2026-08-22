@@ -6,7 +6,7 @@
   <title>Chemistry Games | Chemistry Hub</title>
   <meta name="description" content="HKDSE Chemistry curriculum games covering all 12 topics with a 210-question bank.">
   <link rel="stylesheet" href="student-fun.css?v=20260822a">
-  <link rel="stylesheet" href="student-tools.css?v=20260822a">
+  <link rel="stylesheet" href="student-tools.css?v=20260822c">
 </head>
 <body class="student-page">
   <header class="topbar">
@@ -42,7 +42,7 @@
         <button class="mini-game-card atoms" type="button" data-mini="atoms"><span class="mini-icon">🎯</span><div><small>SPEED GAME · TOPIC 02</small><b>Atom Catch</b><p>Catch the correct element symbol as quickly as possible in 30 seconds.</p></div><em>BEST <strong data-mini-best="atoms">0</strong></em></button>
         <button class="mini-game-card ions" type="button" data-mini="ions"><span class="mini-icon">🧲</span><div><small>MOVE &amp; SORT · TOPICS 02 &amp; 07</small><b>Ion Sorter</b><p>Drag each ion into the cation or anion chamber. Tap-to-move also works.</p></div><em>BEST <strong data-mini-best="ions">0</strong></em></button>
         <button class="mini-game-card lab-move" type="button" data-mini="labmove"><span class="mini-icon">🔬</span><div><small>MOVE &amp; MATCH · PRACTICAL SKILLS</small><b>Lab Bench Builder</b><p>Move apparatus onto the correct laboratory workstation.</p></div><em>BEST <strong data-mini-best="labmove">0</strong></em></button>
-        <button class="mini-game-card organic-name" type="button" data-mini="organicname"><span class="mini-icon">🧩</span><div><small>MOVE &amp; NAME · TOPIC 11</small><b>Name That Molecule</b><p>Drag the correct IUPAC name onto each organic structural formula.</p></div><em>BEST <strong data-mini-best="organicname">0</strong></em></button>
+        <button class="mini-game-card organic-name" type="button" data-mini="organicname"><span class="mini-icon">🧩</span><div><small>DSE EXAM CHALLENGE · TOPIC 11</small><b>Name That Molecule</b><p>Solve complex structures using parent chains, priority rules and close exam-style distractors.</p></div><em>BEST <strong data-mini-best="organicname">0</strong>/12</em></button>
       </div>
     </section>
 
@@ -405,47 +405,56 @@
       wireMovable(session,function(tile,zone){if(ended||session!==miniSession)return false;const item=labPieces[+tile.dataset.index];if(tile.dataset.kind!==zone){errors++;tile.classList.add('wrong');miniFeedback.innerHTML='<b>That workstation does not fit.</b> Think about the apparatus function.';miniStatus.textContent='PLACED '+moved+'/8 · ERRORS '+errors;setTimeout(function(){tile.classList.remove('wrong')},350);return false}const target=miniBody.querySelector('[data-zone="'+zone+'"] .drop-results'),chip=document.createElement('span');chip.textContent=tile.dataset.label;target.appendChild(chip);tile.remove();moved++;miniFeedback.innerHTML='<b>Correct placement.</b> '+item[2];miniStatus.textContent='PLACED '+moved+'/8 · ERRORS '+errors;if(moved===pieces.length){ended=true;const result=Math.max(0,8-errors),xp=Math.max(10,result*6);finishMini('labmove',result,xp,'Laboratory bench complete!','Your score rewards correct first placements.',startLabMove)}return true});
     }
     const organicNameItems=[
-      ['CH₄','methane','alkane','One carbon gives meth-; a saturated hydrocarbon uses -ane.'],
-      ['CH₃CH₃','ethane','alkane','Two carbons give eth-; a saturated hydrocarbon uses -ane.'],
-      ['CH₃CH₂CH₃','propane','alkane','Three carbons give prop-; a saturated hydrocarbon uses -ane.'],
-      ['CH₃CH₂CH₂CH₃','butane','alkane','Four carbons give but-; a saturated hydrocarbon uses -ane.'],
-      ['CH₃CH₂CH₂CH₂CH₃','pentane','alkane','Five carbons give pent-; a saturated hydrocarbon uses -ane.'],
-      ['CH₃CH(CH₃)CH₃','2-methylpropane','alkane','The longest chain has three carbons and a methyl group on carbon 2.'],
-      ['CH₃CH(CH₃)CH₂CH₃','2-methylbutane','alkane','The longest chain has four carbons and a methyl group on carbon 2.'],
-      ['CH₃C(CH₃)₂CH₃','2,2-dimethylpropane','alkane','The propane chain has two methyl groups, both on carbon 2.'],
-      ['CH₂=CH₂','ethene','alkene','Two carbons give eth-; a carbon-carbon double bond uses -ene.'],
-      ['CH₃CH=CH₂','propene','alkene','Three carbons give prop-; the double bond gives the suffix -ene.'],
-      ['CH₂=CHCH₂CH₃','but-1-ene','alkene','Number from the end nearest the double bond, placing it at carbon 1.'],
-      ['CH₃CH=CHCH₃','but-2-ene','alkene','The four-carbon chain has its double bond beginning at carbon 2.'],
-      ['CH₃CH₂Cl','chloroethane','haloalkane','The parent chain is ethane and the chlorine substituent gives chloro-.'],
-      ['CH₃CHBrCH₃','2-bromopropane','haloalkane','The parent is propane with bromine attached to carbon 2.'],
-      ['CH₃CHClCH₂CH₃','2-chlorobutane','haloalkane','Number the butane chain to give chlorine the lowest locant, 2.'],
-      ['CH₃OH','methanol','alcohol','One carbon gives meth- and the hydroxyl group gives -anol.'],
-      ['CH₃CH₂OH','ethanol','alcohol','Two carbons give eth- and the hydroxyl group gives -anol.'],
-      ['CH₃CH₂CH₂OH','propan-1-ol','alcohol','The three-carbon chain has its hydroxyl group on carbon 1.'],
-      ['CH₃CH(OH)CH₃','propan-2-ol','alcohol','The three-carbon chain has its hydroxyl group on carbon 2.'],
-      ['HCOOH','methanoic acid','acid','One carbon including the carboxyl carbon gives methanoic acid.'],
-      ['CH₃COOH','ethanoic acid','acid','Two carbons including the carboxyl carbon give ethanoic acid.'],
-      ['CH₃CH₂COOH','propanoic acid','acid','Three carbons including the carboxyl carbon give propanoic acid.'],
-      ['CH₃CH₂CH₂COOH','butanoic acid','acid','Four carbons including the carboxyl carbon give butanoic acid.'],
-      ['HCOOCH₃','methyl methanoate','ester','Name the alkyl group first, then the acid-derived alkanoate part.'],
-      ['CH₃COOCH₃','methyl ethanoate','ester','CH₃– attached to oxygen gives methyl; CH₃COO– gives ethanoate.'],
-      ['CH₃COOCH₂CH₃','ethyl ethanoate','ester','The oxygen-side group is ethyl and the acid-derived part is ethanoate.'],
-      ['CH₃CH₂COOCH₃','methyl propanoate','ester','The oxygen-side group is methyl and the acid-derived part is propanoate.']
+      ['CH₃CH₂CH(CH₃)CH₂CH₃','3-methylpentane','alkane','The longest continuous chain has five carbons; its methyl substituent is on carbon 3.',['2-ethylbutane','2-methylpentane','3-methylbutane'],'LONGEST CHAIN'],
+      ['CH₃CH(CH₃)CH(CH₃)CH₃','2,3-dimethylbutane','alkane','Use the four-carbon parent chain and show both methyl locants: 2 and 3.',['2,3-methylbutane','1,2-dimethylbutane','2-ethyl-3-methylpropane'],'MULTIPLE SUBSTITUENTS'],
+      ['CH₃C(CH₃)₂CH₂CH₃','2,2-dimethylbutane','alkane','Number from the nearer end so both methyl groups receive locant 2, not 3.',['3,3-dimethylbutane','2-methylpentane','2-ethyl-2-methylpropane'],'LOWEST LOCANTS'],
+      ['CH₃CH₂CH(CH₂CH₃)CH₂CH₂CH₃','3-ethylhexane','alkane','The longest chain contains six carbons and the ethyl substituent is on carbon 3.',['4-ethylhexane','3-methylheptane','2-propylpentane'],'PARENT-CHAIN SELECTION'],
+      ['CH₃CH(CH₃)CH₂CH(CH₃)CH₃','2,4-dimethylpentane','alkane','The five-carbon parent carries two methyl groups at carbons 2 and 4.',['2,4-methylpentane','1,3-dimethylpentane','2-ethyl-4-methylbutane'],'MULTIPLE SUBSTITUENTS'],
+      ['CH₃CH₂CH=CHCH₃','pent-2-ene','alkene','Number from the end nearer the double bond, giving the double bond locant 2.',['pent-3-ene','pent-1-ene','2-pentene-3'],'DOUBLE-BOND LOCANT'],
+      ['CH₂=C(CH₃)CH₂CH₃','2-methylbut-1-ene','alkene','Choose a four-carbon chain containing C=C and number the double bond before the substituent.',['3-methylbut-3-ene','2-ethylprop-1-ene','3-methylbut-1-ene'],'ALKENE PARENT CHAIN'],
+      ['CH₃C(CH₃)=CHCH₃','2-methylbut-2-ene','alkene','Both directions give but-2-ene, so choose the direction giving methyl the lower locant, 2.',['3-methylbut-2-ene','2-ethylprop-1-ene','2-methylbut-1-ene'],'FIRST POINT OF DIFFERENCE'],
+      ['CH₂=CHCH(Cl)CH₃','3-chlorobut-1-ene','alkene','The double bond must receive the lowest locant; chlorine is therefore on carbon 3.',['2-chlorobut-3-ene','2-chlorobut-1-ene','3-chlorobutane-1-ene'],'FUNCTIONAL PRIORITY'],
+      ['CH₂=C(Cl)CH₂CH₃','2-chlorobut-1-ene','alkene','Number from the double-bond end: but-1-ene with chlorine on carbon 2.',['3-chlorobut-3-ene','2-chlorobut-2-ene','1-chlorobut-1-ene'],'HALOGEN + ALKENE'],
+      ['CH₂BrCHClCH₃','1-bromo-2-chloropropane','haloalkane','The lowest locant set is 1,2; list bromo before chloro alphabetically.',['2-bromo-1-chloropropane','1-chloro-2-bromopropane','2-chloro-3-bromopropane'],'ALPHABETICAL ORDER'],
+      ['CHBr₂CHCl₂','1,1-dibromo-2,2-dichloroethane','haloalkane','The locant sets tie, so the alphabetically earlier bromo substituent receives the lower locants.',['2,2-dibromo-1,1-dichloroethane','1,1-dichloro-2,2-dibromoethane','1,2-dibromo-1,2-dichloroethane'],'TIE-BREAKING RULE'],
+      ['CHBrClCH₂Br','1,2-dibromo-1-chloroethane','haloalkane','Numbering from the substituted carbon gives the lower ordered locant set 1,1,2.',['1,2-dibromo-2-chloroethane','1-chloro-1,2-dibromoethane','1,1-dibromo-2-chloroethane'],'ORDERED LOCANT SET'],
+      ['CH₃CH(CH₃)CH₂CH₂OH','3-methylbutan-1-ol','alcohol','The chain containing –OH is numbered from that end, placing –OH at carbon 1 and methyl at carbon 3.',['2-methylbutan-4-ol','2-methylbutan-1-ol','3-methylbutan-4-ol'],'ALCOHOL PRIORITY'],
+      ['CH₃C(OH)(CH₃)CH₂CH₃','2-methylbutan-2-ol','alcohol','The four-carbon chain contains –OH at carbon 2 and a methyl substituent on the same carbon.',['3-methylbutan-3-ol','2-ethylpropan-2-ol','2-methylbutan-3-ol'],'BRANCHED ALCOHOL'],
+      ['CH₃CH₂CH=CHCH₂CH₂OH','hex-3-en-1-ol','alcohol','Number from the –OH end: the alcohol is at carbon 1 and the double bond begins at carbon 3.',['hex-3-en-6-ol','hex-4-en-1-ol','hex-2-en-6-ol'],'PRINCIPAL GROUP PRIORITY'],
+      ['CH₂=CHCH₂CH₂OH','but-3-en-1-ol','alcohol','The –OH group has priority over C=C for numbering, so –OH receives locant 1.',['but-1-en-4-ol','but-1-en-1-ol','but-3-en-4-ol'],'ALCOHOL + ALKENE'],
+      ['CH₃CH(OH)CH₂CH=CH₂','pent-4-en-2-ol','alcohol','Choose the direction that gives –OH locant 2 even though the double bond then receives locant 4.',['pent-1-en-4-ol','pent-4-en-4-ol','pent-1-en-2-ol'],'FUNCTIONAL-GROUP PRIORITY'],
+      ['CH₃CH₂CH₂CHO','butanal','aldehyde','The aldehyde carbon is part of the four-carbon parent chain and is automatically carbon 1.',['butan-1-al','propanal','butanone'],'ALDEHYDE SUFFIX'],
+      ['CH₂=CHCH₂CHO','but-3-enal','aldehyde','The –CHO carbon is carbon 1, so the C=C bond begins at carbon 3.',['but-1-enal','but-4-enal','but-3-en-1-al'],'ALDEHYDE + ALKENE'],
+      ['CH₃CH=CHCHO','but-2-enal','aldehyde','Number from the aldehyde carbon; the double bond begins at carbon 2.',['but-2-en-1-al','but-3-enal','but-1-enal'],'ALDEHYDE NUMBERING'],
+      ['CH₃CH(CH₃)CH₂CHO','3-methylbutanal','aldehyde','Include the aldehyde carbon in the longest chain; the methyl group is on carbon 3.',['2-methylbutanal','3-methylbutan-1-al','2-ethylpropanal'],'ALDEHYDE PARENT CHAIN'],
+      ['CH₃COCH₂CH₃','butan-2-one','ketone','The four-carbon ketone chain is numbered to place C=O at carbon 2.',['butan-3-one','butanone-2','butanal'],'CARBONYL LOCANT'],
+      ['CH₃CH₂COCH₂CH₃','pentan-3-one','ketone','The carbonyl group lies at carbon 3 in the five-carbon parent chain.',['pentan-2-one','3-pentanone-3','pentanal'],'KETONE NUMBERING'],
+      ['CH₃COCH(CH₃)CH₃','3-methylbutan-2-one','ketone','Give the ketone locant 2 before considering the methyl substituent at carbon 3.',['2-methylbutan-3-one','3-methylbutanone','2-ethylpropanone'],'KETONE PRIORITY'],
+      ['CH₃COCH=CH₂','but-3-en-2-one','ketone','The ketone receives locant 2; the double bond consequently begins at carbon 3.',['but-1-en-3-one','but-3-en-3-one','but-1-en-2-one'],'KETONE + ALKENE'],
+      ['CH₃CH(CH₃)CH₂COOH','3-methylbutanoic acid','acid','The carboxyl carbon is carbon 1; the methyl substituent is therefore on carbon 3.',['2-methylbutanoic acid','3-methylbutan-1-oic acid','2-ethylpropanoic acid'],'CARBOXYL CARBON'],
+      ['CH₂=CHCH₂COOH','but-3-enoic acid','acid','Number from the carboxyl carbon, placing the double bond between carbons 3 and 4.',['but-1-enoic acid','but-4-enoic acid','but-3-en-1-oic acid'],'ACID + ALKENE'],
+      ['CH₃CH=CHCOOH','but-2-enoic acid','acid','The carboxyl carbon is carbon 1, so the double bond begins at carbon 2.',['but-3-enoic acid','but-1-enoic acid','but-2-en-1-oic acid'],'ACID NUMBERING'],
+      ['CH₃C(Cl)(CH₃)COOH','2-chloro-2-methylpropanoic acid','acid','The parent is propanoic acid; chloro and methyl are both on carbon 2 and are listed alphabetically.',['2-methyl-2-chloropropanoic acid','3-chloro-2-methylbutanoic acid','2-chloro-2-methylpropan-1-oic acid'],'MULTIPLE PREFIXES'],
+      ['CH₃CH₂CH₂COOCH₂CH₃','ethyl butanoate','ester','Name the group attached to oxygen first (ethyl), then the acid-derived part (butanoate).',['butyl ethanoate','ethyl butan-1-oate','butanoic ethyl ester'],'ESTER TWO-PART NAME'],
+      ['HCOOCH₂CH₂CH₃','propyl methanoate','ester','The oxygen-side alkyl group is propyl; the acid-derived carbonyl part is methanoate.',['methyl propanoate','propyl ethanoate','methanoic propyl ester'],'ESTER DIRECTION'],
+      ['CH₃CH(CH₃)COOCH₃','methyl 2-methylpropanoate','ester','The oxygen-side group is methyl; the acid-derived part is 2-methylpropanoate.',['2-methylpropyl methanoate','methyl 3-methylpropanoate','2-methyl methyl propanoate'],'BRANCHED ESTER'],
+      ['CH₃CH₂COOCH(CH₃)₂','propan-2-yl propanoate','ester','The oxygen-side group is propan-2-yl and the acid-derived part is propanoate.',['propyl propanoate','propan-2-yl ethanoate','2-propyl propanoate'],'BRANCHED ALKYL ESTER'],
+      ['CH₃CH₂CONH₂','propanamide','amide','Include the carbonyl carbon in the three-carbon parent and replace -oic acid with -amide.',['propan-1-amide','ethanamide','propanamine'],'AMIDE SUFFIX'],
+      ['CH₃CH(CH₃)CONH₂','2-methylpropanamide','amide','The parent chain including the amide carbon has three carbons, with methyl on carbon 2.',['3-methylpropanamide','2-methylbutanamide','2-ethyl ethanamide'],'BRANCHED AMIDE']
     ];
     function startOrganicNames(){
-      const session=prepareMini('organicname','Name That Molecule','MOVE & NAME · TOPIC 11','NAMED 0/10 · FIRST TRY 0');
-      const rounds=shuffle(organicNameItems).slice(0,10);let at=0,score=0,errors=0,ended=false,roundWrong=false;
-      function complete(){if(ended||session!==miniSession)return;ended=true;const xp=Math.max(10,score*6);finishMini('organicname',score,xp,'Organic naming round complete!','You named '+score+' of 10 structures correctly on the first try.',startOrganicNames)}
+      const session=prepareMini('organicname','Name That Molecule','DSE EXAM CHALLENGE · TOPIC 11','NAMED 0/12 · FIRST TRY 0');
+      const rounds=shuffle(organicNameItems).slice(0,12);let at=0,score=0,errors=0,ended=false,roundWrong=false;
+      function complete(){if(ended||session!==miniSession)return;ended=true;const xp=Math.max(15,score*7);finishMini('organicname',score,xp,'DSE naming challenge complete!','You named '+score+' of 12 complex structures correctly on the first try.',startOrganicNames)}
       function render(){
         if(at>=rounds.length){complete();return}
-        roundWrong=false;const item=rounds[at],sameFamily=shuffle(organicNameItems.filter(function(x){return x[2]===item[2]&&x[1]!==item[1]})),otherFamily=shuffle(organicNameItems.filter(function(x){return x[2]!==item[2]})),choices=shuffle([item].concat(sameFamily.concat(otherFamily).slice(0,3)));
-        miniStatus.textContent='NAMED '+at+'/10 · FIRST TRY '+score+' · ERRORS '+errors;
-        miniBody.innerHTML='<div class="naming-prompt"><small>NAME THIS ORGANIC COMPOUND</small><strong class="naming-formula">'+item[0]+'</strong><span class="naming-rule">Choose the systematic name.</span></div><div class="drag-bank name-bank">'+choices.map(function(choice,i){return '<button class="drag-tile name-tile" type="button" data-move-id="name-'+at+'-'+i+'" data-correct="'+String(choice[1]===item[1])+'" data-label="'+choice[1]+'">'+choice[1]+'</button>'}).join('')+'</div><div class="drop-zone-grid name-drop-grid"><div class="drop-zone name-drop-zone" role="button" tabindex="0" data-zone="name"><b>MOLECULE NAME</b><span>drag or tap the correct name here</span><div class="drop-results"></div></div></div>';
+        roundWrong=false;const item=rounds[at],choices=shuffle([item[1]].concat(item[4]));
+        miniStatus.textContent='NAMED '+at+'/12 · FIRST TRY '+score+' · ERRORS '+errors;
+        miniBody.innerHTML='<div class="naming-checklist"><span>① principal group</span><span>② longest valid chain</span><span>③ lowest locants</span><span>④ prefixes + suffix</span></div><div class="naming-prompt"><div class="naming-meta"><span>DSE STYLE</span><span>'+item[5]+'</span></div><small>CHOOSE THE SYSTEMATIC NAME</small><strong class="naming-formula">'+item[0]+'</strong><span class="naming-rule">The distractors reproduce common examination naming errors.</span></div><div class="drag-bank name-bank">'+choices.map(function(choice,i){return '<button class="drag-tile name-tile" type="button" data-move-id="name-'+at+'-'+i+'" data-correct="'+String(choice===item[1])+'" data-label="'+choice+'">'+choice+'</button>'}).join('')+'</div><div class="drop-zone-grid name-drop-grid"><div class="drop-zone name-drop-zone" role="button" tabindex="0" data-zone="name"><b>FINAL SYSTEMATIC NAME</b><span>drag or tap the best answer here</span><div class="drop-results"></div></div></div>';
         wireMovable(session,function(tile){
           if(ended||session!==miniSession)return false;
-          if(tile.dataset.correct!=='true'){errors++;roundWrong=true;tile.classList.add('wrong');tile.disabled=true;miniFeedback.innerHTML='<b>Not this name.</b> Check the longest carbon chain, functional group and position number.';miniStatus.textContent='NAMED '+at+'/10 · FIRST TRY '+score+' · ERRORS '+errors;return true}
-          if(!roundWrong)score++;const target=miniBody.querySelector('.drop-results'),chip=document.createElement('span');chip.textContent=tile.dataset.label;target.appendChild(chip);tile.remove();miniFeedback.innerHTML='<b>Correct — '+item[1]+'.</b> '+item[3];at++;miniStatus.textContent='NAMED '+at+'/10 · FIRST TRY '+score+' · ERRORS '+errors;setTimeout(function(){if(session===miniSession&&!ended)render()},720);return true
+          if(tile.dataset.correct!=='true'){errors++;roundWrong=true;tile.classList.add('wrong');tile.disabled=true;miniFeedback.innerHTML='<b>Exam trap.</b> Recheck the principal functional group, parent chain and ordered locant set.';miniStatus.textContent='NAMED '+at+'/12 · FIRST TRY '+score+' · ERRORS '+errors;return true}
+          if(!roundWrong)score++;const target=miniBody.querySelector('.drop-results'),chip=document.createElement('span');chip.textContent=tile.dataset.label;target.appendChild(chip);tile.remove();miniFeedback.innerHTML='<b>Correct — '+item[1]+'.</b> '+item[3];at++;miniStatus.textContent='NAMED '+at+'/12 · FIRST TRY '+score+' · ERRORS '+errors;setTimeout(function(){if(session===miniSession&&!ended)render()},900);return true
         });
       }
       render();
