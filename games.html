@@ -23,7 +23,7 @@
       <div>
         <p class="kicker">QUICK RECALL · INSTANT FEEDBACK</p>
         <h1>Chemistry Arcade</h1>
-        <p>Revise every part of the HKDSE Chemistry curriculum through topic-labelled games. The 210-question bank covers all 12 topics, and each replay draws a fresh ten-question round.</p>
+        <p>Revise every part of the HKDSE Chemistry curriculum through topic-labelled challenges, or jump into three playful mini-games. The 210-question bank covers all 12 topics.</p>
       </div>
     </section>
 
@@ -32,6 +32,22 @@
       <div class="game-stat"><b id="levelStat">1</b><span>LEVEL</span></div>
       <div class="game-stat"><b id="playedStat">0</b><span>ROUNDS PLAYED</span></div>
       <div class="game-stat"><b id="streakStat">0</b><span>BEST STREAK</span></div>
+    </section>
+
+    <section class="fun-zone" aria-labelledby="funZoneTitle">
+      <div class="game-section-heading"><div><p class="kicker">PLAY · RECALL · REPEAT</p><h2 id="funZoneTitle">Chemistry Fun Zone</h2></div><span>Three ways to play</span></div>
+      <div class="mini-game-grid">
+        <button class="mini-game-card memory" type="button" data-mini="memory"><span class="mini-icon">🃏</span><div><small>MEMORY GAME · TOPICS 02 &amp; 11</small><b>Formula Flip</b><p>Turn over cards and match each chemical name with its correct formula.</p></div><em>BEST <strong data-mini-best="memory">0</strong></em></button>
+        <button class="mini-game-card ph" type="button" data-mini="ph"><span class="mini-icon">💦</span><div><small>TIMED SORT · TOPIC 04</small><b>pH Splash</b><p>Sort substances into acidic, neutral or alkaline before time runs out.</p></div><em>BEST <strong data-mini-best="ph">0</strong></em></button>
+        <button class="mini-game-card atoms" type="button" data-mini="atoms"><span class="mini-icon">🎯</span><div><small>SPEED GAME · TOPIC 02</small><b>Atom Catch</b><p>Catch the correct element symbol as quickly as possible in 30 seconds.</p></div><em>BEST <strong data-mini-best="atoms">0</strong></em></button>
+      </div>
+    </section>
+
+    <section class="mini-arena" id="miniArena" aria-live="polite">
+      <div class="arena-top"><div><p class="kicker" id="miniKicker">FUN ZONE</p><h2 id="miniTitle">Formula Flip</h2></div><button id="closeMini" type="button">Close game ×</button></div>
+      <div class="mini-status" id="miniStatus">Choose a mini-game to begin.</div>
+      <div class="mini-body" id="miniBody"></div>
+      <div class="mini-feedback" id="miniFeedback"></div>
     </section>
 
     <section class="curriculum-games">
@@ -318,11 +334,48 @@
       ]}
     };
     const arena=document.getElementById('gameArena'),optionsNode=document.getElementById('gameOptions'),feedback=document.getElementById('gameFeedback'),next=document.getElementById('nextQuestion');
+    const miniArena=document.getElementById('miniArena'),miniBody=document.getElementById('miniBody'),miniStatus=document.getElementById('miniStatus'),miniFeedback=document.getElementById('miniFeedback');
     let game=null,order=[],index=0,score=0,streak=0,answered=false;
+    let miniInterval=null,miniSession=0;
     function profile(){return ChemistryTools.profile()}
     function shuffle(items){const out=items.slice();for(let i=out.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[out[i],out[j]]=[out[j],out[i]]}return out}
-    function updateStats(){const p=profile();document.getElementById('xpStat').textContent=p.xp||0;document.getElementById('levelStat').textContent=Math.floor((p.xp||0)/100)+1;document.getElementById('playedStat').textContent=p.played||0;document.getElementById('streakStat').textContent=p.bestStreak||0;document.querySelectorAll('[data-best]').forEach(function(el){el.textContent=(p.best&&p.best[el.dataset.best])||0})}
-    function start(key){game=key;order=shuffle(games[key].questions).slice(0,10);index=0;score=0;streak=0;answered=false;document.getElementById('gameTitle').textContent=games[key].title;arena.classList.add('open');arena.scrollIntoView({behavior:'smooth',block:'start'});show()}
+    function updateStats(){const p=profile();document.getElementById('xpStat').textContent=p.xp||0;document.getElementById('levelStat').textContent=Math.floor((p.xp||0)/100)+1;document.getElementById('playedStat').textContent=p.played||0;document.getElementById('streakStat').textContent=p.bestStreak||0;document.querySelectorAll('[data-best]').forEach(function(el){el.textContent=(p.best&&p.best[el.dataset.best])||0});document.querySelectorAll('[data-mini-best]').forEach(function(el){el.textContent=(p.funBest&&p.funBest[el.dataset.miniBest])||0})}
+    function stopMiniTimer(){if(miniInterval){clearInterval(miniInterval);miniInterval=null}}
+    function prepareMini(key,title,kicker,status){stopMiniTimer();miniSession++;arena.classList.remove('open');document.getElementById('miniTitle').textContent=title;document.getElementById('miniKicker').textContent=kicker;miniStatus.textContent=status;miniFeedback.textContent='';miniArena.classList.add('open');miniArena.scrollIntoView({behavior:'smooth',block:'start'});return miniSession}
+    function finishMini(key,result,xp,headline,detail,replay){stopMiniTimer();const p=profile();p.xp=(p.xp||0)+xp;p.played=(p.played||0)+1;p.funBest=p.funBest||{};p.funBest[key]=Math.max(p.funBest[key]||0,result);ChemistryTools.writeProfile(p);miniStatus.textContent='ROUND COMPLETE · +'+xp+' XP';miniFeedback.innerHTML='<b>'+headline+'</b> '+detail;miniBody.innerHTML='<div class="mini-result"><strong>'+result+'</strong><span>BEST '+p.funBest[key]+'</span><button type="button">Play again ↻</button></div>';miniBody.querySelector('button').addEventListener('click',replay);updateStats()}
+
+    const memoryPairs=[['Hydrogen','H₂'],['Oxygen','O₂'],['Water','H₂O'],['Carbon dioxide','CO₂'],['Methane','CH₄'],['Ammonia','NH₃']];
+    function startMemory(){
+      const session=prepareMini('memory','Formula Flip','MEMORY MATCH · TOPICS 02 & 11','MOVES 0 · PAIRS 0/6');let first=null,lock=false,moves=0,matched=0;
+      const deck=shuffle(memoryPairs.flatMap(function(pair,i){return [{pair:i,value:pair[0]},{pair:i,value:pair[1]}]}));
+      miniBody.innerHTML='<div class="memory-board">'+deck.map(function(card,i){return '<button class="memory-card" type="button" data-pair="'+card.pair+'" data-value="'+card.value+'" aria-label="Hidden card '+(i+1)+'"><span>'+card.value+'</span></button>'}).join('')+'</div>';
+      miniBody.querySelectorAll('.memory-card').forEach(function(card){card.addEventListener('click',function(){
+        if(lock||card.classList.contains('open')||card.classList.contains('matched')||session!==miniSession)return;card.classList.add('open');card.setAttribute('aria-label',card.dataset.value);
+        if(!first){first=card;return}moves++;miniStatus.textContent='MOVES '+moves+' · PAIRS '+(matched/2)+'/6';
+        if(first.dataset.pair===card.dataset.pair){first.classList.add('matched');card.classList.add('matched');matched+=2;first=null;miniFeedback.textContent='Match found!';miniStatus.textContent='MOVES '+moves+' · PAIRS '+(matched/2)+'/6';if(matched===deck.length){const result=Math.max(25,100-Math.max(0,moves-6)*5),xp=Math.max(15,Math.round(result/10)*5);finishMini('memory',result,xp,'All formula pairs matched!','Fewer moves earn a higher score.',startMemory)}return}
+        lock=true;miniFeedback.textContent='Not a pair — remember their positions.';const previous=first;first=null;setTimeout(function(){if(session!==miniSession)return;previous.classList.remove('open');card.classList.remove('open');previous.setAttribute('aria-label','Hidden card');card.setAttribute('aria-label','Hidden card');lock=false},650)
+      })});
+    }
+
+    const phItems=[
+      ['lemon juice (pH 2)','acidic','A pH below 7 is acidic.'],['distilled water (pH 7)','neutral','At 25 °C, pH 7 is neutral.'],['sodium hydroxide solution (pH 13)','alkaline','A pH above 7 is alkaline.'],['vinegar (pH 3)','acidic','Vinegar contains ethanoic acid.'],['aqueous ammonia (pH 11)','alkaline','Aqueous ammonia produces OH⁻ ions.'],['sodium chloride solution (pH 7)','neutral','A typical sodium chloride solution is approximately neutral.'],['hydrochloric acid (pH 1)','acidic','Hydrochloric acid gives a very low pH.'],['calcium hydroxide solution (pH 12)','alkaline','Calcium hydroxide produces OH⁻ ions in water.'],['carbonated water (pH 5)','acidic','Dissolved carbon dioxide makes the water mildly acidic.'],['sugar solution (pH 7)','neutral','Sugar does not ionise to produce H⁺ or OH⁻ ions.'],['dilute sulfuric acid (pH 1)','acidic','Sulfuric acid produces H⁺ ions in water.'],['potassium hydroxide solution (pH 13)','alkaline','Potassium hydroxide is a strong alkali.']
+    ];
+    function startPH(){
+      const session=prepareMini('ph','pH Splash','TIMED SORT · TOPIC 04','TIME 35s · SCORE 0 · 1/10'),round=shuffle(phItems).slice(0,10);let at=0,points=0,time=35,ended=false;
+      function complete(){if(ended||session!==miniSession)return;ended=true;finishMini('ph',points,points*5,'pH sorting complete!','You classified '+points+' of 10 correctly.',startPH)}
+      function render(){if(at>=round.length){complete();return}const item=round[at];miniStatus.textContent='TIME '+time+'s · SCORE '+points+' · '+(at+1)+'/10';miniBody.innerHTML='<div class="sort-prompt"><small>WHERE DOES THIS BELONG?</small><strong>'+item[0]+'</strong></div><div class="sort-buttons"><button type="button" data-sort="acidic">ACIDIC</button><button type="button" data-sort="neutral">NEUTRAL</button><button type="button" data-sort="alkaline">ALKALINE</button></div>';miniBody.querySelectorAll('[data-sort]').forEach(function(button){button.addEventListener('click',function(){if(ended||session!==miniSession)return;miniBody.querySelectorAll('[data-sort]').forEach(function(b){b.disabled=true});const correct=button.dataset.sort===item[1];if(correct){points++;button.classList.add('correct')}else{button.classList.add('wrong');miniBody.querySelector('[data-sort="'+item[1]+'"]').classList.add('correct')}miniFeedback.innerHTML='<b>'+(correct?'Splash! Correct.':'Not this time.')+'</b> '+item[2];at++;setTimeout(function(){if(session===miniSession&&!ended)render()},520)})})}
+      render();miniInterval=setInterval(function(){time--;if(time<=0){time=0;complete()}else if(!ended)miniStatus.textContent='TIME '+time+'s · SCORE '+points+' · '+Math.min(at+1,10)+'/10'},1000);
+    }
+
+    const atomPool=[['Hydrogen','H'],['Helium','He'],['Lithium','Li'],['Carbon','C'],['Nitrogen','N'],['Oxygen','O'],['Sodium','Na'],['Magnesium','Mg'],['Aluminium','Al'],['Chlorine','Cl'],['Potassium','K'],['Calcium','Ca'],['Iron','Fe'],['Copper','Cu'],['Zinc','Zn']];
+    function startAtoms(){
+      const session=prepareMini('atoms','Atom Catch','SPEED GAME · TOPIC 02','TIME 30s · SCORE 0');let points=0,time=30,ended=false,target=null;
+      function complete(){if(ended||session!==miniSession)return;ended=true;finishMini('atoms',points,points*3,'Time! Atom catching complete.','You caught '+points+' correct element symbols.',startAtoms)}
+      function render(){target=atomPool[Math.floor(Math.random()*atomPool.length)];const options=shuffle([target].concat(shuffle(atomPool.filter(function(x){return x!==target})).slice(0,3)));miniStatus.textContent='TIME '+time+'s · SCORE '+points;miniBody.innerHTML='<div class="catch-prompt"><small>CATCH THE SYMBOL FOR</small><strong>'+target[0]+'</strong></div><div class="atom-grid">'+options.map(function(item){return '<button type="button" data-symbol="'+item[1]+'">'+item[1]+'</button>'}).join('')+'</div>';miniBody.querySelectorAll('[data-symbol]').forEach(function(button){button.addEventListener('click',function(){if(ended||session!==miniSession)return;if(button.dataset.symbol===target[1]){points++;miniFeedback.textContent='Caught it! +1';render()}else{points=Math.max(0,points-1);button.classList.add('wrong');miniFeedback.textContent='Oops — wrong atom. −1'}})})}
+      render();miniInterval=setInterval(function(){time--;if(time<=0){time=0;complete()}else miniStatus.textContent='TIME '+time+'s · SCORE '+points},1000);
+    }
+    function hideMini(){stopMiniTimer();miniSession++;miniArena.classList.remove('open')}
+    function start(key){hideMini();game=key;order=shuffle(games[key].questions).slice(0,10);index=0;score=0;streak=0;answered=false;document.getElementById('gameTitle').textContent=games[key].title;arena.classList.add('open');arena.scrollIntoView({behavior:'smooth',block:'start'});show()}
     function show(){
       const q=order[index];answered=false;document.getElementById('roundLabel').textContent='QUESTION '+(index+1)+' OF '+order.length;document.getElementById('progressBar').style.width=((index+1)/order.length*100)+'%';document.getElementById('scoreLabel').textContent='SCORE '+score+' · STREAK '+streak;document.getElementById('gamePrompt').textContent=q[0];feedback.textContent='Choose the best answer.';next.classList.remove('show');
       optionsNode.innerHTML=q[1].map(function(answer,i){return '<button class="game-option" type="button" data-answer="'+i+'">'+answer+'</button>'}).join('');
@@ -340,7 +393,7 @@
       const p=profile();p.played=(p.played||0)+1;p.best=p.best||{};p.best[game]=Math.max(p.best[game]||0,score);ChemistryTools.writeProfile(p);updateStats();
       document.getElementById('roundLabel').textContent='ROUND COMPLETE';document.getElementById('gamePrompt').textContent=score+'/10 — '+(score===10?'Perfect chemistry!':score>=7?'Strong result!':score>=4?'Good start — replay to improve.':'Keep practising — every round builds recall.');optionsNode.innerHTML='';feedback.innerHTML='<b>You earned '+(score*10)+' XP.</b> Your best score for '+games[game].title+' is '+p.best[game]+'/10.';next.textContent='Play again ↻';next.classList.add('show');answered=true;index=order.length;
     }
-    document.querySelectorAll('[data-game]').forEach(function(button){button.addEventListener('click',function(){start(button.dataset.game)})});next.addEventListener('click',function(){if(index===order.length)start(game);else advance()});document.getElementById('closeGame').addEventListener('click',function(){arena.classList.remove('open');document.getElementById('gameGrid').scrollIntoView({behavior:'smooth'})});window.addEventListener('chemistry-tools-change',updateStats);updateStats();
+    document.querySelectorAll('[data-mini]').forEach(function(button){button.addEventListener('click',function(){({memory:startMemory,ph:startPH,atoms:startAtoms})[button.dataset.mini]()})});document.getElementById('closeMini').addEventListener('click',function(){hideMini();document.querySelector('.fun-zone').scrollIntoView({behavior:'smooth'})});document.querySelectorAll('[data-game]').forEach(function(button){button.addEventListener('click',function(){start(button.dataset.game)})});next.addEventListener('click',function(){if(index===order.length)start(game);else advance()});document.getElementById('closeGame').addEventListener('click',function(){arena.classList.remove('open');document.getElementById('gameGrid').scrollIntoView({behavior:'smooth'})});window.addEventListener('chemistry-tools-change',updateStats);updateStats();
   })();
   </script>
 </body>
