@@ -1,0 +1,350 @@
+/* Student-friendly visual layer for the HKDSE Chemistry Revision Hub. */
+:root {
+  --fun-ink: #17364a;
+  --fun-teal: #0fae91;
+  --fun-cyan: #42c8df;
+  --fun-yellow: #ffd166;
+  --fun-coral: #ff7a7a;
+  --fun-purple: #8c70d8;
+  --fun-shadow: 0 18px 50px rgba(31, 72, 91, .12);
+}
+
+body {
+  background-image:
+    radial-gradient(circle at 8% 14%, rgba(66, 200, 223, .10) 0 7px, transparent 8px),
+    radial-gradient(circle at 93% 24%, rgba(255, 122, 122, .09) 0 9px, transparent 10px),
+    radial-gradient(circle at 82% 82%, rgba(140, 112, 216, .08) 0 6px, transparent 7px);
+  background-size: 190px 190px, 240px 240px, 170px 170px;
+}
+
+body:not(:has(.hero)) .topbar {
+  border-bottom: 1px solid rgba(31, 72, 91, .10) !important;
+  box-shadow: 0 8px 28px rgba(31, 72, 91, .07) !important;
+}
+
+body:not(:has(.hero)) .topbar .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+body:not(:has(.hero)) .topbar .brand::before {
+  content: "";
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 29% 55%, #8fe8d0 0 3px, transparent 4px),
+    radial-gradient(circle at 70% 29%, #ffd166 0 3px, transparent 4px),
+    radial-gradient(circle at 70% 73%, #ff8a8a 0 3px, transparent 4px),
+    linear-gradient(145deg, #17364a, #246274);
+  box-shadow: 0 8px 20px rgba(23, 54, 74, .20);
+  transform: rotate(-4deg);
+}
+
+.home-link {
+  border-radius: 999px !important;
+  transition: transform .18s ease, border-color .18s ease !important;
+}
+
+.home-link:hover { transform: translateY(-2px); }
+
+/* Landing page */
+.hero {
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 13% 22%, rgba(255, 209, 102, .30), transparent 22%),
+    radial-gradient(circle at 88% 18%, rgba(66, 200, 223, .25), transparent 24%),
+    linear-gradient(125deg, #fffaf0 0%, #f8fff9 48%, #e8f8f4 100%);
+}
+
+.hero::before {
+  border: 18px solid rgba(15, 174, 145, .08) !important;
+  box-shadow: 0 0 0 34px rgba(66, 200, 223, .05), 0 0 0 62px rgba(140, 112, 216, .035);
+}
+
+.hero::after {
+  content: "H₂O     Na⁺     e⁻     CO₂";
+  position: absolute;
+  inset: auto 5% 28px auto;
+  z-index: -1;
+  color: rgba(23, 54, 74, .08);
+  font: 800 clamp(18px, 2.1vw, 32px)/1.4 Georgia, serif;
+  letter-spacing: .45em;
+  transform: rotate(-5deg);
+  white-space: pre;
+}
+
+.hero h1 em {
+  position: relative;
+  color: var(--fun-teal);
+  text-decoration: none;
+}
+
+.hero h1 em::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -.09em;
+  height: .18em;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--fun-yellow), var(--fun-coral), var(--fun-purple));
+  transform: rotate(-1.5deg);
+}
+
+.hero-actions .primary,
+.header-cta,
+.btn.primary {
+  border: 0 !important;
+  background: linear-gradient(135deg, #0fae91, #087d78) !important;
+  box-shadow: 0 10px 24px rgba(15, 174, 145, .25) !important;
+}
+
+.hero-actions .primary:hover,
+.header-cta:hover,
+.btn.primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(15, 174, 145, .32) !important;
+}
+
+.hero-actions .secondary {
+  border: 2px solid rgba(23, 54, 74, .12) !important;
+  background: rgba(255, 255, 255, .78) !important;
+  box-shadow: 0 10px 30px rgba(31, 72, 91, .08);
+}
+
+.play {
+  background: linear-gradient(135deg, var(--fun-coral), #ff9a62) !important;
+  box-shadow: 0 6px 16px rgba(255, 122, 122, .24);
+}
+
+.study-card,
+.progress-card {
+  border: 1px solid rgba(255, 255, 255, .75) !important;
+  border-radius: 26px !important;
+  box-shadow: 0 26px 70px rgba(31, 72, 91, .17) !important;
+}
+
+.study-card {
+  transform: rotate(-1.2deg);
+}
+
+.progress-card {
+  transform: rotate(2deg);
+  background: linear-gradient(145deg, #17364a, #164f5b) !important;
+}
+
+.formula {
+  border: 2px solid rgba(255, 255, 255, .8) !important;
+  box-shadow: 0 12px 30px rgba(31, 72, 91, .16) !important;
+  animation: fun-float 4.2s ease-in-out infinite;
+}
+
+.formula-b { animation-delay: -.9s; }
+.formula-c { animation-delay: -1.8s; }
+
+.topic-section {
+  position: relative;
+  background:
+    linear-gradient(rgba(255, 255, 255, .88), rgba(255, 255, 255, .88)),
+    radial-gradient(circle, rgba(15, 174, 145, .16) 1.5px, transparent 1.5px);
+  background-size: auto, 26px 26px;
+}
+
+.filters button,
+.search {
+  border-radius: 999px !important;
+  box-shadow: 0 6px 18px rgba(31, 72, 91, .06);
+}
+
+.filters button.selected {
+  background: linear-gradient(135deg, #17364a, #21566a) !important;
+  color: white !important;
+}
+
+.topic-card {
+  --card-accent: var(--fun-teal);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(31, 72, 91, .10) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 13px 35px rgba(31, 72, 91, .09) !important;
+  transition: transform .24s ease, box-shadow .24s ease, border-color .24s ease !important;
+}
+
+.topic-card::before {
+  content: "";
+  position: absolute;
+  width: 124px;
+  height: 124px;
+  right: -48px;
+  top: -55px;
+  border-radius: 50%;
+  background: var(--card-accent);
+  opacity: .12;
+}
+
+.topic-card::after {
+  content: "";
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  right: 19px;
+  top: 18px;
+  border: 2px solid var(--card-accent);
+  border-radius: 50%;
+  opacity: .10;
+}
+
+.topic-card:hover {
+  transform: translateY(-8px) rotate(-.35deg) !important;
+  border-color: color-mix(in srgb, var(--card-accent) 44%, white) !important;
+  box-shadow: 0 24px 50px rgba(31, 72, 91, .16) !important;
+}
+
+.topic-card:nth-child(even):hover { transform: translateY(-8px) rotate(.35deg) !important; }
+.topic-card.mint, .topic-card.teal { --card-accent: #10ae91; }
+.topic-card.sky, .topic-card.cyan, .topic-card.blue { --card-accent: #39bfe0; }
+.topic-card.amber, .topic-card.orange, .topic-card.lime { --card-accent: #f0aa45; }
+.topic-card.rose, .topic-card.pink { --card-accent: #ee7084; }
+.topic-card.violet, .topic-card.purple { --card-accent: #8c70d8; }
+
+.topic-icon {
+  border-radius: 18px !important;
+  transition: transform .24s ease;
+}
+
+.topic-card:hover .topic-icon { transform: translateY(-4px) rotate(-4deg) scale(1.05); }
+.topic-card .availability { border-radius: 999px !important; }
+.topic-card .progress { height: 7px !important; border-radius: 99px !important; }
+.topic-card .progress i { background: linear-gradient(90deg, var(--card-accent), var(--fun-yellow)) !important; }
+
+.science-figure,
+.method-grid article {
+  border-radius: 24px !important;
+  box-shadow: var(--fun-shadow) !important;
+  transition: transform .22s ease;
+}
+
+.science-figure:hover,
+.method-grid article:hover { transform: translateY(-5px); }
+
+.method-grid article > span {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 16px;
+  color: #17364a;
+  background: linear-gradient(135deg, var(--fun-yellow), #ffe7a3);
+  transform: rotate(-4deg);
+}
+
+/* Practice pages */
+.shell .sidebar {
+  background:
+    radial-gradient(circle at 18% 10%, rgba(66, 200, 223, .18) 0 4px, transparent 5px),
+    radial-gradient(circle at 82% 20%, rgba(255, 209, 102, .14) 0 6px, transparent 7px),
+    linear-gradient(160deg, #16384b 0%, #1a5660 100%) !important;
+  background-size: 88px 88px, 115px 115px, auto;
+}
+
+.shell .score-card {
+  border-radius: 20px !important;
+  background: rgba(255, 255, 255, .10) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12) !important;
+}
+
+.shell .bar { height: 9px !important; border-radius: 99px !important; }
+.shell .bar i { background: linear-gradient(90deg, #45ddbb, #ffd166) !important; }
+
+.question-nav button {
+  border-radius: 12px !important;
+  transition: transform .16s ease, background .16s ease !important;
+}
+
+.question-nav button:hover { transform: translateY(-2px); }
+.question-nav button.active {
+  background: linear-gradient(135deg, #7fe5cd, #ffd166) !important;
+  color: #17364a !important;
+  box-shadow: 0 7px 18px rgba(127, 229, 205, .24) !important;
+}
+
+.content .panel {
+  border-radius: 24px !important;
+  box-shadow: var(--fun-shadow) !important;
+}
+
+.content .panel:not(.marking) {
+  background:
+    linear-gradient(rgba(255, 254, 250, .97), rgba(255, 254, 250, .97)),
+    radial-gradient(circle, rgba(15, 174, 145, .13) 1px, transparent 1px) !important;
+  background-size: auto, 18px 18px !important;
+}
+
+.content .marking {
+  background:
+    radial-gradient(circle at 88% 12%, rgba(255, 209, 102, .11) 0 7px, transparent 8px),
+    linear-gradient(155deg, #16384b, #1c5660) !important;
+  background-size: 120px 120px, auto !important;
+}
+
+.tag {
+  border-radius: 999px !important;
+  font-weight: 900 !important;
+}
+
+.option {
+  border-width: 2px !important;
+  border-radius: 16px !important;
+  box-shadow: 0 5px 15px rgba(31, 72, 91, .045);
+}
+
+.option:hover {
+  transform: translateX(5px) !important;
+  box-shadow: 0 10px 24px rgba(31, 72, 91, .08);
+}
+
+.option b {
+  border-radius: 12px !important;
+  transform: rotate(-3deg);
+}
+
+.option.correct { box-shadow: 0 0 0 3px rgba(15, 174, 145, .10); }
+.option.wrong { box-shadow: 0 0 0 3px rgba(255, 122, 122, .10); }
+
+.answer-status,
+.tip,
+.equation { border-radius: 14px !important; }
+
+.locked span {
+  width: 62px !important;
+  height: 62px !important;
+  border-radius: 22px !important;
+  background: rgba(255, 255, 255, .08) !important;
+  transform: rotate(-4deg);
+}
+
+@keyframes fun-float {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+@media (max-width: 760px) {
+  .hero::after { display: none; }
+  .study-card, .progress-card { transform: none; }
+  .topic-card { border-radius: 20px !important; }
+  .content .panel { border-radius: 20px !important; }
+  .option:hover { transform: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .formula { animation: none; }
+  .topic-card,
+  .topic-icon,
+  .science-figure,
+  .method-grid article,
+  .question-nav button { transition: none !important; }
+}

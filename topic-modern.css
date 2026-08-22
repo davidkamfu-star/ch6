@@ -1,3 +1,4 @@
+@import url("student-fun.css");
 :root{--ink:#173845;--green:#16a085;--soft:#edf8f4;--paper:#fffdf9;--cream:#f3f0e8;--line:#dce4e0;--muted:#687c80;--red:#c65359;--amber:#eba84b;--blue:#275e84}
 body{background:linear-gradient(135deg,#f7f4ed 0%,#eef4ef 100%);font-family:Arial,Helvetica,sans-serif}
 .topbar{min-height:82px;padding:0 clamp(20px,5vw,78px);background:rgba(255,253,249,.95);border-color:rgba(23,56,69,.1);box-shadow:0 4px 22px rgba(34,65,65,.04)}
