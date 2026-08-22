@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chemistry Games | Chemistry Hub</title>
+  <meta name="description" content="Five quick chemistry games for revising elements, pH, reactions, redox and organic chemistry.">
+  <link rel="stylesheet" href="student-fun.css?v=20260822a">
+  <link rel="stylesheet" href="student-tools.css?v=20260822a">
+</head>
+<body class="student-page">
+  <header class="topbar">
+    <a class="brand" href="index.html">CHEMISTRY HUB</a>
+    <nav class="page-nav" aria-label="Student tools">
+      <a href="index.html" data-short="Hub">Revision Hub</a>
+      <a class="active" href="games.html" data-short="Games" aria-current="page">Chemistry Games</a>
+      <a href="mistakes.html" data-short="Notebook">Mistake Notebook</a>
+    </nav>
+  </header>
+
+  <main class="student-shell">
+    <section class="student-hero">
+      <div>
+        <p class="kicker">QUICK RECALL · INSTANT FEEDBACK</p>
+        <h1>Chemistry Arcade</h1>
+        <p>Pick a game, answer ten fast questions and build your XP. Every answer includes a short explanation so play becomes revision.</p>
+      </div>
+    </section>
+
+    <section class="game-summary" aria-label="Game progress">
+      <div class="game-stat"><b id="xpStat">0</b><span>TOTAL XP</span></div>
+      <div class="game-stat"><b id="levelStat">1</b><span>LEVEL</span></div>
+      <div class="game-stat"><b id="playedStat">0</b><span>ROUNDS PLAYED</span></div>
+      <div class="game-stat"><b id="streakStat">0</b><span>BEST STREAK</span></div>
+    </section>
+
+    <section>
+      <div class="game-grid" id="gameGrid">
+        <button class="game-card" type="button" data-game="elements"><small>BEST <span data-best="elements">0</span>/10</small><i>⚛</i><b>Element Match</b><span>Connect element names, symbols and common chemical facts.</span></button>
+        <button class="game-card" type="button" data-game="ph"><small>BEST <span data-best="ph">0</span>/10</small><i>🧪</i><b>pH Challenge</b><span>Race through acids, alkalis, indicators and pH values.</span></button>
+        <button class="game-card" type="button" data-game="reactions"><small>BEST <span data-best="reactions">0</span>/10</small><i>⚡</i><b>Reaction Rush</b><span>Recall observations, products and reaction conditions.</span></button>
+        <button class="game-card" type="button" data-game="redox"><small>BEST <span data-best="redox">0</span>/10</small><i>🔋</i><b>Redox Battle</b><span>Track electron transfer, electrodes and electrolysis.</span></button>
+        <button class="game-card" type="button" data-game="organic"><small>BEST <span data-best="organic">0</span>/10</small><i>⬡</i><b>Organic Formula Match</b><span>Identify homologous series, groups and conversions.</span></button>
+      </div>
+    </section>
+
+    <section class="game-arena" id="gameArena" aria-live="polite">
+      <div class="arena-top"><div><p class="kicker" id="roundLabel">QUESTION 1 OF 10</p><h2 id="gameTitle" style="margin:0;font:400 27px Georgia,serif">Element Match</h2></div><button id="closeGame" type="button">Close game ×</button></div>
+      <div class="arena-progress"><i id="progressBar" style="width:10%"></i></div>
+      <div class="game-prompt"><small id="scoreLabel">SCORE 0 · STREAK 0</small><h2 id="gamePrompt"></h2></div>
+      <div class="game-options" id="gameOptions"></div>
+      <div class="game-feedback" id="gameFeedback">Choose the best answer.</div>
+      <button class="game-next" id="nextQuestion" type="button">Next question →</button>
+    </section>
+  </main>
+
+  <script src="student-tools.js?v=20260822a"></script>
+  <script>
+  (function(){
+    'use strict';
+    const games={
+      elements:{title:'Element Match',questions:[
+        ['Which symbol represents sodium?',['S','Na','N','K'],1,'Sodium has the symbol Na, from the Latin name natrium.'],
+        ['Which element has the symbol Fe?',['Fluorine','Iron','Francium','Fermium'],1,'Fe represents iron, from the Latin name ferrum.'],
+        ['Which element is a halogen?',['Neon','Chlorine','Sodium','Calcium'],1,'Chlorine is a Group 17 halogen.'],
+        ['Which element is a noble gas?',['Oxygen','Nitrogen','Argon','Bromine'],2,'Argon is a Group 18 noble gas with a stable outer shell.'],
+        ['What is the symbol for potassium?',['P','Po','Pt','K'],3,'Potassium uses K, from the Latin name kalium.'],
+        ['Which element is liquid at room conditions?',['Bromine','Sulfur','Iodine','Carbon'],0,'Bromine is a reddish-brown liquid at room conditions.'],
+        ['Which element is found in every hydrocarbon?',['Hydrogen only','Carbon only','Carbon and hydrogen','Oxygen'],2,'Hydrocarbons contain carbon and hydrogen only.'],
+        ['Which metal is commonly protected by galvanising iron?',['Copper','Zinc','Silver','Lead'],1,'Galvanising coats iron with zinc.'],
+        ['Which symbol represents calcium?',['C','Cl','Ca','Cr'],2,'Calcium has the symbol Ca.'],
+        ['Which element is most abundant in air?',['Oxygen','Nitrogen','Argon','Carbon'],1,'Air is about 78% nitrogen by volume.']
+      ]},
+      ph:{title:'pH Challenge',questions:[
+        ['A solution with pH 2 is…',['strongly acidic','weakly alkaline','neutral','strongly alkaline'],0,'A pH well below 7 indicates an acidic solution.'],
+        ['At 25 °C, a neutral aqueous solution has pH…',['0','5','7','14'],2,'At 25 °C, neutrality corresponds to pH 7.'],
+        ['What colour is phenolphthalein in an alkaline solution?',['Red','Pink','Yellow','Blue'],1,'Phenolphthalein is colourless in acid and pink in alkali.'],
+        ['Which ion causes aqueous solutions to be acidic?',['OH⁻','H⁺','Na⁺','Cl⁻'],1,'Acids produce hydrogen ions, H⁺(aq), in water.'],
+        ['Which substance neutralises hydrochloric acid?',['Sodium chloride','Copper','Sodium hydroxide','Carbon dioxide'],2,'An alkali such as sodium hydroxide neutralises the acid.'],
+        ['Diluting an acid with water generally makes its pH…',['decrease','increase','become zero','stay fixed'],1,'Dilution lowers the hydrogen-ion concentration, so pH rises.'],
+        ['Red litmus paper in an alkaline solution turns…',['blue','green','yellow','colourless'],0,'An alkali turns red litmus paper blue.'],
+        ['Acid + carbonate produces salt, water and…',['oxygen','hydrogen','carbon dioxide','chlorine'],2,'Carbonates release carbon dioxide when they react with acids.'],
+        ['Which oxide is basic?',['SO₂','CO₂','MgO','NO₂'],2,'Magnesium oxide is a basic metal oxide.'],
+        ['Which pair can make a soluble salt by titration?',['acid + alkali','acid + excess metal','acid + excess carbonate','two insoluble solids'],0,'Titration is used when both reactants are soluble, such as an acid and an alkali.']
+      ]},
+      reactions:{title:'Reaction Rush',questions:[
+        ['Magnesium reacting with dilute hydrochloric acid releases…',['oxygen','hydrogen','chlorine','carbon dioxide'],1,'Metal + dilute acid gives a salt and hydrogen.'],
+        ['A glowing splint relights in…',['hydrogen','oxygen','carbon dioxide','nitrogen'],1,'Oxygen relights a glowing splint.'],
+        ['The test for carbon dioxide uses…',['limewater','blue litmus','anhydrous copper(II) sulfate','a burning splint'],0,'Carbon dioxide turns limewater milky.'],
+        ['Increasing temperature usually speeds a reaction because particles…',['become larger','collide more often and more energetically','lose all energy','stop moving'],1,'Higher temperature increases collision frequency and the fraction of effective collisions.'],
+        ['A catalyst speeds a reaction by providing…',['more products','a lower activation-energy pathway','extra mass','a higher final yield at equilibrium'],1,'A catalyst offers an alternative pathway with lower activation energy.'],
+        ['Complete combustion of a hydrocarbon forms…',['carbon and water','carbon monoxide only','carbon dioxide and water','hydrogen and oxygen'],2,'With excess oxygen, carbon and hydrogen form carbon dioxide and water.'],
+        ['Which change increases the rate of reaction of marble with acid?',['Use larger marble chips','Cool the acid','Use powdered marble','Dilute the acid'],2,'Powdering increases surface area and collision frequency.'],
+        ['Thermal decomposition requires…',['cooling','heating','electrolysis only','a precipitate'],1,'Thermal decomposition breaks a compound down by heating.'],
+        ['A white precipitate forms when Ag⁺(aq) meets…',['Cl⁻(aq)','NO₃⁻(aq)','Na⁺(aq)','H⁺(aq)'],0,'Silver chloride, AgCl, is a white insoluble solid.'],
+        ['An exothermic reaction transfers energy…',['from surroundings to system','from system to surroundings','nowhere','only into bonds'],1,'Exothermic reactions release energy to the surroundings.']
+      ]},
+      redox:{title:'Redox Battle',questions:[
+        ['Oxidation is…',['gain of electrons','loss of electrons','gain of neutrons','loss of protons'],1,'Oxidation is loss of electrons; reduction is gain of electrons.'],
+        ['At the cathode, particles undergo…',['oxidation','reduction','neutralisation','combustion'],1,'Reduction always occurs at the cathode.'],
+        ['In electrolysis, the anode is connected to the…',['negative terminal','positive terminal','salt bridge','voltmeter only'],1,'The anode of an electrolytic cell is positive.'],
+        ['During electrolysis of molten lead(II) bromide, lead forms at the…',['anode','cathode','electrolyte surface','salt bridge'],1,'Pb²⁺ ions gain electrons at the cathode to form lead.'],
+        ['Which is an oxidation half-equation?',['Cu²⁺ + 2e⁻ → Cu','Cl₂ + 2e⁻ → 2Cl⁻','Zn → Zn²⁺ + 2e⁻','2H⁺ + 2e⁻ → H₂'],2,'Electrons appear on the product side in oxidation.'],
+        ['An oxidising agent is itself…',['oxidised','reduced','neutralised','evaporated'],1,'An oxidising agent accepts electrons and is reduced.'],
+        ['A simple chemical cell converts chemical energy into…',['light only','electrical energy','nuclear energy','sound only'],1,'A chemical cell produces electrical energy from a spontaneous redox reaction.'],
+        ['More reactive metals generally…',['gain electrons more readily','lose electrons more readily','never form ions','are noble gases'],1,'Reactive metals are more easily oxidised to positive ions.'],
+        ['In concentrated NaCl(aq) with inert electrodes, the anode product is usually…',['hydrogen','sodium','chlorine','water'],2,'Chloride ions are oxidised to chlorine at the anode.'],
+        ['Which electrode attracts cations during electrolysis?',['Anode','Cathode','Salt bridge','Both equally'],1,'Positive ions move toward the negative cathode.']
+      ]},
+      organic:{title:'Organic Formula Match',questions:[
+        ['Which formula represents an alkane?',['C₂H₄','C₂H₆','C₂H₅OH','CH₃COOH'],1,'Alkanes follow the general formula CₙH₂ₙ₊₂.'],
+        ['The functional group in alcohols is…',['–COOH','C=C','–OH','–CHO'],2,'Alcohols contain the hydroxyl group, –OH.'],
+        ['Ethene decolourises bromine water because it…',['is saturated','contains a C=C bond','is acidic','contains oxygen'],1,'Bromine adds across the carbon–carbon double bond.'],
+        ['Complete combustion of ethanol produces…',['CO₂ and H₂O','CO and H₂ only','C and O₂','CH₄ only'],0,'Complete combustion of an oxygen-containing organic compound produces carbon dioxide and water.'],
+        ['Which substance is a carboxylic acid?',['CH₃COOH','CH₃CH₂OH','CH₃CH₃','CH₂=CH₂'],0,'CH₃COOH contains the carboxyl group, –COOH.'],
+        ['Ethene molecules join to form poly(ethene) by…',['condensation','addition polymerisation','neutralisation','cracking only'],1,'The C=C bonds open and monomers add together without losing small molecules.'],
+        ['Cracking converts long-chain hydrocarbons into…',['only carbon dioxide','shorter alkanes and alkenes','metals','alcohols only'],1,'Cracking produces useful shorter hydrocarbons, including alkenes.'],
+        ['The general formula of alkenes with one C=C bond is…',['CₙH₂ₙ₊₂','CₙH₂ₙ','CₙH₂ₙ₋₂','CₙHₙ'],1,'Acyclic monoalkenes have the general formula CₙH₂ₙ.'],
+        ['Ethanol can be oxidised to…',['ethanoic acid','ethene only','methane','poly(ethene)'],0,'Under suitable oxidation conditions ethanol forms ethanoic acid.'],
+        ['An ester can be made from an alcohol and…',['an alkane','a carboxylic acid','a metal oxide','an alkene only'],1,'Esterification combines an alcohol and a carboxylic acid.']
+      ]}
+    };
+    const arena=document.getElementById('gameArena'),optionsNode=document.getElementById('gameOptions'),feedback=document.getElementById('gameFeedback'),next=document.getElementById('nextQuestion');
+    let game=null,order=[],index=0,score=0,streak=0,answered=false;
+    function profile(){return ChemistryTools.profile()}
+    function shuffle(items){const out=items.slice();for(let i=out.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[out[i],out[j]]=[out[j],out[i]]}return out}
+    function updateStats(){const p=profile();document.getElementById('xpStat').textContent=p.xp||0;document.getElementById('levelStat').textContent=Math.floor((p.xp||0)/100)+1;document.getElementById('playedStat').textContent=p.played||0;document.getElementById('streakStat').textContent=p.bestStreak||0;document.querySelectorAll('[data-best]').forEach(function(el){el.textContent=(p.best&&p.best[el.dataset.best])||0})}
+    function start(key){game=key;order=shuffle(games[key].questions);index=0;score=0;streak=0;answered=false;document.getElementById('gameTitle').textContent=games[key].title;arena.classList.add('open');arena.scrollIntoView({behavior:'smooth',block:'start'});show()}
+    function show(){
+      const q=order[index];answered=false;document.getElementById('roundLabel').textContent='QUESTION '+(index+1)+' OF '+order.length;document.getElementById('progressBar').style.width=((index+1)/order.length*100)+'%';document.getElementById('scoreLabel').textContent='SCORE '+score+' · STREAK '+streak;document.getElementById('gamePrompt').textContent=q[0];feedback.textContent='Choose the best answer.';next.classList.remove('show');
+      optionsNode.innerHTML=q[1].map(function(answer,i){return '<button class="game-option" type="button" data-answer="'+i+'">'+answer+'</button>'}).join('');
+      optionsNode.querySelectorAll('button').forEach(function(button){button.addEventListener('click',function(){answer(+button.dataset.answer)})});
+    }
+    function answer(choice){
+      if(answered)return;answered=true;const q=order[index],correct=choice===q[2];
+      optionsNode.querySelectorAll('button').forEach(function(button){button.disabled=true;const n=+button.dataset.answer;if(n===q[2])button.classList.add('correct');else if(n===choice)button.classList.add('wrong')});
+      if(correct){score++;streak++;const p=profile();p.xp=(p.xp||0)+10;p.bestStreak=Math.max(p.bestStreak||0,streak);ChemistryTools.writeProfile(p);feedback.innerHTML='<b>Correct! +10 XP.</b> '+q[3]}
+      else{streak=0;feedback.innerHTML='<b>Not quite.</b> '+q[3]}
+      document.getElementById('scoreLabel').textContent='SCORE '+score+' · STREAK '+streak;next.textContent=index===order.length-1?'See result →':'Next question →';next.classList.add('show');updateStats();
+    }
+    function advance(){
+      if(!answered)return;if(index<order.length-1){index++;show();return}
+      const p=profile();p.played=(p.played||0)+1;p.best=p.best||{};p.best[game]=Math.max(p.best[game]||0,score);ChemistryTools.writeProfile(p);updateStats();
+      document.getElementById('roundLabel').textContent='ROUND COMPLETE';document.getElementById('gamePrompt').textContent=score+'/10 — '+(score===10?'Perfect chemistry!':score>=7?'Strong result!':score>=4?'Good start — replay to improve.':'Keep practising — every round builds recall.');optionsNode.innerHTML='';feedback.innerHTML='<b>You earned '+(score*10)+' XP.</b> Your best score for '+games[game].title+' is '+p.best[game]+'/10.';next.textContent='Play again ↻';next.classList.add('show');answered=true;index=order.length;
+    }
+    document.querySelectorAll('[data-game]').forEach(function(button){button.addEventListener('click',function(){start(button.dataset.game)})});next.addEventListener('click',function(){if(index===order.length)start(game);else advance()});document.getElementById('closeGame').addEventListener('click',function(){arena.classList.remove('open');document.getElementById('gameGrid').scrollIntoView({behavior:'smooth'})});window.addEventListener('chemistry-tools-change',updateStats);updateStats();
+  })();
+  </script>
+</body>
+</html>
