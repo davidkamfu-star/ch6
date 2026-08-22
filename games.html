@@ -23,7 +23,7 @@
       <div>
         <p class="kicker">QUICK RECALL · INSTANT FEEDBACK</p>
         <h1>Chemistry Arcade</h1>
-        <p>Revise every part of the HKDSE Chemistry curriculum through topic-labelled challenges, or jump into five playful mini-games—including movable drag-and-drop activities.</p>
+        <p>Revise every part of the HKDSE Chemistry curriculum through topic-labelled challenges, or jump into six playful mini-games—including movable drag-and-drop activities.</p>
       </div>
     </section>
 
@@ -35,13 +35,14 @@
     </section>
 
     <section class="fun-zone" aria-labelledby="funZoneTitle">
-      <div class="game-section-heading"><div><p class="kicker">PLAY · RECALL · REPEAT</p><h2 id="funZoneTitle">Chemistry Fun Zone</h2></div><span>Five ways to play</span></div>
+      <div class="game-section-heading"><div><p class="kicker">PLAY · RECALL · REPEAT</p><h2 id="funZoneTitle">Chemistry Fun Zone</h2></div><span>Six ways to play</span></div>
       <div class="mini-game-grid">
         <button class="mini-game-card memory" type="button" data-mini="memory"><span class="mini-icon">🃏</span><div><small>MEMORY GAME · TOPICS 02 &amp; 11</small><b>Formula Flip</b><p>Turn over cards and match each chemical name with its correct formula.</p></div><em>BEST <strong data-mini-best="memory">0</strong></em></button>
         <button class="mini-game-card ph" type="button" data-mini="ph"><span class="mini-icon">💦</span><div><small>TIMED SORT · TOPIC 04</small><b>pH Splash</b><p>Sort substances into acidic, neutral or alkaline before time runs out.</p></div><em>BEST <strong data-mini-best="ph">0</strong></em></button>
         <button class="mini-game-card atoms" type="button" data-mini="atoms"><span class="mini-icon">🎯</span><div><small>SPEED GAME · TOPIC 02</small><b>Atom Catch</b><p>Catch the correct element symbol as quickly as possible in 30 seconds.</p></div><em>BEST <strong data-mini-best="atoms">0</strong></em></button>
         <button class="mini-game-card ions" type="button" data-mini="ions"><span class="mini-icon">🧲</span><div><small>MOVE &amp; SORT · TOPICS 02 &amp; 07</small><b>Ion Sorter</b><p>Drag each ion into the cation or anion chamber. Tap-to-move also works.</p></div><em>BEST <strong data-mini-best="ions">0</strong></em></button>
         <button class="mini-game-card lab-move" type="button" data-mini="labmove"><span class="mini-icon">🔬</span><div><small>MOVE &amp; MATCH · PRACTICAL SKILLS</small><b>Lab Bench Builder</b><p>Move apparatus onto the correct laboratory workstation.</p></div><em>BEST <strong data-mini-best="labmove">0</strong></em></button>
+        <button class="mini-game-card organic-name" type="button" data-mini="organicname"><span class="mini-icon">🧩</span><div><small>MOVE &amp; NAME · TOPIC 11</small><b>Name That Molecule</b><p>Drag the correct IUPAC name onto each organic structural formula.</p></div><em>BEST <strong data-mini-best="organicname">0</strong></em></button>
       </div>
     </section>
 
@@ -403,6 +404,52 @@
       miniBody.innerHTML='<div class="move-instruction">Move each apparatus tile onto the correct workstation.</div><div class="drag-bank">'+pieces.map(function(item,i){return '<button class="drag-tile apparatus-tile" type="button" data-move-id="lab-'+i+'" data-index="'+labPieces.indexOf(item)+'" data-kind="'+item[1]+'" data-label="'+item[0]+'">'+item[0]+'</button>'}).join('')+'</div><div class="drop-zone-grid"><div class="drop-zone" role="button" tabindex="0" data-zone="measure"><b>MEASURE VOLUME</b><span>accurate liquid delivery</span><div class="drop-results"></div></div><div class="drop-zone" role="button" tabindex="0" data-zone="heat"><b>HEAT MATERIALS</b><span>safe heating apparatus</span><div class="drop-results"></div></div><div class="drop-zone" role="button" tabindex="0" data-zone="gas"><b>COLLECT GAS</b><span>gas collection tools</span><div class="drop-results"></div></div><div class="drop-zone" role="button" tabindex="0" data-zone="separate"><b>SEPARATE MIXTURES</b><span>physical separation</span><div class="drop-results"></div></div></div>';
       wireMovable(session,function(tile,zone){if(ended||session!==miniSession)return false;const item=labPieces[+tile.dataset.index];if(tile.dataset.kind!==zone){errors++;tile.classList.add('wrong');miniFeedback.innerHTML='<b>That workstation does not fit.</b> Think about the apparatus function.';miniStatus.textContent='PLACED '+moved+'/8 · ERRORS '+errors;setTimeout(function(){tile.classList.remove('wrong')},350);return false}const target=miniBody.querySelector('[data-zone="'+zone+'"] .drop-results'),chip=document.createElement('span');chip.textContent=tile.dataset.label;target.appendChild(chip);tile.remove();moved++;miniFeedback.innerHTML='<b>Correct placement.</b> '+item[2];miniStatus.textContent='PLACED '+moved+'/8 · ERRORS '+errors;if(moved===pieces.length){ended=true;const result=Math.max(0,8-errors),xp=Math.max(10,result*6);finishMini('labmove',result,xp,'Laboratory bench complete!','Your score rewards correct first placements.',startLabMove)}return true});
     }
+    const organicNameItems=[
+      ['CH₄','methane','alkane','One carbon gives meth-; a saturated hydrocarbon uses -ane.'],
+      ['CH₃CH₃','ethane','alkane','Two carbons give eth-; a saturated hydrocarbon uses -ane.'],
+      ['CH₃CH₂CH₃','propane','alkane','Three carbons give prop-; a saturated hydrocarbon uses -ane.'],
+      ['CH₃CH₂CH₂CH₃','butane','alkane','Four carbons give but-; a saturated hydrocarbon uses -ane.'],
+      ['CH₃CH₂CH₂CH₂CH₃','pentane','alkane','Five carbons give pent-; a saturated hydrocarbon uses -ane.'],
+      ['CH₃CH(CH₃)CH₃','2-methylpropane','alkane','The longest chain has three carbons and a methyl group on carbon 2.'],
+      ['CH₃CH(CH₃)CH₂CH₃','2-methylbutane','alkane','The longest chain has four carbons and a methyl group on carbon 2.'],
+      ['CH₃C(CH₃)₂CH₃','2,2-dimethylpropane','alkane','The propane chain has two methyl groups, both on carbon 2.'],
+      ['CH₂=CH₂','ethene','alkene','Two carbons give eth-; a carbon-carbon double bond uses -ene.'],
+      ['CH₃CH=CH₂','propene','alkene','Three carbons give prop-; the double bond gives the suffix -ene.'],
+      ['CH₂=CHCH₂CH₃','but-1-ene','alkene','Number from the end nearest the double bond, placing it at carbon 1.'],
+      ['CH₃CH=CHCH₃','but-2-ene','alkene','The four-carbon chain has its double bond beginning at carbon 2.'],
+      ['CH₃CH₂Cl','chloroethane','haloalkane','The parent chain is ethane and the chlorine substituent gives chloro-.'],
+      ['CH₃CHBrCH₃','2-bromopropane','haloalkane','The parent is propane with bromine attached to carbon 2.'],
+      ['CH₃CHClCH₂CH₃','2-chlorobutane','haloalkane','Number the butane chain to give chlorine the lowest locant, 2.'],
+      ['CH₃OH','methanol','alcohol','One carbon gives meth- and the hydroxyl group gives -anol.'],
+      ['CH₃CH₂OH','ethanol','alcohol','Two carbons give eth- and the hydroxyl group gives -anol.'],
+      ['CH₃CH₂CH₂OH','propan-1-ol','alcohol','The three-carbon chain has its hydroxyl group on carbon 1.'],
+      ['CH₃CH(OH)CH₃','propan-2-ol','alcohol','The three-carbon chain has its hydroxyl group on carbon 2.'],
+      ['HCOOH','methanoic acid','acid','One carbon including the carboxyl carbon gives methanoic acid.'],
+      ['CH₃COOH','ethanoic acid','acid','Two carbons including the carboxyl carbon give ethanoic acid.'],
+      ['CH₃CH₂COOH','propanoic acid','acid','Three carbons including the carboxyl carbon give propanoic acid.'],
+      ['CH₃CH₂CH₂COOH','butanoic acid','acid','Four carbons including the carboxyl carbon give butanoic acid.'],
+      ['HCOOCH₃','methyl methanoate','ester','Name the alkyl group first, then the acid-derived alkanoate part.'],
+      ['CH₃COOCH₃','methyl ethanoate','ester','CH₃– attached to oxygen gives methyl; CH₃COO– gives ethanoate.'],
+      ['CH₃COOCH₂CH₃','ethyl ethanoate','ester','The oxygen-side group is ethyl and the acid-derived part is ethanoate.'],
+      ['CH₃CH₂COOCH₃','methyl propanoate','ester','The oxygen-side group is methyl and the acid-derived part is propanoate.']
+    ];
+    function startOrganicNames(){
+      const session=prepareMini('organicname','Name That Molecule','MOVE & NAME · TOPIC 11','NAMED 0/10 · FIRST TRY 0');
+      const rounds=shuffle(organicNameItems).slice(0,10);let at=0,score=0,errors=0,ended=false,roundWrong=false;
+      function complete(){if(ended||session!==miniSession)return;ended=true;const xp=Math.max(10,score*6);finishMini('organicname',score,xp,'Organic naming round complete!','You named '+score+' of 10 structures correctly on the first try.',startOrganicNames)}
+      function render(){
+        if(at>=rounds.length){complete();return}
+        roundWrong=false;const item=rounds[at],sameFamily=shuffle(organicNameItems.filter(function(x){return x[2]===item[2]&&x[1]!==item[1]})),otherFamily=shuffle(organicNameItems.filter(function(x){return x[2]!==item[2]})),choices=shuffle([item].concat(sameFamily.concat(otherFamily).slice(0,3)));
+        miniStatus.textContent='NAMED '+at+'/10 · FIRST TRY '+score+' · ERRORS '+errors;
+        miniBody.innerHTML='<div class="naming-prompt"><small>NAME THIS ORGANIC COMPOUND</small><strong class="naming-formula">'+item[0]+'</strong><span class="naming-rule">Choose the systematic name.</span></div><div class="drag-bank name-bank">'+choices.map(function(choice,i){return '<button class="drag-tile name-tile" type="button" data-move-id="name-'+at+'-'+i+'" data-correct="'+String(choice[1]===item[1])+'" data-label="'+choice[1]+'">'+choice[1]+'</button>'}).join('')+'</div><div class="drop-zone-grid name-drop-grid"><div class="drop-zone name-drop-zone" role="button" tabindex="0" data-zone="name"><b>MOLECULE NAME</b><span>drag or tap the correct name here</span><div class="drop-results"></div></div></div>';
+        wireMovable(session,function(tile){
+          if(ended||session!==miniSession)return false;
+          if(tile.dataset.correct!=='true'){errors++;roundWrong=true;tile.classList.add('wrong');tile.disabled=true;miniFeedback.innerHTML='<b>Not this name.</b> Check the longest carbon chain, functional group and position number.';miniStatus.textContent='NAMED '+at+'/10 · FIRST TRY '+score+' · ERRORS '+errors;return true}
+          if(!roundWrong)score++;const target=miniBody.querySelector('.drop-results'),chip=document.createElement('span');chip.textContent=tile.dataset.label;target.appendChild(chip);tile.remove();miniFeedback.innerHTML='<b>Correct — '+item[1]+'.</b> '+item[3];at++;miniStatus.textContent='NAMED '+at+'/10 · FIRST TRY '+score+' · ERRORS '+errors;setTimeout(function(){if(session===miniSession&&!ended)render()},720);return true
+        });
+      }
+      render();
+    }
     function hideMini(){stopMiniTimer();miniSession++;miniArena.classList.remove('open')}
     function start(key){hideMini();game=key;order=shuffle(games[key].questions).slice(0,10);index=0;score=0;streak=0;answered=false;document.getElementById('gameTitle').textContent=games[key].title;arena.classList.add('open');arena.scrollIntoView({behavior:'smooth',block:'start'});show()}
     function show(){
@@ -422,7 +469,7 @@
       const p=profile();p.played=(p.played||0)+1;p.best=p.best||{};p.best[game]=Math.max(p.best[game]||0,score);ChemistryTools.writeProfile(p);updateStats();
       document.getElementById('roundLabel').textContent='ROUND COMPLETE';document.getElementById('gamePrompt').textContent=score+'/10 — '+(score===10?'Perfect chemistry!':score>=7?'Strong result!':score>=4?'Good start — replay to improve.':'Keep practising — every round builds recall.');optionsNode.innerHTML='';feedback.innerHTML='<b>You earned '+(score*10)+' XP.</b> Your best score for '+games[game].title+' is '+p.best[game]+'/10.';next.textContent='Play again ↻';next.classList.add('show');answered=true;index=order.length;
     }
-    document.querySelectorAll('[data-mini]').forEach(function(button){button.addEventListener('click',function(){({memory:startMemory,ph:startPH,atoms:startAtoms,ions:startIons,labmove:startLabMove})[button.dataset.mini]()})});document.getElementById('closeMini').addEventListener('click',function(){hideMini();document.querySelector('.fun-zone').scrollIntoView({behavior:'smooth'})});document.querySelectorAll('[data-game]').forEach(function(button){button.addEventListener('click',function(){start(button.dataset.game)})});next.addEventListener('click',function(){if(index===order.length)start(game);else advance()});document.getElementById('closeGame').addEventListener('click',function(){arena.classList.remove('open');document.getElementById('gameGrid').scrollIntoView({behavior:'smooth'})});window.addEventListener('chemistry-tools-change',updateStats);updateStats();
+    document.querySelectorAll('[data-mini]').forEach(function(button){button.addEventListener('click',function(){({memory:startMemory,ph:startPH,atoms:startAtoms,ions:startIons,labmove:startLabMove,organicname:startOrganicNames})[button.dataset.mini]()})});document.getElementById('closeMini').addEventListener('click',function(){hideMini();document.querySelector('.fun-zone').scrollIntoView({behavior:'smooth'})});document.querySelectorAll('[data-game]').forEach(function(button){button.addEventListener('click',function(){start(button.dataset.game)})});next.addEventListener('click',function(){if(index===order.length)start(game);else advance()});document.getElementById('closeGame').addEventListener('click',function(){arena.classList.remove('open');document.getElementById('gameGrid').scrollIntoView({behavior:'smooth'})});window.addEventListener('chemistry-tools-change',updateStats);updateStats();
   })();
   </script>
 </body>
