@@ -23,7 +23,7 @@
       <div>
         <p class="kicker">QUICK RECALL · INSTANT FEEDBACK</p>
         <h1>Chemistry Arcade</h1>
-        <p>Revise every part of the HKDSE Chemistry curriculum through topic-labelled challenges, or jump into three playful mini-games. The 210-question bank covers all 12 topics.</p>
+        <p>Revise every part of the HKDSE Chemistry curriculum through topic-labelled challenges, or jump into five playful mini-games—including movable drag-and-drop activities.</p>
       </div>
     </section>
 
@@ -35,11 +35,13 @@
     </section>
 
     <section class="fun-zone" aria-labelledby="funZoneTitle">
-      <div class="game-section-heading"><div><p class="kicker">PLAY · RECALL · REPEAT</p><h2 id="funZoneTitle">Chemistry Fun Zone</h2></div><span>Three ways to play</span></div>
+      <div class="game-section-heading"><div><p class="kicker">PLAY · RECALL · REPEAT</p><h2 id="funZoneTitle">Chemistry Fun Zone</h2></div><span>Five ways to play</span></div>
       <div class="mini-game-grid">
         <button class="mini-game-card memory" type="button" data-mini="memory"><span class="mini-icon">🃏</span><div><small>MEMORY GAME · TOPICS 02 &amp; 11</small><b>Formula Flip</b><p>Turn over cards and match each chemical name with its correct formula.</p></div><em>BEST <strong data-mini-best="memory">0</strong></em></button>
         <button class="mini-game-card ph" type="button" data-mini="ph"><span class="mini-icon">💦</span><div><small>TIMED SORT · TOPIC 04</small><b>pH Splash</b><p>Sort substances into acidic, neutral or alkaline before time runs out.</p></div><em>BEST <strong data-mini-best="ph">0</strong></em></button>
         <button class="mini-game-card atoms" type="button" data-mini="atoms"><span class="mini-icon">🎯</span><div><small>SPEED GAME · TOPIC 02</small><b>Atom Catch</b><p>Catch the correct element symbol as quickly as possible in 30 seconds.</p></div><em>BEST <strong data-mini-best="atoms">0</strong></em></button>
+        <button class="mini-game-card ions" type="button" data-mini="ions"><span class="mini-icon">🧲</span><div><small>MOVE &amp; SORT · TOPICS 02 &amp; 07</small><b>Ion Sorter</b><p>Drag each ion into the cation or anion chamber. Tap-to-move also works.</p></div><em>BEST <strong data-mini-best="ions">0</strong></em></button>
+        <button class="mini-game-card lab-move" type="button" data-mini="labmove"><span class="mini-icon">🔬</span><div><small>MOVE &amp; MATCH · PRACTICAL SKILLS</small><b>Lab Bench Builder</b><p>Move apparatus onto the correct laboratory workstation.</p></div><em>BEST <strong data-mini-best="labmove">0</strong></em></button>
       </div>
     </section>
 
@@ -374,6 +376,33 @@
       function render(){target=atomPool[Math.floor(Math.random()*atomPool.length)];const options=shuffle([target].concat(shuffle(atomPool.filter(function(x){return x!==target})).slice(0,3)));miniStatus.textContent='TIME '+time+'s · SCORE '+points;miniBody.innerHTML='<div class="catch-prompt"><small>CATCH THE SYMBOL FOR</small><strong>'+target[0]+'</strong></div><div class="atom-grid">'+options.map(function(item){return '<button type="button" data-symbol="'+item[1]+'">'+item[1]+'</button>'}).join('')+'</div>';miniBody.querySelectorAll('[data-symbol]').forEach(function(button){button.addEventListener('click',function(){if(ended||session!==miniSession)return;if(button.dataset.symbol===target[1]){points++;miniFeedback.textContent='Caught it! +1';render()}else{points=Math.max(0,points-1);button.classList.add('wrong');miniFeedback.textContent='Oops — wrong atom. −1'}})})}
       render();miniInterval=setInterval(function(){time--;if(time<=0){time=0;complete()}else miniStatus.textContent='TIME '+time+'s · SCORE '+points},1000);
     }
+    function wireMovable(session,onMove){
+      let selected=null;
+      function select(tile){if(session!==miniSession)return;if(selected)selected.classList.remove('selected');selected=tile;selected.classList.add('selected');miniFeedback.textContent='Selected '+tile.dataset.label+'. Now choose a destination.'}
+      miniBody.querySelectorAll('.drag-tile').forEach(function(tile){tile.draggable=true;tile.addEventListener('dragstart',function(event){if(session!==miniSession)return;event.dataTransfer.setData('text/plain',tile.dataset.moveId);event.dataTransfer.effectAllowed='move';select(tile)});tile.addEventListener('click',function(){select(tile)})});
+      miniBody.querySelectorAll('.drop-zone').forEach(function(zone){
+        function moveSelected(){if(selected&&onMove(selected,zone.dataset.zone))selected=null}
+        zone.addEventListener('dragover',function(event){event.preventDefault();zone.classList.add('drag-over')});
+        zone.addEventListener('dragleave',function(){zone.classList.remove('drag-over')});
+        zone.addEventListener('drop',function(event){event.preventDefault();zone.classList.remove('drag-over');const id=event.dataTransfer.getData('text/plain'),tile=miniBody.querySelector('[data-move-id="'+id+'"]');if(tile&&onMove(tile,zone.dataset.zone)){selected=null}});
+        zone.addEventListener('click',moveSelected);
+        zone.addEventListener('keydown',function(event){if(event.key==='Enter'||event.key===' '){event.preventDefault();moveSelected()}});
+      });
+    }
+    const ionPieces=[['Na⁺','cation'],['Mg²⁺','cation'],['Al³⁺','cation'],['H⁺','cation'],['NH₄⁺','cation'],['Ca²⁺','cation'],['Cl⁻','anion'],['OH⁻','anion'],['SO₄²⁻','anion'],['NO₃⁻','anion'],['CO₃²⁻','anion'],['O²⁻','anion']];
+    function startIons(){
+      const session=prepareMini('ions','Ion Sorter','DRAG OR TAP · TOPICS 02 & 07','MOVED 0/12 · ERRORS 0');let moved=0,errors=0,ended=false;const pieces=shuffle(ionPieces);
+      miniBody.innerHTML='<div class="move-instruction">Drag a tile into a chamber, or tap the tile and then tap its destination.</div><div class="drag-bank">'+pieces.map(function(item,i){return '<button class="drag-tile ion-tile" type="button" data-move-id="ion-'+i+'" data-index="'+i+'" data-kind="'+item[1]+'" data-label="'+item[0]+'">'+item[0]+'</button>'}).join('')+'</div><div class="drop-zone-grid two"><div class="drop-zone" role="button" tabindex="0" data-zone="cation"><b>CATION CHAMBER</b><span>positive ions</span><div class="drop-results"></div></div><div class="drop-zone" role="button" tabindex="0" data-zone="anion"><b>ANION CHAMBER</b><span>negative ions</span><div class="drop-results"></div></div></div>';
+      wireMovable(session,function(tile,zone){if(ended||session!==miniSession)return false;if(tile.dataset.kind!==zone){errors++;tile.classList.add('wrong');miniFeedback.innerHTML='<b>Try the other chamber.</b> Cations are positive and anions are negative.';miniStatus.textContent='MOVED '+moved+'/12 · ERRORS '+errors;setTimeout(function(){tile.classList.remove('wrong')},350);return false}const target=miniBody.querySelector('[data-zone="'+zone+'"] .drop-results'),chip=document.createElement('span');chip.textContent=tile.dataset.label;target.appendChild(chip);tile.remove();moved++;miniFeedback.textContent=zone==='cation'?'Correct — the positive ion belongs in the cation chamber.':'Correct — the negative ion belongs in the anion chamber.';miniStatus.textContent='MOVED '+moved+'/12 · ERRORS '+errors;if(moved===pieces.length){ended=true;const result=Math.max(0,12-errors),xp=Math.max(10,result*4);finishMini('ions',result,xp,'All ions sorted!','Your score rewards accurate first moves.',startIons)}return true});
+    }
+    const labPieces=[
+      ['Burette','measure','Delivers accurately measured variable volumes in a titration.'],['Pipette','measure','Transfers one accurate fixed volume.'],['Bunsen burner','heat','Provides a controllable flame for heating.'],['Crucible','heat','Holds solids during strong heating.'],['Gas syringe','gas','Measures the volume of a collected gas.'],['Gas jar','gas','Collects and holds a gas for observation or testing.'],['Filter funnel','separate','Supports filter paper during filtration.'],['Separating funnel','separate','Separates immiscible liquid layers.']
+    ];
+    function startLabMove(){
+      const session=prepareMini('labmove','Lab Bench Builder','DRAG OR TAP · PRACTICAL SKILLS','PLACED 0/8 · ERRORS 0');let moved=0,errors=0,ended=false;const pieces=shuffle(labPieces);
+      miniBody.innerHTML='<div class="move-instruction">Move each apparatus tile onto the correct workstation.</div><div class="drag-bank">'+pieces.map(function(item,i){return '<button class="drag-tile apparatus-tile" type="button" data-move-id="lab-'+i+'" data-index="'+labPieces.indexOf(item)+'" data-kind="'+item[1]+'" data-label="'+item[0]+'">'+item[0]+'</button>'}).join('')+'</div><div class="drop-zone-grid"><div class="drop-zone" role="button" tabindex="0" data-zone="measure"><b>MEASURE VOLUME</b><span>accurate liquid delivery</span><div class="drop-results"></div></div><div class="drop-zone" role="button" tabindex="0" data-zone="heat"><b>HEAT MATERIALS</b><span>safe heating apparatus</span><div class="drop-results"></div></div><div class="drop-zone" role="button" tabindex="0" data-zone="gas"><b>COLLECT GAS</b><span>gas collection tools</span><div class="drop-results"></div></div><div class="drop-zone" role="button" tabindex="0" data-zone="separate"><b>SEPARATE MIXTURES</b><span>physical separation</span><div class="drop-results"></div></div></div>';
+      wireMovable(session,function(tile,zone){if(ended||session!==miniSession)return false;const item=labPieces[+tile.dataset.index];if(tile.dataset.kind!==zone){errors++;tile.classList.add('wrong');miniFeedback.innerHTML='<b>That workstation does not fit.</b> Think about the apparatus function.';miniStatus.textContent='PLACED '+moved+'/8 · ERRORS '+errors;setTimeout(function(){tile.classList.remove('wrong')},350);return false}const target=miniBody.querySelector('[data-zone="'+zone+'"] .drop-results'),chip=document.createElement('span');chip.textContent=tile.dataset.label;target.appendChild(chip);tile.remove();moved++;miniFeedback.innerHTML='<b>Correct placement.</b> '+item[2];miniStatus.textContent='PLACED '+moved+'/8 · ERRORS '+errors;if(moved===pieces.length){ended=true;const result=Math.max(0,8-errors),xp=Math.max(10,result*6);finishMini('labmove',result,xp,'Laboratory bench complete!','Your score rewards correct first placements.',startLabMove)}return true});
+    }
     function hideMini(){stopMiniTimer();miniSession++;miniArena.classList.remove('open')}
     function start(key){hideMini();game=key;order=shuffle(games[key].questions).slice(0,10);index=0;score=0;streak=0;answered=false;document.getElementById('gameTitle').textContent=games[key].title;arena.classList.add('open');arena.scrollIntoView({behavior:'smooth',block:'start'});show()}
     function show(){
@@ -393,7 +422,7 @@
       const p=profile();p.played=(p.played||0)+1;p.best=p.best||{};p.best[game]=Math.max(p.best[game]||0,score);ChemistryTools.writeProfile(p);updateStats();
       document.getElementById('roundLabel').textContent='ROUND COMPLETE';document.getElementById('gamePrompt').textContent=score+'/10 — '+(score===10?'Perfect chemistry!':score>=7?'Strong result!':score>=4?'Good start — replay to improve.':'Keep practising — every round builds recall.');optionsNode.innerHTML='';feedback.innerHTML='<b>You earned '+(score*10)+' XP.</b> Your best score for '+games[game].title+' is '+p.best[game]+'/10.';next.textContent='Play again ↻';next.classList.add('show');answered=true;index=order.length;
     }
-    document.querySelectorAll('[data-mini]').forEach(function(button){button.addEventListener('click',function(){({memory:startMemory,ph:startPH,atoms:startAtoms})[button.dataset.mini]()})});document.getElementById('closeMini').addEventListener('click',function(){hideMini();document.querySelector('.fun-zone').scrollIntoView({behavior:'smooth'})});document.querySelectorAll('[data-game]').forEach(function(button){button.addEventListener('click',function(){start(button.dataset.game)})});next.addEventListener('click',function(){if(index===order.length)start(game);else advance()});document.getElementById('closeGame').addEventListener('click',function(){arena.classList.remove('open');document.getElementById('gameGrid').scrollIntoView({behavior:'smooth'})});window.addEventListener('chemistry-tools-change',updateStats);updateStats();
+    document.querySelectorAll('[data-mini]').forEach(function(button){button.addEventListener('click',function(){({memory:startMemory,ph:startPH,atoms:startAtoms,ions:startIons,labmove:startLabMove})[button.dataset.mini]()})});document.getElementById('closeMini').addEventListener('click',function(){hideMini();document.querySelector('.fun-zone').scrollIntoView({behavior:'smooth'})});document.querySelectorAll('[data-game]').forEach(function(button){button.addEventListener('click',function(){start(button.dataset.game)})});next.addEventListener('click',function(){if(index===order.length)start(game);else advance()});document.getElementById('closeGame').addEventListener('click',function(){arena.classList.remove('open');document.getElementById('gameGrid').scrollIntoView({behavior:'smooth'})});window.addEventListener('chemistry-tools-change',updateStats);updateStats();
   })();
   </script>
 </body>
