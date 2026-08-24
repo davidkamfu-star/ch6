@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Chemistry Games | Chemistry Hub</title>
-  <meta name="description" content="HKDSE Chemistry curriculum games covering all 12 topics with a 210-question bank.">
+  <meta name="description" content="Interactive HKDSE Chemistry curriculum games covering all 12 topics, animated experiments and a 210-question bank.">
   <link rel="stylesheet" href="student-fun.css?v=20260822a">
-  <link rel="stylesheet" href="student-tools.css?v=20260822d">
+  <link rel="stylesheet" href="student-tools.css?v=20260824a">
 </head>
 <body class="student-page">
   <header class="topbar">
@@ -23,7 +23,7 @@
       <div>
         <p class="kicker">QUICK RECALL · INSTANT FEEDBACK</p>
         <h1>Chemistry Arcade</h1>
-        <p>Revise every part of the HKDSE Chemistry curriculum through topic-labelled challenges, or jump into six playful mini-games—including movable drag-and-drop activities.</p>
+        <p>Revise every part of the HKDSE Chemistry curriculum through topic-labelled challenges, or jump into seven playful mini-games—including movable and animated laboratory activities.</p>
       </div>
     </section>
 
@@ -35,7 +35,7 @@
     </section>
 
     <section class="fun-zone" aria-labelledby="funZoneTitle">
-      <div class="game-section-heading"><div><p class="kicker">PLAY · RECALL · REPEAT</p><h2 id="funZoneTitle">Chemistry Fun Zone</h2></div><span>Six ways to play</span></div>
+      <div class="game-section-heading"><div><p class="kicker">PLAY · RECALL · REPEAT</p><h2 id="funZoneTitle">Chemistry Fun Zone</h2></div><span>Seven ways to play</span></div>
       <div class="mini-game-grid">
         <button class="mini-game-card memory" type="button" data-mini="memory"><span class="mini-icon">🃏</span><div><small>MEMORY GAME · TOPICS 02 &amp; 11</small><b>Formula Flip</b><p>Turn over cards and match each chemical name with its correct formula.</p></div><em>BEST <strong data-mini-best="memory">0</strong></em></button>
         <button class="mini-game-card ph" type="button" data-mini="ph"><span class="mini-icon">💦</span><div><small>TIMED SORT · TOPIC 04</small><b>pH Splash</b><p>Sort substances into acidic, neutral or alkaline before time runs out.</p></div><em>BEST <strong data-mini-best="ph">0</strong></em></button>
@@ -43,6 +43,7 @@
         <button class="mini-game-card ions" type="button" data-mini="ions"><span class="mini-icon">🧲</span><div><small>MOVE &amp; SORT · TOPICS 02 &amp; 07</small><b>Ion Sorter</b><p>Drag each ion into the cation or anion chamber. Tap-to-move also works.</p></div><em>BEST <strong data-mini-best="ions">0</strong></em></button>
         <button class="mini-game-card lab-move" type="button" data-mini="labmove"><span class="mini-icon">🔬</span><div><small>MOVE &amp; MATCH · PRACTICAL SKILLS</small><b>Lab Bench Builder</b><p>Move apparatus onto the correct laboratory workstation.</p></div><em>BEST <strong data-mini-best="labmove">0</strong></em></button>
         <button class="mini-game-card organic-name" type="button" data-mini="organicname"><span class="mini-icon">🧩</span><div><small>3-ROUND DSE CHALLENGE · TOPIC 11</small><b>Name That Molecule</b><p>Complete 36 structures across parent chains, functional groups and acid derivatives.</p></div><em>BEST <strong data-mini-best="organicname">0</strong>/36</em></button>
+        <button class="mini-game-card electrolysis" type="button" data-mini="electrolysis"><span class="mini-icon">⚡</span><div><small>ANIMATED LAB · TOPIC 07</small><b>Electrolysis Lab</b><p>Move products to the electrodes, switch on the circuit and watch the ions migrate.</p></div><em>BEST <strong data-mini-best="electrolysis">0</strong>/12</em></button>
       </div>
     </section>
 
@@ -90,7 +91,7 @@
     </section>
   </main>
 
-  <script src="student-tools.js?v=20260822a"></script>
+  <script src="student-tools.js?v=20260824a"></script>
   <script>
   (function(){
     'use strict';
@@ -475,6 +476,43 @@
       }
       render();
     }
+    const electrolysisTrials=[
+      {solution:'concentrated sodium chloride solution',electrodes:'graphite electrodes',ions:['Na⁺','H⁺','Cl⁻','OH⁻'],cathode:'H₂(g)',anode:'Cl₂(g)',cathodeObs:'Colourless hydrogen bubbles form and give a pop with a lighted splint.',anodeObs:'Greenish-yellow chlorine forms and bleaches damp litmus paper.',reason:'H⁺ is discharged instead of Na⁺ at the cathode; concentrated Cl⁻ is discharged at the anode.'},
+      {solution:'dilute sodium chloride solution',electrodes:'graphite electrodes',ions:['Na⁺','H⁺','Cl⁻','OH⁻'],cathode:'H₂(g)',anode:'O₂(g)',cathodeObs:'Colourless hydrogen bubbles form at the negative electrode.',anodeObs:'Colourless oxygen relights a glowing splint.',reason:'H⁺ and OH⁻ are preferentially discharged; dilute chloride solution gives oxygen at the anode.'},
+      {solution:'copper(II) sulfate solution',electrodes:'graphite electrodes',ions:['Cu²⁺','H⁺','SO₄²⁻','OH⁻'],cathode:'Cu(s)',anode:'O₂(g)',cathodeObs:'A pink-brown deposit of copper forms.',anodeObs:'Colourless oxygen bubbles form.',reason:'Cu²⁺ is discharged at the cathode while OH⁻ is discharged at the inert anode.'},
+      {solution:'copper(II) sulfate solution',electrodes:'copper electrodes',ions:['Cu²⁺','SO₄²⁻'],cathode:'Cu(s)',anode:'Cu²⁺(aq)',cathodeObs:'Copper is deposited and the cathode gains mass.',anodeObs:'The copper anode dissolves and loses mass.',reason:'Cu²⁺ gains electrons at the cathode; copper atoms lose electrons at the active anode.'},
+      {solution:'dilute sulfuric acid',electrodes:'platinum electrodes',ions:['H⁺','SO₄²⁻','OH⁻'],cathode:'H₂(g)',anode:'O₂(g)',cathodeObs:'Hydrogen forms; its volume is twice the oxygen volume.',anodeObs:'Oxygen forms and relights a glowing splint.',reason:'Water is decomposed overall, producing hydrogen and oxygen in a 2:1 volume ratio.'},
+      {solution:'molten lead(II) bromide',electrodes:'graphite electrodes',ions:['Pb²⁺','Br⁻'],cathode:'Pb(l)',anode:'Br₂(g)',cathodeObs:'Silvery droplets of molten lead form at the cathode.',anodeObs:'Reddish-brown bromine vapour forms.',reason:'Only Pb²⁺ and Br⁻ are mobile in the molten electrolyte, so each is discharged.'},
+      {solution:'concentrated potassium iodide solution',electrodes:'graphite electrodes',ions:['K⁺','H⁺','I⁻','OH⁻'],cathode:'H₂(g)',anode:'I₂(aq)',cathodeObs:'Hydrogen bubbles form and the solution near the cathode becomes alkaline.',anodeObs:'Brown iodine forms near the anode.',reason:'H⁺ is discharged instead of K⁺; concentrated I⁻ is oxidised to iodine.'},
+      {solution:'molten magnesium chloride',electrodes:'graphite electrodes',ions:['Mg²⁺','Cl⁻'],cathode:'Mg(l)',anode:'Cl₂(g)',cathodeObs:'Molten magnesium metal forms at the cathode.',anodeObs:'Greenish-yellow chlorine gas forms at the anode.',reason:'In the molten compound, Mg²⁺ is reduced and Cl⁻ is oxidised.'},
+      {solution:'silver nitrate solution',electrodes:'graphite electrodes',ions:['Ag⁺','H⁺','NO₃⁻','OH⁻'],cathode:'Ag(s)',anode:'O₂(g)',cathodeObs:'A silver-grey deposit forms on the cathode.',anodeObs:'Colourless oxygen bubbles form at the anode.',reason:'Ag⁺ is readily reduced; nitrate is not discharged and OH⁻ produces oxygen.'},
+      {solution:'aqueous sodium hydroxide',electrodes:'platinum electrodes',ions:['Na⁺','H⁺','OH⁻'],cathode:'H₂(g)',anode:'O₂(g)',cathodeObs:'Hydrogen bubbles form at twice the oxygen volume.',anodeObs:'Oxygen bubbles form at the positive electrode.',reason:'The ions enable conduction while water is decomposed overall into hydrogen and oxygen.'}
+    ];
+    const electrolysisProductPool=['H₂(g)','O₂(g)','Cl₂(g)','Br₂(g)','I₂(aq)','Cu(s)','Ag(s)','Pb(l)','Mg(l)','Na(s)','Cu²⁺(aq)','SO₂(g)'];
+    function saveElectrolysisMistake(item,selected,zone){
+      const list=ChemistryTools.mistakes(),slug=(item.solution+'-'+item.electrodes).toLowerCase().replace(/[^a-z0-9]+/g,'-'),id=location.pathname+'#electrolysis-'+slug;
+      const fresh={id:id,topic:'Topic VII · Redox Reactions, Chemical Cells and Electrolysis',number:'⚡',question:'Predict the cathode and anode products when '+item.solution+' is electrolysed using '+item.electrodes+'.',source:'HKDSE animated practice',difficulty:'DSE exam practice',reason:'Wrong game answer',selected:{letter:zone==='cathode'?'Cathode':'Anode',text:selected},href:'games.html?mini=electrolysis',mastered:false,attempts:1,savedAt:new Date().toISOString(),lastTried:new Date().toISOString()};
+      const i=list.findIndex(function(x){return x.id===id});if(i>=0)list[i]={...list[i],...fresh,attempts:(list[i].attempts||0)+1};else list.unshift(fresh);ChemistryTools.writeMistakes(list)
+    }
+    function startElectrolysis(){
+      const session=prepareMini('electrolysis','Electrolysis Lab','ANIMATED LAB · TOPIC 07','EXPERIMENT 1/6 · FIRST TRY 0/12'),round=shuffle(electrolysisTrials).slice(0,6);let at=0,firstTry=0,errors=0,ended=false;
+      function render(){
+        if(at>=round.length){ended=true;const xp=Math.max(24,firstTry*6);finishMini('electrolysis',firstTry,xp,'Electrolysis series complete!','You placed '+firstTry+' of 12 electrode products correctly on the first try. Incorrect choices were saved automatically for revision.',startElectrolysis);return}
+        const item=round[at],wrongZones={cathode:false,anode:false};let placed=0,powered=false;
+        const choices=shuffle(Array.from(new Set([item.cathode,item.anode].concat(shuffle(electrolysisProductPool.filter(function(x){return x!==item.cathode&&x!==item.anode})).slice(0,4)))));
+        miniStatus.textContent='EXPERIMENT '+(at+1)+'/6 · FIRST TRY '+firstTry+'/12 · ERRORS '+errors;
+        const ions=item.ions.map(function(ion,i){const charge=ion.includes('⁺')?'cation':'anion';return '<span class="lab-ion '+charge+'" style="--ion-row:'+(18+(i%3)*22)+'%;--ion-delay:'+((i%4)*-.55)+'s">'+ion+'</span>'}).join('');
+        miniBody.innerHTML='<div class="electrolysis-brief"><small>ELECTROLYTE</small><strong>'+item.solution+'</strong><span>'+item.electrodes+' · identify both products, then switch on the circuit</span></div><div class="electrolysis-sim"><div class="power-pack"><span>−</span><b>DC</b><span>+</span></div><div class="cell-wire left"></div><div class="cell-wire right"></div><div class="electrolysis-cell"><div class="electrode cathode"><b>CATHODE</b><span>− · reduction</span><div class="product-output" data-output="cathode"></div></div><div class="electrolyte"><div class="solution-level"></div>'+ions+'<strong>'+item.solution+'</strong></div><div class="electrode anode"><b>ANODE</b><span>+ · oxidation</span><div class="product-output" data-output="anode"></div></div></div><button class="power-switch" type="button" disabled>Complete both electrodes to switch on</button></div><div class="move-instruction">Drag a product to an electrode, or tap the product and then its electrode.</div><div class="drag-bank electrolysis-products">'+choices.map(function(choice,i){const kind=choice===item.cathode?'cathode':choice===item.anode?'anode':'wrong';return '<button class="drag-tile product-tile" type="button" data-move-id="product-'+at+'-'+i+'" data-kind="'+kind+'" data-label="'+choice+'">'+choice+'</button>'}).join('')+'</div><div class="drop-zone-grid two electrode-zones"><div class="drop-zone" role="button" tabindex="0" data-zone="cathode"><b>CATHODE PRODUCT (−)</b><span>reduction occurs here</span><div class="drop-results"></div></div><div class="drop-zone" role="button" tabindex="0" data-zone="anode"><b>ANODE PRODUCT (+)</b><span>oxidation occurs here</span><div class="drop-results"></div></div></div>';
+        const sim=miniBody.querySelector('.electrolysis-sim'),switchButton=miniBody.querySelector('.power-switch');
+        wireMovable(session,function(tile,zone){
+          if(ended||powered||session!==miniSession)return false;
+          if(tile.dataset.kind!==zone){errors++;wrongZones[zone]=true;tile.classList.remove('selected');tile.classList.add('wrong');saveElectrolysisMistake(item,tile.dataset.label,zone);miniFeedback.innerHTML='<b>Not discharged there.</b> Reconsider the electrolyte, electrode material and preferential discharge rules. This experiment is now in your Mistake Notebook.';miniStatus.textContent='EXPERIMENT '+(at+1)+'/6 · FIRST TRY '+firstTry+'/12 · ERRORS '+errors;setTimeout(function(){tile.classList.remove('wrong')},450);return true}
+          if(!wrongZones[zone])firstTry++;const target=miniBody.querySelector('[data-zone="'+zone+'"] .drop-results'),chip=document.createElement('span');chip.textContent=tile.dataset.label;target.appendChild(chip);miniBody.querySelector('[data-output="'+zone+'"]').textContent=tile.dataset.label;tile.remove();placed++;miniFeedback.innerHTML='<b>Correct '+zone+' product.</b> '+(placed===2?'Both products are ready—switch on the circuit.':'Now identify the other electrode product.');miniStatus.textContent='EXPERIMENT '+(at+1)+'/6 · FIRST TRY '+firstTry+'/12 · ERRORS '+errors;if(placed===2){switchButton.disabled=false;switchButton.textContent='⚡ Switch on electrolysis'}return true
+        });
+        switchButton.addEventListener('click',function(){if(powered||placed<2||session!==miniSession)return;powered=true;switchButton.disabled=true;switchButton.textContent='Circuit on · ions are migrating';sim.classList.add('powered');miniStatus.textContent='EXPERIMENT '+(at+1)+'/6 · ELECTROLYSIS RUNNING';miniFeedback.innerHTML='<b>Cathode:</b> '+item.cathode+' — '+item.cathodeObs+' <b>Anode:</b> '+item.anode+' — '+item.anodeObs+' '+item.reason;setTimeout(function(){if(session!==miniSession||ended)return;at++;render()},4200)})
+      }
+      render()
+    }
     function hideMini(){stopMiniTimer();miniSession++;miniArena.classList.remove('open')}
     function start(key){hideMini();game=key;order=shuffle(games[key].questions).slice(0,10);index=0;score=0;streak=0;answered=false;document.getElementById('gameTitle').textContent=games[key].title;arena.classList.add('open');arena.scrollIntoView({behavior:'smooth',block:'start'});show()}
     function show(){
@@ -494,7 +532,7 @@
       const p=profile();p.played=(p.played||0)+1;p.best=p.best||{};p.best[game]=Math.max(p.best[game]||0,score);ChemistryTools.writeProfile(p);updateStats();
       document.getElementById('roundLabel').textContent='ROUND COMPLETE';document.getElementById('gamePrompt').textContent=score+'/10 — '+(score===10?'Perfect chemistry!':score>=7?'Strong result!':score>=4?'Good start — replay to improve.':'Keep practising — every round builds recall.');optionsNode.innerHTML='';feedback.innerHTML='<b>You earned '+(score*10)+' XP.</b> Your best score for '+games[game].title+' is '+p.best[game]+'/10.';next.textContent='Play again ↻';next.classList.add('show');answered=true;index=order.length;
     }
-    document.querySelectorAll('[data-mini]').forEach(function(button){button.addEventListener('click',function(){({memory:startMemory,ph:startPH,atoms:startAtoms,ions:startIons,labmove:startLabMove,organicname:startOrganicNames})[button.dataset.mini]()})});document.getElementById('closeMini').addEventListener('click',function(){hideMini();document.querySelector('.fun-zone').scrollIntoView({behavior:'smooth'})});document.querySelectorAll('[data-game]').forEach(function(button){button.addEventListener('click',function(){start(button.dataset.game)})});next.addEventListener('click',function(){if(index===order.length)start(game);else advance()});document.getElementById('closeGame').addEventListener('click',function(){arena.classList.remove('open');document.getElementById('gameGrid').scrollIntoView({behavior:'smooth'})});window.addEventListener('chemistry-tools-change',updateStats);updateStats();
+    const miniStarters={memory:startMemory,ph:startPH,atoms:startAtoms,ions:startIons,labmove:startLabMove,organicname:startOrganicNames,electrolysis:startElectrolysis};document.querySelectorAll('[data-mini]').forEach(function(button){button.addEventListener('click',function(){miniStarters[button.dataset.mini]()})});document.getElementById('closeMini').addEventListener('click',function(){hideMini();document.querySelector('.fun-zone').scrollIntoView({behavior:'smooth'})});document.querySelectorAll('[data-game]').forEach(function(button){button.addEventListener('click',function(){start(button.dataset.game)})});next.addEventListener('click',function(){if(index===order.length)start(game);else advance()});document.getElementById('closeGame').addEventListener('click',function(){arena.classList.remove('open');document.getElementById('gameGrid').scrollIntoView({behavior:'smooth'})});window.addEventListener('chemistry-tools-change',updateStats);updateStats();const requestedMini=new URLSearchParams(location.search).get('mini');if(miniStarters[requestedMini])setTimeout(miniStarters[requestedMini],80);
   })();
   </script>
 </body>
