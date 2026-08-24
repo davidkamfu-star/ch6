@@ -6,7 +6,7 @@
   <title>Chemistry Games | Chemistry Hub</title>
   <meta name="description" content="Interactive HKDSE Chemistry curriculum games covering all 12 topics, animated experiments and a 210-question bank.">
   <link rel="stylesheet" href="student-fun.css?v=20260822a">
-  <link rel="stylesheet" href="student-tools.css?v=20260824d">
+  <link rel="stylesheet" href="student-tools.css?v=20260824e">
 </head>
 <body class="student-page">
   <header class="topbar">
@@ -23,7 +23,7 @@
       <div>
         <p class="kicker">QUICK RECALL · INSTANT FEEDBACK</p>
         <h1>Chemistry Arcade</h1>
-        <p>Revise every part of the HKDSE Chemistry curriculum through topic-labelled challenges, or jump into nine playful mini-games—including movable and animated laboratory activities.</p>
+        <p>Revise every part of the HKDSE Chemistry curriculum through topic-labelled challenges, or jump into ten playful mini-games—including movable, animated and deduction-based activities.</p>
       </div>
     </section>
 
@@ -35,7 +35,7 @@
     </section>
 
     <section class="fun-zone" aria-labelledby="funZoneTitle">
-      <div class="game-section-heading"><div><p class="kicker">PLAY · RECALL · REPEAT</p><h2 id="funZoneTitle">Chemistry Fun Zone</h2></div><span>Nine ways to play</span></div>
+      <div class="game-section-heading"><div><p class="kicker">PLAY · RECALL · REPEAT</p><h2 id="funZoneTitle">Chemistry Fun Zone</h2></div><span>Ten ways to play</span></div>
       <div class="mini-game-grid">
         <button class="mini-game-card memory" type="button" data-mini="memory"><span class="mini-icon">🃏</span><div><small>MEMORY GAME · TOPICS 02 &amp; 11</small><b>Formula Flip</b><p>Turn over cards and match each chemical name with its correct formula.</p></div><em>BEST <strong data-mini-best="memory">0</strong></em></button>
         <button class="mini-game-card ph" type="button" data-mini="ph"><span class="mini-icon">💦</span><div><small>TIMED SORT · TOPIC 04</small><b>pH Splash</b><p>Sort substances into acidic, neutral or alkaline before time runs out.</p></div><em>BEST <strong data-mini-best="ph">0</strong></em></button>
@@ -46,6 +46,7 @@
         <button class="mini-game-card electrolysis" type="button" data-mini="electrolysis"><span class="mini-icon">⚡</span><div><small>ANIMATED LAB · TOPIC 07</small><b>Electrolysis Lab</b><p>Move products to the electrodes, switch on the circuit and watch the ions migrate.</p></div><em>BEST <strong data-mini-best="electrolysis">0</strong>/12</em></button>
         <button class="mini-game-card metal-race" type="button" data-mini="metalrace"><span class="mini-icon">🏁</span><div><small>ANIMATED RACE · TOPIC 03</small><b>Metal Reactivity Race</b><p>Move a metal into the winner lane, then watch the race reveal the chemistry.</p></div><em>BEST <strong data-mini-best="metalrace">0</strong>/10</em></button>
         <button class="mini-game-card escape-lab" type="button" data-mini="escapelab"><span class="mini-icon">🔐</span><div><small>ESCAPE ROOMS · PRACTICAL CHEMISTRY</small><b>Chemistry Escape Lab</b><p>Use tests and observations to identify unknown substances and unlock each room.</p></div><em>BEST <strong data-mini-best="escapelab">0</strong>/12</em></button>
+        <button class="mini-game-card detective" type="button" data-mini="detective"><span class="mini-icon">🔎</span><div><small>CASE FILES · FULL CURRICULUM</small><b>Mystery Substance Detective</b><p>Reveal chemical evidence and identify each mystery with as few clues as possible.</p></div><em>BEST <strong data-mini-best="detective">0</strong>/18</em></button>
       </div>
     </section>
 
@@ -93,7 +94,7 @@
     </section>
   </main>
 
-  <script src="student-tools.js?v=20260824d"></script>
+  <script src="student-tools.js?v=20260824e"></script>
   <script>
   (function(){
     'use strict';
@@ -594,6 +595,48 @@
       }
       render()
     }
+    const detectiveCases=[
+      {code:'G-01',topic:'GASES',evidence:['It is a colourless gas at room conditions.','It turns limewater milky.','It is produced when a carbonate reacts with dilute acid.'],answer:'Carbon dioxide',suspects:['Carbon dioxide','Hydrogen','Oxygen','Ammonia'],explain:'Carbon dioxide forms calcium carbonate in limewater and is liberated by the acid–carbonate reaction.'},
+      {code:'G-02',topic:'GASES',evidence:['It is a greenish-yellow gas.','It turns damp blue litmus paper red and then bleaches it.','It forms at the anode during electrolysis of concentrated brine.'],answer:'Chlorine',suspects:['Chlorine','Oxygen','Sulfur dioxide','Hydrogen chloride'],explain:'Chlorine is the greenish-yellow halogen produced from concentrated chloride solution at an inert anode.'},
+      {code:'G-03',topic:'GASES',evidence:['It is a colourless gas with a pungent smell.','It turns damp red litmus paper blue.','It is released when an ammonium salt is warmed with sodium hydroxide.'],answer:'Ammonia',suspects:['Ammonia','Chlorine','Carbon dioxide','Hydrogen'],explain:'Ammonia is alkaline and is liberated when NH₄⁺ reacts with OH⁻ on warming.'},
+      {code:'M-01',topic:'METALS',evidence:['It is a silvery metal above zinc in the reactivity series.','It burns with an intense white light.','It reacts rapidly with dilute hydrochloric acid to form a 2+ ion.'],answer:'Magnesium',suspects:['Magnesium','Aluminium','Iron','Copper'],explain:'Magnesium burns with a brilliant white light to form MgO and readily forms Mg²⁺.'},
+      {code:'M-02',topic:'METALS',evidence:['It is a reddish-brown metal.','It does not react with dilute hydrochloric acid.','It displaces silver from silver nitrate solution.'],answer:'Copper',suspects:['Copper','Iron','Zinc','Silver'],explain:'Copper is below hydrogen but above silver in the reactivity series.'},
+      {code:'M-03',topic:'METALS',evidence:['Industrial extraction uses electrolysis of its molten oxide.','Its oxide reacts with both acids and alkalis.','A thin oxide layer protects the metal from further corrosion.'],answer:'Aluminium',suspects:['Aluminium','Iron','Copper','Silver'],explain:'Aluminium is extracted electrolytically, and aluminium oxide is amphoteric and protective.'},
+      {code:'S-01',topic:'SALTS',evidence:['It is a soluble white crystalline solid.','Its ions give a yellow flame and a white precipitate with acidified silver nitrate.','It is the major dissolved salt in seawater.'],answer:'Sodium chloride',suspects:['Sodium chloride','Potassium sulfate','Calcium carbonate','Copper(II) sulfate'],explain:'Na⁺ gives a yellow flame and Cl⁻ forms white AgCl; sodium chloride is abundant in seawater.'},
+      {code:'S-02',topic:'SALTS',evidence:['Its aqueous solution is blue.','Sodium hydroxide produces a blue precipitate.','Electrolysis with graphite electrodes deposits copper at the cathode.'],answer:'Copper(II) sulfate',suspects:['Copper(II) sulfate','Iron(II) sulfate','Sodium sulfate','Potassium chloride'],explain:'Cu²⁺ gives the blue solution and blue Cu(OH)₂ precipitate and is discharged as copper.'},
+      {code:'S-03',topic:'SALTS',evidence:['Its aqueous solution is pale green.','Sodium hydroxide gives a green precipitate that turns brown in air.','Zinc displaces its metal from solution.'],answer:'Iron(II) sulfate',suspects:['Iron(II) sulfate','Iron(III) chloride','Copper(II) sulfate','Zinc sulfate'],explain:'Fe²⁺ is pale green and forms green Fe(OH)₂, which oxidises to brown iron(III) compounds.'},
+      {code:'O-01',topic:'ORGANIC CHEMISTRY',evidence:['It is a hydrocarbon with molecular formula C₂H₄.','It rapidly decolourises bromine water.','Its molecules form poly(ethene) by addition polymerisation.'],answer:'Ethene',suspects:['Ethene','Ethane','Ethanol','Ethanoic acid'],explain:'Ethene contains a carbon–carbon double bond that undergoes addition and polymerisation.'},
+      {code:'O-02',topic:'ORGANIC CHEMISTRY',evidence:['It is a colourless combustible liquid miscible with water.','It changes acidified dichromate solution from orange to green on warming.','Complete oxidation can produce ethanoic acid.'],answer:'Ethanol',suspects:['Ethanol','Ethene','Ethyl ethanoate','Ethane'],explain:'Ethanol is a primary alcohol and can be oxidised through ethanal to ethanoic acid.'},
+      {code:'O-03',topic:'ORGANIC CHEMISTRY',evidence:['Its aqueous solution is acidic.','It reacts with sodium carbonate to release carbon dioxide.','It reacts with ethanol in the presence of concentrated sulfuric acid to form an ester.'],answer:'Ethanoic acid',suspects:['Ethanoic acid','Ethanol','Ethene','Ethyl ethanoate'],explain:'Ethanoic acid shows acid reactions and esterifies ethanol to produce ethyl ethanoate.'},
+      {code:'C-01',topic:'STRUCTURE & BONDING',evidence:['It is a major component of sand.','It has a giant covalent structure and a high melting point.','It does not conduct electricity because it has no mobile charged particles.'],answer:'Silicon dioxide',suspects:['Silicon dioxide','Graphite','Sodium chloride','Iodine'],explain:'Silicon dioxide has a three-dimensional giant covalent network with no mobile charges.'},
+      {code:'C-02',topic:'STRUCTURE & BONDING',evidence:['It is an allotrope of carbon.','Its layers slide over one another, so it acts as a lubricant.','It conducts electricity using delocalised electrons.'],answer:'Graphite',suspects:['Graphite','Diamond','Silicon dioxide','Buckminsterfullerene'],explain:'Graphite has layered sheets and one delocalised electron per carbon atom.'},
+      {code:'E-01',topic:'ENVIRONMENTAL CHEMISTRY',evidence:['It is a colourless, choking gas formed when sulfur burns.','It contributes to acid rain.','As a reducing agent, it decolourises acidified potassium manganate(VII).'],answer:'Sulfur dioxide',suspects:['Sulfur dioxide','Carbon dioxide','Chlorine','Oxygen'],explain:'Sulfur dioxide forms acidic substances in the atmosphere and can reduce MnO₄⁻.'},
+      {code:'R-01',topic:'REDOX CHEMISTRY',evidence:['It is a colourless liquid commonly supplied as an aqueous solution.','Manganese(IV) oxide catalyses its decomposition to water and oxygen.','It can behave as either an oxidising agent or a reducing agent.'],answer:'Hydrogen peroxide',suspects:['Hydrogen peroxide','Hydrochloric acid','Ethanol','Bromine water'],explain:'Hydrogen peroxide decomposes as 2H₂O₂ → 2H₂O + O₂ and has an intermediate oxygen oxidation state.'},
+      {code:'M-04',topic:'METALS',evidence:['It reacts with dilute acid to produce hydrogen.','It displaces copper from copper(II) sulfate solution.','Its oxide is amphoteric, and its coating protects iron sacrificially.'],answer:'Zinc',suspects:['Zinc','Copper','Silver','Lead'],explain:'Zinc is above hydrogen and copper, zinc oxide is amphoteric, and zinc protects iron by preferential oxidation.'},
+      {code:'S-04',topic:'HALIDE CHEMISTRY',evidence:['It is a soluble white ionic solid.','Acidified silver nitrate gives a pale-yellow precipitate.','Chlorine water liberates brown iodine from its solution.'],answer:'Potassium iodide',suspects:['Potassium iodide','Potassium bromide','Sodium chloride','Potassium sulfate'],explain:'I⁻ forms pale-yellow AgI and is oxidised by chlorine to iodine.'}
+    ];
+    function saveDetectiveMistake(caseFile,selected,revealed){
+      const list=ChemistryTools.mistakes(),id=location.pathname+'#detective-'+caseFile.code.toLowerCase(),clues=caseFile.evidence.slice(0,revealed).join(' ');
+      const fresh={id:id,topic:'Mystery Substance Detective · '+caseFile.topic,number:'🔎',question:'Case '+caseFile.code+': identify the mystery substance. Evidence: '+clues,source:'HKDSE deduction practice',difficulty:'DSE exam practice',reason:'Wrong game answer',selected:{letter:'ACCUSED',text:selected},href:'games.html?mini=detective',mastered:false,attempts:1,savedAt:new Date().toISOString(),lastTried:new Date().toISOString()};
+      const i=list.findIndex(function(x){return x.id===id});if(i>=0)list[i]={...list[i],...fresh,attempts:(list[i].attempts||0)+1};else list.unshift(fresh);ChemistryTools.writeMistakes(list)
+    }
+    function startDetective(){
+      const session=prepareMini('detective','Mystery Substance Detective','REVEAL · DEDUCE · SOLVE','CASE 1/6 · CLUES 1/3 · SCORE 0/18'),round=shuffle(detectiveCases).slice(0,6);let at=0,score=0,errors=0,ended=false;
+      function render(){
+        if(at>=round.length){ended=true;const xp=Math.max(30,score*5);finishMini('detective',score,xp,'Investigation complete!','You solved six cases for '+score+' of 18 clue-efficiency points. Incorrect accusations were saved for revision.',startDetective);return}
+        const caseFile=round[at];let revealed=1,wrong=false,solved=false;miniStatus.textContent='CASE '+(at+1)+'/6 · CLUES '+revealed+'/3 · SCORE '+score+'/18 · ERRORS '+errors;
+        miniBody.innerHTML='<div class="detective-progress">'+round.map(function(c,i){return '<span class="'+(i<at?'solved':i===at?'active':'')+'">'+(i<at?'✓':c.code)+'</span>'}).join('')+'</div><div class="case-board"><div class="case-heading"><div><small>'+caseFile.topic+'</small><strong>CASE '+caseFile.code+'</strong></div><span class="case-value">WORTH 3 POINTS</span></div><div class="evidence-grid">'+caseFile.evidence.map(function(clue,i){return '<article class="evidence-card '+(i?'sealed':'revealed')+'" data-evidence="'+i+'"><b>EVIDENCE '+(i+1)+'</b><span>'+(i?'<i>SEALED</i>':clue)+'</span></article>'}).join('')+'</div><button class="reveal-evidence" type="button">Reveal Evidence 2 · value drops to 2</button><div class="case-stamp">SOLVED</div></div><div class="move-instruction">Drag a suspect into the case file, or tap the suspect and then the file.</div><div class="drag-bank suspect-bank">'+shuffle(caseFile.suspects).map(function(suspect,i){return '<button class="drag-tile suspect-tile" type="button" data-move-id="suspect-'+at+'-'+i+'" data-correct="'+String(suspect===caseFile.answer)+'" data-label="'+suspect+'">'+suspect+'</button>'}).join('')+'</div><div class="drop-zone-grid detective-file-grid"><div class="drop-zone detective-file" role="button" tabindex="0" data-zone="case"><b>📁 FINAL CASE FILE</b><span>submit the mystery substance</span><div class="drop-results"></div></div></div><button class="detective-next" type="button">Open next case →</button>';
+        const board=miniBody.querySelector('.case-board'),revealButton=miniBody.querySelector('.reveal-evidence'),value=miniBody.querySelector('.case-value'),nextCase=miniBody.querySelector('.detective-next');
+        revealButton.addEventListener('click',function(){if(solved||revealed>=3||session!==miniSession)return;revealed++;const card=miniBody.querySelector('[data-evidence="'+(revealed-1)+'"]');card.classList.remove('sealed');card.classList.add('revealed');card.querySelector('span').textContent=caseFile.evidence[revealed-1];value.textContent='WORTH '+(4-revealed)+' POINT'+(revealed===3?'':'S');revealButton.textContent=revealed===3?'All evidence revealed':'Reveal Evidence 3 · value drops to 1';if(revealed===3)revealButton.disabled=true;miniStatus.textContent='CASE '+(at+1)+'/6 · CLUES '+revealed+'/3 · SCORE '+score+'/18 · ERRORS '+errors;miniFeedback.textContent='New evidence added to the case board.'});
+        wireMovable(session,function(tile){
+          if(solved||ended||session!==miniSession)return false;
+          if(tile.dataset.correct!=='true'){wrong=true;errors++;tile.classList.remove('selected');tile.classList.add('wrong');tile.disabled=true;saveDetectiveMistake(caseFile,tile.dataset.label,revealed);miniFeedback.innerHTML='<b>Incorrect accusation.</b> Compare every revealed property with the suspects. This case was saved for revision.';miniStatus.textContent='CASE '+(at+1)+'/6 · CLUES '+revealed+'/3 · SCORE '+score+'/18 · ERRORS '+errors;return true}
+          solved=true;const earned=wrong?0:4-revealed;score+=earned;const chip=document.createElement('span');chip.textContent=tile.dataset.label;miniBody.querySelector('.detective-file .drop-results').appendChild(chip);tile.remove();miniBody.querySelectorAll('.suspect-tile').forEach(function(t){t.disabled=true});revealButton.disabled=true;board.classList.add('case-solved');miniFeedback.innerHTML='<b>Case solved — '+caseFile.answer+'. '+(earned?'+'+earned+' points.':'No first-try points.')+'</b> '+caseFile.explain;miniStatus.textContent='CASE '+(at+1)+' SOLVED · SCORE '+score+'/18';nextCase.textContent=at===round.length-1?'Close investigation →':'Open Case '+round[at+1].code+' →';nextCase.classList.add('show');return true
+        });
+        nextCase.addEventListener('click',function(){if(!solved||session!==miniSession)return;at++;render()})
+      }
+      render()
+    }
     function hideMini(){stopMiniTimer();miniSession++;miniArena.classList.remove('open')}
     function start(key){hideMini();game=key;order=shuffle(games[key].questions).slice(0,10);index=0;score=0;streak=0;answered=false;document.getElementById('gameTitle').textContent=games[key].title;arena.classList.add('open');arena.scrollIntoView({behavior:'smooth',block:'start'});show()}
     function show(){
@@ -613,7 +656,7 @@
       const p=profile();p.played=(p.played||0)+1;p.best=p.best||{};p.best[game]=Math.max(p.best[game]||0,score);ChemistryTools.writeProfile(p);updateStats();
       document.getElementById('roundLabel').textContent='ROUND COMPLETE';document.getElementById('gamePrompt').textContent=score+'/10 — '+(score===10?'Perfect chemistry!':score>=7?'Strong result!':score>=4?'Good start — replay to improve.':'Keep practising — every round builds recall.');optionsNode.innerHTML='';feedback.innerHTML='<b>You earned '+(score*10)+' XP.</b> Your best score for '+games[game].title+' is '+p.best[game]+'/10.';next.textContent='Play again ↻';next.classList.add('show');answered=true;index=order.length;
     }
-    const miniStarters={memory:startMemory,ph:startPH,atoms:startAtoms,ions:startIons,labmove:startLabMove,organicname:startOrganicNames,electrolysis:startElectrolysis,metalrace:startMetalRace,escapelab:startEscapeLab};document.querySelectorAll('[data-mini]').forEach(function(button){button.addEventListener('click',function(){miniStarters[button.dataset.mini]()})});document.getElementById('closeMini').addEventListener('click',function(){hideMini();document.querySelector('.fun-zone').scrollIntoView({behavior:'smooth'})});document.querySelectorAll('[data-game]').forEach(function(button){button.addEventListener('click',function(){start(button.dataset.game)})});next.addEventListener('click',function(){if(index===order.length)start(game);else advance()});document.getElementById('closeGame').addEventListener('click',function(){arena.classList.remove('open');document.getElementById('gameGrid').scrollIntoView({behavior:'smooth'})});window.addEventListener('chemistry-tools-change',updateStats);updateStats();const requestedMini=new URLSearchParams(location.search).get('mini');if(miniStarters[requestedMini])setTimeout(miniStarters[requestedMini],80);
+    const miniStarters={memory:startMemory,ph:startPH,atoms:startAtoms,ions:startIons,labmove:startLabMove,organicname:startOrganicNames,electrolysis:startElectrolysis,metalrace:startMetalRace,escapelab:startEscapeLab,detective:startDetective};document.querySelectorAll('[data-mini]').forEach(function(button){button.addEventListener('click',function(){miniStarters[button.dataset.mini]()})});document.getElementById('closeMini').addEventListener('click',function(){hideMini();document.querySelector('.fun-zone').scrollIntoView({behavior:'smooth'})});document.querySelectorAll('[data-game]').forEach(function(button){button.addEventListener('click',function(){start(button.dataset.game)})});next.addEventListener('click',function(){if(index===order.length)start(game);else advance()});document.getElementById('closeGame').addEventListener('click',function(){arena.classList.remove('open');document.getElementById('gameGrid').scrollIntoView({behavior:'smooth'})});window.addEventListener('chemistry-tools-change',updateStats);updateStats();const requestedMini=new URLSearchParams(location.search).get('mini');if(miniStarters[requestedMini])setTimeout(miniStarters[requestedMini],80);
   })();
   </script>
 </body>
