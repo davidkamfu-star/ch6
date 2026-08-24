@@ -6,7 +6,7 @@
   <title>Chemistry Games | Chemistry Hub</title>
   <meta name="description" content="Interactive HKDSE Chemistry curriculum games covering all 12 topics, animated experiments and a 210-question bank.">
   <link rel="stylesheet" href="student-fun.css?v=20260822a">
-  <link rel="stylesheet" href="student-tools.css?v=20260824a">
+  <link rel="stylesheet" href="student-tools.css?v=20260824b">
 </head>
 <body class="student-page">
   <header class="topbar">
@@ -23,7 +23,7 @@
       <div>
         <p class="kicker">QUICK RECALL · INSTANT FEEDBACK</p>
         <h1>Chemistry Arcade</h1>
-        <p>Revise every part of the HKDSE Chemistry curriculum through topic-labelled challenges, or jump into seven playful mini-games—including movable and animated laboratory activities.</p>
+        <p>Revise every part of the HKDSE Chemistry curriculum through topic-labelled challenges, or jump into eight playful mini-games—including movable and animated laboratory activities.</p>
       </div>
     </section>
 
@@ -35,7 +35,7 @@
     </section>
 
     <section class="fun-zone" aria-labelledby="funZoneTitle">
-      <div class="game-section-heading"><div><p class="kicker">PLAY · RECALL · REPEAT</p><h2 id="funZoneTitle">Chemistry Fun Zone</h2></div><span>Seven ways to play</span></div>
+      <div class="game-section-heading"><div><p class="kicker">PLAY · RECALL · REPEAT</p><h2 id="funZoneTitle">Chemistry Fun Zone</h2></div><span>Eight ways to play</span></div>
       <div class="mini-game-grid">
         <button class="mini-game-card memory" type="button" data-mini="memory"><span class="mini-icon">🃏</span><div><small>MEMORY GAME · TOPICS 02 &amp; 11</small><b>Formula Flip</b><p>Turn over cards and match each chemical name with its correct formula.</p></div><em>BEST <strong data-mini-best="memory">0</strong></em></button>
         <button class="mini-game-card ph" type="button" data-mini="ph"><span class="mini-icon">💦</span><div><small>TIMED SORT · TOPIC 04</small><b>pH Splash</b><p>Sort substances into acidic, neutral or alkaline before time runs out.</p></div><em>BEST <strong data-mini-best="ph">0</strong></em></button>
@@ -44,6 +44,7 @@
         <button class="mini-game-card lab-move" type="button" data-mini="labmove"><span class="mini-icon">🔬</span><div><small>MOVE &amp; MATCH · PRACTICAL SKILLS</small><b>Lab Bench Builder</b><p>Move apparatus onto the correct laboratory workstation.</p></div><em>BEST <strong data-mini-best="labmove">0</strong></em></button>
         <button class="mini-game-card organic-name" type="button" data-mini="organicname"><span class="mini-icon">🧩</span><div><small>3-ROUND DSE CHALLENGE · TOPIC 11</small><b>Name That Molecule</b><p>Complete 36 structures across parent chains, functional groups and acid derivatives.</p></div><em>BEST <strong data-mini-best="organicname">0</strong>/36</em></button>
         <button class="mini-game-card electrolysis" type="button" data-mini="electrolysis"><span class="mini-icon">⚡</span><div><small>ANIMATED LAB · TOPIC 07</small><b>Electrolysis Lab</b><p>Move products to the electrodes, switch on the circuit and watch the ions migrate.</p></div><em>BEST <strong data-mini-best="electrolysis">0</strong>/12</em></button>
+        <button class="mini-game-card titration" type="button" data-mini="titration"><span class="mini-icon">🧪</span><div><small>PRECISION LAB · TOPICS 04 &amp; 06</small><b>Titration Challenge</b><p>Select the indicator, control the burette, judge the end point and calculate concentration.</p></div><em>BEST <strong data-mini-best="titration">0</strong>/12</em></button>
       </div>
     </section>
 
@@ -91,7 +92,7 @@
     </section>
   </main>
 
-  <script src="student-tools.js?v=20260824a"></script>
+  <script src="student-tools.js?v=20260824b"></script>
   <script>
   (function(){
     'use strict';
@@ -513,6 +514,48 @@
       }
       render()
     }
+    const titrationTrials=[
+      {sample:'25.0 cm³ hydrochloric acid of unknown concentration',burette:'0.100 mol dm⁻³ sodium hydroxide',indicator:'Phenolphthalein',indicatorPrompt:'Which indicator gives a colourless → permanent pale-pink end point?',target:20.0,equation:'HCl + NaOH → NaCl + H₂O',calculation:'Calculate the concentration of HCl.',answers:['0.0400 mol dm⁻³','0.0800 mol dm⁻³','0.100 mol dm⁻³','0.125 mol dm⁻³'],answer:1,explain:'The mole ratio is 1:1. c(HCl) = 0.100 × 20.0 ÷ 25.0 = 0.0800 mol dm⁻³.',before:'#dff4f8',endpoint:'#f4a8c7',after:'#ed6ba8'},
+      {sample:'25.0 cm³ sodium hydroxide of unknown concentration',burette:'0.150 mol dm⁻³ hydrochloric acid',indicator:'Methyl orange',indicatorPrompt:'Which indicator gives a yellow → orange end point as acid is added?',target:18.0,equation:'HCl + NaOH → NaCl + H₂O',calculation:'Calculate the concentration of NaOH.',answers:['0.0540 mol dm⁻³','0.108 mol dm⁻³','0.150 mol dm⁻³','0.208 mol dm⁻³'],answer:1,explain:'The mole ratio is 1:1. c(NaOH) = 0.150 × 18.0 ÷ 25.0 = 0.108 mol dm⁻³.',before:'#f3d955',endpoint:'#ee9b47',after:'#e9675d'},
+      {sample:'25.0 cm³ sulfuric acid of unknown concentration',burette:'0.200 mol dm⁻³ sodium hydroxide',indicator:'Phenolphthalein',indicatorPrompt:'Which indicator gives a colourless → permanent pale-pink end point?',target:25.0,equation:'H₂SO₄ + 2NaOH → Na₂SO₄ + 2H₂O',calculation:'Calculate the concentration of H₂SO₄.',answers:['0.0500 mol dm⁻³','0.100 mol dm⁻³','0.200 mol dm⁻³','0.400 mol dm⁻³'],answer:1,explain:'NaOH:H₂SO₄ = 2:1. c(H₂SO₄) = (0.200 × 25.0 ÷ 2) ÷ 25.0 = 0.100 mol dm⁻³.',before:'#dff4f8',endpoint:'#f4a8c7',after:'#ed6ba8'},
+      {sample:'20.0 cm³ hydrochloric acid of unknown concentration',burette:'0.125 mol dm⁻³ potassium hydroxide',indicator:'Methyl orange',indicatorPrompt:'Which indicator gives a red → orange end point as alkali is added?',target:16.0,equation:'HCl + KOH → KCl + H₂O',calculation:'Calculate the concentration of HCl.',answers:['0.0500 mol dm⁻³','0.0800 mol dm⁻³','0.100 mol dm⁻³','0.156 mol dm⁻³'],answer:2,explain:'The mole ratio is 1:1. c(HCl) = 0.125 × 16.0 ÷ 20.0 = 0.100 mol dm⁻³.',before:'#e9675d',endpoint:'#ee9b47',after:'#f3d955'},
+      {sample:'25.0 cm³ ethanoic acid of unknown concentration',burette:'0.100 mol dm⁻³ sodium hydroxide',indicator:'Phenolphthalein',indicatorPrompt:'Which indicator is suitable for this weak-acid–strong-alkali titration?',target:22.5,equation:'CH₃COOH + NaOH → CH₃COONa + H₂O',calculation:'Calculate the concentration of CH₃COOH.',answers:['0.0450 mol dm⁻³','0.0900 mol dm⁻³','0.100 mol dm⁻³','0.111 mol dm⁻³'],answer:1,explain:'The mole ratio is 1:1. c(CH₃COOH) = 0.100 × 22.5 ÷ 25.0 = 0.0900 mol dm⁻³.',before:'#dff4f8',endpoint:'#f4a8c7',after:'#ed6ba8'},
+      {sample:'25.0 cm³ aqueous ammonia of unknown concentration',burette:'0.100 mol dm⁻³ hydrochloric acid',indicator:'Methyl orange',indicatorPrompt:'Which indicator is suitable for this weak-base–strong-acid titration?',target:20.0,equation:'NH₃ + HCl → NH₄Cl',calculation:'Calculate the concentration of NH₃.',answers:['0.0400 mol dm⁻³','0.0800 mol dm⁻³','0.100 mol dm⁻³','0.125 mol dm⁻³'],answer:1,explain:'The mole ratio is 1:1. c(NH₃) = 0.100 × 20.0 ÷ 25.0 = 0.0800 mol dm⁻³.',before:'#f3d955',endpoint:'#ee9b47',after:'#e9675d'},
+      {sample:'25.0 cm³ sodium carbonate solution of unknown concentration',burette:'0.200 mol dm⁻³ hydrochloric acid',indicator:'Methyl orange',indicatorPrompt:'Which indicator detects the complete-neutralisation end point?',target:20.0,equation:'Na₂CO₃ + 2HCl → 2NaCl + H₂O + CO₂',calculation:'Calculate the concentration of Na₂CO₃.',answers:['0.0400 mol dm⁻³','0.0800 mol dm⁻³','0.160 mol dm⁻³','0.200 mol dm⁻³'],answer:1,explain:'HCl:Na₂CO₃ = 2:1. c(Na₂CO₃) = (0.200 × 20.0 ÷ 2) ÷ 25.0 = 0.0800 mol dm⁻³.',before:'#f3d955',endpoint:'#ee9b47',after:'#e9675d'},
+      {sample:'25.0 cm³ calcium hydroxide solution of unknown concentration',burette:'0.100 mol dm⁻³ hydrochloric acid',indicator:'Methyl orange',indicatorPrompt:'Which indicator gives a yellow → orange end point as acid is added?',target:30.0,equation:'Ca(OH)₂ + 2HCl → CaCl₂ + 2H₂O',calculation:'Calculate the concentration of Ca(OH)₂.',answers:['0.0300 mol dm⁻³','0.0600 mol dm⁻³','0.100 mol dm⁻³','0.120 mol dm⁻³'],answer:1,explain:'HCl:Ca(OH)₂ = 2:1. c[Ca(OH)₂] = (0.100 × 30.0 ÷ 2) ÷ 25.0 = 0.0600 mol dm⁻³.',before:'#f3d955',endpoint:'#ee9b47',after:'#e9675d'}
+    ];
+    const indicatorChoices=['Phenolphthalein','Methyl orange','Universal indicator','Blue litmus solution'];
+    function saveTitrationMistake(item,part,selected){
+      const list=ChemistryTools.mistakes(),slug=(item.sample+'-'+item.burette).toLowerCase().replace(/[^a-z0-9]+/g,'-'),id=location.pathname+'#titration-'+slug+'-'+part;
+      const questions={indicator:item.indicatorPrompt,endpoint:'Judge the end point when titrating '+item.sample+' with '+item.burette+'.',calculation:item.calculation+' '+item.equation};
+      const fresh={id:id,topic:'Topics IV & VI · Acids, Bases and Mole Calculations',number:'🧪',question:questions[part],source:'HKDSE animated titration practice',difficulty:'DSE exam practice',reason:'Wrong game answer',selected:{letter:part.toUpperCase(),text:selected},href:'games.html?mini=titration',mastered:false,attempts:1,savedAt:new Date().toISOString(),lastTried:new Date().toISOString()};
+      const i=list.findIndex(function(x){return x.id===id});if(i>=0)list[i]={...list[i],...fresh,attempts:(list[i].attempts||0)+1};else list.unshift(fresh);ChemistryTools.writeMistakes(list)
+    }
+    function titrationLabMarkup(item){
+      return '<div class="titration-sim"><div class="burette-stand"><div class="burette-scale"><i class="burette-fill"></i><span>0</span><span>10</span><span>20</span><span>30</span></div><div class="burette-tap">◆</div><div class="titration-drop"></div></div><div class="conical-flask"><div class="flask-liquid"></div><b>CONICAL FLASK</b></div><div class="titration-reading"><small>TITRE ADDED</small><strong>0.0 cm³</strong></div></div>'
+    }
+    function startTitration(){
+      const session=prepareMini('titration','Titration Challenge','PRECISION LAB · TOPICS 04 & 06','EXPERIMENT 1/4 · FIRST TRY 0/12'),round=shuffle(titrationTrials).slice(0,4);let at=0,points=0,errors=0,ended=false;
+      function status(stage){miniStatus.textContent='EXPERIMENT '+(at+1)+'/4 · '+stage+' · FIRST TRY '+points+'/12 · ERRORS '+errors}
+      function brief(item){return '<div class="titration-brief"><div><small>CONICAL FLASK</small><strong>'+item.sample+'</strong></div><div><small>BURETTE</small><strong>'+item.burette+'</strong></div></div>'}
+      function complete(){ended=true;const xp=Math.max(24,points*6);finishMini('titration',points,xp,'Titration series complete!','You earned '+points+' of 12 first-try skill points. Every incorrect decision was added to your Mistake Notebook.',startTitration)}
+      function indicatorStage(){
+        if(at>=round.length){complete();return}const item=round[at];let missed=false;status('SELECT INDICATOR');miniBody.innerHTML=brief(item)+titrationLabMarkup(item)+'<div class="titration-question"><small>STEP 1 · INDICATOR</small><strong>'+item.indicatorPrompt+'</strong></div><div class="indicator-options">'+shuffle(indicatorChoices).map(function(name){return '<button type="button" data-indicator="'+name+'">'+name+'</button>'}).join('')+'</div>';
+        miniBody.querySelector('.flask-liquid').style.background=item.before;miniBody.querySelectorAll('[data-indicator]').forEach(function(button){button.addEventListener('click',function(){if(session!==miniSession||button.disabled)return;const correct=button.dataset.indicator===item.indicator;if(!correct){missed=true;errors++;button.classList.add('wrong');button.disabled=true;saveTitrationMistake(item,'indicator',button.dataset.indicator);miniFeedback.innerHTML='<b>Unsuitable indicator.</b> Choose an indicator whose transition range lies within the steep pH change. Saved for revision.';status('SELECT INDICATOR');return}if(!missed)points++;button.classList.add('correct');miniBody.querySelectorAll('[data-indicator]').forEach(function(b){b.disabled=true});miniFeedback.innerHTML='<b>Correct — '+item.indicator+'.</b> Now control the burette and stop at the first permanent end-point colour.';status('INDICATOR READY');setTimeout(function(){if(session===miniSession)dosingStage(item)},650)})})
+      }
+      function dosingStage(item){
+        let volume=0,firstStop=true,dosed=false;status('CONTROL BURETTE');miniBody.innerHTML=brief(item)+titrationLabMarkup(item)+'<div class="titration-question"><small>STEP 2 · END POINT</small><strong>Add titrant carefully. Stop when the first permanent end-point colour appears.</strong><span>Use coarse additions first, then add dropwise near the end point.</span></div><div class="dose-controls"><button type="button" data-dose="5">+5.0 cm³</button><button type="button" data-dose="1">+1.0 cm³</button><button type="button" data-dose="0.1">+0.1 cm³</button><button class="stop-titration" type="button">Stop &amp; record</button></div>';
+        const sim=miniBody.querySelector('.titration-sim'),fill=miniBody.querySelector('.burette-fill'),liquid=miniBody.querySelector('.flask-liquid'),reading=miniBody.querySelector('.titration-reading strong'),drop=miniBody.querySelector('.titration-drop'),maximum=item.target+5;
+        function update(){const delta=volume-item.target;reading.textContent=volume.toFixed(1)+' cm³';fill.style.height=Math.max(4,100-volume/maximum*96)+'%';liquid.style.background=delta<-.11?item.before:delta<=.11?item.endpoint:item.after;status(Math.abs(delta)<=.11?'END-POINT COLOUR':'CONTROL BURETTE')}
+        miniBody.querySelectorAll('[data-dose]').forEach(function(button){button.addEventListener('click',function(){if(dosed||session!==miniSession)return;volume=Math.min(maximum,Math.round((volume+(+button.dataset.dose))*10)/10);drop.classList.remove('active');void drop.offsetWidth;drop.classList.add('active');sim.classList.add('swirl');setTimeout(function(){sim.classList.remove('swirl')},330);update()})});
+        miniBody.querySelector('.stop-titration').addEventListener('click',function(){if(dosed||session!==miniSession)return;const delta=volume-item.target;if(delta<-.11){firstStop=false;errors++;saveTitrationMistake(item,'endpoint',volume.toFixed(1)+' cm³ — stopped too early');miniFeedback.innerHTML='<b>Too early.</b> The indicator has not reached its permanent end-point colour. Continue dropwise; this attempt was saved.';status('END POINT NOT REACHED');return}dosed=true;miniBody.querySelectorAll('.dose-controls button').forEach(function(b){b.disabled=true});if(delta>.11){errors++;saveTitrationMistake(item,'endpoint',volume.toFixed(1)+' cm³ — overshot');miniFeedback.innerHTML='<b>End point overshot.</b> The colour is too intense. Accurate titre: '+item.target.toFixed(1)+' cm³. Saved for revision.'}else{if(firstStop)points++;miniFeedback.innerHTML='<b>Accurate end point: '+volume.toFixed(1)+' cm³.</b> The first permanent colour change has been recorded.'}status('TITRE RECORDED');setTimeout(function(){if(session===miniSession)calculationStage(item)},950)})
+      }
+      function calculationStage(item){
+        let missed=false;status('CALCULATE');miniBody.innerHTML=brief(item)+'<div class="titration-calculation"><small>STEP 3 · MOLE RATIO</small><strong>'+item.calculation+'</strong><span>Accurate titre = '+item.target.toFixed(1)+' cm³</span><b>'+item.equation+'</b></div><div class="calculation-options">'+item.answers.map(function(answer,i){return '<button type="button" data-calc="'+i+'">'+answer+'</button>'}).join('')+'</div>';
+        miniBody.querySelectorAll('[data-calc]').forEach(function(button){button.addEventListener('click',function(){if(session!==miniSession||button.disabled)return;const correct=+button.dataset.calc===item.answer;if(!correct){missed=true;errors++;button.classList.add('wrong');button.disabled=true;saveTitrationMistake(item,'calculation',button.textContent);miniFeedback.innerHTML='<b>Calculation trap.</b> Convert cm³ to dm³ and apply the coefficients in the balanced equation. Saved for revision.';status('RECALCULATE');return}if(!missed)points++;button.classList.add('correct');miniBody.querySelectorAll('[data-calc]').forEach(function(b){b.disabled=true});miniFeedback.innerHTML='<b>Correct.</b> '+item.explain;status('EXPERIMENT COMPLETE');at++;setTimeout(function(){if(session===miniSession)indicatorStage()},1200)})})
+      }
+      indicatorStage()
+    }
     function hideMini(){stopMiniTimer();miniSession++;miniArena.classList.remove('open')}
     function start(key){hideMini();game=key;order=shuffle(games[key].questions).slice(0,10);index=0;score=0;streak=0;answered=false;document.getElementById('gameTitle').textContent=games[key].title;arena.classList.add('open');arena.scrollIntoView({behavior:'smooth',block:'start'});show()}
     function show(){
@@ -532,7 +575,7 @@
       const p=profile();p.played=(p.played||0)+1;p.best=p.best||{};p.best[game]=Math.max(p.best[game]||0,score);ChemistryTools.writeProfile(p);updateStats();
       document.getElementById('roundLabel').textContent='ROUND COMPLETE';document.getElementById('gamePrompt').textContent=score+'/10 — '+(score===10?'Perfect chemistry!':score>=7?'Strong result!':score>=4?'Good start — replay to improve.':'Keep practising — every round builds recall.');optionsNode.innerHTML='';feedback.innerHTML='<b>You earned '+(score*10)+' XP.</b> Your best score for '+games[game].title+' is '+p.best[game]+'/10.';next.textContent='Play again ↻';next.classList.add('show');answered=true;index=order.length;
     }
-    const miniStarters={memory:startMemory,ph:startPH,atoms:startAtoms,ions:startIons,labmove:startLabMove,organicname:startOrganicNames,electrolysis:startElectrolysis};document.querySelectorAll('[data-mini]').forEach(function(button){button.addEventListener('click',function(){miniStarters[button.dataset.mini]()})});document.getElementById('closeMini').addEventListener('click',function(){hideMini();document.querySelector('.fun-zone').scrollIntoView({behavior:'smooth'})});document.querySelectorAll('[data-game]').forEach(function(button){button.addEventListener('click',function(){start(button.dataset.game)})});next.addEventListener('click',function(){if(index===order.length)start(game);else advance()});document.getElementById('closeGame').addEventListener('click',function(){arena.classList.remove('open');document.getElementById('gameGrid').scrollIntoView({behavior:'smooth'})});window.addEventListener('chemistry-tools-change',updateStats);updateStats();const requestedMini=new URLSearchParams(location.search).get('mini');if(miniStarters[requestedMini])setTimeout(miniStarters[requestedMini],80);
+    const miniStarters={memory:startMemory,ph:startPH,atoms:startAtoms,ions:startIons,labmove:startLabMove,organicname:startOrganicNames,electrolysis:startElectrolysis,titration:startTitration};document.querySelectorAll('[data-mini]').forEach(function(button){button.addEventListener('click',function(){miniStarters[button.dataset.mini]()})});document.getElementById('closeMini').addEventListener('click',function(){hideMini();document.querySelector('.fun-zone').scrollIntoView({behavior:'smooth'})});document.querySelectorAll('[data-game]').forEach(function(button){button.addEventListener('click',function(){start(button.dataset.game)})});next.addEventListener('click',function(){if(index===order.length)start(game);else advance()});document.getElementById('closeGame').addEventListener('click',function(){arena.classList.remove('open');document.getElementById('gameGrid').scrollIntoView({behavior:'smooth'})});window.addEventListener('chemistry-tools-change',updateStats);updateStats();const requestedMini=new URLSearchParams(location.search).get('mini');if(miniStarters[requestedMini])setTimeout(miniStarters[requestedMini],80);
   })();
   </script>
 </body>
