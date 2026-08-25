@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mistake Notebook | Chemistry Hub</title>
-  <meta name="description" content="Save, organise and retry chemistry questions that need more practice.">
+  <meta name="description" content="Automatically assess chemistry mistakes, identify weak HKDSE topics and build a personal revision plan.">
   <link rel="stylesheet" href="student-fun.css?v=20260822a">
-  <link rel="stylesheet" href="student-tools.css?v=20260822a">
+  <link rel="stylesheet" href="student-tools.css?v=20260825a">
 </head>
 <body class="student-page">
   <header class="topbar">
@@ -21,9 +21,9 @@
   <main class="student-shell">
     <section class="student-hero">
       <div>
-        <p class="kicker">YOUR PERSONAL REVISION QUEUE</p>
-        <h1>Mistake Notebook</h1>
-        <p>Wrong answers arrive here automatically. You can also save any difficult question, retry it from the original topic, then mark it mastered.</p>
+        <p class="kicker">YOUR PERSONAL REVISION COACH</p>
+        <h1>Learn from every mistake.</h1>
+        <p>Wrong answers are saved and assessed automatically. Your coach spots repeated errors, ranks weak topics and turns them into a focused revision plan.</p>
       </div>
       <div class="stat-pills" aria-label="Notebook summary">
         <div class="stat-pill"><b id="needsCount">0</b><span>NEEDS REVIEW</span></div>
@@ -32,8 +32,10 @@
       </div>
     </section>
 
+    <section id="revisionCoach" class="revision-coach" aria-labelledby="coachHeading" aria-live="polite"></section>
+
     <section aria-labelledby="notebookListHeading">
-      <h2 id="notebookListHeading" class="sr-only">Saved questions</h2>
+      <div class="notebook-heading"><div><p class="kicker">QUESTION-BY-QUESTION RECORD</p><h2 id="notebookListHeading">Your Mistake Notebook</h2></div><span>Use the coach above, then retry and mark each question mastered.</span></div>
       <div class="student-controls">
         <button class="active" type="button" data-filter="all">All questions</button>
         <button type="button" data-filter="open">Needs review</button>
@@ -47,16 +49,18 @@
     <p style="margin-top:24px;color:#71858a;font-size:11px">Your notebook is saved privately in this browser. It is not uploaded or shared.</p>
   </main>
 
-  <script src="student-tools.js?v=20260822a"></script>
+  <script src="student-tools.js?v=20260825a"></script>
   <script>
   (function(){
     'use strict';
     const listNode=document.getElementById('mistakeList');
+    const coachNode=document.getElementById('revisionCoach');
     const topicFilter=document.getElementById('topicFilter');
     const search=document.getElementById('searchQuestions');
     let filter='all';
 
     function escapeHTML(value){return String(value||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+    function safeHref(value){const href=String(value||'');return /^\/?(?:[a-z0-9-]+\/)*[a-z0-9-]+\.html(?:[?#][^\s]*)?$/i.test(href)?href:'mistakes.html'}
     function records(){return window.ChemistryTools?ChemistryTools.mistakes():[]}
     function save(list){ChemistryTools.writeMistakes(list);render()}
     function action(id,type){
@@ -66,6 +70,7 @@
       save(list);
     }
     window.notebookAction=action;
+    window.coachTopic=function(topic){filter='open';topicFilter.value=topic;document.querySelectorAll('[data-filter]').forEach(function(b){b.classList.toggle('active',b.dataset.filter==='open')});render();document.getElementById('notebookListHeading').scrollIntoView({behavior:'smooth',block:'start'})};
 
     function populateTopics(list){
       const current=topicFilter.value;
@@ -73,8 +78,22 @@
       topicFilter.innerHTML='<option value="">Every topic</option>'+topics.map(function(topic){return '<option value="'+escapeHTML(topic)+'">'+escapeHTML(topic)+'</option>'}).join('');
       if(topics.indexOf(current)>=0)topicFilter.value=current;
     }
+    function renderCoach(all){
+      const report=ChemistryTools.assessMistakes(all);
+      if(!report.total){
+        coachNode.innerHTML='<div class="coach-empty"><span class="coach-orb">🧪</span><div><p class="coach-label">SMART REVISION COACH</p><h2 id="coachHeading">Your assessment starts with your first mistake.</h2><p>Practise any topic or chemistry game. When an answer is wrong, it will appear here automatically and the coach will build a personal plan.</p></div><a href="index.html#topics">Start topic practice →</a></div>';return;
+      }
+      const priority=report.priority,queue=report.queue.slice(0,3),topicCards=report.topics.filter(function(x){return x.open>0}).slice(0,4);
+      const recovery=report.recovery===null?0:report.recovery;
+      const priorityTitle=priority?priority.topic:'No active weak topic';
+      const lead=priority?priority.coach.action:'All saved questions are mastered. Use spaced recall this week to keep them secure.';
+      const evidence=report.total<3?'Early assessment · add more answers for stronger guidance':report.total<8?'Growing assessment · based on '+report.total+' saved questions':'Established assessment · based on '+report.total+' saved questions';
+      const queueHTML=queue.length?queue.map(function(item,index){return '<li><span>'+(index+1)+'</span><div><b>'+escapeHTML(item.topic||'Chemistry')+' · Q'+escapeHTML(item.number)+'</b><small>'+escapeHTML(item.question||'Retry this saved question without notes.')+'</small></div><a href="'+escapeHTML(safeHref(item.href))+'">Retry</a></li>'}).join(''):'<li class="coach-cleared"><span>✓</span><div><b>Revision queue cleared</b><small>Choose a mastered question for a quick spaced-recall check later.</small></div></li>';
+      const topicsHTML=topicCards.length?topicCards.map(function(group,index){const level=index===0?'Focus now':group.repeats?'Rebuild':'Practise';const data=JSON.stringify(group.topic).replace(/</g,'\\u003c');return '<article class="coach-topic-card'+(index===0?' priority':'')+'"><div class="coach-topic-top"><span>'+level+'</span><b>'+group.open+' open</b></div><h3>'+escapeHTML(group.coach.focus)+'</h3><p>'+escapeHTML(group.coach.action)+'</p><div class="coach-signals"><span>'+group.open+' question'+(group.open===1?'':'s')+'</span>'+(group.repeats?'<span>'+group.repeats+' repeat error'+(group.repeats===1?'':'s')+'</span>':'')+(group.due?'<span>'+group.due+' due now</span>':'')+'</div><button type="button" onclick=\'coachTopic('+data+')\'>Show these questions →</button></article>'}).join(''):'<article class="coach-topic-card priority"><div class="coach-topic-top"><span>On track</span><b>0 open</b></div><h3>All recorded topics recovered</h3><p>Keep your knowledge strong with a short delayed retry of a mastered question.</p></article>';
+      coachNode.innerHTML='<div class="coach-header"><div><p class="coach-label">SMART REVISION COACH · '+escapeHTML(evidence)+'</p><h2 id="coachHeading">Your next best revision move</h2></div><span class="private-chip">🔒 Saved only in this browser</span></div><div class="coach-overview"><article class="coach-priority"><span class="coach-rank">#1 PRIORITY</span><h3>'+escapeHTML(priorityTitle)+'</h3><p>'+escapeHTML(lead)+'</p><div class="coach-score-row"><span><b>'+report.open+'</b> active</span><span><b>'+report.repeating+'</b> recurring</span><span><b>'+report.due+'</b> due</span></div></article><article class="recovery-card"><div class="recovery-ring" style="--recovery:'+recovery+'"><span><b>'+recovery+'%</b><small>recovered</small></span></div><div><h3>Notebook recovery</h3><p>'+report.mastered+' of '+report.total+' saved questions mastered.</p></div></article><article class="coach-queue"><div class="queue-heading"><span>YOUR 3-STEP PLAN</span><b>Highest-impact questions first</b></div><ol>'+queueHTML+'</ol></article></div><div class="coach-topic-heading"><div><p class="coach-label">WEAK-AREA ASSESSMENT</p><h2>What the pattern suggests</h2></div><p>Priority rises with open questions, repeated errors and questions not reviewed for seven days.</p></div><div class="coach-topic-grid">'+topicsHTML+'</div>';
+    }
     function render(){
-      const all=records();populateTopics(all);
+      const all=records();populateTopics(all);renderCoach(all);
       document.getElementById('needsCount').textContent=all.filter(function(x){return !x.mastered}).length;
       document.getElementById('masteredCount').textContent=all.filter(function(x){return x.mastered}).length;
       document.getElementById('topicCount').textContent=new Set(all.map(function(x){return x.topic}).filter(Boolean)).size;
@@ -89,7 +108,7 @@
       }
       listNode.innerHTML=shown.map(function(item){
         const id=JSON.stringify(item.id).replace(/</g,'\\u003c');
-        return '<article class="mistake-card'+(item.mastered?' mastered':'')+'"><div class="mistake-number">Q'+escapeHTML(item.number)+'</div><div><h3>'+escapeHTML(item.topic||'Chemistry question')+'</h3><p>'+escapeHTML(item.question||'Open the original question to try it again.')+'</p><div class="mistake-meta"><span>'+escapeHTML(item.reason||'Saved for revision')+'</span>'+(item.source?'<span>'+escapeHTML(item.source)+'</span>':'')+(item.difficulty?'<span>'+escapeHTML(item.difficulty)+'</span>':'')+'<span>'+escapeHTML(item.attempts||1)+' attempt'+((item.attempts||1)===1?'':'s')+'</span></div></div><div class="mistake-actions"><a href="'+escapeHTML(item.href)+'">Retry question</a><button type="button" onclick=\'notebookAction('+id+',"'+(item.mastered?'open':'mastered')+'")\'>'+(item.mastered?'Needs review':'Mark mastered')+'</button><button type="button" onclick=\'notebookAction('+id+',"remove")\'>Remove</button></div></article>';
+        return '<article class="mistake-card'+(item.mastered?' mastered':'')+'"><div class="mistake-number">Q'+escapeHTML(item.number)+'</div><div><h3>'+escapeHTML(item.topic||'Chemistry question')+'</h3><p>'+escapeHTML(item.question||'Open the original question to try it again.')+'</p><div class="mistake-meta"><span>'+escapeHTML(item.reason||'Saved for revision')+'</span>'+(item.source?'<span>'+escapeHTML(item.source)+'</span>':'')+(item.difficulty?'<span>'+escapeHTML(item.difficulty)+'</span>':'')+'<span>'+escapeHTML(item.attempts||1)+' attempt'+((item.attempts||1)===1?'':'s')+'</span></div></div><div class="mistake-actions"><a href="'+escapeHTML(safeHref(item.href))+'">Retry question</a><button type="button" onclick=\'notebookAction('+id+',"'+(item.mastered?'open':'mastered')+'")\'>'+(item.mastered?'Needs review':'Mark mastered')+'</button><button type="button" onclick=\'notebookAction('+id+',"remove")\'>Remove</button></div></article>';
       }).join('');
     }
     document.querySelectorAll('[data-filter]').forEach(function(button){button.addEventListener('click',function(){filter=button.dataset.filter;document.querySelectorAll('[data-filter]').forEach(function(b){b.classList.toggle('active',b===button)});render()})});
