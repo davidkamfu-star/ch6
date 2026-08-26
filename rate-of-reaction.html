@@ -41,5 +41,5 @@
     function openViewer(d){el('viewerLabel').textContent=`QUESTION ${current+1} · ${d.label}`;const old=el('viewerCrop');old.outerHTML=cropHTML(d,true).replace('class="viewer-crop"','class="viewer-crop" id="viewerCrop"');el('viewer').classList.add('open');document.body.style.overflow='hidden'}function closeViewer(){el('viewer').classList.remove('open');document.body.style.overflow=''}
     el('viewerClose').onclick=closeViewer;el('viewer').onclick=e=>{if(e.target===el('viewer'))closeViewer()};document.addEventListener('keydown',e=>{if(e.key==='Escape')closeViewer()});el('checkButton').onclick=check;el('clearButton').onclick=()=>{delete state[current];localStorage.setItem(key,JSON.stringify(state));render()};el('previousButton').onclick=()=>go(current-1);el('nextButton').onclick=()=>go(current+1);el('mobilePrevious').onclick=()=>go(current-1);el('mobileNext').onclick=()=>go(current+1);el('resetButton').onclick=()=>{if(confirm('Reset all saved answers for Topic 09?')){state={};localStorage.removeItem(key);current=0;render()}};render();
   </script>
-<script src="student-tools.js?v=20260825a"></script></body>
+<script src="student-tools.js?v=20260826a"></script></body>
 </html>
