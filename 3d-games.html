@@ -97,14 +97,59 @@
     ];
     const organicDirections=Array.from({length:28},(_,i)=>{const y=1-i*2/27,r=Math.sqrt(Math.max(0,1-y*y)),a=i*2.399963;return[Math.cos(a)*r,y,Math.sin(a)*r]});
     function unit(v){const d=Math.hypot(...v)||1;return v.map(x=>x/d)}
+    function geomSub(a,b){return a.map((x,i)=>x-b[i])}
+    function geomAdd(a,b){return a.map((x,i)=>x+b[i])}
+    function geomScale(a,n){return a.map(x=>x*n)}
+    function geomDot(a,b){return a.reduce((n,x,i)=>n+x*b[i],0)}
+    function geomCross(a,b){return[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]]}
+    function geomLength(a){return Math.hypot(...a)}
+    function geomUnit(a){const d=geomLength(a)||1;return a.map(x=>x/d)}
+    function geomPerp(axis,hint){const u=geomUnit(axis);let e=hint?geomSub(hint,geomScale(u,geomDot(hint,u))):[0,0,0];if(geomLength(e)<.05){const ref=Math.abs(u[1])<.82?[0,1,0]:[0,0,1];e=geomCross(u,ref)}return geomUnit(e)}
+    function geomTetraAround(axis,hint){const u=geomUnit(axis),e=geomPerp(u,hint),f=geomUnit(geomCross(u,e)),ring=Math.sqrt(8/9);return[0,1,2].map(k=>{const a=k*Math.PI*2/3;return geomUnit(geomAdd(geomScale(u,-1/3),geomScale(geomAdd(geomScale(e,Math.cos(a)),geomScale(f,Math.sin(a))),ring)))})}
+    function geomPlanarAround(axis,hint,angle=120){const u=geomUnit(axis),e=geomPerp(u,hint),c=Math.cos(angle*Math.PI/180),sn=Math.sin(angle*Math.PI/180);return[geomUnit(geomAdd(geomScale(u,c),geomScale(e,sn))),geomUnit(geomAdd(geomScale(u,c),geomScale(e,-sn)))]}
+    function geomAssign(children,candidates,raw,centre){const free=candidates.slice(),out=[];children.forEach(j=>{const wanted=geomUnit(geomSub(raw[j],raw[centre]));let at=0,best=-Infinity;free.forEach((d,k)=>{const score=geomDot(d,wanted);if(score>best){best=score;at=k}});out.push(free.splice(at,1)[0]||wanted)});return out}
     function completeOrganic(raw){
-      const atoms=raw.atoms.map(a=>({el:a[0],p:a.slice(1)})),bonds=raw.bonds.map(b=>({a:b[0],b:b[1],order:b[2]||1})),heavy=atoms.length;
-      for(let i=0;i<heavy;i++){
-        const atom=atoms[i],target={C:4,O:2,N:3}[atom.el];if(!target)continue;const attached=bonds.filter(b=>b.a===i||b.b===i),used=attached.reduce((n,b)=>n+b.order,0),need=Math.max(0,target-used),neighbours=attached.map(b=>{const j=b.a===i?b.b:b.a;return unit(atoms[j].p.map((x,k)=>x-atom.p[k]))});
-        const planar=atom.el==='C'&&attached.some(b=>b.order===2),pool=planar?Array.from({length:18},(_,k)=>[Math.cos(k*Math.PI/9),Math.sin(k*Math.PI/9),0]):organicDirections.slice((i*5)%organicDirections.length).concat(organicDirections.slice(0,(i*5)%organicDirections.length));
-        for(let h=0;h<need;h++){let best=pool[0],bestScore=Infinity;pool.forEach(d=>{const score=Math.max(...neighbours.map(n=>n[0]*d[0]+n[1]*d[1]+n[2]*d[2]),-1);if(score<bestScore){bestScore=score;best=d}});neighbours.push(best);const j=atoms.push({el:'H',p:atom.p.map((x,k)=>x+best[k]*(atom.el==='O'?.82:.92))})-1;bonds.push({a:i,b:j,order:1})}
+      const atoms=raw.atoms.map(a=>({el:a[0],p:a.slice(1)})),bonds=raw.bonds.map(b=>({a:b[0],b:b[1],order:b[2]||1})),initialCount=atoms.length,rawPos=atoms.map(a=>a.p.slice()),adj=atoms.map(()=>[]);
+      bonds.forEach(b=>{adj[b.a].push({j:b.b,order:b.order});adj[b.b].push({j:b.a,order:b.order})});
+      const isPlanarN=i=>atoms[i].el==='N'&&adj[i].some(({j})=>atoms[j].el==='C'&&adj[j].some(x=>x.order===2&&atoms[x.j].el==='O'));
+      const atomMode=i=>atoms[i].el==='C'?(adj[i].some(x=>x.order===2)?'sp2':'sp3'):isPlanarN(i)?'sp2':atoms[i].el==='O'?'oxygen':'other';
+      const placed=new Set([0]),queue=[{i:0,parent:-1}];
+      while(queue.length){
+        const {i,parent}=queue.shift(),children=adj[i].map(x=>x.j).filter(j=>j!==parent&&!placed.has(j));if(!children.length)continue;
+        const mode=atomMode(i),rawHints=children.map(j=>geomSub(rawPos[j],rawPos[i]));let candidates=[];
+        if(parent<0){
+          if(mode==='sp3'){
+            const neighbours=adj[i].map(x=>x.j);
+            if(neighbours.length===4){children.forEach(j=>{const len=geomLength(geomSub(rawPos[j],rawPos[i]));atoms[j].p=geomAdd(atoms[i].p,geomScale(geomUnit(geomSub(rawPos[j],rawPos[i])),len));placed.add(j);queue.push({i:j,parent:i})});continue}
+            const axis=rawHints[0]||[1,0,0],hint=rawHints[1],all=[geomUnit(axis),...geomTetraAround(axis,hint)];candidates=all.slice(0,children.length)
+          }else if(mode==='sp2'){
+            const doubleChild=adj[i].find(x=>x.order===2&&children.includes(x.j)),first=doubleChild?doubleChild.j:children[0],axis=geomSub(rawPos[first],rawPos[i]),hint=rawHints.find((_,k)=>children[k]!==first),all=[geomUnit(axis),...geomPlanarAround(axis,hint)];const ordered=[first,...children.filter(j=>j!==first)],assigned=geomAssign(ordered,all,rawPos,i);ordered.forEach((j,k)=>{const len=geomLength(geomSub(rawPos[j],rawPos[i]));atoms[j].p=geomAdd(atoms[i].p,geomScale(assigned[k],len));placed.add(j);queue.push({i:j,parent:i})});continue
+          }else if(mode==='oxygen'){
+            const axis=rawHints[0]||[1,0,0],all=[geomUnit(axis),...geomPlanarAround(axis,rawHints[1],109.5)];candidates=all.slice(0,children.length)
+          }else candidates=rawHints.map(geomUnit)
+        }else{
+          const axis=geomSub(atoms[parent].p,atoms[i].p),hint=rawHints[0];
+          if(mode==='sp3')candidates=geomTetraAround(axis,hint);
+          else if(mode==='sp2')candidates=geomPlanarAround(axis,hint);
+          else if(mode==='oxygen')candidates=geomPlanarAround(axis,hint,109.5);
+          else candidates=rawHints.map(geomUnit)
+        }
+        const assigned=geomAssign(children,candidates,rawPos,i);
+        children.forEach((j,k)=>{const len=geomLength(geomSub(rawPos[j],rawPos[i]))||1.2;atoms[j].p=geomAdd(atoms[i].p,geomScale(assigned[k],len));placed.add(j);queue.push({i:j,parent:i})})
       }
-      const centre=[0,1,2].map(k=>atoms.slice(0,heavy).reduce((n,a)=>n+a.p[k],0)/heavy);atoms.forEach(a=>a.p=a.p.map((x,k)=>x-centre[k]));const radius=Math.max(...atoms.map(a=>Math.hypot(...a.p)),1);return{...raw,atoms,bonds,heavy,scale:Math.min(64,170/radius)}
+      for(let i=0;i<initialCount;i++){
+        const atom=atoms[i],target={C:4,O:2,N:3}[atom.el];if(!target)continue;const attached=bonds.filter(b=>b.a===i||b.b===i),used=attached.reduce((n,b)=>n+b.order,0),need=Math.max(0,target-used);if(!need)continue;
+        const neighbours=attached.map(b=>b.a===i?b.b:b.a),dirs=neighbours.map(j=>geomUnit(geomSub(atoms[j].p,atom.p))),mode=atomMode(i);let candidates=[];
+        if(mode==='sp2'){
+          const doubleBond=attached.find(b=>b.order===2),axis=doubleBond?geomUnit(geomSub(atoms[doubleBond.a===i?doubleBond.b:doubleBond.a].p,atom.p)):dirs[0],hint=dirs.find(d=>Math.abs(geomDot(d,axis))<.9),all=[axis,...geomPlanarAround(axis,hint)];candidates=all.filter(d=>!dirs.some(n=>geomDot(d,n)>.94))
+        }else if(mode==='sp3'){
+          if(!dirs.length)candidates=[[1,1,1],[-1,-1,1],[-1,1,-1],[1,-1,-1]].map(geomUnit);
+          else{const all=[dirs[0],...geomTetraAround(dirs[0],dirs[1])];candidates=all.filter(d=>!dirs.some(n=>geomDot(d,n)>.94))}
+        }else if(mode==='oxygen')candidates=geomPlanarAround(dirs[0]||[1,0,0],null,108.5).slice(0,need);
+        else if(isPlanarN(i))candidates=geomPlanarAround(dirs[0]||[1,0,0],null).slice(0,need);
+        for(let h=0;h<need;h++){const best=candidates[h]||geomPerp(dirs[0]||[1,0,0]);const len=atom.el==='O'?.82:atom.el==='N'?.88:.92,j=atoms.push({el:'H',p:geomAdd(atom.p,geomScale(best,len))})-1;bonds.push({a:i,b:j,order:1})}
+      }
+      const heavyAtoms=atoms.filter(a=>a.el!=='H'),centre=[0,1,2].map(k=>heavyAtoms.reduce((n,a)=>n+a.p[k],0)/Math.max(1,heavyAtoms.length));atoms.forEach(a=>a.p=a.p.map((x,k)=>x-centre[k]));const radius=Math.max(...atoms.map(a=>Math.hypot(...a.p)),1);return{...raw,atoms,bonds,heavy:initialCount,scale:Math.min(64,170/radius)}
     }
     const organicModels=[
       {id:'ethene',name:'ethene',formula:'C₂H₄',family:'alkene',group:'carbon–carbon double bond, C=C',note:'Both carbon centres are trigonal planar.',atoms:[['C',-.68,0,0],['C',.68,0,0]],bonds:[[0,1,2]]},
