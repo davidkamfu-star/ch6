@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#102e3a">
+  <meta name="description" content="Quick, concise HKDSE Chemistry revision notes for compulsory Topics I–XII.">
+  <title>Quick Revision Notes | HKDSE Chemistry Hub</title>
+  <style>
+    :root{--navy:#102e3a;--navy2:#173f4b;--teal:#16a085;--mint:#80ddc6;--cream:#f6f2e9;--paper:#fffdf8;--ink:#18353e;--muted:#687b80;--line:#dce4e0;--coral:#d86567;--gold:#d9a441;--blue:#4a99bf;--shadow:0 22px 60px rgba(16,46,58,.10)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif}button,input{font:inherit}button,a{-webkit-tap-highlight-color:transparent}.topbar{min-height:76px;padding:0 clamp(18px,5vw,72px);display:flex;align-items:center;gap:22px;border-bottom:1px solid rgba(16,46,58,.1);background:rgba(255,253,248,.95);position:sticky;top:0;z-index:30;backdrop-filter:blur(16px)}.brand{display:flex;align-items:center;gap:11px;color:var(--navy);text-decoration:none;font-size:12px;font-weight:900;letter-spacing:.1em}.brand-mark{display:grid;place-items:center;width:36px;height:36px;border-radius:11px;background:var(--navy);color:var(--mint);font-size:18px}.topbar nav{display:flex;align-items:center;gap:7px;margin-left:auto}.topbar nav a{padding:9px 12px;border-radius:999px;color:#5d7378;text-decoration:none;font-size:11px;font-weight:800}.topbar nav a:hover,.topbar nav a.active{background:#e8f5f0;color:var(--teal)}
+    .hero{padding:68px clamp(22px,7vw,110px) 58px;background:linear-gradient(125deg,#102e3a 0%,#173f4b 60%,#176b67 100%);color:#fff;overflow:hidden;position:relative}.hero:after{content:"";position:absolute;width:420px;height:420px;right:-140px;top:-220px;border:1px solid rgba(128,221,198,.25);border-radius:50%;box-shadow:0 0 0 70px rgba(128,221,198,.04),0 0 0 140px rgba(128,221,198,.025)}.eyebrow{margin:0 0 15px;color:var(--mint);font-size:10px;font-weight:900;letter-spacing:.17em}.hero h1{max-width:820px;margin:0;font:400 clamp(44px,6vw,76px)/1.01 Georgia,serif;letter-spacing:-.045em}.hero h1 em{color:var(--mint);font-weight:400}.hero-copy{max-width:680px;margin:22px 0 0;color:#c7d9d5;font-size:16px;line-height:1.65}.hero-tools{position:relative;z-index:2;display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:30px}.search{display:flex;align-items:center;gap:10px;width:min(430px,100%);padding:13px 15px;border:1px solid rgba(255,255,255,.2);border-radius:12px;background:rgba(255,255,255,.1)}.search span{color:var(--mint)}.search input{width:100%;border:0;outline:0;background:transparent;color:#fff}.search input::placeholder{color:#b8cdca}.hero-progress{min-width:220px;padding:13px 15px;border:1px solid rgba(255,255,255,.15);border-radius:12px;background:rgba(255,255,255,.08)}.hero-progress-line{display:flex;justify-content:space-between;color:#d6e5e2;font-size:10px;font-weight:800}.progress-track{height:5px;margin-top:9px;border-radius:5px;background:rgba(255,255,255,.17);overflow:hidden}.progress-track i{display:block;height:100%;width:0;background:var(--mint);transition:.3s ease}
+    .layout{display:grid;grid-template-columns:290px minmax(0,1fr);gap:38px;max-width:1450px;margin:auto;padding:42px clamp(18px,5vw,72px) 80px}.chapter-rail{position:sticky;top:100px;align-self:start;max-height:calc(100vh - 120px);overflow:auto;padding-right:7px}.rail-label{margin:0 0 12px;color:#789093;font-size:9px;font-weight:900;letter-spacing:.15em}.chapter-list{display:grid;gap:7px}.chapter-button{width:100%;display:grid;grid-template-columns:35px 1fr auto;gap:10px;align-items:center;padding:10px;border:1px solid transparent;border-radius:12px;background:transparent;color:#567075;text-align:left;cursor:pointer}.chapter-button:hover{background:#f2f7f4}.chapter-button.active{border-color:#cde3da;background:#edf8f3;color:var(--navy)}.chapter-number{display:grid;place-items:center;width:33px;height:33px;border-radius:10px;background:#edf1ef;color:#6f8384;font-size:9px;font-weight:900}.active .chapter-number{background:var(--teal);color:#fff}.chapter-button b{font-size:11px;line-height:1.25}.reviewed-dot{width:8px;height:8px;border-radius:50%;background:#d8e0dd}.chapter-button.reviewed .reviewed-dot{background:var(--teal);box-shadow:0 0 0 3px #d9f0e8}.rail-jump{display:block;margin-top:16px;padding:12px 14px;border-radius:11px;background:var(--navy);color:#fff;text-decoration:none;font-size:11px;font-weight:850;text-align:center}
+    .note{min-width:0}.note-head{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:24px}.topic-id{margin:0 0 8px;color:var(--teal);font-size:10px;font-weight:900;letter-spacing:.16em}.note h2{margin:0;color:var(--navy);font:400 clamp(34px,4vw,52px)/1.05 Georgia,serif;letter-spacing:-.035em}.note-summary{max-width:760px;margin:14px 0 0;color:#63787c;font-size:14px;line-height:1.65}.note-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.note-actions button{padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--navy);font-size:10px;font-weight:850;cursor:pointer}.note-actions button.primary{border-color:var(--teal);background:var(--teal);color:#fff}.note-actions button.primary.done{background:var(--navy);border-color:var(--navy)}.route{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 24px}.route span{padding:7px 10px;border-radius:999px;background:#edf7f3;color:#237865;font-size:10px;font-weight:800}.note-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:16px}.panel{padding:23px;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:0 10px 32px rgba(16,46,58,.045)}.panel.wide{grid-column:1/-1}.panel-label{display:flex;align-items:center;gap:9px;margin-bottom:13px;color:var(--teal);font-size:9px;font-weight:900;letter-spacing:.14em}.panel-label i{display:grid;place-items:center;width:25px;height:25px;border-radius:8px;background:#e7f5ef;font-style:normal;letter-spacing:0}.panel h3{margin:0 0 14px;color:var(--navy);font:400 22px/1.2 Georgia,serif}.clean-list{display:grid;gap:11px;margin:0;padding:0;list-style:none}.clean-list li{position:relative;padding-left:18px;color:#516a70;font-size:13px;line-height:1.55}.clean-list li:before{content:"";position:absolute;left:0;top:.58em;width:7px;height:7px;border-radius:50%;background:var(--teal)}.clean-list strong{color:var(--navy)}.formula-list{display:grid;gap:9px}.formula-row{padding:12px 13px;border-left:3px solid var(--gold);border-radius:0 10px 10px 0;background:#fbf7ed}.formula-row code{display:block;color:var(--navy);font:700 13px/1.45 "Courier New",monospace;white-space:normal}.formula-row span{display:block;margin-top:4px;color:#718185;font-size:10px;line-height:1.4}.exam-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.exam-box{padding:15px;border-radius:13px;background:#edf8f3}.exam-box.trap{background:#fff2ef}.exam-box b{display:block;margin-bottom:8px;color:#15735f;font-size:10px;letter-spacing:.08em}.exam-box.trap b{color:#b44f52}.exam-box p{margin:0;color:#536c70;font-size:12px;line-height:1.55}.recall-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.recall{position:relative;min-height:145px;padding:16px;border:1px solid #dbe5e1;border-radius:14px;background:#fbfdfa;text-align:left;cursor:pointer}.recall span{color:var(--teal);font-size:9px;font-weight:900;letter-spacing:.1em}.recall b{display:block;margin-top:11px;color:var(--navy);font-size:13px;line-height:1.45}.recall p{display:none;margin:10px 0 0;padding-top:10px;border-top:1px solid #dce7e2;color:#587075;font-size:11px;line-height:1.5}.recall.revealed{background:#edf8f3;border-color:#bcded0}.recall.revealed p{display:block}.bottom-actions{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:18px;padding:20px 22px;border-radius:17px;background:var(--navy);color:#fff}.bottom-actions p{margin:0;color:#c6d8d4;font-size:11px;line-height:1.5}.bottom-actions b{display:block;margin-bottom:3px;color:#fff;font:400 20px Georgia,serif}.bottom-actions a{padding:12px 15px;border-radius:10px;background:var(--teal);color:#fff;text-decoration:none;font-size:11px;font-weight:900;white-space:nowrap}.empty{grid-column:1/-1;padding:54px 20px;text-align:center;color:#6d8285}.source-note{margin:18px 0 0;color:#819194;font-size:9px;line-height:1.5}.source-note a{color:#527a77}
+    @media(max-width:1000px){.topbar nav a:nth-child(3),.topbar nav a:nth-child(4){display:none}.layout{grid-template-columns:230px minmax(0,1fr);gap:24px}.note-grid{grid-template-columns:1fr}.panel.wide{grid-column:auto}.recall-grid{grid-template-columns:1fr}.note-head{display:block}.note-actions{justify-content:flex-start;margin-top:18px}}
+    @media(max-width:720px){.topbar{min-height:68px}.brand span:last-child{display:none}.topbar nav a{padding:8px}.topbar nav a:not(.active):not(:last-child){display:none}.hero{padding:48px 20px 42px}.hero h1{font-size:42px}.layout{display:block;padding:25px 16px 60px}.chapter-rail{position:static;max-height:none;margin-bottom:27px;padding:0}.chapter-list{display:flex;overflow:auto;padding-bottom:5px}.chapter-button{flex:0 0 150px;grid-template-columns:30px 1fr;padding:8px}.chapter-number{width:29px;height:29px}.reviewed-dot{display:none}.rail-jump{display:none}.note h2{font-size:36px}.note-grid{display:block}.panel{margin-bottom:12px;padding:19px}.exam-grid{grid-template-columns:1fr}.bottom-actions{align-items:flex-start;flex-direction:column}.bottom-actions a{width:100%;text-align:center}}
+    @media print{.topbar,.hero,.chapter-rail,.note-actions,.bottom-actions,.source-note{display:none!important}.layout{display:block;max-width:none;padding:0}.note-grid{grid-template-columns:1fr 1fr}.panel{box-shadow:none;break-inside:avoid}.recall p{display:block}.recall-grid{grid-template-columns:repeat(3,1fr)}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">⌬</span><span>HKDSE CHEMISTRY HUB</span></a>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Home</a><a class="active" href="revision-notes.html" aria-current="page">Quick Notes</a><a href="3d-games.html">3D Lab</a><a href="games.html">Games</a><a href="mistakes.html">Progress</a>
+    </nav>
+  </header>
+  <main>
+    <section class="hero">
+      <p class="eyebrow">HKDSE COMPULSORY PART · TOPICS I–XII</p>
+      <h1>Quick notes for a <em>clear final review.</em></h1>
+      <p class="hero-copy">One compact chapter at a time: core ideas, equations, practical evidence, exam traps and three retrieval questions. Read less. Recall more.</p>
+      <div class="hero-tools">
+        <label class="search"><span>⌕</span><input id="noteSearch" type="search" placeholder="Search chapter, concept or equation" aria-label="Search revision notes"></label>
+        <div class="hero-progress"><div class="hero-progress-line"><span>CHAPTERS REVIEWED</span><b id="progressText">0 / 12</b></div><div class="progress-track"><i id="progressBar"></i></div></div>
+      </div>
+    </section>
+    <div class="layout">
+      <aside class="chapter-rail" aria-label="Chapter navigation">
+        <p class="rail-label">CHOOSE A CHAPTER</p>
+        <div class="chapter-list" id="chapterList"></div>
+        <a class="rail-jump" href="mistakes.html">Check my revision progress →</a>
+      </aside>
+      <article class="note" id="note" aria-live="polite"></article>
+    </div>
+  </main>
+  <script>
+  (function(){
+    'use strict';
+    const NOTES_KEY='chemistry-quick-notes-v1';
+    const chapters=[
+      {n:1,roman:'I',title:'Planet Earth',short:'Air · sea · rocks',href:'planet-earth.html',summary:'Recognise chemicals in the atmosphere, oceans and rocks; select separation methods and report practical evidence precisely.',route:['Matter and mixtures','Air and water','Rocks and minerals','Separation and tests'],core:[
+        '<strong>Mixture vs compound:</strong> a mixture has variable composition and can be separated physically; a compound has elements chemically combined in a fixed ratio.',
+        '<strong>Air:</strong> about 78% nitrogen and 21% oxygen by volume, with small amounts of noble gases, carbon dioxide and water vapour.',
+        '<strong>Fractional distillation of liquid air:</strong> separate gases using different boiling points after air is liquefied.',
+        '<strong>Earth resources:</strong> sea water contains dissolved salts; rocks contain minerals and ores. Limestone is mainly calcium carbonate.',
+        '<strong>Choose the method from the property:</strong> filtration—particle size; crystallisation—solubility; distillation—boiling point; chromatography—different affinities.'
+      ],formula:[
+        ['CaCO₃(s) → CaO(s) + CO₂(g)','Strong heating of limestone; thermal decomposition.'],
+        ['CO₂ + Ca(OH)₂ → CaCO₃ + H₂O','Carbon dioxide turns limewater milky.'],
+        ['H₂: lighted splint → squeaky pop','State both the test and the positive observation.'],
+        ['O₂: glowing splint relights','Water: anhydrous CuSO₄ white → blue, or cobalt chloride paper blue → pink.']
+      ],do:'Match every separation method to a physical-property difference. In tests, write reagent/procedure, observation, then conclusion.',trap:'Do not call a clear filtrate “pure”. Filtration removes insoluble solids only; dissolved substances remain.',recall:[['Why can air be separated physically?','Its gases are not chemically bonded and retain their own physical properties.'],['How is pure water obtained from sea water?','Use simple distillation: water vaporises and is condensed; salts remain.'],['What confirms carbon dioxide?','Bubble it through limewater; the limewater turns milky.']]},
+      {n:2,roman:'II',title:'Microscopic World I',short:'Atoms · moles · bonding',href:'microscopic-world-i.html',summary:'Connect atomic structure to the Periodic Table, formulae, the mole and the three main types of bonding and structure.',route:['Atomic structure','Periodic Table','Mole concept','Bonding and structures'],core:[
+        '<strong>Atomic number Z</strong> = number of protons. <strong>Mass number A</strong> = protons + neutrons. Isotopes have the same Z but different neutron numbers.',
+        '<strong>Electron arrangement</strong> determines group and chemical behaviour. Main-group atoms form ions to obtain a stable outer shell.',
+        '<strong>Relative atomic mass</strong> is the weighted mean of isotopic masses relative to 1/12 of carbon-12.',
+        '<strong>Ionic bonding:</strong> electrostatic attraction between oppositely charged ions. <strong>Covalent bonding:</strong> attraction between nuclei and shared electron pair(s).',
+        '<strong>Structure controls property:</strong> identify particles, attractions/bonds and whether charged particles can move.'
+      ],formula:[
+        ['n = m / M','Amount (mol) = mass (g) ÷ molar mass (g mol⁻¹).'],
+        ['N = nNₐ','Number of particles; Nₐ = 6.02 × 10²³ mol⁻¹.'],
+        ['Aᵣ = Σ(isotopic mass × abundance) / Σabundance','Use consistent abundance units.'],
+        ['ionic formula: total positive charge = total negative charge','Use the simplest whole-number ion ratio; never change ion charges.']
+      ],do:'For a structure–property answer: name the structure, name the particles and attraction, then link to the energy or mobile charges involved.',trap:'A covalent bond is not “sharing electrons” alone; define the electrostatic attraction. Ionic substances conduct only when ions are mobile.',recall:[['Why do isotopes react similarly?','They have the same atomic number and electron arrangement.'],['Why does NaCl(l) conduct?','Its ions are free to move and carry charge.'],['What is one mole?','An amount containing 6.02 × 10²³ specified particles.']]},
+      {n:3,roman:'III',title:'Metals',short:'Reactivity · extraction · corrosion',href:'metals.html',summary:'Use the reactivity series to predict reactions, select extraction methods and explain corrosion prevention.',route:['Metal properties','Reactivity series','Extraction','Corrosion and alloys'],core:[
+        '<strong>Metallic structure:</strong> positive metal ions in a lattice attracted to delocalised electrons; mobile electrons explain conductivity.',
+        '<strong>Reactivity evidence:</strong> compare reactions with oxygen, water/steam, dilute acids and displacement of metal ions.',
+        '<strong>Extraction:</strong> metals below carbon can often be reduced from oxides by carbon/CO; more reactive metals require electrolysis of molten compounds.',
+        '<strong>Rusting of iron</strong> needs both water and oxygen. Salt or acid speeds corrosion by increasing conductivity.',
+        '<strong>Protection:</strong> barrier coating blocks reactants; sacrificial protection uses a more reactive metal; alloys alter layers and properties.'
+      ],formula:[
+        ['M(s) + 2H⁺(aq) → M²⁺(aq) + H₂(g)','Typical ionic equation for a divalent metal above hydrogen.'],
+        ['Fe₂O₃ + 3CO → 2Fe + 3CO₂','Reduction of iron(III) oxide in the blast furnace.'],
+        ['Zn + Cu²⁺ → Zn²⁺ + Cu','Zinc is the stronger reducing agent.'],
+        ['rusting requires O₂ + H₂O','An intact barrier works only while the iron is not exposed.']
+      ],do:'Use relative positions in the reactivity series to justify displacement, extraction and sacrificial protection.',trap:'Do not say a sacrificial metal merely “blocks oxygen”. It is oxidised preferentially because it is more reactive.',recall:[['Why is aluminium extracted by electrolysis?','It is more reactive than carbon, so its oxide cannot be reduced by carbon economically.'],['Why does galvanising still protect a scratch?','Zinc is more reactive than iron and is oxidised preferentially.'],['What two substances are essential for rusting?','Oxygen and water.']]},
+      {n:4,roman:'IV',title:'Acids and Bases',short:'pH · salts · titration',href:'acids-and-bases.html',summary:'Distinguish strength from concentration, write ionic equations, prepare salts and control volumetric calculations.',route:['Acids and alkalis','Strength and pH','Salts','Volumetric analysis'],core:[
+        '<strong>Acid:</strong> produces H⁺(aq) in water. <strong>Alkali:</strong> a soluble base producing OH⁻(aq). Neutralisation forms water.',
+        '<strong>Strong vs weak</strong> describes extent of ionisation; concentrated vs dilute describes amount per volume.',
+        '<strong>pH:</strong> lower pH means larger [H⁺]. A one-unit pH difference corresponds to a tenfold [H⁺] difference.',
+        '<strong>Salt preparation:</strong> choose excess insoluble solid + acid, titration, or precipitation according to solubility/reactants.',
+        '<strong>Titration:</strong> pipette fixed aliquot, add indicator, titrate to end-point, obtain concordant titres and use mole ratios.'
+      ],formula:[
+        ['pH = −log₁₀[H⁺]    [H⁺] = 10⁻ᵖᴴ','[H⁺] in mol dm⁻³.'],
+        ['H⁺(aq) + OH⁻(aq) → H₂O(l)','Net ionic equation for strong acid–strong alkali neutralisation.'],
+        ['n = cV','Use V in dm³; 1 dm³ = 1000 cm³.'],
+        ['acid + carbonate → salt + CO₂ + H₂O','Effervescence occurs; carbon dioxide can be tested with limewater.']
+      ],do:'In calculations, write moles first, apply the balanced-equation ratio, then find the requested concentration or mass with units.',trap:'Do not infer acid strength from pH unless concentrations are comparable. Do not rinse a pipette with distilled water immediately before use.',recall:[['Strong acid vs concentrated acid?','Strong means nearly complete ionisation; concentrated means many moles per unit volume.'],['Why rinse a burette with titrant?','To avoid dilution of the titrant by residual water.'],['What does pH 2 vs pH 4 mean?','The pH 2 solution has 100 times the hydrogen-ion concentration.']]},
+      {n:5,roman:'V',title:'Fossil Fuels and Carbon Compounds',short:'Petroleum · hydrocarbons · polymers',href:'fossil-fuels-carbon.html',summary:'Link petroleum fractions to molecular size, recognise hydrocarbon reactions and evaluate fuels and addition polymers.',route:['Fossil fuels','Fractional distillation','Alkanes and alkenes','Addition polymers'],core:[
+        '<strong>Petroleum</strong> is a mixture of hydrocarbons separated into fractions by different boiling ranges.',
+        '<strong>Longer chains:</strong> stronger dispersion forces, higher boiling point, greater viscosity, lower volatility and smokier flame.',
+        '<strong>Alkanes</strong> are saturated (CₙH₂ₙ₊₂); <strong>alkenes</strong> are unsaturated (CₙH₂ₙ) and contain C=C.',
+        '<strong>Cracking</strong> converts less useful long-chain hydrocarbons into shorter alkanes and alkenes.',
+        '<strong>Addition polymerisation:</strong> many alkene molecules join; C=C becomes C–C with no small molecule eliminated.'
+      ],formula:[
+        ['hydrocarbon + excess O₂ → CO₂ + H₂O','Complete combustion. Limited oxygen can form CO and/or carbon.'],
+        ['alkene + Br₂ → dibromoalkane','Bromine solution changes from orange/brown to colourless.'],
+        ['C₁₀H₂₂ → C₈H₁₈ + C₂H₄','One valid balanced cracking example.'],
+        ['n CH₂=CH₂ → [–CH₂–CH₂–]ₙ','Poly(ethene); show continuation bonds through brackets.']
+      ],do:'Explain fraction trends through chain length → electron cloud/dispersion forces → energy needed to separate molecules.',trap:'Fractional distillation does not break covalent bonds. Cracking does. A polymer repeat unit must show correct continuation bonds.',recall:[['Why do heavier fractions boil higher?','Larger molecules have stronger dispersion forces, so more energy is needed to separate them.'],['Test for C=C?','Shake with bromine solution; orange/brown becomes colourless.'],['Why crack hydrocarbons?','To match demand by producing shorter fuels and alkenes for polymers.']]},
+      {n:6,roman:'VI',title:'Microscopic World II',short:'Shape · polarity · forces',href:'microscopic-world-ii.html',summary:'Predict three-dimensional molecular shape and use polarity and intermolecular forces to explain physical properties.',route:['Electron-pair repulsion','Molecular shapes','Polarity','Intermolecular forces'],core:[
+        '<strong>Shape:</strong> electron pairs around a central atom repel and arrange as far apart as possible; lone pairs repel more strongly than bond pairs.',
+        '<strong>Common shapes:</strong> linear 180°, trigonal planar 120°, tetrahedral 109.5°, trigonal pyramidal ~107°, bent ~104.5°.',
+        '<strong>Bond polarity</strong> comes from electronegativity difference; <strong>molecular polarity</strong> also depends on shape and dipole cancellation.',
+        '<strong>Intermolecular forces:</strong> dispersion forces act between all particles; permanent dipole–dipole attractions act between polar molecules.',
+        '<strong>Hydrogen bonding</strong> requires H directly bonded to N, O or F and a lone pair on N/O/F of another molecule.'
+      ],formula:[
+        ['2 electron regions → linear → 180°','Count multiple bonds as one electron region.'],
+        ['3 regions → trigonal planar → 120°','With one lone pair, the molecular shape becomes bent.'],
+        ['4 regions → tetrahedral → 109.5°','One lone pair: trigonal pyramidal; two: bent.'],
+        ['stronger intermolecular forces → higher boiling point','Boiling separates molecules; it does not break intramolecular covalent bonds.']
+      ],do:'Draw the shape, mark bond dipoles, decide whether vectors cancel, then compare the strongest relevant intermolecular force.',trap:'A molecule containing polar bonds can be non-polar if its bond dipoles cancel. Never say boiling “breaks covalent bonds” for a simple molecular substance.',recall:[['Why is CO₂ non-polar?','It is linear and the two equal C=O bond dipoles cancel.'],['Why is NH₃ pyramidal?','Four electron regions surround N; one is a lone pair, leaving three bonds in a trigonal-pyramidal shape.'],['Why does ethanol boil above ethane?','Ethanol molecules form hydrogen bonds; ethane has only dispersion forces.']]},
+      {n:7,roman:'VII',title:'Redox, Cells and Electrolysis',short:'Electrons · cells · discharge',href:'redox-reactions-cells-electrolysis.html',summary:'Track electron transfer and oxidation numbers, build chemical cells and predict electrode products in electrolysis.',route:['Redox and oxidation numbers','Electrochemical series','Chemical cells','Electrolysis'],core:[
+        '<strong>Oxidation</strong> = electron loss / oxidation number increases. <strong>Reduction</strong> = electron gain / oxidation number decreases.',
+        '<strong>Oxidising agent</strong> accepts electrons and is reduced; <strong>reducing agent</strong> donates electrons and is oxidised.',
+        '<strong>Chemical cell:</strong> oxidation at negative electrode, reduction at positive electrode; electrons flow externally from oxidised species to reduced species.',
+        '<strong>Electrolysis:</strong> anode is positive and oxidation occurs; cathode is negative and reduction occurs.',
+        '<strong>Preferential discharge</strong> depends on species present, relative ease of discharge, concentration and electrode material.'
+      ],formula:[
+        ['Zn → Zn²⁺ + 2e⁻','Oxidation half-equation; electrons on product side.'],
+        ['Cu²⁺ + 2e⁻ → Cu','Reduction half-equation; atoms and charge balanced.'],
+        ['2Cl⁻ → Cl₂ + 2e⁻','Possible anode reaction in concentrated chloride solution.'],
+        ['2H⁺ + 2e⁻ → H₂','Possible cathode reaction in acidic aqueous solution.']
+      ],do:'Label anode/cathode and oxidation/reduction before writing half-equations. Balance atoms, then charge with electrons.',trap:'Electrode signs change between a chemical cell and an electrolytic cell; oxidation and reduction locations do not.',recall:[['Where does oxidation always occur?','At the anode.'],['Direction of electrons in a chemical cell?','From the electrode where oxidation occurs to the electrode where reduction occurs.'],['What happens to an oxidising agent?','It gains electrons and is reduced.']]},
+      {n:8,roman:'VIII',title:'Chemical Reactions and Energy',short:'ΔH · calorimetry · Hess',href:'chemical-reactions-energy.html',summary:'Read energy profiles and calculate enthalpy changes from experiments, bond enthalpies and Hess cycles.',route:['Enthalpy change','Energy profiles','Calorimetry','Hess and bond enthalpy'],core:[
+        '<strong>Exothermic:</strong> heat released, ΔH < 0, products lower in enthalpy. <strong>Endothermic:</strong> heat absorbed, ΔH > 0.',
+        '<strong>Activation energy</strong> is the minimum energy barrier. A catalyst gives an alternative route with lower Eₐ but does not change ΔH.',
+        '<strong>Calorimetry:</strong> heat gained by solution is estimated by mcΔT; reaction heat has the opposite sign.',
+        '<strong>Hess’s law:</strong> total enthalpy change is independent of route; reverse an equation → reverse sign; multiply equation → multiply ΔH.',
+        '<strong>Bond enthalpy:</strong> energy is absorbed to break bonds and released when bonds form; mean values give estimates.'
+      ],formula:[
+        ['q = mcΔT','q in J; c often 4.18 J g⁻¹ K⁻¹ for dilute aqueous solution.'],
+        ['ΔH = −q / n','Convert J to kJ and use moles corresponding to the stated equation.'],
+        ['ΔH ≈ ΣE(bonds broken) − ΣE(bonds formed)','Broken minus formed.'],
+        ['ΔHroute 1 = ΔHroute 2','Construct a Hess cycle with consistent arrows and states.']
+      ],do:'Write the sign and unit. State heat-loss assumptions when evaluating calorimetry, and use the exact stoichiometric amount required by the equation.',trap:'A catalyst lowers activation energy for both directions and does not make ΔH less negative or more positive.',recall:[['Why is bond breaking endothermic?','Energy is required to overcome the attraction holding bonded atoms together.'],['What does a catalyst change on a profile?','It lowers activation energy via an alternative pathway; reactant/product energy and ΔH are unchanged.'],['Why is experimental combustion ΔH often less exothermic?','Heat loss and incomplete combustion reduce the measured temperature rise.']]},
+      {n:9,roman:'IX',title:'Rate of Reaction',short:'Graphs · collisions · catalysts',href:'rate-of-reaction.html',summary:'Extract rates from data and explain how experimental factors change the frequency of effective collisions.',route:['Measuring rate','Rate graphs','Collision theory','Factors and catalysts'],core:[
+        '<strong>Rate</strong> = change in amount/concentration of reactant or product per unit time.',
+        '<strong>Graph:</strong> average rate is a chord gradient; instantaneous rate is a tangent gradient. A plateau means the reaction has stopped.',
+        '<strong>Effective collision:</strong> particles collide with suitable orientation and energy at least equal to Eₐ.',
+        '<strong>Higher concentration/pressure</strong> increases collision frequency; <strong>higher temperature</strong> also increases the fraction above Eₐ.',
+        '<strong>Catalyst</strong> provides an alternative pathway with lower Eₐ, increasing the fraction of effective collisions.'
+      ],formula:[
+        ['rate = Δquantity / Δt','Include the measured quantity and correct units.'],
+        ['instantaneous rate = gradient of tangent','Use a large triangle drawn on the tangent.'],
+        ['higher T → faster particles + larger fraction with E ≥ Eₐ','The second effect is usually more important.'],
+        ['same limiting reagent → same final amount','A rate factor may change steepness/time but not final yield.']
+      ],do:'For every rate explanation, name the particle change and conclude with “more effective collisions per unit time”.',trap:'More collisions is insufficient: the mark usually requires effective collisions. A steeper curve need not give more final product.',recall:[['Why does powder react faster than lumps?','It has a larger exposed surface area, giving more effective collisions per unit time.'],['How find initial rate from a graph?','Draw a tangent at t = 0 and calculate its gradient.'],['Does a catalyst change final yield?','No for a completed irreversible reaction; it changes how fast equilibrium/completion is reached.']]},
+      {n:10,roman:'X',title:'Chemical Equilibrium',short:'Dynamic systems · Kc · shifts',href:'chemical-equilibrium.html',summary:'Describe dynamic equilibrium, calculate Kc and separate equilibrium shifts from changes in reaction rates.',route:['Reversible reactions','Dynamic equilibrium','Kc','Concentration and temperature'],core:[
+        '<strong>Dynamic equilibrium</strong> occurs in a closed system when forward and reverse reaction rates are equal; concentrations remain constant, not necessarily equal.',
+        '<strong>Kc</strong> uses equilibrium concentrations, each raised to its stoichiometric coefficient. Omit pure solids and liquids.',
+        '<strong>Concentration change:</strong> the system shifts in the direction that consumes part of the added species or replaces part of a removed species.',
+        '<strong>Temperature change:</strong> treat heat as a reactant for endothermic direction and a product for exothermic direction.',
+        '<strong>Catalyst:</strong> speeds forward and reverse reactions, so equilibrium is reached sooner; it does not change Kc or position.'
+      ],formula:[
+        ['aA + bB ⇌ cC + dD','Kc = [C]ᶜ[D]ᵈ / ([A]ᵃ[B]ᵇ).'],
+        ['Kc changes only when temperature changes','At fixed temperature, concentration changes do not change Kc.'],
+        ['increase reactant concentration → forward rate rises immediately','The system then shifts forward until rates become equal again.'],
+        ['raise T → favour endothermic direction','Use the sign of ΔH for the forward reaction.']
+      ],do:'Separate the immediate rate change, the direction of shift and the new equilibrium. Use equilibrium—not initial—concentrations in Kc.',trap:'Equilibrium does not mean equal concentrations or stopped reactions. Avoid claiming a catalyst increases equilibrium yield.',recall:[['What is equal at equilibrium?','Forward and reverse reaction rates.'],['What changes Kc?','Temperature only.'],['Why does a catalyst not shift equilibrium?','It lowers activation energies and speeds both directions, so the equilibrium ratio is unchanged.']]},
+      {n:11,roman:'XI',title:'Chemistry of Carbon Compounds',short:'Functional groups · synthesis · polymers',href:'chemistry-of-carbon-compounds.html',summary:'Name and distinguish functional groups, predict organic reactions and design multi-step synthesis routes within HKDSE scope.',route:['Names and isomers','Functional-group reactions','Tests and evidence','Synthesis and polymers'],core:[
+        '<strong>Name systematically:</strong> choose the longest chain containing the principal functional group, number for the lowest locant, then add substituents.',
+        '<strong>Isomerism:</strong> structural isomers differ in connectivity; cis–trans isomers need restricted C=C rotation and two different groups on each alkene carbon; enantiomers are non-superimposable mirror images.',
+        '<strong>Reaction map:</strong> connect alkenes, haloalkanes, alcohols, aldehydes/ketones, carboxylic acids, esters, amides and primary amines through reagents and conditions.',
+        '<strong>Evidence:</strong> state reagent, conditions and observation. Use bromine solution, acidified dichromate, Tollens’/Fehling’s where appropriate.',
+        '<strong>Synthesis:</strong> identify the functional-group change at each arrow; show reagent, condition, product and any necessary purification.'
+      ],formula:[
+        ['RCH₂OH + 2[O] → RCOOH + H₂O','Primary alcohol oxidation under reflux; distil to isolate aldehyde.'],
+        ['R₂CHOH + [O] → R₂C=O + H₂O','Secondary alcohol → ketone; tertiary alcohol resists ordinary oxidation.'],
+        ['RCOOH + R′OH ⇌ RCOOR′ + H₂O','Esterification: concentrated H₂SO₄ catalyst, heat.'],
+        ['alkene + HX → major haloalkane','Apply Markovnikov’s rule for an unsymmetrical alkene; mechanisms are enrichment, not required.']
+      ],do:'Build a synthesis backward from the target functional group. For each step, specify reagent, condition and structural product.',trap:'Do not number from the nearest branch if the principal functional group is farther away. Keep reaction mechanism and carbocation detail clearly labelled as enrichment.',recall:[['How distinguish aldehyde from ketone?','Warm with Tollens’ reagent: aldehyde gives a silver mirror; ketone shows no reaction.'],['What makes a carbon chiral?','It is bonded to four different groups.'],['How plan a multi-step route?','Compare start and target functional groups, work backward, then fill each conversion with reagent and condition.']]},
+      {n:12,roman:'XII',title:'Patterns in the Chemical World',short:'Periodicity · oxides · transition metals',href:'patterns-in-the-chemical-world.html',summary:'Explain trends from Li to Ar, classify period oxides and recognise characteristic transition-metal chemistry.',route:['Period 2 and 3 structures','Physical trends','Acid–base nature of oxides','Transition metals'],core:[
+        '<strong>Across a period:</strong> nuclear charge increases while electrons enter the same main shell; atomic radius generally decreases.',
+        '<strong>Structure changes</strong> explain melting point and conductivity: metallic lattices → giant covalent structures → simple molecular/monatomic substances.',
+        '<strong>Period 3 oxides:</strong> generally change from basic through amphoteric to acidic across the period.',
+        '<strong>Transition metals</strong> show variable oxidation states, coloured ions/compounds and catalytic behaviour.',
+        '<strong>Explanations must be structural:</strong> identify particles, bonding/forces and mobile charge carriers—not trend memorisation alone.'
+      ],formula:[
+        ['MgO + 2H⁺ → Mg²⁺ + H₂O','A basic oxide reacts with acid.'],
+        ['Al₂O₃ + 6H⁺ → 2Al³⁺ + 3H₂O','Al₂O₃ is amphoteric and also reacts with alkali.'],
+        ['SO₃ + 2OH⁻ → SO₄²⁻ + H₂O','An acidic oxide reacts with alkali.'],
+        ['Fe²⁺ ⇌ Fe³⁺','Different oxidation states often have different colours and redox behaviour.']
+      ],do:'When comparing melting point or conductivity, first state the structure and bonding, then explain the energy or charge movement.',trap:'Do not apply one smooth melting-point trend across the whole period—the type of structure changes. “More shells” cannot explain a trend across the same period.',recall:[['Why does atomic radius decrease across a period?','Nuclear charge rises while shielding changes little, so attraction for outer electrons increases.'],['What does amphoteric mean?','Able to react with both acids and alkalis.'],['Three typical transition-metal features?','Variable oxidation states, coloured ions/compounds and catalytic activity.']]}
+    ];
+    const list=document.getElementById('chapterList'),note=document.getElementById('note'),search=document.getElementById('noteSearch');
+    let state;try{state=JSON.parse(localStorage.getItem(NOTES_KEY)||'{"reviewed":[]}')}catch(_){state={reviewed:[]}}if(!Array.isArray(state.reviewed))state.reviewed=[];
+    let current=Math.max(1,Math.min(12,+(new URLSearchParams(location.search).get('topic')||location.hash.replace(/\D/g,'')||1)));
+    const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    function save(){localStorage.setItem(NOTES_KEY,JSON.stringify(state))}
+    function updateProgress(){const n=state.reviewed.length;document.getElementById('progressText').textContent=n+' / 12';document.getElementById('progressBar').style.width=(n/12*100)+'%'}
+    function renderList(items){list.innerHTML=items.map(c=>'<button class="chapter-button '+(c.n===current?'active ':'')+(state.reviewed.includes(c.n)?'reviewed':'')+'" type="button" data-topic="'+c.n+'"><span class="chapter-number">'+c.roman+'</span><b>'+esc(c.title)+'</b><i class="reviewed-dot" aria-hidden="true"></i></button>').join('')||'<div class="empty">No matching chapter.</div>';list.querySelectorAll('[data-topic]').forEach(b=>b.onclick=()=>select(+b.dataset.topic))}
+    function select(n){current=n;history.replaceState(null,'','?topic='+n+'#topic-'+n);renderList(filterChapters());renderNote();window.scrollTo({top:document.querySelector('.layout').offsetTop-75,behavior:'smooth'})}
+    function filterChapters(){const q=(search.value||'').trim().toLowerCase();return q?chapters.filter(c=>[c.title,c.short,c.summary,c.route.join(' '),c.core.join(' '),c.formula.flat().join(' ')].join(' ').toLowerCase().includes(q)):chapters}
+    function renderNote(){const c=chapters[current-1],done=state.reviewed.includes(c.n);note.innerHTML='<div class="note-head"><div><p class="topic-id">TOPIC '+c.roman+' · QUICK REVISION</p><h2>'+esc(c.title)+'</h2><p class="note-summary">'+c.summary+'</p></div><div class="note-actions"><button type="button" id="printNote">Print note</button><button class="primary '+(done?'done':'')+'" type="button" id="markReviewed">'+(done?'✓ Reviewed':'Mark reviewed')+'</button></div></div><div class="route">'+c.route.map(x=>'<span>'+esc(x)+'</span>').join('')+'</div><div class="note-grid"><section class="panel"><div class="panel-label"><i>01</i> CORE IDEAS</div><h3>What you must understand</h3><ul class="clean-list">'+c.core.map(x=>'<li>'+x+'</li>').join('')+'</ul></section><section class="panel"><div class="panel-label"><i>02</i> EQUATIONS &amp; EVIDENCE</div><h3>What you must recall</h3><div class="formula-list">'+c.formula.map(x=>'<div class="formula-row"><code>'+x[0]+'</code><span>'+x[1]+'</span></div>').join('')+'</div></section><section class="panel wide"><div class="panel-label"><i>03</i> EXAM LENS</div><h3>Write for the mark scheme</h3><div class="exam-grid"><div class="exam-box"><b>DO THIS</b><p>'+c.do+'</p></div><div class="exam-box trap"><b>COMMON TRAP</b><p>'+c.trap+'</p></div></div></section><section class="panel wide"><div class="panel-label"><i>04</i> 60-SECOND RETRIEVAL</div><h3>Answer before you reveal</h3><div class="recall-grid">'+c.recall.map((x,i)=>'<button class="recall" type="button"><span>CHECK '+(i+1)+'</span><b>'+x[0]+'</b><p>'+x[1]+'</p></button>').join('')+'</div></section></div><div class="bottom-actions"><p><b>Ready to apply it?</b>Move straight from recall into the chapter question bank.</p><a href="'+c.href+'">Practise Topic '+c.roman+' →</a></div><p class="source-note">Scope follows the HKDSE Chemistry compulsory curriculum, Topics I–XII. These are compact revision prompts, not a replacement for full teaching notes. Curriculum reference: <a href="https://www.edb.gov.hk/attachment/en/curriculum-development/kla/science-edu/Chem_C_and_A_Guide_updated_Eng_22082018.pdf" target="_blank" rel="noopener">EDB Chemistry Curriculum and Assessment Guide</a>.</p>';
+      document.getElementById('printNote').onclick=()=>window.print();document.getElementById('markReviewed').onclick=()=>{if(done)state.reviewed=state.reviewed.filter(n=>n!==c.n);else{state.reviewed.push(c.n);if(window.ChemistryTools&&ChemistryTools.logSession)ChemistryTools.logSession({type:'self-study',topic:'Topic '+c.roman+' · '+c.title,label:'Quick revision note reviewed',minutes:10,confidence:'Reviewed'})}save();updateProgress();renderList(filterChapters());renderNote()};note.querySelectorAll('.recall').forEach(b=>b.onclick=()=>b.classList.toggle('revealed'))
+    }
+    search.addEventListener('input',()=>renderList(filterChapters()));renderList(chapters);renderNote();updateProgress();
+  })();
+  </script>
+  <script src="student-tools.js?v=20260907b"></script>
+</body>
+</html>
