@@ -102,7 +102,7 @@
 
   function addTopLinks(){
     const top=document.querySelector('.topbar');if(!top||top.querySelector('.student-tool-links'))return;
-    const wrap=document.createElement('div');wrap.className='student-tool-links';wrap.innerHTML='<a href="mistakes.html">Progress Monitor '+badge()+'</a><a href="games.html">Chemistry Games <span aria-hidden="true">⚡</span></a>';
+    const wrap=document.createElement('div');wrap.className='student-tool-links';wrap.innerHTML='<a href="revision-notes.html">Quick Notes <span aria-hidden="true">✦</span></a><a href="mistakes.html">Progress Monitor '+badge()+'</a><a href="games.html">Chemistry Games <span aria-hidden="true">⚡</span></a>';
     const home=top.querySelector('.home-link');if(home)top.insertBefore(wrap,home);else top.appendChild(wrap);
   }
   function addQuestionTools(){
@@ -113,9 +113,9 @@
   }
   function addHomeTools(){
     const topic=document.querySelector('.topic-section');if(!topic||document.querySelector('.student-home-tools'))return;
-    addTopLinks();const p=profile(),level=Math.floor((p.xp||0)/100)+1,assessment=assessMistakes(),priority=assessment.priority,section=document.createElement('section');section.className='student-home-tools';section.innerHTML='<div class="home-tool-card notebook"><span class="home-tool-icon">★</span><div><p>SELF-REVISION PROGRESS</p><h2><b data-mistake-count>'+countOpen()+'</b> questions to revisit</h2><span>'+(priority?'Priority: '+priority.coach.focus+'.':'Track study sessions, accuracy, topic recovery and spaced review in one dashboard.')+'</span></div><a href="mistakes.html">Open my progress dashboard →</a></div><div class="home-tool-card games"><span class="home-tool-icon">⚡</span><div><p>CHEMISTRY ARCADE</p><h2>Level '+level+' · <b>'+(p.xp||0)+'</b> XP</h2><span>Play curriculum challenges, movable games and the new 3D Chemistry Lab.</span></div><a href="games.html">Play Chemistry Games →</a></div>';
+    addTopLinks();const p=profile(),level=Math.floor((p.xp||0)/100)+1,assessment=assessMistakes(),priority=assessment.priority,section=document.createElement('section');section.className='student-home-tools';section.innerHTML='<div class="home-tool-card notebook"><span class="home-tool-icon">★</span><div><p>SELF-REVISION PROGRESS</p><h2><b data-mistake-count>'+countOpen()+'</b> questions to revisit</h2><span>'+(priority?'Priority: '+priority.coach.focus+'.':'Track study sessions, accuracy, topic recovery and spaced review in one dashboard.')+'</span></div><a href="mistakes.html">Open my progress dashboard →</a></div><div class="home-tool-card games"><span class="home-tool-icon">⚡</span><div><p>CHEMISTRY ARCADE</p><h2>Level '+level+' · <b>'+(p.xp||0)+'</b> XP</h2><span>Play curriculum challenges, movable games and the new 3D Chemistry Lab.</span></div><a href="games.html">Play Chemistry Games →</a></div><div class="home-tool-card notes"><span class="home-tool-icon">✦</span><div><p>QUICK REVISION NOTES</p><h2>12 concise chapter guides</h2><span>Core ideas, equations, practical evidence, exam traps and 60-second retrieval checks.</span></div><a href="revision-notes.html">Open Quick Notes →</a></div>';
     topic.parentNode.insertBefore(section,topic);
-    const nav=document.querySelector('header nav');if(nav&&!nav.querySelector('[href="games.html"]'))nav.insertAdjacentHTML('beforeend','<a href="games.html">Games</a>');
+    const nav=document.querySelector('header nav');if(nav&&!nav.querySelector('[href="revision-notes.html"]'))nav.insertAdjacentHTML('beforeend','<a href="revision-notes.html">Quick Notes</a>');if(nav&&!nav.querySelector('[href="games.html"]'))nav.insertAdjacentHTML('beforeend','<a href="games.html">Games</a>');
   }
   function boot(){addStyles();if(document.querySelector('.question-nav'))addQuestionTools();else if(document.querySelector('.topic-grid'))addHomeTools();updateButtons()}
   window.ChemistryTools={mistakes,writeMistakes:list=>write(MISTAKE_KEY,list),profile,writeProfile:p=>write(GAME_KEY,p),progress,writeProgress:data=>write(PROGRESS_KEY,data),logSession,setWeeklyGoal,progressReport,countOpen,assessMistakes,itemSkill};
