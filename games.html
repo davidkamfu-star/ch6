@@ -6,7 +6,7 @@
   <title>Chemistry Games | Chemistry Hub</title>
   <meta name="description" content="Interactive HKDSE Chemistry curriculum games covering all 12 topics, animated experiments and a 210-question bank.">
   <link rel="stylesheet" href="student-fun.css?v=20260822a">
-  <link rel="stylesheet" href="student-tools.css?v=20260826a">
+  <link rel="stylesheet" href="student-tools.css?v=20260907a">
   <style>.three-d-launch{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;margin:24px 0;padding:clamp(24px,4vw,38px);border-radius:24px;background:radial-gradient(circle at 88% 20%,rgba(86,225,196,.24),transparent 30%),linear-gradient(135deg,#0b2430,#174b58);color:#fff;box-shadow:0 15px 38px rgba(16,46,58,.15)}.three-d-launch .kicker{margin:0 0 8px;color:#69e5cc}.three-d-launch h2{margin:0;font:400 clamp(28px,5vw,44px)/1.05 Georgia,serif}.three-d-launch p{max-width:760px;margin:10px 0 0;color:#c8dfe0;font-size:12px;line-height:1.6}.three-d-launch a{padding:14px 18px;border-radius:13px;background:#62dfc6;color:#0b2b35;font-size:11px;font-weight:950;text-decoration:none;white-space:nowrap}.three-d-launch a:hover{background:#8aecd8}@media(max-width:720px){.three-d-launch{grid-template-columns:1fr}.three-d-launch a{justify-self:start}}</style>
 </head>
 <body class="student-page">
@@ -16,7 +16,7 @@
       <a href="index.html" data-short="Hub">Revision Hub</a>
       <a class="active" href="games.html" data-short="Games" aria-current="page">Chemistry Games</a>
       <a href="3d-games.html?lab=organic" data-short="Organic Lab">Organic Revision Lab</a>
-      <a href="mistakes.html" data-short="Notebook">Mistake Notebook</a>
+      <a href="mistakes.html" data-short="Notebook">Progress Monitor</a>
     </nav>
   </header>
 
@@ -98,7 +98,7 @@
     </section>
   </main>
 
-  <script src="student-tools.js?v=20260826a"></script>
+  <script src="student-tools.js?v=20260907a"></script>
   <script>
   (function(){
     'use strict';
@@ -353,7 +353,7 @@
     function updateStats(){const p=profile();document.getElementById('xpStat').textContent=p.xp||0;document.getElementById('levelStat').textContent=Math.floor((p.xp||0)/100)+1;document.getElementById('playedStat').textContent=p.played||0;document.getElementById('streakStat').textContent=p.bestStreak||0;document.querySelectorAll('[data-best]').forEach(function(el){el.textContent=(p.best&&p.best[el.dataset.best])||0});document.querySelectorAll('[data-mini-best]').forEach(function(el){el.textContent=(p.funBest&&p.funBest[el.dataset.miniBest])||0})}
     function stopMiniTimer(){if(miniInterval){clearInterval(miniInterval);miniInterval=null}}
     function prepareMini(key,title,kicker,status){stopMiniTimer();miniSession++;arena.classList.remove('open');document.getElementById('miniTitle').textContent=title;document.getElementById('miniKicker').textContent=kicker;miniStatus.textContent=status;miniFeedback.textContent='';miniArena.classList.add('open');miniArena.scrollIntoView({behavior:'smooth',block:'start'});return miniSession}
-    function finishMini(key,result,xp,headline,detail,replay){stopMiniTimer();const p=profile();p.xp=(p.xp||0)+xp;p.played=(p.played||0)+1;p.funBest=p.funBest||{};p.funBest[key]=Math.max(p.funBest[key]||0,result);ChemistryTools.writeProfile(p);miniStatus.textContent='ROUND COMPLETE · +'+xp+' XP';miniFeedback.innerHTML='<b>'+headline+'</b> '+detail;miniBody.innerHTML='<div class="mini-result"><strong>'+result+'</strong><span>BEST '+p.funBest[key]+'</span><button type="button">Play again ↻</button></div>';miniBody.querySelector('button').addEventListener('click',replay);updateStats()}
+    function finishMini(key,result,xp,headline,detail,replay){stopMiniTimer();const p=profile();p.xp=(p.xp||0)+xp;p.played=(p.played||0)+1;p.funBest=p.funBest||{};p.funBest[key]=Math.max(p.funBest[key]||0,result);ChemistryTools.writeProfile(p);if(ChemistryTools.logSession)ChemistryTools.logSession({type:'game',key:key,label:headline,xp:xp});miniStatus.textContent='ROUND COMPLETE · +'+xp+' XP';miniFeedback.innerHTML='<b>'+headline+'</b> '+detail;miniBody.innerHTML='<div class="mini-result"><strong>'+result+'</strong><span>BEST '+p.funBest[key]+'</span><button type="button">Play again ↻</button></div>';miniBody.querySelector('button').addEventListener('click',replay);updateStats()}
 
     const memoryPairs=[['Hydrogen','H₂'],['Oxygen','O₂'],['Water','H₂O'],['Carbon dioxide','CO₂'],['Methane','CH₄'],['Ammonia','NH₃']];
     function startMemory(){
@@ -657,7 +657,7 @@
     }
     function advance(){
       if(!answered)return;if(index<order.length-1){index++;show();return}
-      const p=profile();p.played=(p.played||0)+1;p.best=p.best||{};p.best[game]=Math.max(p.best[game]||0,score);ChemistryTools.writeProfile(p);updateStats();
+      const p=profile();p.played=(p.played||0)+1;p.best=p.best||{};p.best[game]=Math.max(p.best[game]||0,score);ChemistryTools.writeProfile(p);if(ChemistryTools.logSession)ChemistryTools.logSession({type:'game',key:game,label:games[game].title,score:score,total:10,xp:score*10});updateStats();
       document.getElementById('roundLabel').textContent='ROUND COMPLETE';document.getElementById('gamePrompt').textContent=score+'/10 — '+(score===10?'Perfect chemistry!':score>=7?'Strong result!':score>=4?'Good start — replay to improve.':'Keep practising — every round builds recall.');optionsNode.innerHTML='';feedback.innerHTML='<b>You earned '+(score*10)+' XP.</b> Your best score for '+games[game].title+' is '+p.best[game]+'/10.';next.textContent='Play again ↻';next.classList.add('show');answered=true;index=order.length;
     }
     const miniStarters={memory:startMemory,ph:startPH,atoms:startAtoms,ions:startIons,labmove:startLabMove,organicname:startOrganicNames,electrolysis:startElectrolysis,metalrace:startMetalRace,escapelab:startEscapeLab,detective:startDetective};document.querySelectorAll('[data-mini]').forEach(function(button){button.addEventListener('click',function(){miniStarters[button.dataset.mini]()})});document.getElementById('closeMini').addEventListener('click',function(){hideMini();document.querySelector('.fun-zone').scrollIntoView({behavior:'smooth'})});document.querySelectorAll('[data-game]').forEach(function(button){button.addEventListener('click',function(){start(button.dataset.game)})});next.addEventListener('click',function(){if(index===order.length)start(game);else advance()});document.getElementById('closeGame').addEventListener('click',function(){arena.classList.remove('open');document.getElementById('gameGrid').scrollIntoView({behavior:'smooth'})});window.addEventListener('chemistry-tools-change',updateStats);updateStats();const requestedMini=new URLSearchParams(location.search).get('mini');if(miniStarters[requestedMini])setTimeout(miniStarters[requestedMini],80);
