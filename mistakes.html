@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mistake Notebook | Chemistry Hub</title>
-  <meta name="description" content="Automatically assess chemistry mistakes, identify weak HKDSE topics and build a personal revision plan.">
-  <link rel="stylesheet" href="student-fun.css?v=20260822a">
-  <link rel="stylesheet" href="student-tools.css?v=20260826a">
+  <title>Student Progress Monitor | Chemistry Hub</title>
+  <meta name="description" content="Monitor chemistry revision progress, study consistency, topic recovery and mistakes with a private student dashboard.">
+  <link rel="stylesheet" href="student-fun.css?v=20260907a">
+  <link rel="stylesheet" href="student-tools.css?v=20260907a">
 </head>
 <body class="student-page">
   <header class="topbar">
@@ -14,28 +14,31 @@
     <nav class="page-nav" aria-label="Student tools">
       <a href="index.html" data-short="Hub">Revision Hub</a>
       <a href="games.html" data-short="Games">Chemistry Games</a>
-      <a class="active" href="mistakes.html" data-short="Notebook" aria-current="page">Mistake Notebook</a>
+      <a class="active" href="mistakes.html" data-short="Notebook" aria-current="page">Progress Monitor</a>
     </nav>
   </header>
 
   <main class="student-shell">
     <section class="student-hero">
       <div>
-        <p class="kicker">YOUR PERSONAL REVISION COACH</p>
-        <h1>Learn from every mistake.</h1>
-        <p>Wrong answers are saved and assessed automatically. Your coach spots repeated errors, ranks weak topics and turns them into a focused revision plan.</p>
+        <p class="kicker">SELF-REVISION PROGRESS MONITOR</p>
+        <h1>Know your progress. Revise with purpose.</h1>
+        <p>Track study consistency, game accuracy, topic recovery and questions due for review. Your Mistake Coach then turns the evidence into the next best revision action.</p>
       </div>
-      <div class="stat-pills" aria-label="Notebook summary">
-        <div class="stat-pill"><b id="needsCount">0</b><span>NEEDS REVIEW</span></div>
-        <div class="stat-pill"><b id="masteredCount">0</b><span>MASTERED</span></div>
-        <div class="stat-pill"><b id="topicCount">0</b><span>TOPICS</span></div>
+      <div class="stat-pills" aria-label="Revision progress summary">
+        <div class="stat-pill"><b id="streakCount">0</b><span>DAY STREAK</span></div>
+        <div class="stat-pill"><b id="weekCount">0</b><span>SESSIONS THIS WEEK</span></div>
+        <div class="stat-pill"><b id="accuracyCount">—</b><span>30-DAY ACCURACY</span></div>
+        <div class="stat-pill"><b id="needsCount">0</b><span>REVIEWS DUE</span></div>
       </div>
     </section>
+
+    <section id="progressMonitor" aria-labelledby="progressHeading" aria-live="polite"></section>
 
     <section id="revisionCoach" class="revision-coach" aria-labelledby="coachHeading" aria-live="polite"></section>
 
     <section aria-labelledby="notebookListHeading">
-      <div class="notebook-heading"><div><p class="kicker">QUESTION-BY-QUESTION RECORD</p><h2 id="notebookListHeading">Your Mistake Notebook</h2></div><span>Use the coach above, then retry and mark each question mastered.</span></div>
+      <div class="notebook-heading"><div><p class="kicker">QUESTION-BY-QUESTION RECORD</p><h2 id="notebookListHeading">Your Mistake Notebook</h2><div class="notebook-summary-line"><span id="openSummary">0 open</span><span id="masteredSummary">0 mastered</span><span id="topicSummary">0 topics</span></div></div><span>Use the coach above, then retry and mark each question mastered.</span></div>
       <div class="student-controls">
         <button class="active" type="button" data-filter="all">All questions</button>
         <button type="button" data-filter="open">Needs review</button>
@@ -46,18 +49,20 @@
       <div id="mistakeList" class="mistake-list" aria-live="polite"></div>
     </section>
 
-    <p style="margin-top:24px;color:#71858a;font-size:11px">Your notebook is saved privately in this browser. It is not uploaded or shared.</p>
+    <p style="margin-top:24px;color:#71858a;font-size:11px">Your progress history and mistake notebook are saved privately in this browser. They are not uploaded or shared.</p>
   </main>
 
-  <script src="student-tools.js?v=20260826a"></script>
+  <script src="student-tools.js?v=20260907a"></script>
   <script>
   (function(){
     'use strict';
     const listNode=document.getElementById('mistakeList');
     const coachNode=document.getElementById('revisionCoach');
+    const progressNode=document.getElementById('progressMonitor');
     const topicFilter=document.getElementById('topicFilter');
     const search=document.getElementById('searchQuestions');
     let filter='all';
+    const STANDARD_TOPICS=['Topic I · Planet Earth','Topic II · Microscopic World I','Topic III · Metals','Topic IV · Acids and Bases','Topic V · Fossil Fuels','Topic VI · Microscopic World II','Topic VII · Redox, Cells and Electrolysis','Topic VIII · Chemical Energetics','Topic IX · Rate of Reaction','Topic X · Chemical Equilibrium','Topic XI · Chemistry of Carbon Compounds','Topic XII · Patterns in the Chemical World','Topic XIII · Industrial Chemistry'];
 
     function escapeHTML(value){return String(value||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
     function safeHref(value){const href=String(value||'');return /^\/?(?:[a-z0-9-]+\/)*[a-z0-9-]+\.html(?:[?#][^\s]*)?$/i.test(href)?href:'mistakes.html'}
@@ -65,9 +70,10 @@
     function save(list){ChemistryTools.writeMistakes(list);render()}
     function action(id,type){
       const list=records(),i=list.findIndex(function(item){return item.id===id});if(i<0)return;
+      let activity=null;
       if(type==='remove'){if(!window.confirm('Remove this question from your Mistake Notebook?'))return;list.splice(i,1)}
-      else list[i].mastered=type==='mastered';
-      save(list);
+      else{const mastered=type==='mastered',now=new Date();list[i].mastered=mastered;list[i].lastTried=now.toISOString();if(mastered){list[i].masteredAt=now.toISOString();const due=new Date(now);due.setDate(due.getDate()+7);list[i].reviewDueAt=due.toISOString();activity={type:'mastery',topic:list[i].topic,label:'Q'+list[i].number+' marked mastered',score:1,total:1,relatedId:list[i].id}}else{list[i].reviewDueAt='';list[i].masteredAt=''}}
+      save(list);if(activity&&ChemistryTools.logSession)ChemistryTools.logSession(activity);
     }
     window.notebookAction=action;
     window.coachTopic=function(topic){filter='open';topicFilter.value=topic;document.querySelectorAll('[data-filter]').forEach(function(b){b.classList.toggle('active',b.dataset.filter==='open')});render();document.getElementById('notebookListHeading').scrollIntoView({behavior:'smooth',block:'start'})};
@@ -78,6 +84,22 @@
       topicFilter.innerHTML='<option value="">Every topic</option>'+topics.map(function(topic){return '<option value="'+escapeHTML(topic)+'">'+escapeHTML(topic)+'</option>'}).join('');
       if(topics.indexOf(current)>=0)topicFilter.value=current;
     }
+    function renderProgress(all){
+      const report=ChemistryTools.progressReport(),goal=Math.max(1,report.weeklyGoal||3),goalPct=Math.min(100,Math.round(report.weekSessions/goal*100)),remaining=Math.max(0,goal-report.weekSessions),maxDay=Math.max(1,...report.days.map(function(x){return x.count}));
+      const bars=report.days.map(function(day){const height=Math.max(6,Math.round(day.count/maxDay*100));return '<div class="week-day" aria-label="'+escapeHTML(day.date)+': '+day.count+' activities"><i style="height:'+height+'%"></i><b>'+escapeHTML(day.label)+'</b><small>'+day.count+'</small></div>'}).join('');
+      const knownTopics=Array.from(new Set(STANDARD_TOPICS.concat(report.topics.map(function(x){return x.topic}))));
+      const topicOptions=knownTopics.map(function(topic){return '<option value="'+escapeHTML(topic)+'">'+escapeHTML(topic)+'</option>'}).join('');
+      const topicRows=report.topics.length?report.topics.slice(0,8).map(function(topic){const value=topic.recovery!==null?topic.recovery:(topic.accuracy!==null?topic.accuracy:0),detail=topic.recovery!==null?topic.open+' open · '+topic.recovery+'% recovered':topic.accuracy!==null?topic.accuracy+'% accuracy':topic.sessions+' session'+(topic.sessions===1?'':'s');return '<div class="topic-progress-row"><h4>'+escapeHTML(topic.topic)+'<span>'+escapeHTML(topic.status)+' · '+escapeHTML(detail)+'</span></h4><div class="topic-progress-bar" role="progressbar" aria-label="'+escapeHTML(topic.topic)+' progress" aria-valuenow="'+value+'" aria-valuemin="0" aria-valuemax="100"><i style="width:'+value+'%"></i></div><div class="topic-progress-value"><b>'+value+'%</b><small>'+topic.sessions+' tracked session'+(topic.sessions===1?'':'s')+'</small></div></div>'}).join(''):'<div class="progress-empty">No topic history yet. Complete a game, check a question or log a self-revision session to begin monitoring progress.</div>';
+      const recent=report.activities.length?report.activities.slice(0,6).map(function(item){const detail=item.total?Math.round(item.score/item.total*100)+'%':item.minutes?item.minutes+' min'+(item.confidence?' · '+item.confidence:''):item.xp?'+'+item.xp+' XP':'revision activity',date=new Date(item.at).toLocaleDateString(undefined,{month:'short',day:'numeric'});return '<li><i></i><div><b>'+escapeHTML(item.label||'Chemistry revision')+'</b><span>'+escapeHTML(item.topic)+' · '+escapeHTML(detail)+' · '+escapeHTML(date)+'</span></div></li>'}).join(''):'<li><i></i><div><b>Your activity timeline is ready</b><span>New study sessions and completed games will appear here.</span></div></li>';
+      progressNode.innerHTML='<section class="progress-monitor"><div class="progress-monitor-head"><div><p class="coach-label">MY LEARNING DASHBOARD</p><h2 id="progressHeading">Self-revision progress</h2></div><span class="progress-private">🔒 Private on this device</span></div><div class="progress-metrics"><article class="progress-metric"><span>STUDY CONSISTENCY</span><b>'+report.streak+' day'+(report.streak===1?'':'s')+'</b><small>Current active-day streak</small></article><article class="progress-metric"><span>WEEKLY TARGET</span><b>'+report.weekSessions+' / '+goal+'</b><small>'+(remaining?remaining+' session'+(remaining===1?'':'s')+' remaining':'Goal completed — keep going!')+'</small></article><article class="progress-metric"><span>ANSWER ACCURACY</span><b>'+(report.accuracy===null?'—':report.accuracy+'%')+'</b><small>Tracked answers from the last 30 days</small></article><article class="progress-metric"><span>MISTAKE RECOVERY</span><b>'+(report.recovery===null?'—':report.recovery+'%')+'</b><small>'+all.filter(function(x){return x.mastered}).length+' of '+all.length+' saved questions mastered</small></article></div><div class="progress-dashboard"><article class="progress-panel"><span class="progress-panel-label">WEEKLY REVISION GOAL</span><h3>Build a steady study habit</h3><p>Count completed games and logged self-revision sessions.</p><div class="goal-line"><b>'+report.weekSessions+' sessions</b><span>'+goalPct+'% complete</span></div><div class="goal-track" role="progressbar" aria-label="Weekly study goal" aria-valuenow="'+report.weekSessions+'" aria-valuemin="0" aria-valuemax="'+goal+'"><i style="width:'+goalPct+'%"></i></div><div class="goal-buttons" aria-label="Choose weekly session goal">'+[3,5,7].map(function(n){return '<button class="'+(goal===n?'active':'')+'" type="button" data-week-goal="'+n+'">'+n+' sessions</button>'}).join('')+'</div></article><article class="progress-panel"><span class="progress-panel-label">LAST 7 DAYS</span><h3>Revision activity</h3><p>Every check, game and study log builds the timeline.</p><div class="week-chart">'+bars+'</div></article><article class="progress-panel checkin-panel"><span class="progress-panel-label">QUICK SELF-CHECK-IN</span><h3>Log independent revision</h3><p>Record study completed away from the Hub.</p><div class="checkin-grid"><label>Topic<select id="studyTopic">'+topicOptions+'</select></label><div class="checkin-row"><label>Time<select id="studyMinutes"><option value="10">10 minutes</option><option value="20" selected>20 minutes</option><option value="30">30 minutes</option><option value="45">45 minutes</option></select></label><label>Confidence<select id="studyConfidence"><option>Need support</option><option selected>Building</option><option>Confident</option></select></label></div><button class="checkin-submit" id="logStudySession" type="button">Log self-revision session</button><div class="checkin-status" id="checkinStatus" aria-live="polite"></div></div></article></div><div class="progress-insights"><article class="progress-panel"><span class="progress-panel-label">TOPIC MONITOR</span><h3>Recovery and performance by topic</h3><p>Recovery measures mastered saved mistakes; accuracy uses tracked answers.</p><div class="topic-progress-list">'+topicRows+'</div></article><article class="progress-panel"><span class="progress-panel-label">RECENT ACTIVITY</span><h3>Your revision timeline</h3><ul class="activity-list">'+recent+'</ul></article></div></section>';
+      progressNode.querySelectorAll('[data-week-goal]').forEach(function(button){button.onclick=function(){ChemistryTools.setWeeklyGoal(+button.dataset.weekGoal)}});
+      document.getElementById('logStudySession').onclick=function(){const topic=document.getElementById('studyTopic').value,minutes=+document.getElementById('studyMinutes').value,confidence=document.getElementById('studyConfidence').value;ChemistryTools.logSession({type:'self-study',topic:topic,label:minutes+'-minute self-revision',minutes:minutes,confidence:confidence});const status=document.getElementById('checkinStatus');if(status)status.textContent='Session logged — your weekly progress has been updated.'};
+      document.getElementById('streakCount').textContent=report.streak;
+      document.getElementById('weekCount').textContent=report.weekSessions;
+      document.getElementById('accuracyCount').textContent=report.accuracy===null?'—':report.accuracy+'%';
+      document.getElementById('needsCount').textContent=report.due;
+    }
+
     function renderCoach(all){
       const report=ChemistryTools.assessMistakes(all);
       if(!report.total){
@@ -94,10 +116,11 @@
       coachNode.innerHTML='<div class="coach-header"><div><p class="coach-label">SMART REVISION COACH · '+escapeHTML(evidence)+'</p><h2 id="coachHeading">Your next best revision move</h2></div><span class="private-chip">🔒 Saved only in this browser</span></div><div class="coach-overview"><article class="coach-priority"><span class="coach-rank">#1 PRIORITY</span><h3>'+escapeHTML(priorityTitle)+'</h3><p>'+escapeHTML(lead)+'</p><div class="coach-score-row"><span><b>'+report.open+'</b> active</span><span><b>'+report.repeating+'</b> recurring</span><span><b>'+report.due+'</b> due</span></div></article><article class="recovery-card"><div class="recovery-ring" style="--recovery:'+recovery+'"><span><b>'+recovery+'%</b><small>recovered</small></span></div><div><h3>Notebook recovery</h3><p>'+report.mastered+' of '+report.total+' saved questions mastered.</p></div></article><article class="coach-queue"><div class="queue-heading"><span>YOUR 3-STEP PLAN</span><b>Highest-impact questions first</b></div><ol>'+queueHTML+'</ol></article></div>'+detailHTML+'<div class="coach-topic-heading"><div><p class="coach-label">WEAK-AREA ASSESSMENT</p><h2>What the pattern suggests</h2></div><p>Priority rises with open questions, repeated errors and questions not reviewed for seven days.</p></div><div class="coach-topic-grid">'+topicsHTML+'</div>';
     }
     function render(){
-      const all=records();populateTopics(all);renderCoach(all);
-      document.getElementById('needsCount').textContent=all.filter(function(x){return !x.mastered}).length;
-      document.getElementById('masteredCount').textContent=all.filter(function(x){return x.mastered}).length;
-      document.getElementById('topicCount').textContent=new Set(all.map(function(x){return x.topic}).filter(Boolean)).size;
+      const all=records();populateTopics(all);renderProgress(all);renderCoach(all);
+      const mastered=all.filter(function(x){return x.mastered}).length,topics=new Set(all.map(function(x){return x.topic}).filter(Boolean)).size;
+      document.getElementById('openSummary').textContent=(all.length-mastered)+' open';
+      document.getElementById('masteredSummary').textContent=mastered+' mastered';
+      document.getElementById('topicSummary').textContent=topics+' topic'+(topics===1?'':'s');
       const term=search.value.trim().toLowerCase(),topic=topicFilter.value;
       const shown=all.filter(function(item){
         if(filter==='open'&&item.mastered)return false;if(filter==='mastered'&&!item.mastered)return false;
