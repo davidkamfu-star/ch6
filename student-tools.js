@@ -98,7 +98,7 @@
     document.querySelectorAll('[data-mistake-count]').forEach(el=>el.textContent=countOpen());
   }
   function toast(message){let t=document.getElementById('chemistryToast');if(!t){t=document.createElement('div');t.id='chemistryToast';t.className='chemistry-toast';document.body.appendChild(t)}t.textContent=message;t.classList.add('show');clearTimeout(t._timer);t._timer=setTimeout(()=>t.classList.remove('show'),2400)}
-  function addStyles(){if(document.querySelector('link[href*="student-tools.css"]'))return;const link=document.createElement('link');link.rel='stylesheet';link.href='student-tools.css?v=20260907a';document.head.appendChild(link)}
+  function addStyles(){if(document.querySelector('link[href*="student-tools.css"]'))return;const link=document.createElement('link');link.rel='stylesheet';link.href='student-tools.css?v=20260907b';document.head.appendChild(link)}
 
   function addTopLinks(){
     const top=document.querySelector('.topbar');if(!top||top.querySelector('.student-tool-links'))return;
