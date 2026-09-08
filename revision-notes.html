@@ -185,13 +185,15 @@
         '<strong>Structure changes</strong> explain melting point and conductivity: metallic lattices → giant covalent structures → simple molecular/monatomic substances.',
         '<strong>Period 3 oxides:</strong> generally change from basic through amphoteric to acidic across the period.',
         '<strong>Transition metals</strong> show variable oxidation states, coloured ions/compounds and catalytic behaviour.',
+        '<strong>Dative covalent bonding:</strong> a ligand is a Lewis base that donates a lone pair to the Lewis-acid metal ion; both bonding electrons originate from the ligand donor atom.',
         '<strong>Explanations must be structural:</strong> identify particles, bonding/forces and mobile charge carriers—not trend memorisation alone.'
       ],formula:[
         ['MgO + 2H⁺ → Mg²⁺ + H₂O','A basic oxide reacts with acid.'],
         ['Al₂O₃ + 6H⁺ → 2Al³⁺ + 3H₂O','Al₂O₃ is amphoteric and also reacts with alkali.'],
         ['SO₃ + 2OH⁻ → SO₄²⁻ + H₂O','An acidic oxide reacts with alkali.'],
-        ['Fe³⁺ + e⁻ ⇌ Fe²⁺','Different oxidation states often have different colours and redox behaviour.']
-      ],do:'When comparing melting point or conductivity, first state the structure and bonding, then explain the energy or charge movement.',trap:'Do not apply one smooth melting-point trend across the whole period—the type of structure changes. “More shells” cannot explain a trend across the same period.',recall:[['Why does atomic radius decrease across a period?','Nuclear charge rises while shielding changes little, so attraction for outer electrons increases.'],['What does amphoteric mean?','Able to react with both acids and alkalis.'],['Three typical transition-metal features?','Variable oxidation states, coloured ions/compounds and catalytic activity.']]}
+        ['Fe³⁺ + e⁻ ⇌ Fe²⁺','Different oxidation states often have different colours and redox behaviour.'],
+        ['[Cu(H₂O)₆]²⁺ + 4NH₃ ⇌ [Cu(NH₃)₄(H₂O)₂]²⁺ + 4H₂O','NH₃ replaces four H₂O ligands; N donates a lone pair to Cu²⁺ in each NH₃→Cu bond.']
+      ],do:'When explaining a complex ion, identify the ligand donor atom, the lone-pair donation and the metal-ion acceptor. For trends, state the structure and bonding before explaining the property.',trap:'The arrow points from the ligand donor atom to the metal ion: N: → Cu²⁺. It does not mean that Cu²⁺ supplies one bonding electron.',recall:[['Why does atomic radius decrease across a period?','Nuclear charge rises while shielding changes little, so attraction for outer electrons increases.'],['What does amphoteric mean?','Able to react with both acids and alkalis.'],['Three typical transition-metal features?','Variable oxidation states, coloured ions/compounds and catalytic activity.']]}
     ];
     const list=document.getElementById('chapterList'),note=document.getElementById('note'),search=document.getElementById('noteSearch');
     let state;try{state=JSON.parse(localStorage.getItem(NOTES_KEY)||'{"reviewed":[]}')}catch(_){state={reviewed:[]}}if(!Array.isArray(state.reviewed))state.reviewed=[];
