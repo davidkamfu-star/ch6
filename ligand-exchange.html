@@ -65,7 +65,7 @@
       {q:'In an NH₃→Cu²⁺ dative covalent bond, where do the two bonding electrons originate?',options:['One from NH₃ and one from Cu²⁺','Both from the nitrogen lone pair of NH₃','Both from Cu²⁺','One from a water molecule and one from Cu²⁺'],a:1,why:'NH₃ is the Lewis-base ligand. Its nitrogen atom donates a complete lone pair to the Lewis-acid metal centre.'}
     ];
     const positions=[[1.78,0,0],[-1.78,0,0],[0,1.78,0],[0,-1.78,0],[0,0,2.25],[0,0,-2.25]];
-    const precipitateParticles=Array.from({length:76},(_,i)=>({x:.04+((i*37)%91)/100,y:((i*53)%97)/100,r:1.7+(i%5)*.62,speed:4.5+(i%7)*1.15,phase:i*.73}));
+    const precipitateParticles=Array.from({length:86},(_,i)=>{const random=n=>{const v=Math.sin((i+1)*n)*43758.5453;return v-Math.floor(v)};return{x:.04+random(12.9898)*.92,y:random(78.233),r:1.5+random(39.425)*3.1,speed:4+random(93.117)*7,phase:random(51.713)*Math.PI*2}});
     let step=0,rotX=-.34,rotY=.48,drag=false,lastX=0,lastY=0,auto=true,labels=true,showBond=true,lastTime=0,answered=0,score=0,logged=false,transition=1,previous=0;
     function project(p){let[x,y,z]=p,cy=Math.cos(rotY),sy=Math.sin(rotY),cx=Math.cos(rotX),sx=Math.sin(rotX),x1=x*cy-z*sy,z1=x*sy+z*cy,y1=y*cx-z1*sx,z2=y*sx+z1*cx,f=370/(370+z2*36),scale=88*f;return{x:520+x1*scale,y:300-y1*scale,z:z2,r:f}}
     function sphere(p,r,colour,label,alpha){ctx.save();ctx.globalAlpha=alpha===undefined?1:alpha;ctx.shadowBlur=label==='Cu²⁺'?22:10;ctx.shadowColor=colour;const g=ctx.createRadialGradient(p.x-r*.36,p.y-r*.36,r*.08,p.x,p.y,r);g.addColorStop(0,'#fff');g.addColorStop(.2,colour);g.addColorStop(1,'#102c39');ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,r,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0;ctx.strokeStyle='rgba(255,255,255,.52)';ctx.lineWidth=1.4;ctx.stroke();if(labels){ctx.fillStyle='#fff';ctx.font='800 '+Math.max(10,r*.55)+'px Arial';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(label,p.x,p.y+1)}ctx.restore()}
@@ -190,12 +190,12 @@
         ctx.stroke();
       }
       ctx.fillStyle='#fff';
-      ctx.font='900 9px Arial';
+      ctx.font='900 11px Arial';
       ctx.textAlign='center';
       ctx.fillText(step===0?'PALE-BLUE SOLUTION':step===1?'LIGHT-BLUE PRECIPITATE':'DEEP-BLUE SOLUTION',x+w/2,532);
       if(step===1){
         ctx.fillStyle='#a9dce9';
-        ctx.font='700 8px Arial';
+        ctx.font='700 9px Arial';
         ctx.fillText('FINE PARTICLES FORM · SUSPEND · SETTLE',x+w/2,547);
       }
       ctx.restore();
