@@ -1,60 +1,329 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#102e3a"><meta name="description" content="Interactive HKDSE Chemistry by-topic past-paper practice with detailed marking, 2012–2026."><title>HKDSE Chemistry Revision Hub</title><link rel="stylesheet" href="student-fun.css?v=20260822a"><style>@import "tailwindcss";
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#071d2a">
+  <meta name="description" content="A structured HKDSE Chemistry revision hub with concise notes, by-topic practice, interactive games, 3D models, mistake coaching and progress monitoring.">
+  <title>HKDSE Chemistry Revision Hub</title>
+  <link rel="stylesheet" href="student-tools.css?v=20260907b">
+  <style>
+    :root{
+      --ink:#122f39;--navy:#071d2a;--navy2:#0d3541;--teal:#18a78e;--mint:#8de3cc;
+      --blue:#428fd0;--violet:#7668d7;--gold:#e2aa42;--coral:#e56d70;--paper:#fbfdfb;
+      --soft:#edf5f2;--muted:#667c81;--line:#dce6e2;--white:#fff;--shadow:0 20px 55px rgba(8,39,48,.09)
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif;font-size:16px}
+    a,button,input{font:inherit}
+    a,button{-webkit-tap-highlight-color:transparent}
+    a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid rgba(24,167,142,.35);outline-offset:3px}
+    .topbar{min-height:74px;padding:0 clamp(18px,5vw,72px);display:flex;align-items:center;gap:28px;border-bottom:1px solid rgba(18,47,57,.1);background:rgba(255,255,255,.95);position:sticky;top:0;z-index:50;backdrop-filter:blur(15px)}
+    .brand{display:flex;align-items:center;gap:11px;color:var(--navy);text-decoration:none;white-space:nowrap}
+    .brand-mark{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--navy);color:var(--mint);font-size:21px;box-shadow:0 8px 20px rgba(7,29,42,.18)}
+    .brand-copy{display:grid;gap:2px}
+    .brand-copy b{font-size:.83rem;letter-spacing:.13em}
+    .brand-copy small{color:#789093;font-size:.7rem;font-weight:800;letter-spacing:.08em}
+    .topbar nav{display:flex;align-items:center;gap:5px;margin-left:auto}
+    .topbar nav a{padding:10px 12px;border-radius:999px;color:#536c72;text-decoration:none;font-size:.84rem;font-weight:800;white-space:nowrap}
+    .topbar nav a:hover,.topbar nav a.active{background:#e9f6f2;color:#087b68}
+    .progress-link{display:flex!important;align-items:center;gap:7px;background:var(--navy)!important;color:#fff!important}
+    .progress-link i{display:grid;place-items:center;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:var(--teal);font-size:.7rem;font-style:normal}
 
-:root{--navy:#102e3a;--navy-2:#173f4b;--teal:#16a085;--teal-light:#80ddc6;--cream:#f6f2e9;--paper:#fffdf8;--ink:#18353e;--muted:#687b80;--line:#dce4e0;--coral:#d86567;--gold:#d9a441}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-geist-sans),Arial,sans-serif}button,input{font:inherit}button,a{-webkit-tap-highlight-color:transparent}button{color:inherit}.topbar{height:84px;padding:0 clamp(22px,6vw,92px);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(16,46,58,.1);background:rgba(255,253,248,.94);position:sticky;top:0;z-index:30;backdrop-filter:blur(16px)}.brand{display:flex;align-items:center;gap:12px;color:var(--navy);text-decoration:none}.brand-symbol{position:relative;width:38px;height:38px;border-radius:12px;background:var(--navy);display:block;box-shadow:0 8px 18px rgba(16,46,58,.16)}.brand-symbol i{position:absolute;width:7px;height:7px;background:var(--teal-light);border:2px solid #fff;border-radius:50%}.brand-symbol i:nth-child(1){left:8px;top:15px}.brand-symbol i:nth-child(2){right:7px;top:7px}.brand-symbol i:nth-child(3){right:7px;bottom:7px}.brand-symbol:before,.brand-symbol:after{content:"";position:absolute;left:14px;width:14px;height:1px;background:#fff;transform-origin:left}.brand-symbol:before{top:17px;transform:rotate(-30deg)}.brand-symbol:after{top:20px;transform:rotate(30deg)}.brand-copy{display:grid;gap:1px}.brand-copy b{font-size:14px;letter-spacing:.13em}.brand-copy small{font-size:8px;letter-spacing:.2em;color:#6a7c80}.topbar nav{display:flex;gap:34px;align-items:center}.topbar nav a{padding:31px 0 28px;color:#63777b;text-decoration:none;font-size:13px;font-weight:650;position:relative}.topbar nav a:hover,.topbar nav a.nav-active{color:var(--navy)}.topbar nav a.nav-active:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;border-radius:3px;background:var(--teal)}.header-cta{border:0;border-radius:100px;padding:11px 12px 11px 18px;background:var(--navy);color:#fff;font-size:12px;font-weight:750;cursor:pointer;display:flex;align-items:center;gap:13px}.header-cta span{display:grid;place-items:center;width:25px;height:25px;border-radius:50%;background:var(--teal);font-size:15px}
+    main{overflow:hidden}
+    .dashboard{max-width:1450px;margin:0 auto;padding:34px clamp(18px,5vw,72px) 18px;display:grid;grid-template-columns:minmax(0,1.55fr) minmax(310px,.65fr);gap:18px}
+    .start-card{min-height:410px;padding:clamp(28px,4.5vw,58px);border-radius:28px;background:radial-gradient(circle at 84% 10%,rgba(72,143,208,.32),transparent 30%),linear-gradient(125deg,#061b28,#0b3541 62%,#0c605b);color:#fff;position:relative;overflow:hidden;box-shadow:0 25px 65px rgba(7,29,42,.18)}
+    .start-card:after{content:"";position:absolute;width:340px;height:340px;right:-170px;bottom:-210px;border:1px solid rgba(141,227,204,.3);border-radius:50%;box-shadow:0 0 0 55px rgba(141,227,204,.045),0 0 0 110px rgba(141,227,204,.025)}
+    .eyebrow{margin:0 0 17px;color:var(--mint);font-size:.74rem;font-weight:900;letter-spacing:.18em}
+    .start-card h1{max-width:810px;margin:0;font:400 clamp(2.65rem,5vw,4.85rem)/.99 Georgia,serif;letter-spacing:-.052em}
+    .start-card h1 em{color:#8fd2ff;font-weight:400}
+    .start-card>p{max-width:670px;margin:22px 0 27px;color:#c6dbd7;font-size:1rem;line-height:1.65}
+    .hero-actions{display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:2}
+    .button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 17px;border:1px solid transparent;border-radius:12px;text-decoration:none;font-size:.88rem;font-weight:900}
+    .button.primary{background:var(--teal);color:#fff;box-shadow:0 10px 28px rgba(24,167,142,.28)}
+    .button.secondary{border-color:rgba(255,255,255,.22);background:rgba(255,255,255,.08);color:#fff}
+    .button span{margin-left:15px}
+    .learning-loop{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:710px;margin-top:34px;position:relative;z-index:2}
+    .learning-loop div{padding:11px 12px;border:1px solid rgba(255,255,255,.12);border-radius:11px;background:rgba(255,255,255,.055)}
+    .learning-loop b{display:block;color:#fff;font-size:.8rem}
+    .learning-loop span{display:block;margin-top:4px;color:#aecaC6;font-size:.7rem;line-height:1.35}
 
-.hero{min-height:670px;padding:88px clamp(24px,7vw,112px) 76px;display:grid;grid-template-columns:minmax(0,1.03fr) minmax(420px,.97fr);gap:40px;align-items:center;overflow:hidden;position:relative;background:linear-gradient(120deg,#fbf8f1 0%,#fbf8f1 56%,#e8f2ed 56%,#f0f5ef 100%)}.hero:before{content:"";position:absolute;width:320px;height:320px;border-radius:50%;border:1px solid rgba(22,160,133,.14);right:-110px;top:-120px}.hero-copy{position:relative;z-index:2}.eyebrow,.kicker{margin:0 0 18px;color:var(--teal);font-size:10px;font-weight:850;letter-spacing:.18em}.eyebrow span{padding:6px 9px;margin-right:10px;background:var(--teal);color:#fff;border-radius:5px;letter-spacing:.11em}.eyebrow b{color:#526e72;font-weight:800}.hero h1{margin:0;max-width:780px;color:var(--navy);font-family:Georgia,serif;font-size:clamp(53px,5.5vw,82px);font-weight:400;line-height:.98;letter-spacing:-.055em}.hero h1 em{color:var(--teal);font-weight:400}.hero-copy>p{max-width:620px;margin:29px 0 34px;color:#577075;font-size:17px;line-height:1.72}.hero-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.primary,.secondary{border-radius:10px;padding:15px 20px;font-weight:780;cursor:pointer}.primary{border:1px solid var(--teal);background:var(--teal);color:#fff;box-shadow:0 12px 25px rgba(22,160,133,.2)}.primary span{margin-left:16px}.secondary{border:1px solid #cbd8d3;background:rgba(255,255,255,.74);color:var(--navy)}.play{display:inline-grid;place-items:center;width:27px;height:27px;margin-right:8px;border-radius:50%;background:#e3f1eb;color:var(--teal);font-size:9px}.trust-row{display:flex;gap:24px;flex-wrap:wrap;margin-top:38px;padding-top:22px;border-top:1px solid #d9e1dc;color:#728287;font-size:11px}.trust-row b{display:block;margin-bottom:3px;color:var(--navy);font-size:17px}.hero-showcase{position:relative;min-height:490px}.study-card{position:absolute;left:8%;top:34px;width:min(440px,82%);padding:28px;border-radius:22px;background:#fff;box-shadow:0 30px 70px rgba(17,55,58,.16);transform:rotate(-2deg);z-index:3}.study-card-top{display:flex;justify-content:space-between;color:#76908d;font-size:9px;letter-spacing:.14em}.study-card-top b{color:var(--coral)}.study-label{margin:28px 0 10px;color:var(--teal);font-size:9px;font-weight:850;letter-spacing:.16em}.study-card h2{margin:0 0 22px;color:var(--navy);font-family:Georgia,serif;font-size:25px;font-weight:400;line-height:1.35}.mini-options{display:grid;gap:8px}.mini-options span{padding:11px 12px;border:1px solid #e0e6e2;border-radius:9px;color:#52666b;font-size:12px}.mini-options span:first-child{border-color:var(--teal);background:#eff9f5;color:var(--navy)}.mini-options b{display:inline-grid;place-items:center;width:24px;height:24px;margin-right:9px;border-radius:50%;background:#eef2ef}.mini-options span:first-child b{background:var(--teal);color:#fff}.study-result{display:flex;align-items:center;gap:11px;margin-top:18px;padding:12px 14px;border-radius:10px;background:var(--navy);color:#fff}.study-result>span{display:grid;place-items:center;width:29px;height:29px;border-radius:50%;background:var(--teal)}.study-result p{display:grid;margin:0}.study-result b{font-size:12px}.study-result small{margin-top:2px;color:#c5d7d3;font-size:10px}.formula{position:absolute;z-index:1;display:grid;place-items:center;border-radius:50%;font-family:Georgia,serif;box-shadow:0 15px 35px rgba(31,70,67,.12)}.formula-a{width:108px;height:108px;right:2%;top:10px;background:var(--coral);color:#fff;font-size:31px}.formula-b{width:88px;height:88px;left:-1%;bottom:44px;background:var(--teal);color:#fff;font-size:21px}.formula-c{width:70px;height:70px;right:11%;bottom:28px;background:var(--gold);color:#fff;font-size:21px}.formula sup{font-size:.52em}.progress-card{position:absolute;right:0;bottom:78px;z-index:5;width:190px;padding:17px 18px;border:1px solid rgba(255,255,255,.8);border-radius:14px;background:rgba(255,255,255,.9);box-shadow:0 15px 38px rgba(31,70,67,.13);backdrop-filter:blur(10px)}.progress-card>span{color:#7a8d8d;font-size:8px;font-weight:850;letter-spacing:.15em}.progress-card strong{display:block;margin:5px 0;color:var(--navy);font-size:34px}.progress-card strong small{font-size:16px}.progress-card>div{height:5px;background:#e4ebe7;border-radius:5px;overflow:hidden}.progress-card i{display:block;height:100%;background:var(--teal)}.progress-card p{margin:8px 0 0;color:#728385;font-size:9px}
+    .progress-card{padding:25px;border:1px solid var(--line);border-radius:28px;background:#fff;box-shadow:var(--shadow)}
+    .progress-card-header{display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .progress-card-header p{margin:0;color:#248b78;font-size:.73rem;font-weight:900;letter-spacing:.13em}
+    .level-chip{padding:7px 9px;border-radius:999px;background:#edf7f4;color:#177664;font-size:.72rem;font-weight:900}
+    .progress-card h2{margin:18px 0 3px;color:var(--navy);font:400 1.7rem Georgia,serif}
+    .progress-card>.sub{margin:0;color:var(--muted);font-size:.84rem;line-height:1.45}
+    .metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:21px 0}
+    .metric{padding:14px;border:1px solid #e1e9e6;border-radius:13px;background:#fbfdfc}
+    .metric b{display:block;color:var(--navy);font-size:1.55rem;line-height:1}
+    .metric span{display:block;margin-top:6px;color:#728589;font-size:.72rem;font-weight:750;line-height:1.3}
+    .week-line{display:flex;justify-content:space-between;color:#61777c;font-size:.75rem;font-weight:800}
+    .week-track{height:8px;margin:9px 0 18px;border-radius:8px;background:#e6eeeb;overflow:hidden}
+    .week-track i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,var(--teal),#68d3b7);transition:width .5s ease}
+    .smart-start{display:block;padding:14px;border-radius:12px;background:#fff7e9;color:#6b5526;text-decoration:none}
+    .smart-start span{display:block;color:#a07822;font-size:.69rem;font-weight:900;letter-spacing:.12em}
+    .smart-start b{display:block;margin-top:6px;font-size:.88rem;line-height:1.4}
 
-.topic-section{padding:96px clamp(24px,7vw,112px) 110px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:36px}.section-head h2,.method-copy h2,.resource-strip h2,.visual-heading h2{margin:0;color:var(--navy);font-family:Georgia,serif;font-size:clamp(38px,4vw,55px);font-weight:400;letter-spacing:-.035em}.section-intro{max-width:570px;margin:13px 0 0;color:var(--muted);font-size:13px;line-height:1.65}.search{min-width:260px;padding:10px 13px;display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:10px;background:#fff}.search span{font-size:21px;transform:rotate(-20deg);color:var(--teal)}.search input{width:100%;border:0;outline:0;background:transparent;color:var(--ink)}.filters{display:flex;gap:8px;margin:38px 0 22px;overflow-x:auto}.filters button{padding:9px 14px;border:1px solid var(--line);border-radius:100px;background:#fff;color:#627579;font-size:11px;cursor:pointer;white-space:nowrap}.filters button.selected{border-color:var(--navy);background:var(--navy);color:#fff}.filters b{margin-left:5px;color:var(--teal-light)}.topic-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.topic-card{--accent:#2aaa84;position:relative;min-height:265px;padding:19px;border:1px solid #e0e6e2;border-radius:16px;background:#fff;display:flex;flex-direction:column;overflow:hidden;transition:.22s ease}.topic-card.available{cursor:pointer}.topic-card.available:hover,.topic-card.available:focus{transform:translateY(-5px);border-color:var(--accent);box-shadow:0 20px 42px rgba(25,56,54,.11);outline:none}.topic-card.coming{background:#fbfaf6}.topic-card.coming>*{opacity:.73}.topic-card:before{content:"";position:absolute;width:120px;height:120px;border-radius:50%;right:-48px;top:-55px;background:color-mix(in srgb,var(--accent) 12%,transparent)}.topic-card.sky{--accent:#4a99bf}.topic-card.amber{--accent:#d99d35}.topic-card.rose{--accent:#d86573}.topic-card.violet{--accent:#8f73b9}.topic-card.cyan{--accent:#3fa8b0}.topic-card.orange{--accent:#d97842}.topic-card.lime{--accent:#7fa848}.topic-card.blue{--accent:#527ac0}.topic-card.pink{--accent:#c86f99}.topic-card.purple{--accent:#7e65a6}.topic-card.teal{--accent:#238b80}.card-top{display:flex;align-items:center;justify-content:space-between;position:relative}.topic-number{color:var(--accent);font-size:9px;font-weight:900;letter-spacing:.15em}.availability{padding:5px 7px;border-radius:5px;background:color-mix(in srgb,var(--accent) 11%,#fff);color:var(--accent);font-size:7px;font-weight:900;letter-spacing:.1em}.coming .availability{background:#eeeae1;color:#8e8a81}.topic-icon{width:58px;height:58px;margin:24px 0 18px;display:grid;place-items:center;border-radius:15px;background:color-mix(in srgb,var(--accent) 11%,#fff);color:var(--accent)}.topic-icon svg{width:43px;height:43px;overflow:visible;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}.topic-icon svg .fill{fill:currentColor;stroke:none}.topic-icon svg .liquid{fill:color-mix(in srgb,var(--accent) 32%,transparent);stroke:currentColor}.topic-icon svg text{fill:currentColor;stroke:none;font-size:9px;font-weight:800}.topic-card h3{margin:0 0 8px;color:var(--navy);font-family:Georgia,serif;font-size:21px;font-weight:400;line-height:1.18}.topic-card>p{margin:0;color:#738387;font-size:11px;line-height:1.5}.card-meta{display:flex;justify-content:space-between;gap:8px;margin-top:auto;padding-top:20px;color:#7a898b;font-size:9px}.card-meta span:last-child{color:var(--accent);font-weight:750}.coming .card-meta span:last-child{color:#898981}.progress{height:4px;margin-top:9px;border-radius:4px;background:#e8edea;overflow:hidden}.progress i{display:block;height:100%;background:var(--accent)}.empty{padding:55px 0;color:var(--muted)}
+    .section{max-width:1450px;margin:0 auto;padding:42px clamp(18px,5vw,72px)}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:25px;margin-bottom:20px}
+    .kicker{margin:0 0 8px;color:#168872;font-size:.72rem;font-weight:900;letter-spacing:.15em}
+    .section h2{margin:0;color:var(--navy);font:400 clamp(2rem,3.2vw,3.15rem)/1.08 Georgia,serif;letter-spacing:-.035em}
+    .section-head>p{max-width:520px;margin:0;color:var(--muted);font-size:.9rem;line-height:1.55}
+    .mode-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:11px}
+    .mode-card{min-height:195px;padding:19px;border:1px solid var(--line);border-radius:18px;background:#fff;color:var(--ink);text-decoration:none;display:flex;flex-direction:column;transition:.2s ease;box-shadow:0 8px 25px rgba(10,45,53,.035)}
+    .mode-card:hover{transform:translateY(-4px);border-color:#87cbbb;box-shadow:0 16px 35px rgba(10,45,53,.09)}
+    .mode-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:#eaf7f3;color:#087e69;font-size:.78rem;font-weight:950;letter-spacing:.03em}
+    .mode-card:nth-child(2) .mode-icon{background:#eaf3fb;color:#327dbb}.mode-card:nth-child(3) .mode-icon{background:#f0edff;color:#6758c5}.mode-card:nth-child(4) .mode-icon{background:#fff0eb;color:#c65d49}.mode-card:nth-child(5) .mode-icon{background:#fff6df;color:#9e751b}.mode-card:nth-child(6) .mode-icon{background:#eef4f2;color:#385e62}
+    .mode-card h3{margin:24px 0 7px;color:var(--navy);font:400 1.23rem Georgia,serif}
+    .mode-card p{margin:0;color:#6b7e82;font-size:.79rem;line-height:1.5}
+    .mode-card b{margin-top:auto;padding-top:15px;color:#168872;font-size:.75rem}
 
-.hero-titration{display:block;width:100%;height:205px;margin:7px 0 2px}.hero-titration .hero-stand{fill:none;stroke:#789096;stroke-width:3;stroke-linecap:round}.hero-titration .hero-glass,.hero-titration .hero-flask{fill:rgba(220,239,237,.28);stroke:#234d58;stroke-width:2}.hero-titration .hero-liquid,.hero-titration .hero-flask-liquid{fill:#e9a4ae;opacity:.78}.hero-titration .hero-tap,.hero-titration .hero-leader{fill:none;stroke:#234d58;stroke-width:2;stroke-linecap:round}.hero-titration .hero-drop{fill:#16a085}.hero-titration text{fill:#587176;font-size:11px}.hero-equation{padding:11px 13px;border-left:3px solid var(--teal);border-radius:0 8px 8px 0;background:#eff7f4;color:var(--navy);font-family:Georgia,serif;font-size:14px}.hero-equation b{padding:0 5px;color:var(--teal)}
+    .topic-directory{margin-top:12px;padding-top:58px;border-top:1px solid var(--line)}
+    .topic-toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .search{display:flex;align-items:center;gap:9px;min-width:270px;padding:11px 13px;border:1px solid var(--line);border-radius:12px;background:#fff}
+    .search span{color:var(--teal);font-weight:900}
+    .search input{width:100%;border:0;outline:0;background:transparent;color:var(--ink);font-size:.85rem}
+    .filters{display:flex;gap:7px;overflow:auto;padding:2px}
+    .filters button{padding:9px 12px;border:1px solid var(--line);border-radius:999px;background:#fff;color:#64797e;font-size:.75rem;font-weight:850;cursor:pointer;white-space:nowrap}
+    .filters button.selected{border-color:var(--navy);background:var(--navy);color:#fff}
+    .chapter-groups{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:22px}
+    .topic-key{display:flex;justify-content:flex-end;gap:12px;margin:13px 0 -8px;color:#6d8185;font-size:.72rem}.topic-key b{display:inline-grid;place-items:center;min-width:24px;height:24px;margin-right:4px;border-radius:7px;background:#edf6f3;color:#187866}.topic-key span:last-child b{background:var(--navy);color:#fff}
+    .chapter-group{padding:18px;border:1px solid var(--line);border-radius:20px;background:#fff}
+    .group-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:12px}
+    .group-head b{color:var(--navy);font-size:.88rem}
+    .group-head span{color:#7b8d90;font-size:.7rem;font-weight:850;letter-spacing:.08em}
+    .chapter-list{display:grid;gap:8px}
+    .chapter-card{--accent:var(--teal);padding:13px;border:1px solid #e3eae7;border-radius:13px;background:#fcfefd;display:grid;grid-template-columns:38px 1fr auto;gap:10px;align-items:center;transition:.18s ease}
+    .chapter-card:hover{border-color:color-mix(in srgb,var(--accent) 58%,#dce6e2);background:color-mix(in srgb,var(--accent) 4%,#fff)}
+    .chapter-card[hidden]{display:none}
+    .chapter-number{display:grid;place-items:center;width:38px;height:38px;border-radius:11px;background:color-mix(in srgb,var(--accent) 12%,#fff);color:var(--accent);font-size:.72rem;font-weight:950}
+    .chapter-copy b{display:block;color:var(--navy);font-size:.84rem;line-height:1.25}
+    .chapter-copy span{display:block;margin-top:4px;color:#74878b;font-size:.68rem;line-height:1.3}
+    .chapter-actions{display:flex;gap:4px}
+    .chapter-actions a{display:grid;place-items:center;min-width:34px;height:34px;padding:0 8px;border-radius:9px;text-decoration:none;font-size:.67rem;font-weight:900}
+    .chapter-actions a:first-child{background:#edf6f3;color:#187866}.chapter-actions a:last-child{background:var(--navy);color:#fff}
+    .chapter-group.foundation{--group:#168c76}.chapter-group.application{--group:#3d88c4}.chapter-group.physical{--group:#d5952c}.chapter-group.advanced{--group:#7365cc}
+    .chapter-group .chapter-card{--accent:var(--group)}
+    .topic-empty{display:none;margin:18px 0 0;padding:25px;border:1px dashed #cbdad5;border-radius:15px;color:#708489;text-align:center;font-size:.9rem}
 
-.visual-section{padding:95px clamp(24px,7vw,112px) 105px;background:#102e3a;color:#fff;position:relative;overflow:hidden}.visual-section:before{content:"";position:absolute;width:520px;height:520px;right:-260px;top:-260px;border:1px solid rgba(128,221,198,.15);border-radius:50%;box-shadow:0 0 0 70px rgba(128,221,198,.025),0 0 0 140px rgba(128,221,198,.02)}.visual-heading{display:flex;justify-content:space-between;align-items:end;gap:50px;position:relative}.visual-heading h2{max-width:650px;color:#fff}.visual-heading>p{max-width:440px;margin:0;color:#b9ceca;font-size:13px;line-height:1.7}.visual-section .kicker{color:#80ddc6}.visual-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:48px;position:relative}.science-figure{min-height:430px;margin:0;padding:24px 25px 22px;border:1px solid rgba(255,255,255,.13);border-radius:20px;background:rgba(255,255,255,.065);display:flex;flex-direction:column;backdrop-filter:blur(10px)}.figure-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;color:#80ddc6;font-size:9px;letter-spacing:.16em}.figure-label span{display:grid;place-items:center;width:28px;height:28px;border:1px solid rgba(128,221,198,.35);border-radius:8px}.science-figure>svg{width:100%;height:255px;overflow:visible}.science-figure figcaption{display:grid;gap:5px;margin-top:auto;padding-top:15px;border-top:1px solid rgba(255,255,255,.11)}.science-figure figcaption b{font-family:Georgia,serif;font-size:17px;font-weight:400}.science-figure figcaption span{color:#b8cac7;font-size:11px;line-height:1.5}.science-figure .shell,.science-figure .leader,.science-figure .glass,.science-figure .stand,.science-figure .clamp,.science-figure .tap,.science-figure .axis,.science-figure .level,.science-figure .measure{fill:none;stroke:#8ba9a5;stroke-width:2}.science-figure .nucleus{fill:#d86567}.science-figure .nucleus-text{fill:#fff;text-anchor:middle;font-size:10px;font-weight:800}.science-figure .nucleus-text.small{font-size:8px}.science-figure .electron circle{fill:#80ddc6}.science-figure .annotation{fill:#dce9e6;font-size:11px}.science-figure .annotation.minor{fill:#95afab;font-size:9px}.science-figure .solution{fill:#7dccba;opacity:.75}.science-figure .drop{fill:#80ddc6}.science-figure .flask-liquid{fill:#d86567;opacity:.72}.science-figure .profile{fill:none;stroke:#80ddc6;stroke-width:4;stroke-linecap:round}.science-figure .measure{stroke:#d86567}.science-figure .enthalpy{stroke:#d9a441}.science-figure .axis-label{fill:#bcd0cc;font-size:10px}.ph-equation{margin:25px 0 45px;text-align:center;color:#fff;font-family:Georgia,serif;font-size:clamp(17px,2vw,24px)}.ph-equation b{padding:0 7px;color:#80ddc6}.ph-scale{margin:0 6px}.ph-numbers,.ph-colours{display:grid;grid-template-columns:repeat(15,1fr)}.ph-numbers span{text-align:center;color:#ccd9d6;font-size:9px}.ph-colours{height:20px;margin:8px 0 9px;overflow:hidden;border-radius:6px}.ph-colours i:nth-child(1){background:#c62f49}.ph-colours i:nth-child(2){background:#db3f4d}.ph-colours i:nth-child(3){background:#e85743}.ph-colours i:nth-child(4){background:#ed713d}.ph-colours i:nth-child(5){background:#e89336}.ph-colours i:nth-child(6){background:#dab43b}.ph-colours i:nth-child(7){background:#b7c344}.ph-colours i:nth-child(8){background:#63bd67}.ph-colours i:nth-child(9){background:#26ad84}.ph-colours i:nth-child(10){background:#1c9ca3}.ph-colours i:nth-child(11){background:#288bb7}.ph-colours i:nth-child(12){background:#3e75b7}.ph-colours i:nth-child(13){background:#5860a9}.ph-colours i:nth-child(14){background:#704f9b}.ph-colours i:nth-child(15){background:#87478c}.ph-zones{display:grid;grid-template-columns:7fr 1fr 7fr;color:#a9bfbb;font-size:8px;letter-spacing:.13em}.ph-zones span:nth-child(2){text-align:center;color:#80ddc6}.ph-zones span:last-child{text-align:right}.indicator-row{display:flex;justify-content:space-between;gap:12px;margin:36px 7px 10px;color:#b9cbc8;font-size:9px}.indicator-row span{display:flex;align-items:center;gap:6px}.indicator-row i{width:9px;height:13px;border-radius:60% 40% 55% 45%;transform:rotate(45deg)}.acid-drop{background:#e85743}.neutral-drop{background:#63bd67}.base-drop{background:#5860a9}
+    .featured{max-width:calc(1450px - clamp(36px,10vw,144px));margin:32px auto 0;padding:36px;border-radius:27px;background:linear-gradient(125deg,#071d2a,#0d3945);color:#fff}
+    .featured-head{display:flex;justify-content:space-between;align-items:end;gap:20px}
+    .featured h2{margin:0;color:#fff;font:400 clamp(2rem,3.2vw,3.15rem)/1.08 Georgia,serif;letter-spacing:-.035em}
+    .featured-head p:last-child{max-width:500px;margin:0;color:#b9cfcb;font-size:.88rem;line-height:1.55}
+    .lab-grid{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:12px;margin-top:24px}
+    .lab-card{min-height:220px;padding:22px;border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(255,255,255,.065);color:#fff;text-decoration:none;display:flex;flex-direction:column;position:relative;overflow:hidden;transition:.2s ease}
+    .lab-card:hover{transform:translateY(-4px);border-color:rgba(141,227,204,.5);background:rgba(255,255,255,.1)}
+    .lab-card.feature{background:linear-gradient(135deg,rgba(24,167,142,.23),rgba(66,143,208,.14))}
+    .lab-tag{align-self:flex-start;padding:6px 8px;border-radius:7px;background:rgba(141,227,204,.12);color:var(--mint);font-size:.66rem;font-weight:900;letter-spacing:.1em}
+    .lab-card h3{margin:30px 0 8px;font:400 1.55rem Georgia,serif}
+    .lab-card p{margin:0;color:#bcd0cc;font-size:.78rem;line-height:1.55}
+    .lab-card b{margin-top:auto;padding-top:18px;color:var(--mint);font-size:.75rem}
 
-.method-section{margin:0 clamp(18px,4vw,60px) 60px;padding:72px clamp(28px,5vw,72px);display:grid;grid-template-columns:.8fr 1.2fr;gap:70px;align-items:center;border-radius:24px;background:#edf5f1}.method-copy>p:last-child{max-width:470px;color:#657a7e;font-size:13px;line-height:1.7}.method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.method-grid article{min-height:205px;padding:22px;border:1px solid #d9e5df;border-radius:15px;background:rgba(255,255,255,.74)}.method-grid span{display:grid;place-items:center;width:32px;height:32px;border-radius:9px;background:var(--navy);color:var(--teal-light);font-size:9px;font-weight:900}.method-grid b{display:block;margin:34px 0 8px;color:var(--navy);font-family:Georgia,serif;font-size:18px;font-weight:400}.method-grid p{margin:0;color:#6c7d80;font-size:11px;line-height:1.6}.resource-strip{margin:0 clamp(18px,4vw,60px) 55px;padding:68px clamp(28px,5vw,72px);display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;border-radius:24px;background:var(--navy);color:#fff}.resource-strip h2{color:#fff}.resource-strip .kicker{color:var(--teal-light)}.resource-list{display:grid;grid-template-columns:1fr 1fr;gap:17px 25px}.resource-list span{padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.13);font-size:12px;color:#d2dfdc}.resource-list b{margin-right:13px;color:var(--teal-light);font-size:9px;letter-spacing:.1em}footer{min-height:96px;padding:0 clamp(24px,7vw,112px);display:flex;align-items:center;justify-content:space-between;gap:20px;color:#758589;font-size:10px;border-top:1px solid #e2e6e2}footer>div{display:flex;align-items:center;gap:12px}footer b{color:var(--navy);font-size:13px;letter-spacing:.12em}footer div span{padding-left:12px;border-left:1px solid #d9dfdc}
+    .cycle{display:grid;grid-template-columns:.8fr 1.2fr;gap:28px;align-items:center;padding-bottom:70px}
+    .cycle-copy p:last-child{max-width:500px;color:var(--muted);font-size:.9rem;line-height:1.6}
+    .cycle-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+    .cycle-steps article{min-height:155px;padding:18px;border:1px solid var(--line);border-radius:16px;background:#fff}
+    .cycle-steps span{display:grid;place-items:center;width:31px;height:31px;border-radius:9px;background:var(--navy);color:var(--mint);font-size:.7rem;font-weight:900}
+    .cycle-steps b{display:block;margin:23px 0 7px;color:var(--navy);font-size:.86rem}
+    .cycle-steps p{margin:0;color:#6c7f83;font-size:.72rem;line-height:1.45}
+    footer{min-height:96px;padding:22px clamp(18px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:20px;border-top:1px solid var(--line);color:#738589;font-size:.75rem}
+    footer b{color:var(--navy);letter-spacing:.12em}
 
-@media(max-width:1080px){.hero{grid-template-columns:1fr .8fr}.topic-grid{grid-template-columns:repeat(3,1fr)}.method-section{grid-template-columns:1fr;gap:38px}.method-grid{max-width:850px}.resource-strip{grid-template-columns:1fr;gap:34px}.visual-heading{align-items:flex-start;flex-direction:column;gap:18px}}@media(max-width:780px){.topbar{height:70px;padding:0 18px}.topbar nav{display:none}.header-cta{font-size:0;padding:8px}.header-cta span{font-size:15px}.hero{display:block;min-height:auto;padding:64px 22px 58px;background:linear-gradient(160deg,#fbf8f1 0%,#fbf8f1 63%,#eaf3ee 63%)}.hero-showcase{min-height:510px;margin-top:38px}.study-card{left:5%;width:88%}.formula-a{right:-4%}.progress-card{right:1%}.section-head{align-items:flex-start;flex-direction:column}.search{width:100%}.topic-grid{grid-template-columns:repeat(2,1fr)}.visual-grid{grid-template-columns:1fr}.science-figure{min-height:410px}.method-grid{grid-template-columns:1fr}.resource-list{grid-template-columns:1fr}.trust-row{gap:18px}.hero h1{font-size:52px}}@media(max-width:520px){.brand-copy small{display:none}.hero h1{font-size:43px}.hero-copy>p{font-size:15px}.hero-actions{align-items:stretch;flex-direction:column}.primary,.secondary{width:100%}.trust-row{display:grid;grid-template-columns:1fr 1fr}.trust-row span:last-child{grid-column:1/-1}.hero-showcase{min-height:490px;margin-left:-8px;margin-right:-8px}.study-card{padding:20px}.hero-titration{height:180px}.formula-a{width:83px;height:83px}.formula-b{display:none}.progress-card{display:none}.topic-section{padding:72px 16px 80px}.topic-grid{grid-template-columns:1fr}.topic-card{min-height:245px}.visual-section{padding:70px 14px 75px}.visual-heading h2{font-size:36px}.science-figure{min-height:390px;padding:20px 17px}.science-figure>svg{height:230px}.ph-equation{margin:20px 0 38px;font-size:16px}.indicator-row{font-size:8px}.method-section,.resource-strip{margin-left:8px;margin-right:8px;padding:50px 22px;border-radius:18px}.section-head h2,.method-copy h2,.resource-strip h2{font-size:36px}footer{padding:25px 20px;align-items:flex-start;flex-direction:column;justify-content:center}.topic-card.coming{min-height:220px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.topic-card{transition:none}}
+    @media(max-width:1180px){.mode-grid{grid-template-columns:repeat(3,1fr)}.chapter-groups{grid-template-columns:1fr 1fr}.lab-grid{grid-template-columns:1fr 1fr}.lab-card.feature{grid-column:1/-1}.cycle{grid-template-columns:1fr}.cycle-steps{max-width:900px}}
+    @media(max-width:850px){.topbar{gap:12px}.topbar nav{overflow-x:auto}.topbar nav a{padding:9px}.topbar nav a:nth-child(2),.topbar nav a:nth-child(3){display:none}.dashboard{grid-template-columns:1fr}.start-card{min-height:auto}.learning-loop{grid-template-columns:1fr 1fr}.section-head,.featured-head{align-items:flex-start;flex-direction:column}.featured{margin-left:12px;margin-right:12px}.cycle-steps{grid-template-columns:1fr 1fr}}
+    @media(max-width:620px){.topbar{padding:10px 13px}.brand-copy small{display:none}.topbar nav a{font-size:.74rem}.topbar nav a:first-child{display:none}.progress-link{padding:8px!important}.progress-link span{display:none}.dashboard{padding:16px 12px 10px}.start-card{padding:28px 21px;border-radius:20px}.start-card h1{font-size:2.55rem}.start-card>p{font-size:.9rem}.hero-actions{align-items:stretch;flex-direction:column}.button{width:100%}.learning-loop{grid-template-columns:1fr 1fr;margin-top:25px}.section{padding:38px 13px}.mode-grid,.chapter-groups,.lab-grid,.cycle-steps{grid-template-columns:1fr}.section-head{margin-bottom:17px}.topic-toolbar,.search{width:100%}.filters{width:100%}.featured{padding:28px 18px}.lab-card.feature{grid-column:auto}.chapter-actions a:first-child{display:none}.cycle{padding-bottom:50px}footer{align-items:flex-start;flex-direction:column}.metric-grid{grid-template-columns:1fr 1fr}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.mode-card,.lab-card,.chapter-card,.week-track i{transition:none}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">⌬</span><span class="brand-copy"><b>CHEMISTRY HUB</b><small>HKDSE · 2012–2026</small></span></a>
+    <nav aria-label="Main navigation">
+      <a class="active" href="index.html">Home</a>
+      <a href="revision-notes.html">Quick Notes</a>
+      <a href="#topics">Topics</a>
+      <a href="games.html">Games</a>
+      <a href="3d-games.html">3D Lab</a>
+      <a class="progress-link" href="mistakes.html"><span>Progress</span><i id="navMistakes">0</i></a>
+    </nav>
+  </header>
 
-.topic-card{text-decoration:none;color:inherit}</style></head><body><main><header class="topbar"><a class="brand" href="#top" aria-label="Chemistry revision home"><span class="brand-symbol" aria-hidden="true"><i></i><i></i><i></i></span><span class="brand-copy"><b>CHEMISTRY</b><small>REVISION HUB</small></span></a><nav aria-label="Main navigation"><a class="nav-active" href="#topics">Topics</a><a href="#visuals">Chemistry visuals</a><a href="#how-it-works">How it works</a></nav><button class="header-cta" data-open="acids-and-bases.html">Continue learning <span>→</span></button></header><section class="hero" id="top"><div class="hero-copy"><div class="eyebrow"><span>HKDSE CHEMISTRY</span><b>2012–2026</b></div><h1>Past-paper practice,<br/><em>beautifully organised.</em></h1><p>Master every topic with clearly retyped questions, source-faithful diagrams, immediate checking and teacher-quality marking.</p><div class="hero-actions"><button class="primary" id="browseTopics">Browse the question bank <span>↓</span></button><button class="secondary" data-open="acids-and-bases.html"><span class="play">▶</span> Start Topic 04</button></div><div class="trust-row"><span><b>527</b> live questions</span><span><b>12</b> complete topics</span><span><b>27</b> Topic 12 questions</span></div></div><div class="hero-showcase" aria-label="Interactive learning preview"><div class="formula formula-a">H<sup>+</sup></div><div class="formula formula-b">OH<sup>−</sup></div><div class="formula formula-c">pH</div><div class="study-card"><div class="study-card-top"><span>TOPIC 04</span><b>ACID–BASE TITRATION</b></div><svg class="hero-titration" viewBox="0 0 360 190" role="img" aria-label="Burette delivering sodium hydroxide into hydrochloric acid in a conical flask"><path class="hero-stand" d="M45 18v158M17 176h57M45 48h92"></path><path class="hero-glass" d="M137 10h19v93h-19zM140 103h13v12M144 115v13"></path><path class="hero-liquid" d="M141 21h11v67h-11z"></path><path class="hero-tap" d="M131 108h31M157 103v11"></path><circle class="hero-drop" cx="147" cy="138" r="4"></circle><path class="hero-flask" d="M122 182h50c7 0 9-6 6-11l-17-24v-15h-28v15l-17 24c-3 5-1 11 6 11z"></path><path class="hero-flask-liquid" d="M120 168h54l5 10h-64z"></path><path class="hero-leader" d="M158 39h55"></path><text x="220" y="35">NaOH(aq)</text><path class="hero-leader" d="M175 163h40"></path><text x="221" y="159">HCl(aq)</text><text x="221" y="174">+ indicator</text></svg><div class="hero-equation">H⁺(aq) + OH⁻(aq) <b>→</b> H₂O(l)</div><div class="study-result"><span>✓</span><p><b>End-point detected</b><small>Persistent pale-pink colour</small></p></div></div><div class="progress-card"><span>YOUR PROGRESS</span><strong>0<small>%</small></strong><div><i style="width:0%"></i></div><p>0 of 12 topics started</p></div></div></section><section class="topic-section" id="topics"><div class="section-head"><div><p class="kicker">THE COMPLETE CURRICULUM</p><h2>Choose your next topic</h2><p class="section-intro">All twelve interactive topics are available now.</p></div><label class="search"><span aria-hidden="true">⌕</span><input id="topicSearch" placeholder="Search topics" aria-label="Search topics" value=""/></label></div><div class="filters" role="group" aria-label="Filter topics"><button class="selected">All topics <b>12</b></button><button class="">Available now <b>12</b></button><button class="">In progress <b>0</b></button></div><div class="topic-grid"><a class="topic-card mint available" aria-label="Open Planet Earth practice" href="planet-earth.html"><div class="card-top"><span class="topic-number">TOPIC 01</span><span class="availability">AVAILABLE</span></div><div class="topic-icon"><svg viewBox="0 0 64 64" role="img" aria-hidden="true"><circle cx="32" cy="32" r="22"></circle><path d="M10 32h44M32 10c8 8 11 15 11 22S40 46 32 54M32 10c-8 8-11 15-11 22s3 14 11 22M16 20h32M16 44h32"></path></svg></div><h3>Planet Earth</h3><p>Atmosphere · oceans · rocks</p><div class="card-meta"><span>14 questions</span><span>Start practice →</span></div><div class="progress"><i style="width:0%"></i></div></a><a class="topic-card sky available" aria-label="Open Microscopic World I practice" href="microscopic-world-i.html"><div class="card-top"><span class="topic-number">TOPIC 02</span><span class="availability">AVAILABLE</span></div><div class="topic-icon"><svg viewBox="0 0 64 64" role="img" aria-hidden="true"><ellipse cx="32" cy="32" rx="25" ry="10"></ellipse><ellipse cx="32" cy="32" rx="25" ry="10" transform="rotate(60 32 32)"></ellipse><ellipse cx="32" cy="32" rx="25" ry="10" transform="rotate(120 32 32)"></ellipse><circle class="fill" cx="32" cy="32" r="5"></circle><circle class="fill" cx="56" cy="32" r="3"></circle></svg></div><h3>Microscopic World I</h3><p>Atomic structure · bonding</p><div class="card-meta"><span>35 questions</span><span>Start practice →</span></div><div class="progress"><i style="width:0%"></i></div></a><a class="topic-card amber available" aria-label="Open Metals practice" href="metals.html"><div class="card-top"><span class="topic-number">TOPIC 03</span><span class="availability">AVAILABLE</span></div><div class="topic-icon"><svg viewBox="0 0 64 64" role="img" aria-hidden="true"><circle class="fill" cx="15" cy="15" r="5"></circle><circle class="fill" cx="32" cy="15" r="5"></circle><circle class="fill" cx="49" cy="15" r="5"></circle><circle class="fill" cx="15" cy="32" r="5"></circle><circle class="fill" cx="32" cy="32" r="5"></circle><circle class="fill" cx="49" cy="32" r="5"></circle><circle class="fill" cx="15" cy="49" r="5"></circle><circle class="fill" cx="32" cy="49" r="5"></circle><circle class="fill" cx="49" cy="49" r="5"></circle><path d="M15 15h34M15 32h34M15 49h34M15 15v34M32 15v34M49 15v34"></path></svg></div><h3>Metals</h3><p>Reactivity · extraction · corrosion</p><div class="card-meta"><span>58 questions</span><span>Start practice →</span></div><div class="progress"><i style="width:0%"></i></div></a><a class="topic-card rose available" aria-label="Open Acids and Bases practice" href="acids-and-bases.html"><div class="card-top"><span class="topic-number">TOPIC 04</span><span class="availability">AVAILABLE</span></div><div class="topic-icon"><svg viewBox="0 0 64 64" role="img" aria-hidden="true"><path d="M26 8h12M28 8v22L15 51c-2 3 0 6 4 6h26c4 0 6-3 4-6L36 30V8"></path><path class="liquid" d="M20 46h24l5 8H15z"></path><path d="M22 43h20"></path><circle class="fill" cx="29" cy="49" r="2"></circle><circle class="fill" cx="37" cy="52" r="2"></circle></svg></div><h3>Acids and Bases</h3><p>pH · neutralisation · titration</p><div class="card-meta"><span>69 questions</span><span>Start practice →</span></div><div class="progress"><i style="width:0%"></i></div></a><a class="topic-card violet available" aria-label="Open Fossil Fuels &amp; Carbon practice" href="fossil-fuels-carbon.html"><div class="card-top"><span class="topic-number">TOPIC 05</span><span class="availability">AVAILABLE</span></div><div class="topic-icon"><svg viewBox="0 0 64 64" role="img" aria-hidden="true"><path d="M20 12 44 12 56 32 44 52 20 52 8 32z"></path><circle cx="32" cy="32" r="13"></circle><path d="M44 12l12 20M20 52 8 32M20 12h24"></path></svg></div><h3>Fossil Fuels &amp; Carbon</h3><p>Petroleum · fuels · organic reactions · polymers</p><div class="card-meta"><span>45 questions</span><span>Start practice →</span></div><div class="progress"><i style="width:0%"></i></div></a><a class="topic-card cyan available" aria-label="Open Microscopic World II practice" href="microscopic-world-ii.html"><div class="card-top"><span class="topic-number">TOPIC 06</span><span class="availability">AVAILABLE</span></div><div class="topic-icon"><svg viewBox="0 0 64 64" role="img" aria-hidden="true"><ellipse cx="32" cy="32" rx="25" ry="10"></ellipse><ellipse cx="32" cy="32" rx="25" ry="10" transform="rotate(60 32 32)"></ellipse><ellipse cx="32" cy="32" rx="25" ry="10" transform="rotate(120 32 32)"></ellipse><circle class="fill" cx="32" cy="32" r="5"></circle><circle class="fill" cx="56" cy="32" r="3"></circle></svg></div><h3>Microscopic World II</h3><p>Molecular shape · polarity · intermolecular forces</p><div class="card-meta"><span>23 questions</span><span>Start practice →</span></div><div class="progress"><i style="width:0%"></i></div></a><a class="topic-card orange available" aria-label="Open Redox, Cells &amp; Electrolysis practice" href="redox-reactions-cells-electrolysis.html"><div class="card-top"><span class="topic-number">TOPIC 07</span><span class="availability">AVAILABLE</span></div><div class="topic-icon"><svg viewBox="0 0 64 64" role="img" aria-hidden="true"><path d="M9 22h38l-8-8M55 42H17l8 8"></path><circle class="fill" cx="14" cy="42" r="5"></circle><circle class="fill" cx="50" cy="22" r="5"></circle><text x="9" y="13">e−</text><text x="43" y="57">e−</text></svg></div><h3>Redox, Cells &amp; Electrolysis</h3><p>Oxidation states · cells · electrolysis</p><div class="card-meta"><span>63 questions</span><span>Start practice →</span></div><div class="progress"><i style="width:0%"></i></div></a><a class="topic-card lime available" aria-label="Open Chemical Reactions &amp; Energy practice" href="chemical-reactions-energy.html"><div class="card-top"><span class="topic-number">TOPIC 08</span><span class="availability">AVAILABLE</span></div><div class="topic-icon"><svg viewBox="0 0 64 64" role="img" aria-hidden="true"><path d="M8 53V9M8 53h48"></path><path d="M11 45c8 0 10-31 23-31s11 25 22 25"></path><path d="M38 39h18"></path><text x="12" y="14">E</text></svg></div><h3>Chemical Reactions &amp; Energy</h3><p>Enthalpy · calorimetry · Hess’s law</p><div class="card-meta"><span>33 questions</span><span>Start practice →</span></div><div class="progress"><i style="width:0%"></i></div></a><a class="topic-card blue available" aria-label="Open Rate of Reaction practice" href="rate-of-reaction.html"><div class="card-top"><span class="topic-number">TOPIC 09</span><span class="availability">AVAILABLE</span></div><div class="topic-icon"><svg viewBox="0 0 64 64" role="img" aria-hidden="true"><circle class="fill" cx="15" cy="18" r="5"></circle><circle class="fill" cx="49" cy="46" r="5"></circle><circle cx="44" cy="14" r="4"></circle><circle cx="20" cy="49" r="4"></circle><path d="M20 21l14 8M44 42 31 34M25 45l10-8M40 18l-6 8"></path></svg></div><h3>Rate of Reaction</h3><p>Collision theory · kinetics</p><div class="card-meta"><span>34 questions</span><span>Start practice →</span></div><div class="progress"><i style="width:0%"></i></div></a><a class="topic-card pink available" aria-label="Open Chemical Equilibrium practice" href="chemical-equilibrium.html"><div class="card-top"><span class="topic-number">TOPIC 10</span><span class="availability">AVAILABLE</span></div><div class="topic-icon"><svg viewBox="0 0 64 64" role="img" aria-hidden="true"><path d="M8 23h44l-9-9M56 41H12l9 9"></path><text x="10" y="14">A + B</text><text x="35" y="57">C + D</text></svg></div><h3>Chemical Equilibrium</h3><p>Dynamic systems · Kc · Le Chatelier</p><div class="card-meta"><span>37 questions</span><span>Start practice →</span></div><div class="progress"><i style="width:0%"></i></div></a><a class="topic-card purple available" aria-label="Open Chemistry of Carbon Compounds practice" href="chemistry-of-carbon-compounds.html"><div class="card-top"><span class="topic-number">TOPIC 11</span><span class="availability">AVAILABLE</span></div><div class="topic-icon"><svg viewBox="0 0 64 64" role="img" aria-hidden="true"><path d="M20 12 44 12 56 32 44 52 20 52 8 32z"></path><circle cx="32" cy="32" r="13"></circle><path d="M44 12l12 20M20 52 8 32M20 12h24"></path></svg></div><h3>Chemistry of Carbon Compounds</h3><p>Functional groups · isomerism · synthesis · polymers</p><div class="card-meta"><span>89 questions</span><span>Start practice →</span></div><div class="progress"><i style="width:0%"></i></div></a><a class="topic-card teal available" aria-label="Open Patterns in the Chemical World practice" href="patterns-in-the-chemical-world.html"><div class="card-top"><span class="topic-number">TOPIC 12</span><span class="availability">AVAILABLE</span></div><div class="topic-icon"><svg viewBox="0 0 64 64" role="img" aria-hidden="true"><path d="M9 12h46v40H9zM9 25h46M9 38h46M22 12v40M35 12v40M48 12v40"></path><path class="fill" d="M35 25h13v13H35z"></path></svg></div><h3>Patterns in the Chemical World</h3><p>Periodicity · oxides · transition metals</p><div class="card-meta"><span>27 questions</span><span>Start practice →</span></div><div class="progress"><i style="width:0%"></i></div></a></div></section><section class="visual-section" id="visuals"><div class="visual-heading"><div><p class="kicker">CHEMISTRY MADE VISIBLE</p><h2>See the science behind every answer.</h2></div><p>Purpose-built diagrams connect macroscopic observations, particle-level models and symbolic equations.</p></div><div class="visual-grid"><figure class="science-figure atom-figure"><div class="figure-label"><span>01</span><b>ATOMIC STRUCTURE</b></div><svg viewBox="0 0 340 230" role="img" aria-labelledby="atom-title atom-desc"><title id="atom-title">Bohr model of a sodium atom</title><desc id="atom-desc">A nucleus with eleven protons and twelve neutrons, surrounded by electron shells containing two, eight and one electrons.</desc><circle class="shell" cx="132" cy="116" r="34"></circle><circle class="shell" cx="132" cy="116" r="65"></circle><circle class="shell" cx="132" cy="116" r="96"></circle><circle class="nucleus" cx="132" cy="116" r="22"></circle><text class="nucleus-text" x="132" y="112">11p⁺</text><text class="nucleus-text small" x="132" y="126">12n⁰</text><g class="electron"><circle cx="132" cy="82" r="5"></circle><circle cx="132" cy="150" r="5"></circle><circle cx="132" cy="51" r="5"></circle><circle cx="132" cy="181" r="5"></circle><circle cx="67" cy="116" r="5"></circle><circle cx="197" cy="116" r="5"></circle><circle cx="86" cy="70" r="5"></circle><circle cx="178" cy="70" r="5"></circle><circle cx="86" cy="162" r="5"></circle><circle cx="178" cy="162" r="5"></circle><circle cx="228" cy="116" r="5"></circle></g><path class="leader" d="M228 116h48"></path><text class="annotation" x="282" y="112">1 valence</text><text class="annotation" x="282" y="126">electron</text><path class="leader" d="M154 108h83"></path><text class="annotation" x="244" y="92">nucleus</text></svg><figcaption><b>Electron arrangement: 2,8,1</b><span>Sodium readily loses its outer electron to form Na⁺.</span></figcaption></figure><figure class="science-figure ph-figure"><div class="figure-label"><span>02</span><b>ACIDS &amp; BASES</b></div><div class="ph-equation">HCl(aq) + NaOH(aq) <b>→</b> NaCl(aq) + H₂O(l)</div><div class="ph-scale" aria-label="pH scale from zero to fourteen"><div class="ph-numbers"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span></div><div class="ph-colours"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="ph-zones"><span>ACIDIC</span><span>NEUTRAL</span><span>ALKALINE</span></div></div><div class="indicator-row"><span><i class="acid-drop"></i>strong acid</span><span><i class="neutral-drop"></i>pure water</span><span><i class="base-drop"></i>strong alkali</span></div><figcaption><b>pH is a logarithmic scale</b><span>A change of one pH unit represents a tenfold change in [H⁺].</span></figcaption></figure><figure class="science-figure titration-figure"><div class="figure-label"><span>03</span><b>VOLUMETRIC ANALYSIS</b></div><svg viewBox="0 0 360 240" role="img" aria-labelledby="titration-title titration-desc"><title id="titration-title">Acid-base titration apparatus</title><desc id="titration-desc">A burette containing sodium hydroxide is clamped above a conical flask containing hydrochloric acid and indicator.</desc><path class="stand" d="M55 24v190M22 214h76M55 62h94"></path><path class="clamp" d="M130 50h29v24h-29"></path><path class="glass" d="M155 16h20v116h-20zM158 132h14v14M162 146v17"></path><path class="solution" d="M159 27h12v86h-12z"></path><path class="tap" d="M147 137h36M176 132v11"></path><circle class="drop" cx="165" cy="176" r="4"></circle><path class="glass flask" d="M140 223h50c8 0 11-7 7-13l-18-30v-20h-28v20l-18 30c-4 6-1 13 7 13z"></path><path class="flask-liquid" d="M139 207h52l7 12h-66z"></path><path class="leader" d="M177 45h64"></path><text class="annotation" x="248" y="42">burette</text><text class="annotation minor" x="248" y="56">NaOH(aq)</text><path class="leader" d="M195 202h48"></path><text class="annotation" x="249" y="198">conical flask</text><text class="annotation minor" x="249" y="212">HCl + indicator</text></svg><figcaption><b>Read the lower meniscus at eye level</b><span>Add titrant dropwise near the end-point while swirling.</span></figcaption></figure><figure class="science-figure energy-figure"><div class="figure-label"><span>04</span><b>REACTION ENERGY</b></div><svg viewBox="0 0 360 235" role="img" aria-labelledby="energy-title energy-desc"><title id="energy-title">Exothermic reaction energy profile</title><desc id="energy-desc">A graph of potential energy against reaction progress, showing activation energy and a negative enthalpy change.</desc><path class="axis" d="M48 18v177h280M48 195l-7-11M48 195l9-8M328 195l-11-7M328 195l-10 8"></path><text class="axis-label" x="10" y="116" transform="rotate(-90 10 116)">Potential energy</text><text class="axis-label" x="210" y="224">Reaction progress</text><path class="profile" d="M60 148C105 148 112 141 137 82c20-48 43-55 67-7 24 47 44 82 111 82"></path><path class="level" d="M60 148h57M264 157h51"></path><path class="measure" d="M104 145V84M98 91l6-8 6 8"></path><text class="annotation" x="62" y="102">Eₐ</text><path class="measure enthalpy" d="M290 148v9M284 151l6 7 6-7"></path><text class="annotation" x="300" y="145">ΔH &lt; 0</text><text class="annotation minor" x="61" y="164">reactants</text><text class="annotation minor" x="266" y="174">products</text></svg><figcaption><b>Exothermic profile</b><span>Products have lower potential energy than reactants.</span></figcaption></figure></div></section><section class="method-section" id="how-it-works"><div class="method-copy"><p class="kicker">STUDY WITH PURPOSE</p><h2>A clearer route from practice to progress.</h2><p>Every available topic follows the same focused learning cycle, so students always know what to do next.</p></div><div class="method-grid"><article><span>01</span><b>Choose a topic</b><p>Work through a carefully sorted set of HKDSE questions.</p></article><article><span>02</span><b>Check instantly</b><p>Get immediate feedback while the thinking is still fresh.</p></article><article><span>03</span><b>Learn from marking</b><p>Review the principle, reasoning and common distractors.</p></article></div></section><section class="resource-strip" id="resources"><div><p class="kicker">BUILT FOR EFFECTIVE REVISION</p><h2>Everything students need, kept together.</h2></div><div class="resource-list"><span><b>01</b> Fully retyped questions</span><span><b>02</b> Clear original diagrams</span><span><b>03</b> Detailed teacher marking</span><span><b>04</b> Progress saved automatically</span></div></section><footer><div><b>CHEMISTRY.</b><span>HKDSE Revision Hub</span></div><span>Focused learning · 2012–2026</span></footer></main><script>
-(() => {
-  const cards = [...document.querySelectorAll('.topic-card')];
-  const search = document.getElementById('topicSearch');
-  const filters = [...document.querySelectorAll('.filters button')];
-  let mode = 'all';
-  const keys = {
-    'TOPIC 01':'planet-earth-progress-v1','TOPIC 02':'microscopic-world-i-progress-v1',
-    'TOPIC 03':'metals-progress-v1','TOPIC 04':'acids-bases-progress-v1',
-    'TOPIC 07':'redox-cells-electrolysis-progress-v1',
-    'TOPIC 08':'chemical-reactions-energy-progress-v1','TOPIC 09':'rate-of-reaction-progress-v1','TOPIC 10':'chemical-equilibrium-progress-v1',
-    'TOPIC 11':'chemistry-carbon-compounds-progress-v1'
-  };
-  const totals = {'TOPIC 01':14,'TOPIC 02':35,'TOPIC 03':58,'TOPIC 04':69,'TOPIC 07':63,'TOPIC 08':33,'TOPIC 09':34,'TOPIC 10':37,'TOPIC 11':89};
-  cards.forEach(card => {
-    const label = card.querySelector('.topic-number')?.textContent?.trim() || '';
-    const key = keys[label];
-    if (!key) return;
-    try {
-      const saved = JSON.parse(localStorage.getItem(key) || '{}');
-      const completed = Object.values(saved).filter(v => v && typeof v === 'object' && v.checked).length;
-      const pct = Math.round(completed / totals[label] * 100);
-      card.dataset.progress = String(pct);
-      const bar = card.querySelector('.progress i'); if (bar) bar.style.width = pct + '%';
-      const meta = card.querySelector('.card-meta span:last-child'); if (meta && pct) meta.textContent = pct + '% complete';
-    } catch (_) {}
-  });
-  const apply = () => {
-    const q = (search?.value || '').toLowerCase();
-    cards.forEach(card => {
-      const match = card.textContent.toLowerCase().includes(q);
-      const available = card.classList.contains('available');
-      const progress = Number(card.dataset.progress || 0);
-      card.hidden = !(match && (mode === 'all' || (mode === 'available' ? available : progress > 0)));
-    });
-  };
-  search?.addEventListener('input', apply);
-  filters.forEach((button, index) => button.addEventListener('click', () => {
-    filters.forEach(b => b.classList.remove('selected')); button.classList.add('selected');
-    mode = index === 0 ? 'all' : index === 1 ? 'available' : 'progress'; apply();
-  }));
-  document.getElementById('browseTopics')?.addEventListener('click', () => document.getElementById('topics')?.scrollIntoView({behavior:'smooth'}));
-  document.querySelectorAll('[data-open]').forEach(button => button.addEventListener('click', () => location.href = button.dataset.open));
-})();</script><script src="student-tools.js?v=20260907b"></script></body></html>
+  <main>
+    <section class="dashboard" aria-labelledby="hubTitle">
+      <article class="start-card">
+        <p class="eyebrow">YOUR HKDSE CHEMISTRY REVISION SPACE</p>
+        <h1 id="hubTitle">Know it. See it. <em>Use it.</em></h1>
+        <p>Move from concise chapter notes to by-topic questions, visual models and focused correction. Your work is saved so every session has a clear next step.</p>
+        <div class="hero-actions">
+          <a class="button primary" id="smartStart" href="revision-notes.html">Start a 10-minute revision <span>→</span></a>
+          <a class="button secondary" href="#topics">Choose a chapter</a>
+        </div>
+        <div class="learning-loop" aria-label="Recommended revision cycle">
+          <div><b>01 · Recall</b><span>Quick chapter notes</span></div>
+          <div><b>02 · Practise</b><span>HKDSE questions</span></div>
+          <div><b>03 · Correct</b><span>Mistake coaching</span></div>
+          <div><b>04 · Recheck</b><span>Mastery over time</span></div>
+        </div>
+      </article>
+
+      <aside class="progress-card" aria-labelledby="progressTitle">
+        <div class="progress-card-header"><p>MY REVISION SNAPSHOT</p><span class="level-chip" id="levelChip">LEVEL 1</span></div>
+        <h2 id="progressTitle">Start building momentum.</h2>
+        <p class="sub" id="progressMessage">Complete a note, game or question set and your progress will appear here.</p>
+        <div class="metric-grid">
+          <div class="metric"><b id="weekSessions">0</b><span>sessions this week</span></div>
+          <div class="metric"><b id="accuracy">—</b><span>recent accuracy</span></div>
+          <div class="metric"><b id="streak">0</b><span>day revision streak</span></div>
+          <div class="metric"><b id="openMistakes">0</b><span>questions to revisit</span></div>
+        </div>
+        <div class="week-line"><span>Weekly goal</span><strong id="weeklyGoalText">0 / 3</strong></div>
+        <div class="week-track"><i id="weeklyGoalBar"></i></div>
+        <a class="smart-start" id="priorityLink" href="mistakes.html"><span>RECOMMENDED NEXT</span><b id="priorityText">Open the progress monitor and set a weekly target →</b></a>
+      </aside>
+    </section>
+
+    <section class="section" aria-labelledby="modeTitle">
+      <div class="section-head"><div><p class="kicker">CHOOSE HOW TO REVISE</p><h2 id="modeTitle">One Hub, six focused modes.</h2></div><p>Use the mode that matches your goal today—understand, practise, visualise, challenge yourself or repair a weakness.</p></div>
+      <div class="mode-grid">
+        <a class="mode-card" href="revision-notes.html"><span class="mode-icon">NOTE</span><h3>Quick Notes</h3><p>Core concepts, equations, exam traps and 60-second recall for every chapter.</p><b>Choose a chapter →</b></a>
+        <a class="mode-card" href="#topics"><span class="mode-icon">Q</span><h3>Topic Practice</h3><p>Work through clearly sorted HKDSE questions with immediate checking.</p><b>Browse 12 topics →</b></a>
+        <a class="mode-card" href="3d-games.html"><span class="mode-icon">3D</span><h3>Visual Lab</h3><p>Rotate molecules, inspect mechanisms and explore chemistry spatially.</p><b>Open the laboratory →</b></a>
+        <a class="mode-card" href="games.html"><span class="mode-icon">XP</span><h3>Chemistry Arcade</h3><p>Build speed and recall through curriculum-linked interactive challenges.</p><b>Play a challenge →</b></a>
+        <a class="mode-card" href="mistakes.html"><span class="mode-icon">FIX</span><h3>Mistake Coach</h3><p>Identify why an answer went wrong and follow a targeted recovery plan.</p><b>Repair weaknesses →</b></a>
+        <a class="mode-card" href="mistakes.html"><span class="mode-icon">%</span><h3>Progress Monitor</h3><p>Check weekly activity, accuracy, mastery and spaced-review priorities.</p><b>View my progress →</b></a>
+      </div>
+    </section>
+
+    <section class="section topic-directory" id="topics" aria-labelledby="topicsTitle">
+      <div class="section-head">
+        <div><p class="kicker">CHAPTER PATHWAY</p><h2 id="topicsTitle">All 12 compulsory topics.</h2></div>
+        <div class="topic-toolbar">
+          <label class="search"><span>⌕</span><input id="topicSearch" type="search" placeholder="Search topic or concept" aria-label="Search chemistry topics"></label>
+          <div class="filters" aria-label="Filter chapter groups">
+            <button class="selected" type="button" data-filter="all">All</button>
+            <button type="button" data-filter="foundation">Foundations</button>
+            <button type="button" data-filter="application">Applications</button>
+            <button type="button" data-filter="physical">Physical</button>
+            <button type="button" data-filter="advanced">Advanced</button>
+          </div>
+        </div>
+      </div>
+
+      <p class="topic-key"><span><b>N</b>Quick Notes</span><span><b>Q</b>Practice Questions</span></p>
+
+      <div class="chapter-groups" id="chapterGroups">
+        <section class="chapter-group foundation" data-group="foundation"><div class="group-head"><b>Foundations</b><span>TOPICS I–IV</span></div><div class="chapter-list">
+          <article class="chapter-card" data-search="planet earth atmosphere rocks water"><span class="chapter-number">I</span><span class="chapter-copy"><b>Planet Earth</b><span>Atmosphere · oceans · rocks</span></span><span class="chapter-actions"><a href="revision-notes.html?topic=1" aria-label="Planet Earth notes">N</a><a href="planet-earth.html" aria-label="Planet Earth practice">Q</a></span></article>
+          <article class="chapter-card" data-search="microscopic world i atomic structure bonding formula"><span class="chapter-number">II</span><span class="chapter-copy"><b>Microscopic World I</b><span>Atoms · bonding · formulae</span></span><span class="chapter-actions"><a href="revision-notes.html?topic=2" aria-label="Microscopic World I notes">N</a><a href="microscopic-world-i.html" aria-label="Microscopic World I practice">Q</a></span></article>
+          <article class="chapter-card" data-search="metals reactivity extraction corrosion"><span class="chapter-number">III</span><span class="chapter-copy"><b>Metals</b><span>Reactivity · extraction · corrosion</span></span><span class="chapter-actions"><a href="revision-notes.html?topic=3" aria-label="Metals notes">N</a><a href="metals.html" aria-label="Metals practice">Q</a></span></article>
+          <article class="chapter-card" data-search="acids bases salts ph titration neutralisation"><span class="chapter-number">IV</span><span class="chapter-copy"><b>Acids and Bases</b><span>pH · salts · titration</span></span><span class="chapter-actions"><a href="revision-notes.html?topic=4" aria-label="Acids and Bases notes">N</a><a href="acids-and-bases.html" aria-label="Acids and Bases practice">Q</a></span></article>
+        </div></section>
+
+        <section class="chapter-group application" data-group="application"><div class="group-head"><b>Applications</b><span>TOPICS V–VII</span></div><div class="chapter-list">
+          <article class="chapter-card" data-search="fossil fuels carbon petroleum combustion polymers"><span class="chapter-number">V</span><span class="chapter-copy"><b>Fossil Fuels and Carbon</b><span>Petroleum · fuels · polymers</span></span><span class="chapter-actions"><a href="revision-notes.html?topic=5" aria-label="Fossil Fuels notes">N</a><a href="fossil-fuels-carbon.html" aria-label="Fossil Fuels practice">Q</a></span></article>
+          <article class="chapter-card" data-search="microscopic world ii shape polarity intermolecular forces"><span class="chapter-number">VI</span><span class="chapter-copy"><b>Microscopic World II</b><span>Shape · polarity · forces</span></span><span class="chapter-actions"><a href="revision-notes.html?topic=6" aria-label="Microscopic World II notes">N</a><a href="microscopic-world-ii.html" aria-label="Microscopic World II practice">Q</a></span></article>
+          <article class="chapter-card" data-search="redox reactions cells electrolysis oxidation reduction"><span class="chapter-number">VII</span><span class="chapter-copy"><b>Redox, Cells and Electrolysis</b><span>Oxidation · cells · electrolysis</span></span><span class="chapter-actions"><a href="revision-notes.html?topic=7" aria-label="Redox notes">N</a><a href="redox-reactions-cells-electrolysis.html" aria-label="Redox practice">Q</a></span></article>
+        </div></section>
+
+        <section class="chapter-group physical" data-group="physical"><div class="group-head"><b>Physical Chemistry</b><span>TOPICS VIII–X</span></div><div class="chapter-list">
+          <article class="chapter-card" data-search="chemical reactions energy enthalpy hess calorimetry"><span class="chapter-number">VIII</span><span class="chapter-copy"><b>Chemical Reactions and Energy</b><span>Enthalpy · calorimetry · Hess</span></span><span class="chapter-actions"><a href="revision-notes.html?topic=8" aria-label="Energetics notes">N</a><a href="chemical-reactions-energy.html" aria-label="Energetics practice">Q</a></span></article>
+          <article class="chapter-card" data-search="rate reaction collision kinetics catalyst"><span class="chapter-number">IX</span><span class="chapter-copy"><b>Rate of Reaction</b><span>Collision theory · kinetics</span></span><span class="chapter-actions"><a href="revision-notes.html?topic=9" aria-label="Rate notes">N</a><a href="rate-of-reaction.html" aria-label="Rate practice">Q</a></span></article>
+          <article class="chapter-card" data-search="chemical equilibrium kc le chatelier dynamic"><span class="chapter-number">X</span><span class="chapter-copy"><b>Chemical Equilibrium</b><span>Kc · Le Chatelier · systems</span></span><span class="chapter-actions"><a href="revision-notes.html?topic=10" aria-label="Equilibrium notes">N</a><a href="chemical-equilibrium.html" aria-label="Equilibrium practice">Q</a></span></article>
+        </div></section>
+
+        <section class="chapter-group advanced" data-group="advanced"><div class="group-head"><b>Advanced Connections</b><span>TOPICS XI–XII</span></div><div class="chapter-list">
+          <article class="chapter-card" data-search="chemistry carbon compounds organic functional groups isomerism synthesis mechanism"><span class="chapter-number">XI</span><span class="chapter-copy"><b>Chemistry of Carbon Compounds</b><span>Groups · isomerism · synthesis</span></span><span class="chapter-actions"><a href="revision-notes.html?topic=11" aria-label="Organic chemistry notes">N</a><a href="chemistry-of-carbon-compounds.html" aria-label="Organic chemistry practice">Q</a></span></article>
+          <article class="chapter-card" data-search="patterns chemical world periodicity oxides transition metals complexes ligand"><span class="chapter-number">XII</span><span class="chapter-copy"><b>Patterns in the Chemical World</b><span>Periodicity · oxides · complexes</span></span><span class="chapter-actions"><a href="revision-notes.html?topic=12" aria-label="Patterns notes">N</a><a href="patterns-in-the-chemical-world.html" aria-label="Patterns practice">Q</a></span></article>
+        </div></section>
+      </div>
+      <p class="topic-empty" id="topicEmpty">No topic matches that search. Try a chapter name or keyword such as “equilibrium”, “organic” or “redox”.</p>
+    </section>
+
+    <section class="featured" aria-labelledby="labsTitle">
+      <div class="featured-head"><div><p class="kicker">FEATURED INTERACTIVE LABS</p><h2 id="labsTitle">Chemistry you can manipulate.</h2></div><p>Use three-dimensional models and mission-style challenges when flat notes are not enough.</p></div>
+      <div class="lab-grid">
+        <a class="lab-card feature" href="3d-games.html?lab=organic"><span class="lab-tag">TOPIC XI · FULL PATHWAY</span><h3>Organic Chemistry Revision Lab</h3><p>Structures and naming, isomerism, multi-step synthesis, ChemStrike and animated reaction mechanisms.</p><b>Enter the organic laboratory →</b></a>
+        <a class="lab-card" href="ligand-exchange.html"><span class="lab-tag">TOPIC XII · 3D MODEL</span><h3>Copper Ligand Exchange</h3><p>Follow the colour changes, rotate the complex and visualise dative bond formation.</p><b>Open the ligand lab →</b></a>
+        <a class="lab-card" href="games.html"><span class="lab-tag">12 TOPICS · GAME MODE</span><h3>Chemistry Arcade</h3><p>Short challenges for recall, classification, equations and practical chemistry.</p><b>Choose a mission →</b></a>
+      </div>
+    </section>
+
+    <section class="section cycle" aria-labelledby="cycleTitle">
+      <div class="cycle-copy"><p class="kicker">A REVISION SYSTEM, NOT A FILE LIST</p><h2 id="cycleTitle">Every mistake becomes a next step.</h2><p>The Hub connects learning, practice and correction. Students can save difficult questions, see repeated weaknesses, practise again and check whether recall is stable later.</p></div>
+      <div class="cycle-steps">
+        <article><span>01</span><b>Learn</b><p>Recall the key rule, equation or structure.</p></article>
+        <article><span>02</span><b>Apply</b><p>Answer a focused HKDSE-style question.</p></article>
+        <article><span>03</span><b>Diagnose</b><p>Record the exact reason for the error.</p></article>
+        <article><span>04</span><b>Master</b><p>Retry now and complete a delayed check.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer><span><b>HKDSE CHEMISTRY HUB</b> · Structured self-revision</span><span>Quick Notes · Practice · Visual Labs · Progress</span></footer>
+
+  <script src="student-tools.js?v=20260907b"></script>
+  <script>
+  (()=>{
+    'use strict';
+    const cards=[...document.querySelectorAll('.chapter-card')];
+    const groups=[...document.querySelectorAll('.chapter-group')];
+    const search=document.getElementById('topicSearch');
+    const filters=[...document.querySelectorAll('[data-filter]')];
+    let activeFilter='all';
+
+    function filterTopics(){
+      const query=(search.value||'').trim().toLowerCase();
+      let shown=0;
+      groups.forEach(group=>{
+        const groupAllowed=activeFilter==='all'||group.dataset.group===activeFilter;
+        let groupShown=0;
+        group.querySelectorAll('.chapter-card').forEach(card=>{
+          const matches=!query||(card.dataset.search+' '+card.textContent).toLowerCase().includes(query);
+          card.hidden=!(groupAllowed&&matches);
+          if(!card.hidden){groupShown++;shown++}
+        });
+        group.hidden=groupShown===0;
+      });
+      document.getElementById('topicEmpty').style.display=shown?'none':'block';
+    }
+    search.addEventListener('input',filterTopics);
+    filters.forEach(button=>button.addEventListener('click',()=>{
+      activeFilter=button.dataset.filter;
+      filters.forEach(item=>item.classList.toggle('selected',item===button));
+      filterTopics();
+    }));
+
+    if(window.ChemistryTools){
+      const report=ChemistryTools.progressReport();
+      const profile=ChemistryTools.profile();
+      const open=ChemistryTools.countOpen();
+      const goal=Math.max(1,Number(report.weeklyGoal)||3);
+      const level=Math.floor((Number(profile.xp)||0)/100)+1;
+      document.getElementById('navMistakes').textContent=open;
+      document.getElementById('levelChip').textContent='LEVEL '+level+' · '+(Number(profile.xp)||0)+' XP';
+      document.getElementById('weekSessions').textContent=report.weekSessions||0;
+      document.getElementById('accuracy').textContent=report.accuracy===null?'—':report.accuracy+'%';
+      document.getElementById('streak').textContent=report.streak||0;
+      document.getElementById('openMistakes').textContent=open;
+      document.getElementById('weeklyGoalText').textContent=(report.weekSessions||0)+' / '+goal;
+      document.getElementById('weeklyGoalBar').style.width=Math.min(100,Math.round((report.weekSessions||0)/goal*100))+'%';
+      if(report.weekSessions){
+        document.getElementById('progressTitle').textContent=report.weekSessions>=goal?'Weekly goal reached.':'Keep the revision streak moving.';
+        document.getElementById('progressMessage').textContent=report.weekSessions>=goal?'Good work—use a short retrieval check to keep the knowledge active.':'One focused session is more useful than unfocused rereading.';
+      }
+      const assessment=ChemistryTools.assessMistakes();
+      if(assessment&&assessment.priority){
+        const focus=assessment.priority.coach&&assessment.priority.coach.focus?assessment.priority.coach.focus:(assessment.priority.topic||'your highest-priority weakness');
+        document.getElementById('priorityText').textContent='Repair '+focus+' →';
+        document.getElementById('smartStart').textContent='Fix my top weakness →';
+        document.getElementById('smartStart').href='mistakes.html';
+      }else if(report.activities&&report.activities.length){
+        document.getElementById('priorityText').textContent='Review recent work and choose the next chapter →';
+      }
+    }
+  })();
+  </script>
+</body>
+</html>
