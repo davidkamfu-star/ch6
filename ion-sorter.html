@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ion Sorter | Chemistry Arcade</title>
+  <meta name="description" content="An interactive HKDSE Chemistry game for sorting ions by type and charge, matching formulae with names, and recalling aqueous-ion colours.">
+  <link rel="stylesheet" href="student-tools.css?v=20260907b">
+  <style>
+    :root{
+      color-scheme:dark;
+      --ink:#eefbff;--muted:#9db4bf;--panel:#102936;--panel-2:#0b202b;
+      --line:rgba(173,225,239,.15);--cyan:#5fe5d1;--blue:#65b8ff;
+      --amber:#ffc661;--red:#ff687a;--green:#79e8a7;--shadow:0 22px 70px rgba(0,0,0,.34)
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;min-height:100vh;background:
+      radial-gradient(circle at 15% 0,rgba(25,150,165,.18),transparent 30rem),
+      radial-gradient(circle at 90% 12%,rgba(78,95,219,.14),transparent 28rem),
+      #06151d;color:var(--ink);font:500 16px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    button,input{font:inherit}
+    button,a{touch-action:manipulation}
+    button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #fff;outline-offset:3px}
+    .topbar{min-height:64px;padding:12px clamp(16px,4vw,48px);display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line);background:rgba(5,18,25,.9);backdrop-filter:blur(16px);position:sticky;top:0;z-index:20}
+    .brand{color:#fff;text-decoration:none;font-weight:950;letter-spacing:.14em;font-size:.88rem}
+    .topnav{display:flex;align-items:center;gap:8px}
+    .topnav a{color:#bad0d8;text-decoration:none;font-weight:800;font-size:.86rem;padding:9px 12px;border-radius:10px}
+    .topnav a:hover{background:rgba(255,255,255,.07);color:#fff}
+    .shell{width:min(1380px,calc(100% - 32px));margin:0 auto;padding:22px 0 64px}
+    .mission-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:end;margin:8px 0 18px}
+    .eyebrow{margin:0 0 5px;color:var(--cyan);font-weight:950;font-size:.78rem;letter-spacing:.15em}
+    h1{margin:0;font:800 clamp(2.05rem,5vw,4rem)/.98 Georgia,serif;letter-spacing:-.035em}
+    .mission-head>div>p:last-child{max-width:700px;margin:10px 0 0;color:var(--muted)}
+    .rank{display:flex;gap:10px;align-items:center;padding:12px 15px;border:1px solid var(--line);border-radius:16px;background:rgba(17,42,54,.72)}
+    .rank-badge{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--blue));color:#06202b;font-weight:1000}
+    .rank span{display:block;color:var(--muted);font-size:.72rem;font-weight:900;letter-spacing:.1em}.rank b{font-size:1.1rem}
+    .mission-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+    .mission-tab{min-height:78px;padding:13px 14px;text-align:left;border:1px solid var(--line);border-radius:15px;background:#0b202b;color:var(--muted);cursor:pointer;transition:.18s ease}
+    .mission-tab:hover{transform:translateY(-2px);border-color:rgba(95,229,209,.45)}
+    .mission-tab.active{background:linear-gradient(135deg,rgba(40,141,154,.35),rgba(62,83,157,.25));border-color:var(--cyan);color:#fff;box-shadow:0 0 0 1px rgba(95,229,209,.18)}
+    .mission-tab small{display:block;color:var(--cyan);font-size:.68rem;font-weight:950;letter-spacing:.12em}.mission-tab b{display:block;margin-top:4px;font-size:.94rem}
+    .game-frame{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:16px;align-items:start}
+    .arena{min-height:650px;border:1px solid var(--line);border-radius:24px;background:
+      linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px),
+      linear-gradient(160deg,#102d3a,#081c26 68%);background-size:34px 34px,34px 34px,auto;box-shadow:var(--shadow);overflow:hidden}
+    .hud{display:grid;grid-template-columns:repeat(5,1fr);border-bottom:1px solid var(--line);background:rgba(3,14,20,.52)}
+    .hud-item{padding:13px 14px;border-right:1px solid var(--line)}.hud-item:last-child{border-right:0}
+    .hud-item span{display:block;color:#7f9aa5;font-size:.66rem;font-weight:950;letter-spacing:.12em}.hud-item b{display:block;margin-top:2px;font-size:1.04rem}
+    .hud-item .lives{color:var(--red);letter-spacing:.1em}
+    .progress-track{height:5px;background:rgba(255,255,255,.06)}.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--blue));transition:width .3s ease}
+    .playfield{min-height:560px;padding:clamp(20px,4vw,46px);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+    .instruction{margin:0;color:var(--cyan);font-size:.76rem;font-weight:950;letter-spacing:.13em;text-transform:uppercase}
+    .prompt-line{margin:9px 0 20px;max-width:720px;font:700 clamp(1.35rem,3vw,2rem)/1.2 Georgia,serif}
+    .ion-card{position:relative;display:grid;place-items:center;width:min(310px,82vw);min-height:185px;padding:25px;margin:0 auto 28px;border:1px solid rgba(255,255,255,.18);border-radius:26px;background:
+      radial-gradient(circle at 28% 18%,rgba(255,255,255,.19),transparent 22%),
+      linear-gradient(145deg,#234f60,#122e3a);box-shadow:0 22px 40px rgba(0,0,0,.35),inset 0 1px rgba(255,255,255,.16);cursor:grab;user-select:none}
+    .ion-card:active{cursor:grabbing}.ion-card.dragging{opacity:.55;transform:scale(.97)}
+    .ion-card::after{content:"ION INTEL";position:absolute;top:13px;right:15px;color:rgba(255,255,255,.42);font-size:.62rem;font-weight:950;letter-spacing:.13em}
+    .formula{font:800 clamp(3rem,8vw,5.3rem)/1 Georgia,serif;letter-spacing:-.02em}.formula sup,.formula sub{font-size:.48em}
+    .card-name{margin-top:11px;color:#bdd0d8;font-size:.92rem}
+    .choices{display:grid;grid-template-columns:repeat(2,minmax(170px,260px));gap:12px;width:min(640px,100%)}
+    .choices.six{grid-template-columns:repeat(3,minmax(120px,1fr));width:min(700px,100%)}
+    .choice{min-height:72px;padding:13px;border:1px solid rgba(255,255,255,.14);border-radius:15px;background:rgba(6,24,32,.86);color:#eaf8fc;font-weight:850;cursor:pointer;transition:.16s ease}
+    .choice:hover,.choice.drop-ready{border-color:var(--cyan);background:rgba(26,90,99,.6);transform:translateY(-2px)}
+    .choice small{display:block;color:#8aa8b2;font-size:.68rem;letter-spacing:.08em;margin-top:3px}
+    .choice.correct{border-color:var(--green);background:rgba(35,127,78,.42);animation:hit .35s ease}.choice.wrong{border-color:var(--red);background:rgba(153,39,57,.38);animation:shake .35s ease}
+    .feedback{min-height:58px;margin-top:20px;padding:12px 16px;border-radius:13px;color:#c9dce2;max-width:760px}
+    .feedback.good{background:rgba(61,164,101,.18);color:#c8ffdb}.feedback.bad{background:rgba(221,64,84,.16);color:#ffd1d7}
+    .feedback b{color:#fff}
+    .next{display:none;margin-top:12px;padding:12px 18px;border:0;border-radius:12px;background:var(--cyan);color:#08232d;font-weight:950;cursor:pointer}.next.show{display:inline-flex}
+    .side{display:grid;gap:14px}
+    .panel{padding:18px;border:1px solid var(--line);border-radius:18px;background:rgba(14,38,50,.86)}
+    .panel h2{margin:0 0 11px;font-size:1rem}.panel p{margin:0;color:var(--muted);font-size:.86rem}
+    .objective-list{display:grid;gap:9px;margin-top:14px}
+    .objective{display:grid;grid-template-columns:28px 1fr;gap:9px;align-items:start;color:#b8ced6;font-size:.82rem}.objective i{display:grid;place-items:center;width:25px;height:25px;border-radius:8px;background:rgba(95,229,209,.1);color:var(--cyan);font-style:normal;font-weight:950}
+    .start-btn,.guide-btn{width:100%;margin-top:15px;padding:13px;border:0;border-radius:12px;font-weight:950;cursor:pointer}
+    .start-btn{background:linear-gradient(135deg,var(--cyan),#69baff);color:#06212b}.guide-btn{border:1px solid var(--line);background:#0a202a;color:#d8eaf0}
+    .intel-stats{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.intel-stats div{padding:10px;border-radius:11px;background:rgba(255,255,255,.045)}.intel-stats b{display:block;font-size:1.15rem}.intel-stats span{color:#7897a2;font-size:.68rem;font-weight:900}
+    .accuracy-bar{height:8px;margin-top:11px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden}.accuracy-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--red),var(--amber),var(--green));transition:width .25s}
+    .brief{margin-top:14px;padding:13px;border-left:3px solid var(--amber);background:rgba(255,198,97,.07);color:#d8c9a6;font-size:.78rem}
+    .result{max-width:600px;padding:30px;border:1px solid var(--line);border-radius:22px;background:rgba(5,22,30,.9);box-shadow:var(--shadow)}
+    .result-medal{font-size:3.3rem}.result h2{margin:6px 0;font:800 2rem/1 Georgia,serif}.result p{color:var(--muted)}
+    .result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}.result-grid div{padding:13px;border-radius:13px;background:rgba(255,255,255,.055)}.result-grid b{display:block;font-size:1.35rem}.result-grid span{font-size:.68rem;color:#8aa4ae;font-weight:900}
+    .result-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:10px}.result-actions button,.result-actions a{padding:12px 16px;border-radius:12px;border:1px solid var(--line);background:#102f3d;color:#fff;text-decoration:none;font-weight:900;cursor:pointer}.result-actions .primary{background:var(--cyan);color:#06212b}
+    .guide{display:none;margin-top:18px;border:1px solid var(--line);border-radius:24px;background:#091c25;overflow:hidden}.guide.open{display:block}
+    .guide-head{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:20px 22px;border-bottom:1px solid var(--line)}.guide-head h2{margin:0;font:800 1.55rem/1 Georgia,serif}.guide-head p{margin:5px 0 0;color:var(--muted);font-size:.85rem}
+    .guide-search{width:min(280px,42vw);padding:11px 13px;border:1px solid var(--line);border-radius:12px;background:#06151d;color:#fff}
+    .guide-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line)}
+    .guide-column{padding:20px;background:#091c25}.guide-column h3{margin:0 0 13px;color:var(--cyan)}
+    .charge-block{margin-bottom:18px}.charge-block h4{margin:0 0 7px;color:#91aab4;font-size:.73rem;letter-spacing:.12em}
+    .ion-row{display:grid;grid-template-columns:80px 1fr auto;gap:10px;align-items:center;padding:8px 2px;border-bottom:1px solid rgba(255,255,255,.055);font-size:.84rem}.ion-row b{font:700 1.05rem Georgia,serif}.colour-chip{padding:3px 7px;border-radius:999px;background:rgba(255,255,255,.07);color:#bed0d7;font-size:.66rem;white-space:nowrap}
+    .accuracy-note{margin:16px 20px 20px;padding:13px 15px;border-radius:12px;background:rgba(101,184,255,.08);color:#b9d7eb;font-size:.8rem}
+    @keyframes hit{50%{transform:scale(1.035)}}@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+    @media(max-width:980px){.game-frame{grid-template-columns:1fr}.side{grid-template-columns:1fr 1fr}.arena{min-height:610px}}
+    @media(max-width:720px){
+      .topbar{position:static}.topnav a:first-child{display:none}.shell{width:min(100% - 20px,1380px);padding-top:13px}
+      .mission-head{grid-template-columns:1fr}.rank{justify-self:start}.mission-tabs{grid-template-columns:1fr 1fr}
+      .mission-tab{min-height:68px}.hud{grid-template-columns:repeat(3,1fr)}.hud-item:nth-child(4),.hud-item:nth-child(5){border-top:1px solid var(--line)}.hud-item:nth-child(4){grid-column:1/2}.hud-item:nth-child(5){grid-column:2/4}
+      .playfield{min-height:510px;padding:24px 14px}.choices,.choices.six{grid-template-columns:1fr 1fr}.choice{min-height:64px}.side{grid-template-columns:1fr}.guide-grid{grid-template-columns:1fr}.guide-head{align-items:flex-start;flex-direction:column}.guide-search{width:100%}
+    }
+    @media(max-width:430px){.mission-tabs{grid-template-columns:1fr}.mission-tab{min-height:auto}.choices,.choices.six{grid-template-columns:1fr}.ion-card{min-height:150px}.formula{font-size:3.35rem}.topnav a{padding:8px;font-size:.76rem}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">CHEMISTRY HUB</a>
+    <nav class="topnav" aria-label="Page navigation">
+      <a href="index.html">Revision Hub</a>
+      <a href="games.html">← Chemistry Arcade</a>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <section class="mission-head">
+      <div>
+        <p class="eyebrow">CHEMSTRIKE TRAINING · HKDSE TOPICS II &amp; VII</p>
+        <h1>Ion Sorter</h1>
+        <p>Classify ions, read their charges, match formulae with names and identify characteristic aqueous colours.</p>
+      </div>
+      <div class="rank" aria-label="Player rank">
+        <span class="rank-badge" id="rankBadge">1</span>
+        <div><span>ION RANK</span><b id="rankName">Recruit</b></div>
+      </div>
+    </section>
+
+    <nav class="mission-tabs" aria-label="Ion Sorter missions">
+      <button class="mission-tab active" type="button" data-stage="polarity"><small>MISSION 01</small><b>Cation or Anion</b></button>
+      <button class="mission-tab" type="button" data-stage="charge"><small>MISSION 02</small><b>Charge Dock</b></button>
+      <button class="mission-tab" type="button" data-stage="identity"><small>MISSION 03</small><b>Formula Intel</b></button>
+      <button class="mission-tab" type="button" data-stage="colour"><small>MISSION 04</small><b>Colour Scan</b></button>
+    </nav>
+
+    <div class="game-frame">
+      <section class="arena" aria-label="Ion Sorter play area">
+        <div class="hud">
+          <div class="hud-item"><span>SCORE</span><b id="score">0</b></div>
+          <div class="hud-item"><span>STREAK</span><b id="streak">0</b></div>
+          <div class="hud-item"><span>ACCURACY</span><b id="accuracy">—</b></div>
+          <div class="hud-item"><span>SHIELDS</span><b class="lives" id="lives">♥ ♥ ♥</b></div>
+          <div class="hud-item"><span>MISSION TIME</span><b id="timer">00:00</b></div>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="playfield" id="playfield" aria-live="polite">
+          <p class="instruction" id="instruction">MISSION 01 · CLASSIFY THE ION</p>
+          <h2 class="prompt-line" id="prompt">Is this ion positively or negatively charged?</h2>
+          <div class="ion-card" id="ionCard" draggable="true" tabindex="0" aria-label="Ion card">
+            <div><div class="formula" id="formula">Na⁺</div><div class="card-name" id="cardName">sodium ion</div></div>
+          </div>
+          <div class="choices" id="choices"></div>
+          <div class="feedback" id="feedback">Drag the ion card to a chamber, or tap a choice. Keyboard: press 1–6.</div>
+          <button class="next" id="nextButton" type="button">Next ion →</button>
+        </div>
+      </section>
+
+      <aside class="side">
+        <section class="panel">
+          <h2 id="sideTitle">Mission 01 objective</h2>
+          <p id="sideCopy">Separate positive ions from negative ions without losing all three shields.</p>
+          <div class="objective-list" id="objectives"></div>
+          <button class="start-btn" id="startButton" type="button">Restart Mission 01</button>
+          <button class="guide-btn" id="guideButton" type="button" aria-expanded="false">Open ion field guide</button>
+        </section>
+        <section class="panel">
+          <h2>Career record</h2>
+          <div class="intel-stats">
+            <div><b id="bestScore">0</b><span>BEST SCORE</span></div>
+            <div><b id="ionsMastered">0</b><span>IONS MASTERED</span></div>
+          </div>
+          <div class="accuracy-bar" aria-label="Current mission accuracy"><i id="accuracyBar"></i></div>
+          <div class="brief" id="brief">Correct answers build a streak multiplier. A wrong answer is sent to the Mistake Coach for later review.</div>
+        </section>
+      </aside>
+    </div>
+
+    <section class="guide" id="guide" aria-labelledby="guideTitle">
+      <div class="guide-head">
+        <div><h2 id="guideTitle">Ion field guide</h2><p>44 ions organised by actual ionic charge, with characteristic aqueous colours where applicable.</p></div>
+        <input class="guide-search" id="guideSearch" type="search" placeholder="Search name, formula or colour" aria-label="Search ion field guide">
+      </div>
+      <div class="guide-grid" id="guideGrid"></div>
+      <p class="accuracy-note"><b>Accuracy note:</b> mercury(I) exists as the dimeric ion Hg₂²⁺, not as an isolated Hg⁺ ion. Hypochlorite may be written ClO⁻ (or OCl⁻). Colours refer to common aqueous ions and can vary slightly with conditions.</p>
+    </section>
+  </main>
+
+  <script src="student-tools.js?v=20260907b"></script>
+  <script>
+  (function(){
+    'use strict';
+    const ions=[
+      {key:'na',formula:'Na⁺',name:'sodium ion',type:'cation',charge:'+1'},
+      {key:'k',formula:'K⁺',name:'potassium ion',type:'cation',charge:'+1'},
+      {key:'cu1',formula:'Cu⁺',name:'copper(I) ion',type:'cation',charge:'+1'},
+      {key:'ag',formula:'Ag⁺',name:'silver ion',type:'cation',charge:'+1'},
+      {key:'h',formula:'H⁺',name:'hydrogen ion',type:'cation',charge:'+1'},
+      {key:'nh4',formula:'NH₄⁺',name:'ammonium ion',type:'cation',charge:'+1'},
+      {key:'mg',formula:'Mg²⁺',name:'magnesium ion',type:'cation',charge:'+2'},
+      {key:'ca',formula:'Ca²⁺',name:'calcium ion',type:'cation',charge:'+2'},
+      {key:'ba',formula:'Ba²⁺',name:'barium ion',type:'cation',charge:'+2'},
+      {key:'pb',formula:'Pb²⁺',name:'lead(II) ion',type:'cation',charge:'+2'},
+      {key:'fe2',formula:'Fe²⁺',name:'iron(II) ion',type:'cation',charge:'+2',colour:'pale green'},
+      {key:'co2',formula:'Co²⁺',name:'cobalt(II) ion',type:'cation',charge:'+2',colour:'pink'},
+      {key:'ni2',formula:'Ni²⁺',name:'nickel(II) ion',type:'cation',charge:'+2',colour:'green'},
+      {key:'mn2',formula:'Mn²⁺',name:'manganese(II) ion',type:'cation',charge:'+2',colour:'very pale pink / nearly colourless'},
+      {key:'cu2',formula:'Cu²⁺',name:'copper(II) ion',type:'cation',charge:'+2',colour:'blue'},
+      {key:'zn',formula:'Zn²⁺',name:'zinc ion',type:'cation',charge:'+2'},
+      {key:'hg1',formula:'Hg₂²⁺',name:'mercury(I) ion',type:'cation',charge:'+2',note:'Two Hg atoms each have oxidation state +1.'},
+      {key:'hg2',formula:'Hg²⁺',name:'mercury(II) ion',type:'cation',charge:'+2'},
+      {key:'al',formula:'Al³⁺',name:'aluminium ion',type:'cation',charge:'+3'},
+      {key:'fe3',formula:'Fe³⁺',name:'iron(III) ion',type:'cation',charge:'+3',colour:'yellow'},
+      {key:'cr3',formula:'Cr³⁺',name:'chromium(III) ion',type:'cation',charge:'+3',colour:'green'},
+      {key:'hydride',formula:'H⁻',name:'hydride ion',type:'anion',charge:'-1'},
+      {key:'cl',formula:'Cl⁻',name:'chloride ion',type:'anion',charge:'-1'},
+      {key:'br',formula:'Br⁻',name:'bromide ion',type:'anion',charge:'-1'},
+      {key:'iodide',formula:'I⁻',name:'iodide ion',type:'anion',charge:'-1'},
+      {key:'oh',formula:'OH⁻',name:'hydroxide ion',type:'anion',charge:'-1'},
+      {key:'no3',formula:'NO₃⁻',name:'nitrate ion',type:'anion',charge:'-1'},
+      {key:'no2',formula:'NO₂⁻',name:'nitrite ion',type:'anion',charge:'-1'},
+      {key:'hco3',formula:'HCO₃⁻',name:'hydrogencarbonate ion',type:'anion',charge:'-1'},
+      {key:'hso4',formula:'HSO₄⁻',name:'hydrogensulfate ion',type:'anion',charge:'-1'},
+      {key:'cn',formula:'CN⁻',name:'cyanide ion',type:'anion',charge:'-1'},
+      {key:'mno4',formula:'MnO₄⁻',name:'permanganate ion',type:'anion',charge:'-1',colour:'purple'},
+      {key:'clo3',formula:'ClO₃⁻',name:'chlorate ion',type:'anion',charge:'-1'},
+      {key:'clo',formula:'ClO⁻',name:'hypochlorite ion',type:'anion',charge:'-1',note:'OCl⁻ is an equivalent ordering.'},
+      {key:'oxide',formula:'O²⁻',name:'oxide ion',type:'anion',charge:'-2'},
+      {key:'sulfide',formula:'S²⁻',name:'sulfide ion',type:'anion',charge:'-2'},
+      {key:'so4',formula:'SO₄²⁻',name:'sulfate ion',type:'anion',charge:'-2'},
+      {key:'so3',formula:'SO₃²⁻',name:'sulfite ion',type:'anion',charge:'-2'},
+      {key:'co3',formula:'CO₃²⁻',name:'carbonate ion',type:'anion',charge:'-2'},
+      {key:'cro4',formula:'CrO₄²⁻',name:'chromate ion',type:'anion',charge:'-2',colour:'yellow'},
+      {key:'cr2o7',formula:'Cr₂O₇²⁻',name:'dichromate ion',type:'anion',charge:'-2',colour:'orange'},
+      {key:'nitride',formula:'N³⁻',name:'nitride ion',type:'anion',charge:'-3'},
+      {key:'phosphide',formula:'P³⁻',name:'phosphide ion',type:'anion',charge:'-3'},
+      {key:'po4',formula:'PO₄³⁻',name:'phosphate ion',type:'anion',charge:'-3'}
+    ];
+    const stages={
+      polarity:{number:'01',title:'Cation or Anion',instruction:'CLASSIFY THE ION',prompt:'Is this ion positively or negatively charged?',rounds:10,copy:'Separate positive ions from negative ions without losing all three shields.',objectives:['Read the superscript sign','Cation = positive ion','Anion = negative ion']},
+      charge:{number:'02',title:'Charge Dock',instruction:'SORT BY ACTUAL CHARGE',prompt:'Move this ion to its correct charge dock.',rounds:12,copy:'Sort each formula into one of the six charge docks.',objectives:['Read both sign and magnitude','Remember brackets are not a charge','Hg₂²⁺ has an overall charge of +2']},
+      identity:{number:'03',title:'Formula Intel',instruction:'MATCH FORMULA AND NAME',prompt:'Select the correct name for this formula.',rounds:10,copy:'Match each chemical formula with its systematic ion name.',objectives:['Recognise monatomic endings','Distinguish -ite from -ate','Check Roman numerals carefully']},
+      colour:{number:'04',title:'Colour Scan',instruction:'IDENTIFY AQUEOUS COLOUR',prompt:'What is the characteristic colour of this aqueous ion?',rounds:10,copy:'Identify the characteristic colours of selected transition-metal ions and oxyanions.',objectives:['Connect colour with formula','Separate similar green ions','Distinguish chromate and dichromate']}
+    };
+    const colourIons=ions.filter(x=>x.colour);
+    const colourChoices=['blue','pink','pale green','green','yellow','orange','purple','very pale pink / nearly colourless'];
+    const ranks=['Recruit','Charge Scout','Formula Agent','Ion Specialist','Master Chemist'];
+    const $=id=>document.getElementById(id);
+    const state={stage:'polarity',deck:[],index:0,score:0,streak:0,correct:0,answered:0,lives:3,locked:false,started:Date.now(),timer:null,current:null};
+    const saved=readSave();
+
+    function readSave(){try{return JSON.parse(localStorage.getItem('chemIonSorterV1'))||{best:{},mastered:{},plays:0}}catch(e){return{best:{},mastered:{},plays:0}}}
+    function writeSave(){localStorage.setItem('chemIonSorterV1',JSON.stringify(saved))}
+    function shuffle(list){const out=list.slice();for(let i=out.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[out[i],out[j]]=[out[j],out[i]]}return out}
+    function sampleOptions(correct,pool,count){const other=shuffle(pool.filter(x=>x!==correct)).slice(0,count-1);return shuffle([correct].concat(other))}
+    function percent(){return state.answered?Math.round(state.correct/state.answered*100):0}
+    function formatTime(ms){const sec=Math.floor(ms/1000),m=Math.floor(sec/60),s=sec%60;return String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')}
+    function rankIndex(){const mastered=Object.keys(saved.mastered||{}).length;return Math.min(4,Math.floor(mastered/10))}
+    function updateCareer(){
+      const ri=rankIndex();$('rankBadge').textContent=ri+1;$('rankName').textContent=ranks[ri];
+      $('bestScore').textContent=Math.max(0,...Object.values(saved.best||{}));$('ionsMastered').textContent=Object.keys(saved.mastered||{}).length
+    }
+    function updateHud(){
+      $('score').textContent=state.score.toLocaleString();$('streak').textContent=state.streak;
+      $('accuracy').textContent=state.answered?percent()+'%':'—';$('lives').textContent='♥ '.repeat(state.lives).trim()||'DEPLETED';
+      $('progressFill').style.width=Math.min(100,state.index/stages[state.stage].rounds*100)+'%';
+      $('accuracyBar').style.width=(state.answered?percent():0)+'%'
+    }
+    function setStage(key){
+      state.stage=key;saved.lastStage=key;writeSave();document.querySelectorAll('.mission-tab').forEach(b=>b.classList.toggle('active',b.dataset.stage===key));
+      const cfg=stages[key];$('sideTitle').textContent='Mission '+cfg.number+' objective';$('sideCopy').textContent=cfg.copy;
+      $('objectives').innerHTML=cfg.objectives.map((x,i)=>'<div class="objective"><i>'+(i+1)+'</i><span>'+x+'</span></div>').join('');
+      $('startButton').textContent='Restart Mission '+cfg.number;startMission()
+    }
+    function buildDeck(){
+      const cfg=stages[state.stage],pool=state.stage==='colour'?colourIons:ions;
+      let deck=[];while(deck.length<cfg.rounds){deck=deck.concat(shuffle(pool))}
+      return deck.slice(0,cfg.rounds)
+    }
+    function resetPlayfieldMarkup(){
+      if($('instruction'))return;
+      $('playfield').innerHTML='<p class="instruction" id="instruction"></p><h2 class="prompt-line" id="prompt"></h2><div class="ion-card" id="ionCard" draggable="true" tabindex="0" aria-label="Ion card"><div><div class="formula" id="formula"></div><div class="card-name" id="cardName"></div></div></div><div class="choices" id="choices"></div><div class="feedback" id="feedback"></div><button class="next" id="nextButton" type="button">Next ion →</button>';
+      $('nextButton').addEventListener('click',showQuestion);
+      $('ionCard').addEventListener('dragstart',event=>{event.dataTransfer.setData('text/plain',state.current.key);$('ionCard').classList.add('dragging')});
+      $('ionCard').addEventListener('dragend',()=>$('ionCard').classList.remove('dragging'))
+    }
+    function startMission(){
+      resetPlayfieldMarkup();clearInterval(state.timer);Object.assign(state,{deck:buildDeck(),index:0,score:0,streak:0,correct:0,answered:0,lives:3,locked:false,started:Date.now(),current:null});
+      state.timer=setInterval(()=>$('timer').textContent=formatTime(Date.now()-state.started),1000);
+      $('timer').textContent='00:00';showQuestion();updateHud()
+    }
+    function choicesFor(ion){
+      if(state.stage==='polarity')return[{value:'cation',label:'CATION',sub:'positive ion'},{value:'anion',label:'ANION',sub:'negative ion'}];
+      if(state.stage==='charge')return['+1','+2','+3','-1','-2','-3'].map(x=>({value:x,label:x,sub:x[0]==='+'?'positive':'negative'}));
+      if(state.stage==='identity')return sampleOptions(ion.name,ions.map(x=>x.name),4).map(x=>({value:x,label:x,sub:'ion name'}));
+      return sampleOptions(ion.colour,colourChoices,4).map(x=>({value:x,label:x,sub:'aqueous colour'}))
+    }
+    function correctValue(ion){return state.stage==='polarity'?ion.type:state.stage==='charge'?ion.charge:state.stage==='identity'?ion.name:ion.colour}
+    function explanation(ion){
+      if(state.stage==='polarity')return ion.formula+' is a '+ion.type+' because it carries a '+(ion.type==='cation'?'positive':'negative')+' charge.';
+      if(state.stage==='charge')return 'The superscript shows an overall charge of '+ion.charge+'.'+(ion.note?' '+ion.note:'');
+      if(state.stage==='identity')return ion.formula+' is the formula of the '+ion.name+'.'+(ion.note?' '+ion.note:'');
+      return ion.name+' is characteristically '+ion.colour+' in aqueous solution.'
+    }
+    function showQuestion(){
+      if(state.index>=stages[state.stage].rounds||state.lives<=0){finishMission();return}
+      state.locked=false;const ion=state.deck[state.index];state.current=ion;const cfg=stages[state.stage];
+      $('instruction').textContent='MISSION '+cfg.number+' · '+cfg.instruction;$('prompt').textContent=cfg.prompt;
+      $('formula').textContent=ion.formula;$('cardName').textContent=state.stage==='identity'?'IDENTITY CLASSIFIED':state.stage==='colour'?ion.name:ion.name;
+      const options=choicesFor(ion);$('choices').className='choices'+(options.length===6?' six':'');
+      $('choices').innerHTML=options.map((o,i)=>'<button class="choice" type="button" data-choice="'+o.value.replace(/"/g,'&quot;')+'"><span>'+(i+1)+'. '+o.label+'</span><small>'+o.sub+'</small></button>').join('');
+      $('choices').querySelectorAll('.choice').forEach(button=>{
+        button.addEventListener('click',()=>answer(button.dataset.choice,button));
+        button.addEventListener('dragover',event=>{event.preventDefault();button.classList.add('drop-ready')});
+        button.addEventListener('dragleave',()=>button.classList.remove('drop-ready'));
+        button.addEventListener('drop',event=>{event.preventDefault();button.classList.remove('drop-ready');answer(button.dataset.choice,button)})
+      });
+      $('feedback').className='feedback';$('feedback').textContent='Drag the ion card to a target, or tap a choice. Keyboard: press 1–6.';$('nextButton').classList.remove('show');updateHud()
+    }
+    function recordMistake(ion,chosen){
+      if(!window.ChemistryTools||!ChemistryTools.mistakes)return;
+      const list=ChemistryTools.mistakes(),id='/ion-sorter.html#'+state.stage+'-'+ion.key,now=new Date().toISOString(),existing=list.findIndex(x=>x.id===id);
+      const item={id,topic:'Topic II · Microscopic World I',number:'Ion Sorter',question:stages[state.stage].prompt+' '+ion.formula,source:'Ion Sorter · Mission '+stages[state.stage].number,difficulty:state.stage==='polarity'?'Foundation':'Core',reason:'Wrong game answer',selected:{letter:'',text:chosen},href:'ion-sorter.html',mastered:false,attempts:1,savedAt:now,lastTried:now};
+      if(existing>=0)list[existing]={...list[existing],...item,attempts:(list[existing].attempts||0)+1,savedAt:list[existing].savedAt||now};else list.unshift(item);
+      ChemistryTools.writeMistakes(list)
+    }
+    function answer(value,button){
+      if(state.locked)return;state.locked=true;state.answered++;const ion=state.current,correct=correctValue(ion),ok=value===correct;
+      if(ok){state.correct++;state.streak++;const multiplier=Math.min(4,1+Math.floor((state.streak-1)/3));state.score+=100*multiplier;button.classList.add('correct');saved.mastered[ion.key]=(saved.mastered[ion.key]||0)+1;
+        $('feedback').className='feedback good';$('feedback').innerHTML='<b>Correct · '+(multiplier>1?'×'+multiplier+' streak bonus. ':'')+'</b>'+explanation(ion)
+      }else{state.lives--;state.streak=0;button.classList.add('wrong');const target=[...$('choices').querySelectorAll('.choice')].find(x=>x.dataset.choice===correct);if(target)target.classList.add('correct');recordMistake(ion,value);
+        $('feedback').className='feedback bad';$('feedback').innerHTML='<b>Correction:</b> '+explanation(ion)
+      }
+      state.index++;writeSave();updateCareer();updateHud();$('nextButton').classList.add('show');$('nextButton').focus()
+    }
+    function finishMission(){
+      clearInterval(state.timer);const cfg=stages[state.stage],elapsed=Date.now()-state.started,acc=percent(),xp=Math.max(10,Math.round((state.score/100)+(state.correct*2)));
+      saved.best[state.stage]=Math.max(saved.best[state.stage]||0,state.score);saved.plays=(saved.plays||0)+1;writeSave();updateCareer();
+      if(window.ChemistryTools){const p=ChemistryTools.profile();p.xp=(p.xp||0)+xp;p.played=(p.played||0)+1;p.funBest=p.funBest||{};p.funBest.ions=Math.max(p.funBest.ions||0,acc);ChemistryTools.writeProfile(p);ChemistryTools.logSession({type:'game',topic:'Topic II · Microscopic World I',key:'ions',label:'Ion Sorter · '+cfg.title,score:state.correct,total:state.answered,xp,minutes:Math.max(1,Math.round(elapsed/60000))})}
+      const medal=acc>=90?'🏆':acc>=70?'🥈':'🧪',message=acc>=90?'Mission mastered.':acc>=70?'Good control—one more run will strengthen recall.':'Open the field guide, review the corrections and retry.';
+      $('progressFill').style.width='100%';$('playfield').innerHTML='<div class="result"><div class="result-medal">'+medal+'</div><h2>'+message+'</h2><p>'+cfg.title+' complete. Your weak answers have been added to the Mistake Coach.</p><div class="result-grid"><div><b>'+state.score.toLocaleString()+'</b><span>SCORE</span></div><div><b>'+acc+'%</b><span>ACCURACY</span></div><div><b>+'+xp+'</b><span>XP</span></div></div><div class="result-actions"><button class="primary" id="replayResult" type="button">Replay mission</button><button id="nextMission" type="button">Next mission →</button><a href="mistakes.html">Mistake Coach</a></div></div>';
+      $('replayResult').addEventListener('click',()=>location.reload());
+      $('nextMission').addEventListener('click',()=>{const keys=Object.keys(stages),next=keys[(keys.indexOf(state.stage)+1)%keys.length];saved.lastStage=next;writeSave();location.reload()})
+    }
+    function renderGuide(query){
+      const needle=(query||'').trim().toLowerCase(),filtered=ions.filter(x=>[x.formula,x.name,x.charge,x.colour||''].join(' ').toLowerCase().includes(needle));
+      const groups=[['cation','Cations'],['anion','Anions']];
+      $('guideGrid').innerHTML=groups.map(([type,title])=>'<div class="guide-column"><h3>'+title+'</h3>'+['+1','+2','+3','-1','-2','-3'].filter(charge=>charge[0]===(type==='cation'?'+':'-')).map(charge=>{const rows=filtered.filter(x=>x.type===type&&x.charge===charge);return rows.length?'<div class="charge-block"><h4>CHARGE '+charge+'</h4>'+rows.map(x=>'<div class="ion-row"><b>'+x.formula+'</b><span>'+x.name+'</span>'+(x.colour?'<em class="colour-chip">'+x.colour+'</em>':'<span></span>')+'</div>').join('')+'</div>':''}).join('')+'</div>').join('')
+    }
+    document.querySelectorAll('.mission-tab').forEach(button=>button.addEventListener('click',()=>setStage(button.dataset.stage)));
+    $('startButton').addEventListener('click',startMission);$('nextButton').addEventListener('click',showQuestion);
+    $('guideButton').addEventListener('click',()=>{const open=$('guide').classList.toggle('open');$('guideButton').setAttribute('aria-expanded',String(open));$('guideButton').textContent=open?'Close ion field guide':'Open ion field guide';if(open)$('guide').scrollIntoView({behavior:'smooth',block:'start'})});
+    $('guideSearch').addEventListener('input',event=>renderGuide(event.target.value));
+    $('ionCard').addEventListener('dragstart',event=>{event.dataTransfer.setData('text/plain',state.current.key);$('ionCard').classList.add('dragging')});
+    $('ionCard').addEventListener('dragend',()=>$('ionCard').classList.remove('dragging'));
+    document.addEventListener('keydown',event=>{if(state.locked)return;const n=Number(event.key);if(n>=1&&n<=6){const buttons=$('choices').querySelectorAll('.choice');if(buttons[n-1])buttons[n-1].click()}});
+    renderGuide('');updateCareer();const hash=location.hash.slice(1),initial=stages[hash]?hash:(stages[saved.lastStage]?saved.lastStage:'polarity');setStage(initial)
+  })();
+  </script>
+</body>
+</html>
