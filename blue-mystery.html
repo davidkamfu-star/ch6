@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#071923">
+  <title>The Blue Solution Mystery | ChemStrike Stories</title>
+  <meta name="description" content="Solve a chemistry case through choices, evidence, animated experiments and a rotatable copper coordination model.">
+  <link rel="stylesheet" href="blue-mystery.css?v=1"><link rel="stylesheet" href="student-tools.css?v=20260907b">
+</head>
+<body>
+<header><a class="brand" href="index.html">CHEMISTRY HUB <span>/ CHEMSTRIKE STORIES</span></a><nav aria-label="Hub navigation"><a href="games.html">Arcade</a><a href="mistakes.html">My progress</a></nav></header>
+<main>
+  <div class="case-heading"><div><p class="eyebrow">CASE 001 · THE MISSING LABEL</p><h1>The Blue Solution Mystery</h1></div><span class="case-tag">8 scenes · 8–12 min</span></div>
+  <div class="case-progress"><span id="sceneCount">Scene 1 of 8</span><progress id="caseProgress" max="8" value="0" aria-label="Case progress"></progress><span id="score">Evidence checks 0 / 7</span></div>
+  <div class="workspace">
+    <section class="visual-panel" aria-label="Experiment and particle viewer">
+      <div class="viewer-heading"><span id="viewHeading">OBSERVATION FEED</span><div class="view-tabs" aria-label="View selection"><button id="labView" aria-pressed="true">Lab</button><button id="modelView" aria-pressed="false">3D model</button></div></div>
+      <canvas id="visual" width="900" height="600" aria-label="Schematic of the sample. A pale blue solution is present." tabindex="0"></canvas>
+      <p id="visualCaption" class="caption">A pale blue solution. Colour alone does not establish its identity.</p>
+      <div class="playback"><button id="play" aria-label="Play or pause the observation animation">Play</button><button id="replay">Replay</button><label for="time">Reaction timeline</label><input id="time" type="range" min="0" max="0" value="0" step="0.01"><output id="timeLabel" for="time">Initial sample</output></div>
+      <div id="rotation" class="rotation" hidden><label>Rotate model <input id="angle" type="range" min="-180" max="180" value="25"></label><label>Tilt <input id="tilt" type="range" min="-75" max="75" value="20"></label></div>
+      <p class="model-note" id="modelNote">Schematic laboratory observation, not a video. Replay unlocks as you perform each test. No real chemicals are needed.</p>
+    </section>
+    <section class="story-panel" aria-labelledby="sceneTitle">
+      <p class="speaker">DR LIN · YOUR LAB PARTNER</p><h2 id="sceneTitle" tabindex="-1"></h2><p id="narration"></p>
+      <p class="question" id="question"></p><div id="choices" class="choices"></div>
+      <div id="feedback" class="feedback" role="status"></div>
+      <div class="story-actions"><button id="hint" class="quiet">Ask Dr Lin for a hint</button><button id="continue" class="primary" hidden>Continue →</button></div>
+      <div id="result" hidden></div>
+    </section>
+  </div>
+  <section class="notebook" aria-labelledby="evidenceTitle"><div><p class="eyebrow">YOUR CASE FILE</p><h2 id="evidenceTitle">Collected evidence</h2><p>Separate what you see from what you infer.</p></div><ol id="evidence"><li>No tests yet. Inspect the sealed sample first.</li></ol></section>
+  <footer><p id="saveStatus">Progress is saved on this device/browser, not to a teacher account. You can leave and return.</p><button id="restart" class="quiet">Start a new case attempt</button><p class="safety">Virtual experiment only. Real ammonia and copper compounds require teacher supervision, eye protection and appropriate ventilation. Never taste or directly smell an unknown.</p><details><summary>Chemistry reference and model limits</summary><p>Based on the <a href="https://edu.rsc.org/experiments/an-equilibrium-using-copperii-and-ammonia/1711.article">Royal Society of Chemistry copper(II)–ammonia experiment</a>. The reaction timeline is illustrative, not a kinetic simulation. Coordination models show donor groups, not every atom; elongated axial bonds are schematic. Cu(OH)₂ is an extended solid, not an isolated octahedral molecule. See the <a href="ligand-exchange.html">full ligand-exchange lab</a> for further revision.</p></details></footer>
+</main>
+<script src="student-tools.js?v=20260907b"></script><script src="blue-mystery.js?v=1"></script>
+</body></html>
