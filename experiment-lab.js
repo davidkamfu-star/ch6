@@ -81,7 +81,7 @@
       const f=M.copper(s.time,s.metal);lathe(0,0,[[.1,1.05],[2,1.05]],'#c1efff0d','#afe7f599');fluid(0,0,1.35,1,`rgba(45,156,232,${.12+.45*(1-f)})`);box(0,.2,0,.42,2.4,.12,s.metal==='copper'?'#ba683b':'#aebbc9');
       for(let i=0;i<Math.floor(f*30);i++)ball([Math.sin(i*2.7)*.22,.25+(i%10)*.12,.11],.065,'#b46a3c');label([0,2.85,0],s.metal+' strip');label([0,.1,1.3],'CuSO₄(aq)');
     }else{
-      lathe(0,0,[[.1,1],[.3,1],[1.35,.34],[1.65,.28]],'#c7f5ff12','#a6e6f599');const t=M.titration(s.volume),pink=s.mixed?t.pink:0;fluid(0,0,.45+s.volume/140,.7,pink?`rgba(244,95,171,${.15+pink*.65})`:'#a4d5e63a');
+      lathe(0,0,[[.1,1],[.3,1],[1.35,.34],[1.65,.28]],'#c7f5ff12','#a6e6f599');const t=M.titration(s.volume),pink=s.mixed?t.pink:0;fluid(0,0,.45+s.volume/140,.7,pink?`rgba(249,170,209,${t.endpoint?.16:.15+pink*.65})`:'#a4d5e63a');
       box(-1.5,.1,.4,.9,.1,.9,'#7e94a6');line([-1.5,.2,.4],[-1.5,4.7,.4],'#a9c5d5',5);line([-1.5,3.7,.4],[0,3.7,0],'#a9c5d5',4);lathe(0,0,[[2.3,.095],[4.8,.095]],'#ceeafa22','#b1eaffaa');lathe(0,0,[[2.3,.08],[4.7-s.volume/50*2.35,.08]],'#78d8fa99');line([-.3,2.3,0],[.3,2.3,0],'#72e0cb',5);line([0,2.3,0],[0,1.95,0],'#d1f5ff',3);for(let i=0;i<=10;i++)line([.1,4.7-i*.235,0],[.2,4.7-i*.235,0],'#d3ecf3',1);label([.8,4.4,0],'NaOH(aq)');label([0,0,1.2],s.mixed?(pink?'pink':'colourless'):'swirl to mix');if(!s.mixed)ball([0,1.7-(clock%1)*.4,0],.07,'#a8e9ff');
     }
   }
@@ -102,5 +102,6 @@
   $('macro').onclick=()=>setView(false);$('micro').onclick=()=>setView(true);function setView(v){micro=v;$('macro').setAttribute('aria-pressed',!v);$('micro').setAttribute('aria-pressed',v);update();draw()}
   function pauseLabel(){$('pause').textContent=paused?'Resume motion':'Pause motion';$('pause').setAttribute('aria-pressed',paused)}$('pause').onclick=()=>{paused=!paused;pauseLabel()};$('homeView').onclick=()=>{yaw=-.32;pitch=.28;zoom=1;draw()};document.querySelectorAll('[data-lab]').forEach(b=>b.onclick=()=>switchLab(b.dataset.lab));window.addEventListener('resize',()=>{draw();plot()});
   let uiTime=0;function frame(now){const dt=Math.min((now-last)/1000||0,.05);last=now;if(!paused&&!document.hidden){clock+=dt;if(s.running){s.time+=dt*(active==='rate'?6:3);if(s.time>=(active==='rate'?60:30))advance(0);uiTime+=dt;if(uiTime>.2){update();uiTime=0}}draw()}requestAnimationFrame(frame)}
+  window.addEventListener('experiment-film-play',()=>{paused=true;pauseLabel()});
   pauseLabel();const requested=new URLSearchParams(location.search).get('lab');switchLab(lessons[requested]?requested:'rate');requestAnimationFrame(frame);
 })();
