@@ -1,0 +1,17 @@
+.chapter-card{grid-template-columns:38px minmax(0,1fr)!important;align-items:start!important}
+.chapter-card .chapter-copy{min-width:0}
+.chapter-card .chapter-actions{grid-column:1/-1;display:flex;gap:8px}
+.chapter-card .chapter-actions a{min-height:40px;flex:1;padding:8px 10px;text-align:center;font-size:.74rem}
+.chapter-card .chapter-actions a:first-child{background:#edf6f3;color:#146d5f}
+.chapter-card .chapter-actions a:last-child{background:#103744;color:#fff}
+.chapter-progress{display:block;margin-top:7px;color:#486e73;font-size:.73rem;line-height:1.35}
+.practice-resume{margin:17px 0 0;padding:15px 18px;border:1px solid #a9d9ca;border-radius:14px;background:#f0faf6;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.practice-resume strong{color:#123c43}.practice-resume small{display:block;margin-top:4px;color:#546f73}
+.practice-resume a{padding:10px 14px;border-radius:9px;background:#103744;color:#fff;text-decoration:none;font-weight:750;font-size:.84rem}
+.practice-guide{max-width:1440px;margin:0 auto;padding:12px clamp(14px,3.2vw,46px);background:#eaf5f1;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;color:#16464d;font:600 13px/1.45 Arial,sans-serif}
+.practice-guide .guide-links{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.practice-guide a,.practice-guide button{padding:8px 11px;border:1px solid #b7d9d0;border-radius:8px;background:#fff;color:#155d54;text-decoration:none;font:700 12px Arial,sans-serif;cursor:pointer}
+.practice-guide button{background:#134b49;color:white;border-color:#134b49}
+.practice-guide button:disabled{opacity:.5;cursor:not-allowed}
+.practice-guide a:focus-visible,.practice-guide button:focus-visible{outline:3px solid #6caa9d;outline-offset:2px}
+@media(max-width:760px){.practice-guide{padding:12px 14px}.practice-guide .guide-links{width:100%}.practice-guide a,.practice-guide button{flex:1;text-align:center;white-space:nowrap}}
