@@ -16,7 +16,8 @@
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.option,.progress-track i{transition:none}}
   </style>
   <link rel="stylesheet" href="student-fun.css?v=20260822a">
-<link rel="stylesheet" href="practice-ux.css?v=1">
+<link rel="stylesheet" href="practice-ux.css?v=2">
+<link rel="stylesheet" href="mastery-theme.css?v=1">
 </head>
 <body>
   <header class="topbar"><a class="brand" href="index.html"><span class="brand-mark">⚗</span><span class="brand-copy"><b>CHEMISTRY</b><small>REVISION HUB</small></span></a><a class="back" href="index.html">← All topics</a></header>
@@ -43,6 +44,6 @@
     function openViewer(d){el('viewerLabel').textContent=`QUESTION ${current+1} · ${d.label}`;const old=el('viewerCrop');old.outerHTML=cropHTML(d,true).replace('class="viewer-crop"','class="viewer-crop" id="viewerCrop"');el('viewer').classList.add('open');document.body.style.overflow='hidden'}function closeViewer(){el('viewer').classList.remove('open');document.body.style.overflow=''}
     el('viewerClose').onclick=closeViewer;el('viewer').onclick=e=>{if(e.target===el('viewer'))closeViewer()};document.addEventListener('keydown',e=>{if(e.key==='Escape')closeViewer()});el('checkButton').onclick=check;el('clearButton').onclick=()=>{delete state[current];localStorage.setItem(key,JSON.stringify(state));render()};el('previousButton').onclick=()=>go(current-1);el('nextButton').onclick=()=>go(current+1);el('mobilePrevious').onclick=()=>go(current-1);el('mobileNext').onclick=()=>go(current+1);el('resetButton').onclick=()=>{if(confirm('Reset all saved answers for Topic 09?')){state={};localStorage.removeItem(key);current=0;render()}};render();
   </script>
-<script src="student-tools.js?v=20260907b"></script><script src="practice-ux.js?v=1"></script>
+<script src="student-tools.js?v=20260907b"></script><script src="practice-ux.js?v=2"></script>
 </body>
 </html>
