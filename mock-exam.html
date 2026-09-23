@@ -17,20 +17,20 @@
     <section class="hero">
       <div class="hero-inner">
         <div><p class="eyebrow">PAPER 1A PRACTICE · 12 TOPICS</p><h1>36 questions.<br><em>One focused paper.</em></h1><p>Three questions are selected at random from each compulsory topic, then mixed into a mock paper. Answer first; see marking and topic priorities after you submit.</p></div>
-        <div class="hero-stats" aria-label="Mock paper structure"><div><b>36</b><span>MC QUESTIONS</span></div><div><b>12</b><span>TOPICS</span></div><div><b>60</b><span>MIN PRACTICE TIMER</span></div></div>
+        <div class="hero-stats" aria-label="Mock paper structure"><div><b>36</b><span>MC QUESTIONS</span></div><div><b>12</b><span>TOPICS</span></div><div><b>45</b><span>MIN PRACTICE TIMER</span></div></div>
       </div>
     </section>
     <div class="shell">
       <section class="welcome panel" id="welcome" aria-labelledby="welcomeTitle">
         <div class="eyebrow dark">READY WHEN YOU ARE</div>
         <h2 id="welcomeTitle">Your Paper 1A practice starts here.</h2>
-        <p>The paper mixes three questions from each topic. The 60-minute timer begins when you press Start. Your answers and remaining time are saved in this browser so you can return to the same paper.</p>
+        <p>The paper mixes three questions from each topic. The 45-minute timer begins when you press Start. Your answers and remaining time are saved in this browser so you can return to the same paper.</p>
         <div class="instructions"><div><span>01</span><b>Choose A–D</b><p>Move freely between all 36 questions.</p></div><div><span>02</span><b>Check your paper</b><p>Use the question map to spot blanks or flag questions.</p></div><div><span>03</span><b>Review by topic</b><p>See explanations, notes and the exact question to revisit.</p></div></div>
         <p class="small-note">Practice paper assembled from the Hub’s existing topic question banks. This is a revision activity, not an official HKEAA paper.</p>
         <div class="welcome-actions"><button class="button primary" id="startButton" type="button">Start a new random paper →</button><button class="button secondary" id="resumeButton" type="button" hidden>Resume saved paper</button><button class="button secondary" id="viewResultButton" type="button" hidden>View last result</button></div>
       </section>
       <section id="exam" hidden aria-label="Chemistry mock exam">
-        <div class="exam-top panel"><div><p class="eyebrow dark">YOUR PAPER IS IN PROGRESS</p><strong id="examCount">0 of 36 answered</strong></div><div class="exam-top-actions"><span class="timer" id="timer" role="timer" aria-live="off">60:00</span><button class="submit small" id="submitButton" type="button">Submit paper</button></div><div class="progress-track"><span id="examProgress"></span></div></div>
+        <div class="exam-top panel"><div><p class="eyebrow dark">YOUR PAPER IS IN PROGRESS</p><strong id="examCount">0 of 36 answered</strong></div><div class="exam-top-actions"><span class="timer" id="timer" role="timer" aria-live="off">45:00</span><button class="submit small" id="submitButton" type="button">Submit paper</button></div><div class="progress-track"><span id="examProgress"></span></div></div>
         <div class="exam-grid">
           <aside class="navigator panel" aria-label="Question navigator"><div class="map-head"><b>QUESTION MAP</b><span>36 questions</span></div><div class="question-map" id="questionMap"></div><p class="map-key"><i class="key-answered"></i> Answered <i class="key-flagged"></i> Flagged</p><button class="submit wide" id="submitSide" type="button">Submit and see results →</button></aside>
           <article class="question panel" aria-live="polite"><div class="question-heading"><span id="questionLabel">QUESTION 01 / 36</span><button id="flagButton" type="button" aria-pressed="false">☆ Flag for review</button></div><div class="source" id="sourceLabel">Select the best answer.</div><div class="stem" id="stem"></div><div class="context" id="context" hidden></div><div class="choices" id="choices" role="group" aria-label="Answer choices"></div><div class="question-footer"><button type="button" id="previousButton">← Previous</button><span id="autosaveText">Saved automatically</span><button class="next" type="button" id="nextButton">Next question →</button></div></article>
@@ -41,6 +41,6 @@
   </main>
   <footer>HKDSE Chemistry Hub · Focused self-revision · Progress is saved in this browser.</footer>
   <script src="mock-bank.js?v=1"></script>
-  <script src="mock-exam.js?v=2"></script>
+  <script src="mock-exam.js?v=3"></script>
 </body>
 </html>
