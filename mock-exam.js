@@ -86,10 +86,28 @@
     if(n<36&&!confirm((36-n)+' question'+(36-n===1?' is':'s are')+' unanswered. Submit the paper now?'))return;
     finish(false);
   }
+  function recordProgress(){
+    try{
+      var key='chemistry-progress-monitor-v1';
+      var progress=JSON.parse(localStorage.getItem(key)||'{"weeklyGoal":3,"history":[]}');
+      if(!progress||typeof progress!=='object')return;
+      if(!Array.isArray(progress.history))progress.history=[];
+      var score=state.items.reduce(function(total,_,i){return total+(state.answers[i]===question(i).answer?1:0)},0);
+      progress.history.unshift({
+        id:'activity-'+Date.now()+'-'+Math.random().toString(36).slice(2,7),
+        type:'self-study',topic:'Mixed Chemistry mock',key:'mock-exam-36',
+        label:'36-question Paper 1A practice mock',score:score,total:36,xp:0,
+        minutes:Math.max(1,Math.round((Date.now()-state.startedAt)/60000)),
+        confidence:'',relatedId:'',at:new Date().toISOString()
+      });
+      progress.history=progress.history.slice(0,400);
+      localStorage.setItem(key,JSON.stringify(progress));
+    }catch(e){}
+  }
   function finish(timedOut){
     if(!state||state.finishedAt)return;
     if(tickHandle)clearInterval(tickHandle);
-    tickHandle=null;state.finishedAt=Date.now();state.timedOut=!!timedOut;save();
+    tickHandle=null;state.finishedAt=Date.now();state.timedOut=!!timedOut;save();recordProgress();
     renderResults();show('results');window.scrollTo({top:0,behavior:'smooth'});
   }
   function add(tag,klass,content){
