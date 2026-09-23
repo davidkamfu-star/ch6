@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  var KEY='chemistry-36q-mock-v1',DURATION=60*60*1000,bank=window.CHEM_MOCK_BANK;
+  var KEY='chemistry-36q-mock-v1',DURATION=45*60*1000,bank=window.CHEM_MOCK_BANK;
   var panel=function(id){return document.getElementById(id)};
   if(!Array.isArray(bank)||bank.length!==12||bank.some(function(t){return !Array.isArray(t.questions)||t.questions.length<3})){
     panel('welcomeTitle').textContent='The question bank could not be loaded.';
@@ -8,7 +8,7 @@
   }
   var state=null,position=0,tickHandle=null;
   function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){panel('autosaveText').textContent='This browser cannot save progress'}}
-  function read(){try{var value=JSON.parse(localStorage.getItem(KEY)||'null');return value&&Array.isArray(value.items)&&value.items.length===36?value:null}catch(e){return null}}
+  function read(){try{var value=JSON.parse(localStorage.getItem(KEY)||'null');if(value&&Array.isArray(value.items)&&value.items.length===36){if(!value.finishedAt&&Number.isFinite(value.startedAt))value.endsAt=Math.min(Number(value.endsAt)||Infinity,value.startedAt+DURATION);return value}return null}catch(e){return null}}
   function shuffle(items){
     var out=items.slice();
     for(var i=out.length-1;i>0;i--){
