@@ -86,3 +86,59 @@ body{background:
 .mock-promo a:hover{background:#fff}
 @media(max-width:900px){.mock-promo{margin:14px 12px}}
 @media(max-width:620px){.mock-promo{flex-direction:column;align-items:stretch;padding:20px}.mock-promo a{text-align:center}}
+
+/* Colourful student revision home */
+body.colourful-hub{--paper:#f7f6ff;--navy:#24214b;--ink:#292647;--muted:#666381;background:radial-gradient(ellipse at 0 0,#e6f5ff,transparent 40%),radial-gradient(ellipse at 100% 30%,#ffeaf2,transparent 38%),#f7f6ff}
+.colourful-hub .topbar{background:rgba(255,255,255,.96);border-top:4px solid #7860ec}
+.colourful-hub .brand-mark{background:linear-gradient(135deg,#7753e6,#398bf0)!important;color:#fff!important}
+.colourful-hub .topbar nav a.active{background:#eee8ff;color:#593dc0}
+.colourful-hub .progress-link{background:#6746d0!important}
+.colourful-hub .dashboard{gap:24px;padding-top:30px}
+.colourful-hub .start-card{background:radial-gradient(circle at 100% 0,rgba(88,219,255,.5),transparent 38%),radial-gradient(circle at 85% 100%,rgba(245,103,195,.45),transparent 45%),linear-gradient(120deg,#3b247d,#644bd0 62%,#3985d6)!important;border-radius:30px;box-shadow:0 24px 55px rgba(83,57,159,.22)!important}
+.colourful-hub .start-card h1{font-family:Arial,Helvetica,sans-serif;font-weight:850;line-height:1.08;letter-spacing:-.055em;font-size:clamp(2.5rem,4.6vw,4.5rem)}
+.colourful-hub .start-card h1 em{font-style:normal;color:#fff0a3!important;font-weight:850}
+.colourful-hub .eyebrow{color:#dfd6ff;letter-spacing:.12em}
+.colourful-hub .start-card>p{color:#eeeaff;max-width:570px}
+.colourful-hub .button.primary{background:#fff0a3!important;color:#382869;box-shadow:0 10px 24px rgba(31,18,77,.2)!important}
+.colourful-hub .button.secondary{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.35)}
+.colourful-hub .learning-loop div{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2)}
+.colourful-hub .learning-loop span{color:#eeeaff}
+.colourful-hub .progress-card{border-top:5px solid #fa9c5c!important;background:linear-gradient(145deg,#fff,#fff8f0)!important}
+.colourful-hub .progress-card h2,.colourful-hub .section h2,.colourful-hub .mastery-path-head h2,.colourful-hub .mock-promo h2{font-family:Arial,Helvetica,sans-serif;font-weight:800;letter-spacing:-.035em}
+.colourful-hub .metric:nth-child(1){background:#ede8ff;border-color:#ddd2ff}.colourful-hub .metric:nth-child(2){background:#e4f7fa;border-color:#c3edf3}.colourful-hub .metric:nth-child(3){background:#fff0da;border-color:#ffdfae}.colourful-hub .metric:nth-child(4){background:#ffe9ef;border-color:#ffd0df}
+.colourful-hub .level-chip{background:#eee8ff;color:#6040b8}
+.colourful-hub .mastery-path{background:#fff;border-color:#e4dff3}
+.colourful-hub .mastery-step:nth-child(1){background:#f0eaff;border-color:#dcd0ff}.colourful-hub .mastery-step:nth-child(2){background:#e5f6ff;border-color:#c7e8fb}.colourful-hub .mastery-step:nth-child(3){background:#fff1df;border-color:#ffe0b4}.colourful-hub .mastery-step:nth-child(4){background:#e7f8ef;border-color:#c8ebd9}
+.colourful-hub .mastery-step .step-no{background:#6746d0;color:#fff}
+.colourful-hub .mock-promo{background:linear-gradient(115deg,#1c729a,#317cce 55%,#6159d5);border-radius:24px}
+.colourful-hub .mock-promo p{color:#d6f5ff}.colourful-hub .mock-promo span{color:#ecf6ff}.colourful-hub .mock-promo a{background:#fff0a3;color:#34315a}
+.colourful-hub .topic-directory{background:rgba(255,255,255,.85);padding-top:34px}
+.colourful-hub .kicker,.colourful-hub .mastery-path-head p{color:#7050c9}
+.colourful-hub .chapter-group.foundation{--group:#188c77;background:linear-gradient(180deg,#e4f8ef,#f8fffb)!important}
+.colourful-hub .chapter-group.application{--group:#337ece;background:linear-gradient(180deg,#e5f2ff,#f9fcff)!important}
+.colourful-hub .chapter-group.physical{--group:#a5630b;background:linear-gradient(180deg,#fff0d6,#fffdf7)!important}
+.colourful-hub .chapter-group.advanced{--group:#8050c6;background:linear-gradient(180deg,#eee4ff,#fcfaff)!important}
+.colourful-hub .group-head b{color:var(--group);font-size:1rem}
+.colourful-hub .chapter-card{grid-template-columns:42px minmax(0,1fr) auto;border-left:4px solid var(--group)!important}
+.colourful-hub .chapter-actions a:first-child{background:color-mix(in srgb,var(--group) 12%,white);color:var(--group)}
+.colourful-hub .chapter-actions a:last-child{background:var(--group)}
+.colourful-hub .filters button.selected{background:#6746d0;border-color:#6746d0}
+.colourful-hub .mode-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.colourful-hub .mode-card{--card-colour:#7951ce;--card-tint:#f2ebff;min-height:218px;padding:24px;border-top:5px solid var(--card-colour)!important;background:linear-gradient(150deg,#fff,var(--card-tint))}
+.colourful-hub .mode-card:nth-child(2){--card-colour:#2f8bc7;--card-tint:#eaf7ff}.colourful-hub .mode-card:nth-child(3){--card-colour:#25977e;--card-tint:#e9fbf3}.colourful-hub .mode-card:nth-child(4){--card-colour:#d66090;--card-tint:#fff0f5}.colourful-hub .mode-card:nth-child(5){--card-colour:#b77819;--card-tint:#fff6e3}.colourful-hub .mode-card:nth-child(6){--card-colour:#536ed2;--card-tint:#edf1ff}
+.colourful-hub .mode-icon{width:50px;height:50px;background:var(--card-tint)!important;color:var(--card-colour)!important;border:1px solid color-mix(in srgb,var(--card-colour) 25%,white)}
+.colourful-hub .mode-card h3{font-family:Arial,Helvetica,sans-serif;font-weight:800;margin-top:18px}
+.colourful-hub .mode-card b{color:var(--card-colour)}
+.colourful-hub .featured{background:linear-gradient(125deg,#2d245e,#4c398c 58%,#305f9d);border-radius:30px}
+.colourful-hub .featured h2,.colourful-hub .lab-card h3{font-family:Arial,Helvetica,sans-serif;font-weight:800}
+.colourful-hub .lab-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.colourful-hub .lab-card{border-top:4px solid #bb9cff;background:rgba(255,255,255,.09)}
+.colourful-hub .lab-card.feature{grid-column:auto;background:linear-gradient(135deg,rgba(121,81,206,.65),rgba(59,150,203,.3))}
+.colourful-hub .lab-card:nth-child(2){border-top-color:#61dcdf}.colourful-hub .lab-card:nth-child(3){border-top-color:#ffcc79}.colourful-hub .lab-card:nth-child(4){border-top-color:#ff9cbc}
+.colourful-hub .lab-tag{color:#fff;background:rgba(255,255,255,.15)}.colourful-hub .lab-card b{color:#fff0a3}
+.colourful-hub .cycle-steps article:nth-child(1){background:#f0eaff}.colourful-hub .cycle-steps article:nth-child(2){background:#e7f4ff}.colourful-hub .cycle-steps article:nth-child(3){background:#fff0e2}.colourful-hub .cycle-steps article:nth-child(4){background:#e5f7ed}
+.colourful-hub .cycle-steps span{background:#6746d0;color:white}
+.colourful-hub a:focus-visible,.colourful-hub button:focus-visible,.colourful-hub input:focus-visible{outline:3px solid #7254d6;outline-offset:4px}
+.colourful-hub #topics{scroll-margin-top:100px}
+@media(max-width:850px){.colourful-hub .mode-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.colourful-hub .mode-grid,.colourful-hub .lab-grid{grid-template-columns:1fr}.colourful-hub .chapter-actions a:first-child{display:grid}.colourful-hub .chapter-actions{flex-direction:column}.colourful-hub .start-card{border-radius:22px}.colourful-hub .start-card h1{font-size:2.6rem}.colourful-hub .mode-card{min-height:190px}.colourful-hub .chapter-group{padding:14px!important}}
