@@ -1,14 +1,14 @@
 
 /* Shared internal-page design. Model and apparatus colours remain controlled by their own styles. */
-body.hub-interior{--hub-accent:#6746c8;--hub-tint:#f0eaff;--hub-edge:#ddd3f2;--hub-text:#302a4c;background:radial-gradient(ellipse at 0 0,var(--hub-tint),transparent 48%),#f8f9fd!important;font-family:Arial,Helvetica,sans-serif}
+body.hub-interior{--hub-accent:#6746c8;--hub-tint:#f0eaff;--hub-edge:#ddd3f2;--hub-text:#302a4c;font-family:Arial,Helvetica,sans-serif}
 body.hub-interior.hub-practice{--hub-accent:#376fb8;--hub-tint:#e8f2ff;--hub-edge:#cbdff3}
 body.hub-interior.hub-notes{--hub-accent:#7049bd;--hub-tint:#f0eaff}
 body.hub-interior.hub-games{--hub-accent:#b43d79;--hub-tint:#ffeaf4;--hub-edge:#f4cede}
 body.hub-interior.hub-lab{--hub-accent:#187d78;--hub-tint:#e3f6f2;--hub-edge:#bfe5dc}
 body.hub-interior.hub-progress{--hub-accent:#976219;--hub-tint:#fff2de;--hub-edge:#f1dcb8}
 body.hub-interior.hub-mock{--hub-accent:#4f5fc2;--hub-tint:#edf0ff}
-.hub-interior .topbar,.hub-interior .site-header{background:#fff!important;border-top:4px solid var(--hub-accent);box-shadow:0 6px 24px rgba(38,31,77,.07)}
-.hub-interior .brand{color:var(--hub-text)!important;font-weight:850}
+.hub-interior:not(.hub-dark) .topbar,.hub-interior:not(.hub-dark) .site-header{background:#fff!important;border-top:4px solid var(--hub-accent);box-shadow:0 6px 24px rgba(38,31,77,.07)}
+.hub-interior:not(.hub-dark) .brand{color:var(--hub-text)!important;font-weight:850}
 .hub-interior .brand-mark,.hub-interior .brand-icon{background:var(--hub-accent)!important;color:#fff!important;border-radius:12px}
 .hub-interior .topbar nav a,.hub-interior .page-nav a{border-radius:10px}
 .hub-interior .topbar nav a.active,.hub-interior .page-nav a.active{background:var(--hub-tint)!important;color:var(--hub-accent)!important}
@@ -18,8 +18,8 @@ body.hub-interior.hub-mock{--hub-accent:#4f5fc2;--hub-tint:#edf0ff}
 .hub-interior :is(.hero,.student-hero,.lab-hero,.mission-head,.case-heading)>p,.hub-interior .hero-copy>p{color:#eeeafa!important}
 .hub-interior :is(.hero-stats,.hero-badges,.hero-tags) :is(.stat,span){border-color:rgba(255,255,255,.25)}
 .hub-interior :is(.panel,.note,.lesson-card,.quiz-card,.concept-panel,.story-panel,.evidence,.record,.explain,.game-arena,.mini-arena,.progress-monitor){border:1px solid var(--hub-edge);border-radius:20px;box-shadow:0 10px 30px rgba(37,29,67,.055)}
-.hub-interior :is(.panel,.note,.lesson-card,.quiz-card,.concept-panel,.story-panel){background:#fff}
-.hub-interior :is(.sidebar,.chapter-rail,.side,.game-menu){background:linear-gradient(180deg,var(--hub-tint),#fff)!important;border:1px solid var(--hub-edge)!important;border-radius:20px;box-shadow:0 10px 25px rgba(37,29,67,.05)}
+.hub-interior:not(.hub-dark) :is(.panel:not(.marking),.note,.lesson-card,.quiz-card,.concept-panel,.story-panel){background:#fff}
+.hub-interior:not(.hub-dark) :is(.chapter-rail,.side,.game-menu){background:linear-gradient(180deg,var(--hub-tint),#fff)!important;border:1px solid var(--hub-edge)!important;border-radius:20px;box-shadow:0 10px 25px rgba(37,29,67,.05)}
 .hub-interior :is(.topic-head,.note-head,.lab-head,.notebook-heading,.report-head){border-bottom:1px solid var(--hub-edge);padding-bottom:18px}
 .hub-interior :is(.topic-head,.note-head,.notebook-heading,.report-head) :is(h1,h2){color:var(--hub-text);font-family:Arial,Helvetica,sans-serif;font-weight:800;letter-spacing:-.025em}
 .hub-interior :is(.question-title,.question-text){line-height:1.7}
@@ -28,7 +28,7 @@ body.hub-interior.hub-mock{--hub-accent:#4f5fc2;--hub-tint:#edf0ff}
 .hub-interior :is(.options button,.game-options button,.challenge-options button,.answers button,.choices button){border-radius:12px;line-height:1.5}
 .hub-interior :is(.question-nav button,.chapter-button){border-radius:10px}
 .hub-interior :is(.question-nav button,.chapter-button):focus-visible,.hub-interior :is(a,button,input,select):focus-visible{outline:3px solid var(--hub-accent);outline-offset:3px}
-.hub-interior .score-card{background:white;border:1px solid var(--hub-edge);border-top:4px solid var(--hub-accent);border-radius:15px}
+.hub-interior .score-card{border:1px solid var(--hub-edge);border-top:4px solid var(--hub-accent);border-radius:15px}
 .hub-interior .note-summary{background:var(--hub-tint);color:var(--hub-text);padding:16px;border-radius:12px}
 .hub-interior .note-grid .panel{border-top:4px solid var(--hub-accent)}
 .hub-interior .note-grid .panel:nth-child(2){border-top-color:#268896}.hub-interior .note-grid .panel:nth-child(3){border-top-color:#bf7b26}
@@ -51,3 +51,13 @@ body.hub-interior.hub-mock{--hub-accent:#4f5fc2;--hub-tint:#edf0ff}
 @media(max-width:640px){.hub-interior :is(.hero,.student-hero,.lab-hero,.mission-head,.case-heading){border-radius:16px}.hub-interior .hub-section-links{padding:0 12px;gap:6px}.hub-interior .hub-section-links a{padding:8px 10px}.hub-interior .report-section{padding:17px}.hub-interior :is(.panel,.note,.lesson-card){border-radius:15px}}
 @media(prefers-reduced-motion:reduce){.hub-interior :is(.mini-game-card,.game-card){transition:none}}
 @media print{body.hub-interior{background:white!important}.hub-interior .hub-section-links{display:none}.hub-interior .report-section{box-shadow:none}}
+
+/* Preserve dark teaching panels and their matching text colours. */
+@media screen{body.hub-interior:not(.hub-dark){background:radial-gradient(ellipse at 0 0,var(--hub-tint),transparent 48%),#f8f9fd!important}}
+.hub-interior .hub-section-links a[aria-current]{background:var(--hub-accent);border-color:var(--hub-accent);color:white}
+.hub-dark :is(a,button,input,select):focus-visible{outline-color:#ffd68b}
+.hub-interior :is(#progressMonitor,#revisionCoach){scroll-margin-top:100px}
+@media(max-width:640px){.hub-section-links a{min-height:44px;display:inline-flex;align-items:center}.hub-dark header{flex-wrap:wrap}.hub-dark header nav{flex-wrap:wrap}}
+
+.hub-interior .student-hero .stat-pill{color:var(--hub-text)}
+.hub-interior .student-hero>div>p{color:#eeeafa}

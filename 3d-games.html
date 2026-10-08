@@ -29,22 +29,16 @@
     @media(max-width:620px){.lab-shell{width:min(100% - 20px,1260px);padding-top:24px}.lab-hero{padding:27px 22px;border-radius:23px}.organic-path{padding:15px}.organic-path-head{display:block}.organic-path-head p{margin-top:5px}.hero-score{grid-template-columns:1fr 1fr}.game-menu{grid-template-columns:1fr}.lab-choice{grid-template-columns:45px 1fr;text-align:left}.lab-choice i{margin:0}.lab-choice span{display:block}.lab-choice small{grid-column:2}.lab-head{flex-direction:column}.answers,.organic-tray,.synthesis-slots{grid-template-columns:1fr}.stage{border-radius:16px}.lab-card{border-radius:20px;padding:14px}.stage-note{display:none}.model-tools{left:8px;top:8px;gap:4px}.model-tools button{padding:6px 7px;font-size:7px}.model-readout{right:8px;bottom:8px;max-width:72%;padding:8px 10px}.model-readout strong{font-size:11px}.stage-legend{display:none}}
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.flow-electron{animation:none!important}.hyper-electron{display:none}}
   </style>
-<link rel="stylesheet" href="hub-interior.css?v=20261006">
+<link rel="stylesheet" href="hub-interior.css?v=20261008">
 </head>
-<body class="student-page hub-interior hub-lab"><nav class="hub-section-links" aria-label="Revision shortcuts"><a href="index.html">⌂ Hub</a><a href="revision-notes.html">Quick Notes</a><a href="index.html#topics">Topic Practice</a><a href="mock-exam.html">36 MC · 45 min</a><a href="games.html">Games</a><a href="3d-games.html">3D Lab</a><a href="mistakes.html">My Progress</a></nav>
+<body class="student-page hub-interior hub-lab"><nav class="hub-section-links" aria-label="Revision shortcuts"><a href="index.html">⌂ Hub</a><a href="revision-notes.html">Quick Notes</a><a href="index.html#topics">Topic Practice</a><a href="mock-exam.html">36 MC · 45 min</a><a href="games.html">Games</a><a href="3d-games.html" aria-current="page">3D Lab</a><a href="mistakes.html">My Progress</a></nav>
   <header class="topbar">
     <a class="brand" href="index.html">CHEMISTRY HUB</a>
-    <nav class="page-nav" aria-label="Student tools">
-      <a href="index.html" data-short="Hub">Revision Hub</a>
-      <a href="games.html" data-short="Games">Chemistry Games</a>
-      <a class="active" href="3d-games.html" data-short="Organic Lab" aria-current="page">Organic Revision Lab</a>
-      <a href="mistakes.html" data-short="Notebook">Progress Monitor</a>
-    </nav>
   </header>
 
   <main class="lab-shell">
     <section class="lab-hero">
-      <div><p class="kicker">HKDSE TOPIC 11 · ORGANISED REVISION PATH</p><h1>Organic Chemistry Revision Lab</h1><p>Master carbon-compound structures, systematic naming, isomerism, synthesis and animated reaction changes through one connected interactive learning path.</p><div class="hero-badges"><span>STRUCTURE &amp; NAMING</span><span>3D ISOMERISM</span><span>MULTI-STEP SYNTHESIS</span><span>CHEMSTRIKE MISSIONS</span><span>3D MECHANISMS</span></div></div>
+      <div><p class="kicker">HKDSE TOPIC XI · ORGANISED REVISION PATH</p><h1>Organic Chemistry Revision Lab</h1><p>Master carbon-compound structures, systematic naming, isomerism, synthesis and animated reaction changes through one connected interactive learning path.</p><div class="hero-badges"><span>STRUCTURE &amp; NAMING</span><span>3D ISOMERISM</span><span>MULTI-STEP SYNTHESIS</span><span>CHEMSTRIKE MISSIONS</span><span>3D MECHANISMS</span></div></div>
       <div class="hero-score" aria-label="3D game progress"><div><b id="xpValue">0</b><span>TOTAL XP</span></div><div><b id="levelValue">1</b><span>LEVEL</span></div><div><b id="bestValue">0</b><span>CURRENT BEST</span></div><div><b id="mistakeValue">0</b><span>TO REVISE</span></div></div>
     </section>
 
@@ -54,19 +48,19 @@
       <nav class="game-menu" aria-label="Choose an organic chemistry revision lab">
         <p class="lab-group-title">ORGANIC CHEMISTRY CORE</p>
         <button class="lab-choice active" data-lab="organic" type="button"><i>🧬</i><span><b>Structures &amp; Naming</b><span>Build, identify and transform 3D carbon compounds</span></span><small>STAGE 1 · 20 CHALLENGES</small></button>
-        <button class="lab-choice" data-lab="isomer" type="button"><i>🪞</i><span><b>3D Isomerism Lab</b><span>Compare connectivity and spatial arrangement</span></span><small>TOPIC 11 · 15 MOVABLE CHALLENGES</small></button>
+        <button class="lab-choice" data-lab="isomer" type="button"><i>🪞</i><span><b>3D Isomerism Lab</b><span>Compare connectivity and spatial arrangement</span></span><small>TOPIC XI · 15 MOVABLE CHALLENGES</small></button>
         <button class="lab-choice" data-lab="synthesis" type="button"><i>🧪</i><span><b>3D Synthesis Workshop</b><span>Build foundation and advanced DSE pathways</span></span><small>40 ROUTES · 17 MULTI-STEP</small></button>
         <button class="lab-choice" data-lab="reaction4d" type="button"><i>⏱</i><span><b>ChemStrike</b><span>Deploy reagents in tactical reaction missions</span></span><small>STAGE 4 · 8 MISSIONS</small></button>
         <button class="lab-choice" data-lab="mechanism" type="button"><i>↷</i><span><b>3D Mechanism Theatre</b><span>Follow electron pairs and bond changes step by step</span></span><small>STAGE 5 · 5 MECHANISMS</small></button>
         <p class="lab-group-title">SUPPORTING 3D CHEMISTRY LABS</p>
-        <a class="lab-choice" href="ligand-exchange.html" style="text-decoration:none"><i>💧</i><span><b>3D Ligand Exchange Lab</b><span>Add NH₃ and follow the Cu²⁺ colour changes</span></span><small>TOPIC 12 · 3 CORE STAGES</small></a>
-        <button class="lab-choice" data-lab="molecule" type="button"><i>⚛</i><span><b>Molecular Shape Explorer</b><span>Rotate ball-and-stick molecular structures</span></span><small>TOPICS 02 &amp; 06 · 8 STRUCTURES</small></button>
-        <button class="lab-choice" data-lab="collision" type="button"><i>💥</i><span><b>Collision Arena</b><span>Control factors that affect rate</span></span><small>TOPIC 09 · 8 CHALLENGES</small></button>
-        <button class="lab-choice" data-lab="lattice" type="button"><i>💎</i><span><b>Lattice Repair</b><span>Rebuild a three-dimensional crystal</span></span><small>TOPIC 02 · 12 REPAIRS</small></button>
+        <a class="lab-choice" href="ligand-exchange.html" style="text-decoration:none"><i>💧</i><span><b>3D Ligand Exchange Lab</b><span>Add NH₃ and follow the Cu²⁺ colour changes</span></span><small>TOPIC XII · 3 CORE STAGES</small></a>
+        <button class="lab-choice" data-lab="molecule" type="button"><i>⚛</i><span><b>Molecular Shape Explorer</b><span>Rotate ball-and-stick molecular structures</span></span><small>TOPICS II &amp; VI · 8 STRUCTURES</small></button>
+        <button class="lab-choice" data-lab="collision" type="button"><i>💥</i><span><b>Collision Arena</b><span>Control factors that affect rate</span></span><small>TOPIC IX · 8 CHALLENGES</small></button>
+        <button class="lab-choice" data-lab="lattice" type="button"><i>💎</i><span><b>Lattice Repair</b><span>Rebuild a three-dimensional crystal</span></span><small>TOPIC II · 12 REPAIRS</small></button>
       </nav>
 
       <article class="lab-card">
-        <div class="lab-head"><div><p class="kicker" id="labKicker">BUILD THE MOLECULE · HKDSE TOPIC 11</p><h2 id="labTitle">Structures &amp; Naming</h2></div><span class="lab-status" id="labStatus">MOVABLE CHALLENGE 1 OF 20</span></div>
+        <div class="lab-head"><div><p class="kicker" id="labKicker">BUILD THE MOLECULE · HKDSE TOPIC XI</p><h2 id="labTitle">Structures &amp; Naming</h2></div><span class="lab-status" id="labStatus">MOVABLE CHALLENGE 1 OF 20</span></div>
         <div class="stage"><canvas id="scene" width="800" height="450" aria-label="Interactive three-dimensional chemistry model"></canvas><div class="model-tools" id="modelTools"><button id="spinToggle" type="button" aria-pressed="true">AUTO ROTATE</button><button id="pairToggle" type="button" aria-pressed="true">LONE PAIRS</button><button id="compareToggle" type="button" aria-pressed="false" hidden>ROTATE B ONLY</button><button id="resetView" type="button">RESET VIEW</button></div><span class="stage-note">Drag or use arrow keys to inspect every angle</span><div class="stage-legend" id="stageLegend"></div><div class="model-readout" id="modelReadout"></div><span class="sr-only" id="sceneDescription" aria-live="polite"></span></div>
         <div id="gamePanel"></div>
       </article>
