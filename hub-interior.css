@@ -61,3 +61,16 @@ body.hub-interior.hub-mock{--hub-accent:#4f5fc2;--hub-tint:#edf0ff}
 
 .hub-interior .student-hero .stat-pill{color:var(--hub-text)}
 .hub-interior .student-hero>div>p{color:#eeeafa}
+
+/* Let wide question tables scroll inside their cards instead of widening the grid. */
+.hub-practice .practice-layout>*{min-width:0}
+.hub-practice :is(.question-table-wrap,.data-table){max-width:100%;overflow-x:auto}
+@media(max-width:760px){
+  .hub-practice .question-card .actions{display:flex;flex-direction:column;flex-wrap:wrap}
+  .hub-practice .question-card .action-group{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .hub-practice .question-card .action-group .btn{min-width:0;width:100%}
+}
+@media(max-width:1050px){
+  .hub-practice #questionContent~.options{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hub-practice #questionContent~.options .option{min-width:0}
+}
