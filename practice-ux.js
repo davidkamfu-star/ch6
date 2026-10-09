@@ -55,11 +55,9 @@
     var strip=make('nav','practice-guide');strip.setAttribute('aria-label','Question practice shortcuts');
     var status=make('span','guide-status');status.innerHTML='<small>TOPIC MASTERY</small>Choose a question to begin';
     var links=make('div','guide-links');
-    var all=make('a','','All topics');all.href='index.html#topics';
     var notes=make('a','','Topic notes');notes.href='revision-notes.html?topic='+number;
-    var mistakes=make('a','mistake-link','Review mistakes');mistakes.href='mistakes.html';
     var next=make('button','','Next unanswered →');next.type='button';
-    links.appendChild(all);links.appendChild(notes);links.appendChild(mistakes);links.appendChild(next);
+    links.appendChild(notes);links.appendChild(next);
     strip.appendChild(status);strip.appendChild(links);header.insertAdjacentElement('afterend',strip);
     function buttons(){return Array.from(map.querySelectorAll('button[data-i]'))}
     function currentIndex(){
