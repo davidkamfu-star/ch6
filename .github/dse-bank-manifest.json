@@ -1,8 +1,8 @@
 [
   {
     "path": "app.js",
-    "sha256": "f20a061f56c8b8d63deea7285bc10c3b7db1461bdf4dec075042a5f848339c19",
-    "size": 26733
+    "sha256": "b1c85099e8d0297507cd94e77a5f49c66ff584664a92b6122a03541bdb1fe9ac",
+    "size": 28290
   },
   {
     "path": "assets/A1-student-0.pdf",
@@ -1796,8 +1796,8 @@
   },
   {
     "path": "index.html",
-    "sha256": "bf29719df97731439abbd82efe3a89cffb32c9b3b5b5e3d89fc2d6d782f8fae3",
-    "size": 5740
+    "sha256": "b6c99e107bbfc57b56c83ea6eae882a365d5d3febd55e7937a990e8867872b10",
+    "size": 6691
   },
   {
     "path": "pdf-engine.js",
@@ -1811,8 +1811,8 @@
   },
   {
     "path": "style.css",
-    "sha256": "173d433cc4000f1801e26791caf9ae61a098f855bd181b29dd2604a63aa47681",
-    "size": 11660
+    "sha256": "9a27780168683fd7ef005142b43225380c1d719ee18899d60832552e200fba3c",
+    "size": 17008
   },
   {
     "path": "thumbs/A1-2012-1.jpg",
