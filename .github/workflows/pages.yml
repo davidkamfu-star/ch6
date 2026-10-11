@@ -36,7 +36,7 @@ jobs:
           python3 - <<'PY'
           import concurrent.futures, hashlib, json, pathlib, subprocess
           root = pathlib.Path("math-bank")
-          if not (root / "bank.json").is_file():
+          if not (root / "en/assets").is_dir():
               manifest = json.loads(pathlib.Path(".github/dse-bank-manifest.json").read_text())
               def copy(entry):
                   rel = pathlib.PurePosixPath(entry["path"])
@@ -60,6 +60,9 @@ jobs:
                           print(f"Copied and verified {i}/{len(manifest)} files", flush=True)
               bank = json.loads((root / "bank.json").read_text())
               assert len(bank["questions"]) == 262 and len(bank["topics"]) == 35
+              english = json.loads((root / "bank-en.json").read_text())
+              assert len(english["questions"]) == 262 and len(english["topics"]) == 35
+              assert {q["id"] for q in bank["questions"]} == {q["id"] for q in english["questions"]}
               (root / ".nojekyll").touch()
               print("Question bank verified and copied into GitHub repository", flush=True)
           else:
