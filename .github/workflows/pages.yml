@@ -1,4 +1,4 @@
-name: Deploy chemistry revision hub
+name: Deploy revision hub and mathematics question bank
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -23,6 +23,51 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Import and verify mathematics question bank once
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import concurrent.futures, hashlib, json, pathlib, subprocess
+          root = pathlib.Path("math-bank")
+          if not (root / "bank.json").is_file():
+              manifest = json.loads(pathlib.Path(".github/dse-bank-manifest.json").read_text())
+              def copy(entry):
+                  rel = pathlib.PurePosixPath(entry["path"])
+                  if rel.is_absolute() or ".." in rel.parts:
+                      raise ValueError("Invalid asset path")
+                  target = root / rel
+                  target.parent.mkdir(parents=True, exist_ok=True)
+                  subprocess.run(["curl", "--fail", "--location", "--silent", "--show-error",
+                                  "--retry", "3", "--max-time", "120",
+                                  "https://dse-topic-bank.davidkamfu.chatgpt.site/" + rel.as_posix(),
+                                  "--output", str(target)], check=True)
+                  data = target.read_bytes()
+                  if len(data) != entry["size"] or hashlib.sha256(data).hexdigest() != entry["sha256"]:
+                      raise ValueError("Asset checksum mismatch: " + str(rel))
+                  return str(rel)
+              with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+                  for i, result in enumerate(pool.map(copy, manifest), 1):
+                      if i % 25 == 0:
+                          print(f"Copied and verified {i}/{len(manifest)} files", flush=True)
+              bank = json.loads((root / "bank.json").read_text())
+              assert len(bank["questions"]) == 262 and len(bank["topics"]) == 35
+              (root / ".nojekyll").touch()
+              print("Question bank verified and copied into GitHub repository", flush=True)
+          else:
+              print("Using question bank files already saved in GitHub", flush=True)
+          PY
+      - name: Save imported question bank in repository
+        shell: bash
+        run: |
+          git add math-bank
+          if ! git diff --cached --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Add Traditional Chinese DSE mathematics question bank"
+            git push origin HEAD:main
+          fi
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
         with:
