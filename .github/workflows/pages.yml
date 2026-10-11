@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -25,6 +25,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: main
+      - name: Restore cached mathematics question bank
+        uses: actions/cache@v4
+        with:
+          path: math-bank
+          key: dse-bank-${{ hashFiles('.github/dse-bank-manifest.json') }}
       - name: Import and verify mathematics question bank once
         shell: bash
         run: |
@@ -39,6 +44,8 @@ jobs:
                       raise ValueError("Invalid asset path")
                   target = root / rel
                   target.parent.mkdir(parents=True, exist_ok=True)
+                  if target.is_file() and hashlib.sha256(target.read_bytes()).hexdigest() == entry["sha256"]:
+                      return str(rel)
                   subprocess.run(["curl", "--fail", "--location", "--silent", "--show-error",
                                   "--retry", "3", "--max-time", "120",
                                   "https://dse-topic-bank.davidkamfu.chatgpt.site/" + rel.as_posix(),
@@ -58,16 +65,6 @@ jobs:
           else:
               print("Using question bank files already saved in GitHub", flush=True)
           PY
-      - name: Save imported question bank in repository
-        shell: bash
-        run: |
-          git add math-bank
-          if ! git diff --cached --quiet; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git commit -m "Add Traditional Chinese DSE mathematics question bank"
-            git push origin HEAD:main
-          fi
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
         with:
