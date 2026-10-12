@@ -1,8 +1,8 @@
 [
   {
     "path": "app.js",
-    "sha256": "b1c85099e8d0297507cd94e77a5f49c66ff584664a92b6122a03541bdb1fe9ac",
-    "size": 28290
+    "sha256": "b92b90e3c67bc910a9c3e6852d420fdf3730125dce959f39968d27a28cdb5524",
+    "size": 29108
   },
   {
     "path": "assets/A1-student-0.pdf",
@@ -221,13 +221,13 @@
   },
   {
     "path": "bank-en.json",
-    "sha256": "7de50cbc19733600863f4a668f1e5ba2367d972f5daf5b81bb1785fac09d0d27",
-    "size": 133077
+    "sha256": "1d6dd701f75c2728ef17b8f1671eedca906dc51976793f59211f02a084fe93d2",
+    "size": 147426
   },
   {
     "path": "bank.json",
-    "sha256": "b44e89077e7b3bd80935bc9ed149b94f227436dc151cb24d95ebb6ae86d798d3",
-    "size": 105925
+    "sha256": "a8c44123a8d22de4700af5fb58f3f251e1ff2e714bcb2d535e26489e70b6c71c",
+    "size": 122004
   },
   {
     "path": "en/assets/A1-student-0.pdf",
@@ -1796,13 +1796,13 @@
   },
   {
     "path": "index.html",
-    "sha256": "0dd69d85755cde0fa56544f6366ff9992d52777f7346ccf21d15dea8e2f75df2",
-    "size": 6730
+    "sha256": "9f18925d7230b916326455afb7a132f47ef9d6fd1657e3273e67e15f4e7688e5",
+    "size": 6763
   },
   {
     "path": "pdf-engine.js",
-    "sha256": "e50b6e5a06190f85d7944a12c1786b936dc0346b4f812bf3117f48ada80e8615",
-    "size": 4195
+    "sha256": "25b6d641a0a27ff2973fcd046e7f522aa5bd74ea78c6d9bab423d7f9f92c46b1",
+    "size": 5010
   },
   {
     "path": "pdf-lib.min.js",
