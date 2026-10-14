@@ -30,6 +30,8 @@ jobs:
         with:
           path: math-bank
           key: dse-bank-${{ hashFiles('.github/dse-bank-manifest.json') }}
+      - name: Keep checked-in question bank code after cache restore
+        run: git restore --source=HEAD --worktree -- math-bank
       - name: Import and verify mathematics question bank once
         shell: bash
         run: |
