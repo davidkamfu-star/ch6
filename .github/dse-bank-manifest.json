@@ -1,8 +1,8 @@
 [
   {
     "path": "app.js",
-    "sha256": "b92b90e3c67bc910a9c3e6852d420fdf3730125dce959f39968d27a28cdb5524",
-    "size": 29108
+    "sha256": "e82008a9de50767ab4851a40794ae8b79bb558ba12bbb84168bf0f3056ef42c5",
+    "size": 29193
   },
   {
     "path": "assets/A1-student-0.pdf",
@@ -1796,13 +1796,13 @@
   },
   {
     "path": "index.html",
-    "sha256": "9f18925d7230b916326455afb7a132f47ef9d6fd1657e3273e67e15f4e7688e5",
-    "size": 6763
+    "sha256": "4404a1601ffe908069ae682f89455858065ce25c02aa3047464b43ed2f52da92",
+    "size": 6784
   },
   {
     "path": "pdf-engine.js",
-    "sha256": "25b6d641a0a27ff2973fcd046e7f522aa5bd74ea78c6d9bab423d7f9f92c46b1",
-    "size": 5010
+    "sha256": "8eebfb57d1df53e3598d8601487297ee5272afa1e5e05b9d31d4145c1d516a32",
+    "size": 6144
   },
   {
     "path": "pdf-lib.min.js",
