@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChemMaster World | Reaction Rate Lab</title>
+<link rel="stylesheet" href="chem-master-world.css">
+<link rel="stylesheet" href="reaction-rate-lab.css">
+<script defer src="student-tools.js?v=20260907b"></script>
+<script defer src="reaction-rate-lab.js"></script>
+</head>
+<body>
+<header><a class="brand" href="index.html">⌬ ChemMaster World</a><a href="chem-master-world.html">← Mission 01: Changing Copper</a></header>
+<main>
+<section class="intro"><p class="eyebrow">CHEMMASTER WORLD / FIELD FILE 02</p><h1>Reaction <em>Rate Lab</em></h1><p>Your lab has two samples of calcium carbonate. Can you make one react faster with hydrochloric acid while keeping the final amount of carbon dioxide the same?</p><span class="badge">TOPIC IX · RATE OF REACTION</span></section>
+<div class="layout">
+<section class="card"><p class="eyebrow">YOUR INVESTIGATION</p><h2>Plan a fair test</h2>
+<p>Change just one condition. Both runs use the same mass of calcium carbonate, with acid in excess.</p>
+<label for="factor">Condition to change</label>
+<select id="factor"><option value="concentration">Higher acid concentration</option><option value="surface">Smaller calcium carbonate pieces</option><option value="temperature">Higher reaction temperature</option></select>
+<p id="settings"></p>
+<fieldset><legend>Predict the final gas volume in the changed run</legend>
+<label><input type="radio" name="predict" value="lower"> Lower</label>
+<label><input type="radio" name="predict" value="same"> Same</label>
+<label><input type="radio" name="predict" value="higher"> Higher</label>
+</fieldset>
+<button class="primary" id="run" disabled>Run the comparison</button>
+<p id="finding" role="status"></p>
+<form id="analysis" hidden>
+<h2>Explain your evidence</h2>
+<label for="slope">Which run has the greater initial gradient?</label>
+<select id="slope" required><option value="">Choose an answer</option><option value="reference">Reference run</option><option value="changed">Changed run</option><option value="same">Same gradient</option></select>
+<label for="cause">Why does the changed run start faster?</label>
+<select id="cause" required><option value="">Choose an answer</option><option value="concentration">More acid particles per unit volume</option><option value="surface">More exposed solid surface</option><option value="temperature">A greater fraction of collisions have enough energy</option><option value="yield">More carbon dioxide is produced in total</option></select>
+<label for="plateau">Why do the curves reach the same final volume?</label>
+<select id="plateau" required><option value="">Choose an answer</option><option value="same">The same mass of limiting calcium carbonate reacts fully.</option><option value="acid">The acid runs out in both runs.</option><option value="rate">The reactions have the same initial rate.</option></select>
+<button class="primary" type="submit">Check my explanation</button>
+<p id="feedback" role="status"></p>
+</form>
+</section>
+<section class="card viewer"><p class="eyebrow">VIRTUAL LAB</p><h2>Compare the two runs</h2>
+<p>CaCO₃(s) + 2HCl(aq) → CaCl₂(aq) + H₂O(l) + CO₂(g)</p>
+<div class="rate-legend"><span>● Reference</span><span>◆ Changed condition (dashed)</span></div>
+<svg id="chart" viewBox="0 0 520 325" role="img" aria-labelledby="chart-title chart-desc">
+<title id="chart-title">Volume of carbon dioxide against simulated time</title><desc id="chart-desc">Both runs start at zero.</desc>
+<path d="M65 35V265H493 M65 150H493 M65 35H493" fill="none" stroke="#8292b1" stroke-width="1"/>
+<g fill="#e4edff" font-size="15"><text x="65" y="19">CO₂ volume / cm³</text><text x="35" y="40">80</text><text x="35" y="155">40</text><text x="45" y="270">0</text><text x="62" y="288">0</text><text x="267" y="288">30</text><text x="472" y="288">60</text><text x="215" y="314">Simulated time / s</text></g>
+<path id="ref-curve" fill="none" stroke="#8debcf" stroke-width="4"/><path id="changed-curve" fill="none" stroke="#ffdb8c" stroke-width="4" stroke-dasharray="10 5"/>
+</svg>
+<table><caption>Gas collected at the selected time</caption><thead><tr><th scope="col">Reference</th><th scope="col">Changed condition</th></tr></thead><tbody><tr><td id="ref-value">0.0 cm³</td><td id="changed-value">0.0 cm³</td></tr></tbody></table>
+<div class="replay"><button id="play" disabled>Play</button><button id="pause" disabled>Pause</button><button id="reset" disabled>Rewind</button></div>
+<label class="range-label" for="time">Replay time <output id="clock">0 s</output></label>
+<input id="time" type="range" min="0" max="60" value="0" disabled>
+<p class="small">Illustrative curves, not experimental data. Both gas volumes are compared at the same reference temperature and pressure.</p>
+</section>
+</div>
+</main>
+<footer><a href="rate-of-reaction.html">Rate of Reaction practice ↗</a><a href="mistakes.html#progressMonitor">My Progress ↗</a><span>Virtual experiment · Topic IX</span></footer>
+</body>
+</html>
