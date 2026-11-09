@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10172b">
+<title>ChemMaster World | The Case of the Changing Copper</title>
+<link rel="stylesheet" href="chem-master-world.css">
+<script defer src="student-tools.js?v=20260907b"></script>
+<script defer src="chem-master-world.js"></script>
+</head>
+<body>
+<header><a href="index.html" class="brand"><span aria-hidden="true">⌬</span> ChemMaster World</a><a href="index.html">Back to Hub <span aria-hidden="true">↗</span></a></header>
+<main>
+<section class="intro" aria-labelledby="title">
+<p class="eyebrow">CHEMMASTER WORLD / FIELD FILE 01</p>
+<h1 id="title">The Case of the <em>Changing Copper</em></h1>
+<p>A pale blue sample, a mysterious solid, and a deep blue solution. As the lab’s trainee investigator, collect the evidence and explain what changed.</p>
+<span class="badge">TOPIC XII · COPPER(II) COMPLEXES</span>
+</section>
+<div class="layout">
+<div class="workspace">
+<nav class="card map" aria-label="Mission map"><p class="eyebrow">MISSION MAP</p><ol id="map"></ol></nav>
+<section class="card task" aria-labelledby="task-title">
+<p class="eyebrow" id="step-label"></p><h2 id="task-title" tabindex="-1">Opening the case…</h2>
+<div id="task"></div>
+<p id="feedback" class="feedback" role="status" hidden></p>
+</section>
+<section class="card evidence" aria-labelledby="evidence-title"><p class="eyebrow">CASE NOTES</p><h2 id="evidence-title">Evidence locker</h2><ul id="evidence"></ul></section>
+</div>
+<section class="card viewer" aria-labelledby="viewer-title">
+<div class="view-head"><div><p class="eyebrow">VIRTUAL LAB</p><h2 id="viewer-title">4D replay</h2></div><span class="badge">3D + STAGES</span></div>
+<div class="view-modes" role="group" aria-label="Lab view">
+<button id="beaker" aria-pressed="true">Beaker</button><button id="particle" aria-pressed="false">Particle model</button><button id="diagram" aria-pressed="false">2D diagram</button>
+</div>
+<div class="scene">
+<canvas id="scene" width="720" height="440" tabindex="0" aria-label="Interactive lab scene. Use arrow keys to rotate the particle model."></canvas>
+<div id="fallback" hidden></div>
+</div>
+<div id="rotation" hidden role="group" aria-label="Rotate particle model"><button data-rotate="-1,0" aria-label="Rotate left">←</button><button data-rotate="1,0" aria-label="Rotate right">→</button><button data-rotate="0,-1" aria-label="Tilt up">↑</button><button data-rotate="0,1" aria-label="Tilt down">↓</button><button id="reset-view">Reset view</button></div>
+<p id="model-note" class="small"></p>
+<div class="replay" role="group" aria-label="Replay controls"><button id="prev">Previous stage</button><button id="play">Play</button><button id="pause">Pause</button><button id="next">Next stage</button></div>
+<label class="range-label" for="timeline">Stage sequence <span id="stage-count"></span></label>
+<input id="timeline" type="range" min="0" max="2" step="1" value="0" aria-describedby="timeline-note">
+<p class="small" id="timeline-note">Replay shows the order of observations. It does not show measured reaction time.</p>
+<div class="observation" aria-live="polite"><p class="eyebrow" id="stage-name"></p><h3 id="observation"></h3><p id="explanation"></p><p id="equation" class="equation"></p></div>
+</section>
+</div>
+<noscript><p>This mission requires JavaScript. You can still open the <a href="ligand-exchange.html">Copper Ligand Exchange lesson</a>.</p></noscript>
+</main>
+<footer><a href="ligand-exchange.html">Copper Ligand Exchange lesson ↗</a><a href="mistakes.html#progressMonitor">My progress ↗</a><span>Virtual experiment · Topic XII</span></footer>
+</body>
+</html>
