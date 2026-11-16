@@ -18,6 +18,7 @@ function validateQuestions(questions,options={}){
 }
 async function build({questions,topics,options,readAsset,renderSheet,onProgress=()=>{}}){
  validateQuestions(questions,options);
+ if(!root.PDFLib?.PDFDocument)throw Error(options.language==='en'?'The PDF export library could not be loaded. Refresh the page and try again.':'PDF 匯出元件未能載入，請重新整理頁面後再試。');
  const {PDFDocument,StandardFonts,rgb,PDFName,PDFArray}=root.PDFLib;
  const doc=await PDFDocument.create(),latin=await doc.embedFont(StandardFonts.Helvetica);
  const rows=ordered(questions,topics,options.sort);const mode=options.mode||'student';

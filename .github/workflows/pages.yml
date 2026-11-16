@@ -1,13 +1,14 @@
 name: Deploy revision hub and mathematics question bank
 
 on:
-  push:
+  workflow_run:
+    workflows: [pages build and deployment]
+    types: [completed]
     branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
-  actions: read
   pages: write
   id-token: write
 
@@ -17,6 +18,7 @@ concurrency:
 
 jobs:
   deploy:
+    if: github.ref == 'refs/heads/main'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -33,64 +35,16 @@ jobs:
           key: dse-bank-${{ hashFiles('.github/dse-bank-manifest.json') }}
       - name: Keep checked-in question bank code after cache restore
         run: git restore --source=HEAD --worktree -- math-bank
-      - name: Import and verify mathematics question bank once
-        shell: bash
+      - name: Restore and verify every question bank asset
+        run: python3 .github/scripts/prepare_math_bank.py
+      - name: Test PDF exports and partial asset cache recovery
         run: |
-          python3 - <<'PY'
-          import concurrent.futures, hashlib, json, pathlib, subprocess
-          root = pathlib.Path("math-bank")
-          if not (root / "en/assets").is_dir():
-              manifest = json.loads(pathlib.Path(".github/dse-bank-manifest.json").read_text())
-              def copy(entry):
-                  rel = pathlib.PurePosixPath(entry["path"])
-                  if rel.is_absolute() or ".." in rel.parts:
-                      raise ValueError("Invalid asset path")
-                  target = root / rel
-                  target.parent.mkdir(parents=True, exist_ok=True)
-                  if target.is_file() and hashlib.sha256(target.read_bytes()).hexdigest() == entry["sha256"]:
-                      return str(rel)
-                  subprocess.run(["curl", "--fail", "--location", "--silent", "--show-error",
-                                  "--retry", "3", "--max-time", "120",
-                                  "https://dse-topic-bank.davidkamfu.chatgpt.site/" + rel.as_posix(),
-                                  "--output", str(target)], check=True)
-                  data = target.read_bytes()
-                  if len(data) != entry["size"] or hashlib.sha256(data).hexdigest() != entry["sha256"]:
-                      raise ValueError("Asset checksum mismatch: " + str(rel))
-                  return str(rel)
-              with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
-                  for i, result in enumerate(pool.map(copy, manifest), 1):
-                      if i % 25 == 0:
-                          print(f"Copied and verified {i}/{len(manifest)} files", flush=True)
-              bank = json.loads((root / "bank.json").read_text())
-              assert len(bank["questions"]) == 262 and len(bank["topics"]) == 35
-              english = json.loads((root / "bank-en.json").read_text())
-              assert len(english["questions"]) == 262 and len(english["topics"]) == 35
-              assert {q["id"] for q in bank["questions"]} == {q["id"] for q in english["questions"]}
-              (root / ".nojekyll").touch()
-              print("Question bank verified and copied into GitHub repository", flush=True)
-          else:
-              print("Using question bank files already saved in GitHub", flush=True)
-          PY
+          python3 -m unittest discover -s .github/scripts -p 'test_*.py'
+          node --test math-bank/tests/pdf-export.test.cjs
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
         with:
           enablement: true
-      - name: Wait for automatic branch Pages deployment
-        uses: actions/github-script@v7
-        with:
-          script: |
-            // Publish the complete asset bundle after the legacy branch publisher.
-            for (let attempt = 0; attempt < 60; attempt++) {
-              const { data } = await github.rest.actions.listWorkflowRunsForRepo({
-                ...context.repo, head_sha: context.sha, per_page: 100
-              });
-              const pending = data.workflow_runs.filter(run =>
-                run.name === 'pages build and deployment' && run.status !== 'completed'
-              );
-              if (!pending.length) return;
-              await new Promise(resolve => setTimeout(resolve, 10000));
-            }
-            throw new Error('Automatic branch Pages deployment did not finish; refusing to race it.');
       - name: Upload website
         uses: actions/upload-pages-artifact@v3
         with:
