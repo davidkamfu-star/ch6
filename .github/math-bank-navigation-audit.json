@@ -1,0 +1,722 @@
+[
+  {
+    "bank": "bank.json",
+    "id": "A1-2026-2",
+    "kind": "student",
+    "removedSegment": {
+      "page": 10,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-student-0.pdf"
+    },
+    "sourceText": "02 代數分式\n目錄\n上一課題\n下一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2026-2",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 11,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-teacher-0.pdf"
+    },
+    "sourceText": "02 代數分式\n目錄\n上一課題\n下一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2025-2",
+    "kind": "student",
+    "removedSegment": {
+      "page": 13,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-student-0.pdf"
+    },
+    "sourceText": "03 主項變換\n目錄\n上一課題\n下一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2025-2",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 14,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-teacher-0.pdf"
+    },
+    "sourceText": "03 主項變換\n目錄\n上一課題\n下一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2014-5",
+    "kind": "student",
+    "removedSegment": {
+      "page": 5,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-student-1.pdf"
+    },
+    "sourceText": "04 因式分解\n目錄\n上一課題\n下一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2014-5",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 10,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-teacher-1.pdf"
+    },
+    "sourceText": "04 因式分解\n目錄\n上一課題\n下一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2026-4",
+    "kind": "student",
+    "removedSegment": {
+      "page": 13,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-student-1.pdf"
+    },
+    "sourceText": "05 多項式及二次方程\n目錄\n上一課題\n下一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2026-4",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 6,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-teacher-2.pdf"
+    },
+    "sourceText": "05 多項式及二次方程\n目錄\n上一課題\n下一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2020-7",
+    "kind": "student",
+    "removedSegment": {
+      "page": 0,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-student-2.pdf"
+    },
+    "sourceText": "06 估算及誤差\n目錄\n上一課題\n下一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2020-7",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 8,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-teacher-2.pdf"
+    },
+    "sourceText": "06 估算及誤差\n目錄\n上一課題\n下一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2023-3",
+    "kind": "student",
+    "removedSegment": {
+      "page": 3,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-student-2.pdf"
+    },
+    "sourceText": "07 百分數\n目錄\n上一課題\n下一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2023-3",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 13,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-teacher-2.pdf"
+    },
+    "sourceText": "07 百分數\n目錄\n上一課題\n下一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2026-7",
+    "kind": "student",
+    "removedSegment": {
+      "page": 11,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-student-2.pdf"
+    },
+    "sourceText": "08 比\n目錄\n上一課題\n下一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2026-7",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 11,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-teacher-3.pdf"
+    },
+    "sourceText": "08 比\n目錄\n上一課題\n下一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2021-5",
+    "kind": "student",
+    "removedSegment": {
+      "page": 1,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-student-3.pdf"
+    },
+    "sourceText": "09 線性方程及聯立方程\n目錄\n上一課題\n下一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2021-5",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 3,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-teacher-4.pdf"
+    },
+    "sourceText": "09 線性方程及聯立方程\n目錄\n上一課題\n下一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2013-4",
+    "kind": "student",
+    "removedSegment": {
+      "page": 3,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-student-3.pdf"
+    },
+    "sourceText": "10 變分及率\n目錄\n上一課題\n下一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2013-4",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 6,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-teacher-4.pdf"
+    },
+    "sourceText": "10 變分及率\n目錄\n上一課題\n下一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2018-9",
+    "kind": "student",
+    "removedSegment": {
+      "page": 5,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-student-3.pdf"
+    },
+    "sourceText": "11 線性不等式\n目錄\n上一課題\n下一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2018-9",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 9,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-teacher-4.pdf"
+    },
+    "sourceText": "11 線性不等式\n目錄\n上一課題\n下一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2025-6",
+    "kind": "student",
+    "removedSegment": {
+      "page": 13,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-student-3.pdf"
+    },
+    "sourceText": "12 坐標幾何\n目錄\n上一課題\n下一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2025-6",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 7,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-teacher-5.pdf"
+    },
+    "sourceText": "12 坐標幾何\n目錄\n上一課題\n下一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2024-7",
+    "kind": "student",
+    "removedSegment": {
+      "page": 5,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-student-4.pdf"
+    },
+    "sourceText": "13 平面幾何\n目錄\n上一課題\n下一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2024-7",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 1,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-teacher-6.pdf"
+    },
+    "sourceText": "13 平面幾何\n目錄\n上一課題\n下一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2023-7",
+    "kind": "student",
+    "removedSegment": {
+      "page": 4,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-student-5.pdf"
+    },
+    "sourceText": "14 求積法\n目錄\n上一課題\n下一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2023-7",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 0,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-teacher-7.pdf"
+    },
+    "sourceText": "14 求積法\n目錄\n上一課題\n下一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2019-9",
+    "kind": "student",
+    "removedSegment": {
+      "page": 7,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-student-5.pdf"
+    },
+    "sourceText": "15 概率\n目錄\n上一課題\n下一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2019-9",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 3,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-teacher-7.pdf"
+    },
+    "sourceText": "15 概率\n目錄\n上一課題\n下一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2018-4",
+    "kind": "student",
+    "removedSegment": {
+      "page": 8,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-student-5.pdf"
+    },
+    "sourceText": "16 統計\n目錄\n上一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank.json",
+    "id": "A1-2018-4",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 4,
+      "top": 45,
+      "bottom": 108.38099670410156,
+      "asset": "assets/A1-teacher-7.pdf"
+    },
+    "sourceText": "16 統計\n目錄\n上一課題\n題目索引\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2026-2",
+    "kind": "student",
+    "removedSegment": {
+      "page": 10,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-student-0.pdf"
+    },
+    "sourceText": "02  Algebraic Fractions\nContents\nPrevious Topic\nNext Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2026-2",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 10,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-teacher-0.pdf"
+    },
+    "sourceText": "02  Algebraic Fractions\nContents\nPrevious Topic\nNext Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2025-2",
+    "kind": "student",
+    "removedSegment": {
+      "page": 13,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-student-0.pdf"
+    },
+    "sourceText": "03  Change of Subject\nContents\nPrevious Topic\nNext Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2025-2",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 13,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-teacher-0.pdf"
+    },
+    "sourceText": "03  Change of Subject\nContents\nPrevious Topic\nNext Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2014-5",
+    "kind": "student",
+    "removedSegment": {
+      "page": 5,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-student-1.pdf"
+    },
+    "sourceText": "04  Factorization\nContents\nPrevious Topic\nNext Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2014-5",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 8,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-teacher-1.pdf"
+    },
+    "sourceText": "04  Factorization\nContents\nPrevious Topic\nNext Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2026-4",
+    "kind": "student",
+    "removedSegment": {
+      "page": 13,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-student-1.pdf"
+    },
+    "sourceText": "05  Polynomials and Quadratic Equations\nContents\nPrevious Topic\nNext Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2026-4",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 3,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-teacher-2.pdf"
+    },
+    "sourceText": "05  Polynomials and Quadratic Equations\nContents\nPrevious Topic\nNext Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2020-7",
+    "kind": "student",
+    "removedSegment": {
+      "page": 0,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-student-2.pdf"
+    },
+    "sourceText": "06  Estimation and Error\nContents\nPrevious Topic\nNext Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2020-7",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 5,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-teacher-2.pdf"
+    },
+    "sourceText": "06  Estimation and Error\nContents\nPrevious Topic\nNext Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2023-3",
+    "kind": "student",
+    "removedSegment": {
+      "page": 3,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-student-2.pdf"
+    },
+    "sourceText": "07  Percentages\nContents\nPrevious Topic\nNext Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2023-3",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 9,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-teacher-2.pdf"
+    },
+    "sourceText": "07  Percentages\nContents\nPrevious Topic\nNext Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2026-7",
+    "kind": "student",
+    "removedSegment": {
+      "page": 11,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-student-2.pdf"
+    },
+    "sourceText": "08  Ratios\nContents\nPrevious Topic\nNext Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2026-7",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 7,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-teacher-3.pdf"
+    },
+    "sourceText": "08  Ratios\nContents\nPrevious Topic\nNext Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2021-5",
+    "kind": "student",
+    "removedSegment": {
+      "page": 1,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-student-3.pdf"
+    },
+    "sourceText": "09  Linear and Simultaneous Equations\nContents\nPrevious Topic\nNext Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2021-5",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 14,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-teacher-3.pdf"
+    },
+    "sourceText": "09  Linear and Simultaneous Equations\nContents\nPrevious Topic\nNext Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2013-4",
+    "kind": "student",
+    "removedSegment": {
+      "page": 3,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-student-3.pdf"
+    },
+    "sourceText": "10  Variation and Rates\nContents\nPrevious Topic\nNext Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2013-4",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 1,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-teacher-4.pdf"
+    },
+    "sourceText": "10  Variation and Rates\nContents\nPrevious Topic\nNext Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2018-9",
+    "kind": "student",
+    "removedSegment": {
+      "page": 5,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-student-3.pdf"
+    },
+    "sourceText": "11  Linear Inequalities\nContents\nPrevious Topic\nNext Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2018-9",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 4,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-teacher-4.pdf"
+    },
+    "sourceText": "11  Linear Inequalities\nContents\nPrevious Topic\nNext Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2025-6",
+    "kind": "student",
+    "removedSegment": {
+      "page": 13,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-student-3.pdf"
+    },
+    "sourceText": "12  Coordinate Geometry\nContents\nPrevious Topic\nNext Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2025-6",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 2,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-teacher-5.pdf"
+    },
+    "sourceText": "12  Coordinate Geometry\nContents\nPrevious Topic\nNext Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2024-7",
+    "kind": "student",
+    "removedSegment": {
+      "page": 5,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-student-4.pdf"
+    },
+    "sourceText": "13  Plane Geometry\nContents\nPrevious Topic\nNext Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2024-7",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 11,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-teacher-5.pdf"
+    },
+    "sourceText": "13  Plane Geometry\nContents\nPrevious Topic\nNext Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2023-7",
+    "kind": "student",
+    "removedSegment": {
+      "page": 4,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-student-5.pdf"
+    },
+    "sourceText": "14  Mensuration\nContents\nPrevious Topic\nNext Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2023-7",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 10,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-teacher-6.pdf"
+    },
+    "sourceText": "14  Mensuration\nContents\nPrevious Topic\nNext Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2019-9",
+    "kind": "student",
+    "removedSegment": {
+      "page": 7,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-student-5.pdf"
+    },
+    "sourceText": "15  Probability\nContents\nPrevious Topic\nNext Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2019-9",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 13,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-teacher-6.pdf"
+    },
+    "sourceText": "15  Probability\nContents\nPrevious Topic\nNext Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2018-4",
+    "kind": "student",
+    "removedSegment": {
+      "page": 8,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-student-5.pdf"
+    },
+    "sourceText": "16  Statistics\nContents\nPrevious Topic\nReference Index\n"
+  },
+  {
+    "bank": "bank-en.json",
+    "id": "A1-2018-4",
+    "kind": "teacher",
+    "removedSegment": {
+      "page": 14,
+      "top": 45,
+      "bottom": 112.79199981689453,
+      "asset": "en/assets/A1-teacher-6.pdf"
+    },
+    "sourceText": "16  Statistics\nContents\nPrevious Topic\nReference Index\n"
+  }
+]

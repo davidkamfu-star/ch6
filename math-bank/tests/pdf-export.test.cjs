@@ -3,17 +3,50 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
 const vm=require('node:vm');
-const PDFLib=require('pdf-lib');
+// The deployment restores the verified browser bundle; local development may use npm.
+const PDFLib=fs.existsSync(path.join(__dirname,'..','pdf-lib.min.js'))?require('../pdf-lib.min.js'):require('pdf-lib');
 globalThis.PDFLib=PDFLib;
 const engine=require('../pdf-engine.js');
 const segment={asset:'source.pdf',page:0,top:45,bottom:300};
 const question=(id,extra={})=>({id,year:2026,number:1,section:'A1',topic:'t',topicName:'Topic',marks:3,student:[{...segment}],teacher:[{...segment}],marking:[{...segment}],...extra});
 const options={mode:'student',sort:'topic',language:'en'};
 
+test('missing runtime gives a readable error before any source PDF request',async()=>{
+ const context=vm.createContext({});
+ vm.runInContext(fs.readFileSync(path.join(__dirname,'..','pdf-engine.js'),'utf8'),context);
+ let reads=0;
+ for(const language of ['en','zh-Hant']){
+  await assert.rejects(context.BankPDF.build({questions:[question('q')],topics:[],options:{...options,language},readAsset:async()=>{reads++;}}),language==='en'?/PDF export library could not be loaded/:/PDF 匯出元件未能載入/);
+ }
+ assert.equal(reads,0);
+});
+
 test('both complete banks pass preflight',()=>{
  for(const file of ['bank.json','bank-en.json']){
   const bank=JSON.parse(fs.readFileSync(path.join(__dirname,'..',file)));
   for(const mode of ['student','teacher'])engine.validateQuestions(bank.questions,{...options,mode});
+ }
+});
+
+test('source-booklet topic navigation is excluded without losing real continuation pages',()=>{
+ const audit=JSON.parse(fs.readFileSync(path.join(__dirname,'..','..','.github','math-bank-navigation-audit.json')));
+ for(const file of ['bank.json','bank-en.json']){
+  const bank=JSON.parse(fs.readFileSync(path.join(__dirname,'..',file)));
+  const byId=new Map(bank.questions.map(q=>[q.id,q]));
+  const removed=audit.filter(item=>item.bank===file);
+  assert.equal(new Set(removed.map(item=>item.id)).size,15);
+  assert.equal(removed.length,30);
+  for(const item of removed){
+   const segments=byId.get(item.id)[item.kind];
+   assert.ok(segments.length>0);
+   assert.ok(!segments.some(s=>JSON.stringify(s)===JSON.stringify(item.removedSegment)));
+   assert.match(item.sourceText,file==='bank.json'?/目錄\n上一課題/:/Contents\nPrevious Topic/);
+  }
+  assert.equal(byId.get('A1-2026-2').student.length,1);
+  assert.equal(byId.get('A1-2026-2').teacher.length,1);
+  assert.equal(byId.get('B-2026-19').marking.length,2);
+  assert.equal(byId.get('B-2026-19').teacher.length,3);
+  if(file==='bank-en.json')assert.equal(byId.get('B-2026-19').student.length,2);
  }
 });
 
