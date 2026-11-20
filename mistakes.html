@@ -20,7 +20,7 @@
     @media print{.printing-report header,.printing-report .student-hero,.printing-report #progressMonitor,.printing-report #revisionCoach,.printing-report section[aria-labelledby="notebookListHeading"],.printing-report main>p{display:none!important}.printing-report .student-shell{max-width:none!important;padding:0!important}.printing-report .diagnostic-report{box-shadow:none;border:0;margin:0;padding:0}.printing-report .report-actions{display:none}.printing-report .priority-row,.printing-report .report-card,.printing-report .prescription-card{break-inside:avoid}.printing-report *{color:#111!important;background:#fff!important}}
   </style>
 <link rel="stylesheet" href="hub-interior.css?v=20261008">
-</head>
+<link rel="stylesheet" href="field.css"></head>
 <body class="student-page hub-interior hub-progress"><nav class="hub-section-links" aria-label="Revision shortcuts"><a href="index.html">⌂ Hub</a><a href="revision-notes.html">Quick Notes</a><a href="index.html#topics">Topic Practice</a><a href="mock-exam.html">36 MC · 45 min</a><a href="games.html">Games</a><a href="3d-games.html">3D Lab</a><a href="mistakes.html" aria-current="page">My Progress</a></nav>
   <header class="topbar">
     <a class="brand" href="index.html">ChemMaster Hub</a>
@@ -60,7 +60,7 @@
     </section>
 
     <p style="margin-top:24px;color:#71858a;font-size:11px">Your progress history and mistake notebook are saved privately in this browser. They are not uploaded or shared.</p>
-  </main>
+  <section class="field" id="field"></section></main>
 
   <script src="student-tools.js?v=20260907b"></script>
   <script>
@@ -240,5 +240,5 @@
     topicFilter.addEventListener('change',render);search.addEventListener('input',render);window.addEventListener('chemistry-tools-change',render);render();
   })();
   </script>
-</body>
+<script src="field.js"></script></body>
 </html>
