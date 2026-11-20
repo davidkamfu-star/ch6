@@ -2,7 +2,7 @@ name: Chemistry World student journeys
 on: [push, workflow_dispatch]
 jobs:
   journeys:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - run: npm install --prefix /tmp/world-test playwright@1.55.0
