@@ -49,7 +49,7 @@
       }
     }
   }
-  function questionPage(pair,number){
+  function questionPage(pair,number){var arcade=document.createElement("a");arcade.textContent="◆ Play this topic";arcade.href="topic-vault.html?topic="+number;document.querySelector(".hub-section-links")?.append(arcade);
     var map=document.getElementById('questionNav'),header=document.querySelector('.topbar,header');
     if(!map||!header)return;
     var strip=make('nav','practice-guide');strip.setAttribute('aria-label','Question practice shortcuts');
